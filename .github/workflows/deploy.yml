@@ -31,8 +31,17 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Install pandoc and CJK fonts
-        run: sudo apt-get update && sudo apt-get install -y pandoc fonts-noto-cjk
+      - name: Install CJK fonts
+        run: sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
+
+      - name: Install pandoc (latest release — needs a modern Typst writer)
+        run: |
+          url=$(curl -fsSL https://api.github.com/repos/jgm/pandoc/releases/latest \
+            | grep browser_download_url | grep -- '-amd64.deb' | head -1 | cut -d '"' -f4)
+          echo "pandoc deb: $url"
+          curl -fsSL "$url" -o /tmp/pandoc.deb
+          sudo dpkg -i /tmp/pandoc.deb
+          pandoc --version | head -1
 
       - name: Install Typst ${{ env.TYPST_VERSION }}
         run: |
