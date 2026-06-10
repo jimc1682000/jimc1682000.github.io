@@ -14,7 +14,7 @@ const items = computed(() => [
 
 <template>
   <ul class="projects">
-    <li v-for="(p, i) in items" :key="i">
+    <li v-for="(p, i) in items" :key="i" :class="{ live: p.live }">
       <strong>
         <a v-if="p.url" :href="p.url" target="_blank" rel="noopener">{{ p.name }}</a>
         <span v-else>{{ p.name }}</span>
