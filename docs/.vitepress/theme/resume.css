@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap");
+
+:root {
+  --accent: #0d7d7d;
+  --accent-soft: #e6f2f2;
+  --ink: #1f2933;
+  --muted: #5b6770;
+  --line: #dde3e6;
+  --bg: #eceff1;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", "Noto Sans TC", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.resume-shell { min-height: 100vh; }
+
+/* ---------- Toolbar ---------- */
+.toolbar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px; flex-wrap: wrap;
+  padding: 11px 20px;
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { font-weight: 700; color: var(--ink); }
+.brand em { color: var(--accent); font-style: normal; font-weight: 600; }
+.ctrls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.seg {
+  font-size: 13px; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 8px;
+  padding: 6px 13px; background: #fff; transition: .15s;
+}
+.seg:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+.dl {
+  font-size: 13px; font-weight: 600; color: #fff; background: var(--accent);
+  border-radius: 8px; padding: 7px 16px; transition: .15s;
+}
+.dl:hover { filter: brightness(1.1); text-decoration: none; }
+
+/* ---------- Résumé card (A4-ish) ---------- */
+.resume {
+  max-width: 820px;
+  margin: 28px auto;
+  padding: 44px 52px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 8px 34px rgba(0, 0, 0, .12);
+}
+
+/* Header */
+.rh h1 { margin: 0; font-size: 30px; font-weight: 700; letter-spacing: .01em; line-height: 1.15; }
+.rh h1 .en { color: var(--accent); font-weight: 600; }
+.rh .role {
+  margin: 5px 0 9px; font-size: 14px; font-weight: 600; color: var(--muted);
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.rh .contact { margin: 0; font-size: 13px; color: var(--muted); }
+.rh .contact a { color: var(--muted); }
+.rh .contact a:hover { color: var(--accent); }
+.rh .contact .sep { margin: 0 7px; opacity: .5; }
+
+.summary {
+  margin: 16px 0 4px; padding: 12px 16px;
+  background: var(--accent-soft); border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0; font-size: 14px; color: var(--ink); line-height: 1.55;
+}
+
+/* Body sections */
+.resume-body h2 {
+  font-size: 16px; font-weight: 700; color: var(--accent);
+  text-transform: uppercase; letter-spacing: .06em;
+  margin: 26px 0 12px; padding-bottom: 5px; border-bottom: 1.5px solid var(--accent);
+}
+.resume-body h3 {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  font-size: 15px; font-weight: 600; margin: 16px 0 5px;
+}
+.resume-body h3 .date { font-size: 12.5px; font-weight: 500; color: var(--muted); white-space: nowrap; }
+.resume-body ul { margin: 0 0 6px; padding-left: 20px; }
+.resume-body li { margin: 4px 0; }
+.resume-body li::marker { color: var(--accent); }
+.resume-body strong { font-weight: 600; }
+
+/* Footer */
+.foot { text-align: center; color: var(--muted); font-size: 13px; padding: 10px 20px 40px; }
+.foot .sep { margin: 0 8px; opacity: .5; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .resume { margin: 14px; padding: 26px 22px; border-radius: 4px; }
+  .rh h1 { font-size: 24px; }
+  .resume-body h3 { flex-direction: column; gap: 1px; }
+  .toolbar { padding: 9px 12px; }
+  .brand { display: none; }
+  .ctrls { width: 100%; justify-content: space-between; }
+}

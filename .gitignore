@@ -48,3 +48,9 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+# Node / VitePress
+node_modules/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+resume/.tmp/
+.DS_Store
