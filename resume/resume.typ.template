@@ -10,7 +10,7 @@
 #let jobAbove  = $if(compact)$11pt$else$14pt$endif$
 #let jobBelow  = $if(compact)$4pt$else$5pt$endif$
 
-#set text(font: ("Inter", "PingFang TC"), size: baseSize, lang: "$lang$", fill: rgb("#1f2933"))
+#set text(font: ("Inter", "PingFang TC", "Noto Sans CJK TC", "Noto Sans TC"), size: baseSize, lang: "$lang$", fill: rgb("#1f2933"))
 #set par(leading: leadEm, justify: false, spacing: leadEm)
 #let accent = rgb("#0d7d7d")
 #let muted = rgb("#5b6770")

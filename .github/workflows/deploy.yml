@@ -3,6 +3,8 @@ name: Deploy résumé site to GitHub Pages
 on:
   push:
     branches: [master, main]
+  schedule:
+    - cron: "0 0 * * 1" # weekly (Mon 00:00 UTC) — refresh auto-detected projects
   workflow_dispatch:
 
 permissions:
@@ -14,17 +16,41 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+env:
+  TYPST_VERSION: "0.14.2"
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm run build
+
+      - name: Install pandoc and CJK fonts
+        run: sudo apt-get update && sudo apt-get install -y pandoc fonts-noto-cjk
+
+      - name: Install Typst ${{ env.TYPST_VERSION }}
+        run: |
+          curl -fsSL "https://github.com/typst/typst/releases/download/v${TYPST_VERSION}/typst-x86_64-unknown-linux-musl.tar.xz" | tar -xJ
+          sudo mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
+          typst --version
+
+      - name: Auto-detect GitHub Pages projects
+        run: npm run projects
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate 2-page A4 PDFs
+        run: npm run pdf
+
+      - name: Build site
+        run: npm run build
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -71,6 +71,10 @@ otherVariantLabel: 通用版
 - 自建並維運自託管 AI 平台（OpenClaw on VPS）；開發 Claude Code skills 與 agentic workflow，應用於 DevOps / SRE 維運自動化
 - 建置知識庫自動化管線（精煉、發布、語意檢索），整合 Slack / Jira / Notion，加速事件分析與文件產出
 
+## 精選專案
+
+<Projects />
+
 ## 學歷、認證 & 語言
 
 - **學歷**：東吳大學 學士（2007 – 2012）· 國立臺南第一高級中學（2004 – 2007）

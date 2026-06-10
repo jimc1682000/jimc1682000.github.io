@@ -1,0 +1,12 @@
+{
+  "zh": [
+    { "name": "以悟易物（UnionPay 行動應用大賽）", "desc": "行動 App，獲昕創 App 大賽前五名" },
+    { "name": "Java 道場 — 重構套路", "desc": "重構手法技術分享", "url": "https://prezi.com/wrffukwxl_gp/" },
+    { "name": "ZK 101", "desc": "ZK 框架入門教學分享" }
+  ],
+  "en": [
+    { "name": "Enlighten by Item (UnionPay Mobile App Contest)", "desc": "mobile app, top-5 finalist" },
+    { "name": "Java Dojo — Refactoring Patterns", "desc": "talk on refactoring techniques", "url": "https://prezi.com/wrffukwxl_gp/" },
+    { "name": "ZK 101", "desc": "introductory tutorial on the ZK framework" }
+  ]
+}

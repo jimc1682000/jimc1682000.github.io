@@ -5,10 +5,12 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "projects": "node resume/fetch-projects.mjs",
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
     "preview": "vitepress preview docs",
-    "pdf": "node resume/build.mjs"
+    "pdf": "node resume/build.mjs",
+    "generate": "npm run projects && npm run pdf"
   },
   "devDependencies": {
     "vitepress": "^1.6.3",

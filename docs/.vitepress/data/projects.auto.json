@@ -1,0 +1,16 @@
+[
+  {
+    "name": "film-brain",
+    "desc": "AI film-library brain — static portfolio: semantic search replay, debugging case study, eval iteration story",
+    "url": "https://jimc1682000.github.io/film-brain/",
+    "repo": "https://github.com/jimc1682000/film-brain",
+    "pushed": "2026-06-09T03:52:25Z"
+  },
+  {
+    "name": "a-day-with-my-ai-wife",
+    "desc": "我與老婆的一天 — A day debugging Gitea OOM with my AI wife (Claude Code). 14 collaboration tips included.",
+    "url": "https://jimc1682000.github.io/a-day-with-my-ai-wife/",
+    "repo": "https://github.com/jimc1682000/a-day-with-my-ai-wife",
+    "pushed": "2026-04-01T05:39:25Z"
+  }
+]

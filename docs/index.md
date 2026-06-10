@@ -75,9 +75,7 @@ otherVariantLabel: Platform / SRE 深度版
 
 ## 精選專案
 
-- **以悟易物（UnionPay 行動應用大賽）**：行動 App，獲昕創 App 大賽前五名
-- **Java 道場 — 重構套路**：重構手法技術分享（Prezi）
-- **ZK 101**：ZK 框架入門教學分享
+<Projects />
 
 ## 學歷、認證 & 語言
 

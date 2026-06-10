@@ -72,6 +72,10 @@ otherVariantLabel: General
 - Self-host and operate an AI platform (OpenClaw on VPS); build Claude Code skills and agentic workflows for DevOps / SRE automation
 - Built a knowledge-base automation pipeline (distill, publish, semantic search) integrated with Slack / Jira / Notion to speed up incident analysis and documentation
 
+## Selected Projects
+
+<Projects />
+
 ## Education, Certifications & Languages
 
 - **Education**: Soochow University, B.A. (2007 – 2012) · Tainan First Senior High School (2004 – 2007)

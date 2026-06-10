@@ -76,9 +76,7 @@ otherVariantLabel: Platform / SRE Focus
 
 ## Selected Projects
 
-- **Enlighten by Item (UnionPay Mobile App Contest)**: mobile app, top-5 finalist in the contest
-- **Java Dojo — Refactoring Patterns**: technical talk on refactoring techniques (Prezi)
-- **ZK 101**: introductory tutorial on the ZK framework
+<Projects />
 
 ## Education, Certifications & Languages
 
