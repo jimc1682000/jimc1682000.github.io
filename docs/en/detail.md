@@ -26,7 +26,7 @@ pdf: /pdf/resume-detail-en.pdf
 - **Messaging / Streaming**: Kafka, Zookeeper, ActiveMQ, RabbitMQ, SQS
 - **Databases**: MySQL, PostgreSQL, Aurora, MSSQL, MongoDB, Redis, DynamoDB
 - **Backend / Languages**: Java, Python, JavaScript / Node.js, Bash, Spring, Hibernate, ZK, GWT, Django, JMS, GSON, RESTful
-- **Systems / Network / Security**: Linux, Windows Server, VMware, Hyper-V, AD, Exchange, WSUS, UTM, TCP/IP, ethical hacking / penetration testing (CEH)
+- **Systems / Network / Security**: Linux, Windows Server, VMware, Hyper-V, AD, Exchange, WSUS, UTM, TCP/IP, VLAN, VPN, iptables, IIS, IPS, ethical hacking / penetration testing (CEH)
 - **Testing / Load**: JMeter, Locust
 - **AI / Agentic**: AWS Bedrock, Claude Code, agentic workflows, RAG / knowledge-base automation
 
@@ -64,7 +64,7 @@ pdf: /pdf/resume-detail-en.pdf
 - Standardized components via containers (multi-layer images); maintained Elasticsearch with Curator and tuned Logstash parsing rules
 - *Tools: Ansible, Terraform, Docker, ELK, GitLab, Jenkins, AWS, Airflow, RabbitMQ, ECS, Lambda, Locust, JMeter*
 
-### DevOps Automation Engineer · Groundhog Technologies @@ 2018.08 – 2019.02
+### DevOps Automation Engineer · Groundhog Technologies @@ 2018.09 – 2019.02
 - Deployed DSP / DMP systems to customer environments; built connectivity-monitoring tools between servers; improved performance by removing redundant components / tuning settings
 - Introduced Kubernetes, GitLab CI/CD, and Ansible to increase automation; hardened firewall settings and fixed vulnerabilities to raise the security level
 - *Tools: Docker, Kafka, Zookeeper, ELK, Grafana, Prometheus, Kubernetes, Ansible, GitLab CI/CD, GCP, MongoDB, Redis*
@@ -91,7 +91,11 @@ pdf: /pdf/resume-detail-en.pdf
 
 ## Certifications
 
-- CCNA (640-802) · MCITP Windows Server 2008 R2 (70-646 / 640 / 642) · RHCE (EX200 / EX300) · CEH (312-50) · ENSA (312-38) · CCNSP · MOS Master · OCPJP7 (1Z0-803 / 804)
+- **Red Hat**: RHCA · RHCE (EX200 / EX300)
+- **Security / Network**: CEH (312-50) · ENSA (312-38) · CCNSP · CCNA (640-802)
+- **Microsoft**: MCITP (Windows Server 2008 R2: 70-646 / 640 / 642) · MCSA · MCTS · MOS Master
+- **Java**: OCPJP7 (1Z0-803 / 804) · SCJP
+- **Other**: International Trade Proficiency Exam · Life Insurance Agent (LIA-ROC)
 
 ## Professional Training
 

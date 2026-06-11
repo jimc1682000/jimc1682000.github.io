@@ -26,7 +26,7 @@ pdf: /pdf/resume-detail-zh.pdf
 - **訊息 / 串流**：Kafka、Zookeeper、ActiveMQ、RabbitMQ、SQS
 - **資料庫**：MySQL、PostgreSQL、Aurora、MSSQL、MongoDB、Redis、DynamoDB
 - **後端 / 語言**：Java、Python、JavaScript / Node.js、Bash、Spring、Hibernate、ZK、GWT、Django、JMS、GSON、RESTful
-- **系統 / 網路 / 資安**：Linux、Windows Server、VMware、Hyper-V、AD、Exchange、WSUS、UTM、TCP/IP、Ethical Hacking / 滲透測試（CEH）
+- **系統 / 網路 / 資安**：Linux、Windows Server、VMware、Hyper-V、AD、Exchange、WSUS、UTM、TCP/IP、VLAN、VPN、iptables、IIS、IPS、Ethical Hacking / 滲透測試（CEH）
 - **測試 / 壓測**：JMeter、Locust
 - **AI / Agentic**：AWS Bedrock、Claude Code、Agentic Workflow、RAG / 知識庫自動化
 
@@ -64,7 +64,7 @@ pdf: /pdf/resume-detail-zh.pdf
 - 容器化標準化元件（多層映像檔）；以 Curator 維護 Elasticsearch、調整 Logstash 解析規則
 - *Tools：Ansible、Terraform、Docker、ELK、GitLab、Jenkins、AWS、Airflow、RabbitMQ、ECS、Lambda、Locust、JMeter*
 
-### DevOps Automation Engineer · Groundhog Technologies（現觀科技） @@ 2018.08 – 2019.02
+### DevOps Automation Engineer · Groundhog Technologies（現觀科技） @@ 2018.09 – 2019.02
 - 部署 DSP / DMP 系統至客戶環境；開發伺服器間連線監控工具；移除冗餘元件 / 調整服務設定提升效能
 - 導入 Kubernetes、GitLab CI/CD、Ansible 強化自動化；檢查防火牆設定、修補弱點提升資安等級
 - *Tools：Docker、Kafka、Zookeeper、ELK、Grafana、Prometheus、Kubernetes、Ansible、GitLab CI/CD、GCP、MongoDB、Redis*
@@ -91,7 +91,11 @@ pdf: /pdf/resume-detail-zh.pdf
 
 ## 認證
 
-- CCNA（640-802）· MCITP Windows Server 2008 R2（70-646 / 640 / 642）· RHCE（EX200 / EX300）· CEH（312-50）· ENSA（312-38）· CCNSP · MOS Master · OCPJP7（1Z0-803 / 804）
+- **Red Hat**：RHCA · RHCE（EX200 / EX300）
+- **資安 / 網路**：CEH（312-50）· ENSA（312-38）· CCNSP · CCNA（640-802）
+- **Microsoft**：MCITP（Windows Server 2008 R2：70-646 / 640 / 642）· MCSA · MCTS · MOS Master
+- **Java**：OCPJP7（1Z0-803 / 804）· SCJP
+- **其他**：國際貿易大會考 · 人身保險業務員（壽險公會）
 
 ## 專業訓練
 
