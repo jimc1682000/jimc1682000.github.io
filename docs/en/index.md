@@ -14,7 +14,7 @@ contacts:
     href: https://github.com/jimc1682000
   - text: linkedin.com/in/594jimmychen
     href: https://www.linkedin.com/in/594jimmychen
-  - text: New Taipei, Taiwan
+  - text: Taipei, Taiwan
 pdf: /pdf/resume-general-en.pdf
 otherLang: /
 otherLangLabel: 中文

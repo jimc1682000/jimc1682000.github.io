@@ -13,7 +13,7 @@ contacts:
     href: https://github.com/jimc1682000
   - text: linkedin.com/in/594jimmychen
     href: https://www.linkedin.com/in/594jimmychen
-  - text: New Taipei, Taiwan（可遷台南）
+  - text: Taipei, Taiwan（可遷台南）
 pdf: /pdf/resume-platform-zh.pdf
 otherLang: /en/platform
 otherLangLabel: EN

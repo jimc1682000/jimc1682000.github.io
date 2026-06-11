@@ -14,7 +14,7 @@ contacts:
     href: https://github.com/jimc1682000
   - text: linkedin.com/in/594jimmychen
     href: https://www.linkedin.com/in/594jimmychen
-  - text: New Taipei, Taiwan (open to relocation)
+  - text: Taipei, Taiwan (open to relocation)
 pdf: /pdf/resume-platform-en.pdf
 otherLang: /platform
 otherLangLabel: 中文
