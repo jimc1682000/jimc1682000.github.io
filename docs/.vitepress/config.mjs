@@ -17,7 +17,7 @@ export default defineConfig({
     [
       "script",
       {},
-      "(function(){try{var e=document.documentElement;var q=new URLSearchParams(location.search);e.setAttribute('data-theme',q.get('theme')||localStorage.getItem('resume.theme')||'light');e.setAttribute('data-mode',q.get('mode')||localStorage.getItem('resume.mode')||'minimal');}catch(_){}})();",
+      "(function(){try{var e=document.documentElement;var q=new URLSearchParams(location.search);e.setAttribute('data-theme',q.get('theme')||localStorage.getItem('resume.theme')||'light');e.setAttribute('data-mode','rich');}catch(_){}})();",
     ],
   ],
 });

@@ -49,6 +49,7 @@ pdf: /pdf/resume-detail-en.pdf
 - Performed multiple disaster-recovery drills and maintenance windows, and responded to a range of incidents (incident response)
 - Optimized cloud cost by identifying and removing unused / low-utilization resources, tuning data transfer, and adjusting logging
 - Strengthened operations: Opsworks → ASG / SSM migration, end-to-end (E2E) monitoring, and a service readiness review process
+- *Tools: AWS (Opsworks / ASG / SSM / CloudWatch)*
 
 ### Senior DevOps Engineer · GoFreight @@ 2020.10 – 2021.09
 - Containerization: replaced VM dev / stage environments, ran unit tests in the CI/CD pipeline, and improved pipeline performance and reliability
