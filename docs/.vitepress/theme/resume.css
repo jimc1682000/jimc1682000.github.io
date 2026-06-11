@@ -217,18 +217,18 @@ html[data-mode="rich"] .job:hover { transform: translateY(-3px); box-shadow: var
 html[data-mode="rich"] .job h3 { margin-top: 4px; }
 
 /* bento skills: first h2 (核心技能) + its ul */
-html[data-mode="rich"] .resume-body > h2:first-of-type + ul {
+html[data-mode="rich"] .resume-body h2:first-of-type + ul {
   list-style: none; padding: 0; margin: 4px 0 0;
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
 }
-html[data-mode="rich"] .resume-body > h2:first-of-type + ul > li {
+html[data-mode="rich"] .resume-body h2:first-of-type + ul > li {
   margin: 0; padding: 11px 14px;
   background: var(--card); border: 1px solid var(--line); border-radius: 11px;
   transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
-html[data-theme="dark"][data-mode="rich"] .resume-body > h2:first-of-type + ul > li { background: rgba(255,255,255,.03); }
-html[data-mode="rich"] .resume-body > h2:first-of-type + ul > li:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); box-shadow: var(--shadow-soft); }
-html[data-mode="rich"] .resume-body > h2:first-of-type + ul > li::marker { content: ""; }
+html[data-theme="dark"][data-mode="rich"] .resume-body h2:first-of-type + ul > li { background: rgba(255,255,255,.03); }
+html[data-mode="rich"] .resume-body h2:first-of-type + ul > li:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); box-shadow: var(--shadow-soft); }
+html[data-mode="rich"] .resume-body h2:first-of-type + ul > li::marker { content: ""; }
 
 /* project cards */
 html[data-mode="rich"] ul.projects {
@@ -254,22 +254,22 @@ html[data-mode="rich"] .resume-body h2 {
 /* punchier card hover: bigger lift, scale, accent-coloured glow */
 html[data-mode="rich"] .job:hover,
 html[data-mode="rich"] ul.projects > li:hover,
-html[data-mode="rich"] .resume-body > h2:first-of-type + ul > li:hover {
+html[data-mode="rich"] .resume-body h2:first-of-type + ul > li:hover {
   transform: translateY(-5px) scale(1.015);
   box-shadow: 0 14px 34px color-mix(in srgb, var(--accent) 30%, transparent);
   border-color: color-mix(in srgb, var(--accent) 60%, var(--line));
 }
 /* accent top bar that lights up on hover (skills + projects cards) */
 html[data-mode="rich"] ul.projects > li,
-html[data-mode="rich"] .resume-body > h2:first-of-type + ul > li { position: relative; overflow: hidden; }
+html[data-mode="rich"] .resume-body h2:first-of-type + ul > li { position: relative; overflow: hidden; }
 html[data-mode="rich"] ul.projects > li::before,
-html[data-mode="rich"] .resume-body > h2:first-of-type + ul > li::before {
+html[data-mode="rich"] .resume-body h2:first-of-type + ul > li::before {
   content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 100%;
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
 }
 html[data-mode="rich"] ul.projects > li:hover::before,
-html[data-mode="rich"] .resume-body > h2:first-of-type + ul > li:hover::before { transform: scaleX(1); }
+html[data-mode="rich"] .resume-body h2:first-of-type + ul > li:hover::before { transform: scaleX(1); }
 /* glowing summary in rich */
 html[data-mode="rich"] .summary {
   border-left-width: 4px;
@@ -311,7 +311,7 @@ html[data-mode="rich"] ul.projects .badge {
   .resume { margin: 14px; padding: 28px 22px; border-radius: 13px; }
   .rh h1 { font-size: 25px; }
   .resume-body h3 { flex-direction: column; gap: 1px; }
-  html[data-mode="rich"] .resume-body > h2:first-of-type + ul,
+  html[data-mode="rich"] .resume-body h2:first-of-type + ul,
   html[data-mode="rich"] ul.projects { grid-template-columns: 1fr; }
   .toolbar { padding: 9px 12px; }
   .brand { display: none; }
