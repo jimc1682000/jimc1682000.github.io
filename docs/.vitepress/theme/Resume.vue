@@ -37,6 +37,9 @@ function toggleTheme() {
   try { localStorage.setItem("resume.theme", theme.value); } catch (_) {}
   applyRoot();
 }
+function scrollTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
 // "Title @@ Date" -> title + right-aligned date; then group each h3 + its <ul> into a .job card.
 function decorate() {
@@ -115,7 +118,9 @@ onUnmounted(() => { if (io) io.disconnect(); cleanup.forEach((fn) => fn()); clea
     <div class="aurora" aria-hidden="true"></div>
 
     <nav class="toolbar" :class="{ scrolled }">
-      <a class="brand" :href="variantHref('ai', curLang)" aria-label="Home">JC</a>
+      <button class="brand" type="button" @click="scrollTop" aria-label="回到頂端" title="Top">
+        <span>陳</span><span>建</span><span>豪</span>
+      </button>
       <div class="ctrls">
         <div class="seg variant">
           <a v-for="v in VARIANTS" :key="v.key" :href="variantHref(v.key)" :class="{ active: v.key === curVariant }">{{ curLang === "en" ? v.en : v.zh }}</a>
