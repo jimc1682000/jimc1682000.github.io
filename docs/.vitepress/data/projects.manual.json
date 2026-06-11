@@ -1,11 +1,11 @@
 {
   "zh": [
-    { "name": "以悟易物（UnionPay 行動應用大賽）", "desc": "行動 App，獲昕創 App 大賽前五名" },
+    { "name": "以悟易物（UnionPay 行動應用大賽）", "desc": "行動 App，獲昕創 App 大賽前五名", "url": "https://youtu.be/1cPPJpAbw6g" },
     { "name": "Java 道場 — 重構套路", "desc": "重構手法技術分享", "url": "https://prezi.com/wrffukwxl_gp/" },
     { "name": "ZK 101", "desc": "ZK 框架入門教學分享", "url": "https://www.slideshare.net/secret/oLkuCFwBVSidag" }
   ],
   "en": [
-    { "name": "Enlighten by Item (UnionPay Mobile App Contest)", "desc": "mobile app, top-5 finalist" },
+    { "name": "Enlighten by Item (UnionPay Mobile App Contest)", "desc": "mobile app, top-5 finalist", "url": "https://youtu.be/1cPPJpAbw6g" },
     { "name": "Java Dojo — Refactoring Patterns", "desc": "talk on refactoring techniques", "url": "https://prezi.com/wrffukwxl_gp/" },
     { "name": "ZK 101", "desc": "introductory tutorial on the ZK framework", "url": "https://www.slideshare.net/secret/oLkuCFwBVSidag" }
   ]
