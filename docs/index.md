@@ -37,10 +37,10 @@ pdf: /pdf/resume-ai-zh.pdf
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
 - 主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、憑證管理 skill 等共用資產；以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）
 - 獨力完成 GitLab → Gitea 版控遷移；建置 Vaultwarden 並導入 Bitwarden；評估並導入 Bruno 取代 Postman
-- 建置 FAST 頻道監控平台（週報、即時告警、LINE Bot / Slack 通知）；整合 AWS Elemental 媒體串流（MediaLive / MediaPackage / MediaTailor、DRM、Global Accelerator、SPEKE、IVS）
+- 建置 FAST 頻道監控平台（週報、即時告警、告警熱力圖、LINE Bot / Slack 通知）；整合 AWS Elemental 媒體串流（MediaLive / MediaPackage / MediaTailor、DRM、Global Accelerator、SPEKE、IVS、Elemental Link）
 - 建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署；以 Go 開發 Jenkins 部署自動化（Geo-block 流程）
 - 重構資料庫架構：Aurora Read Replica、MySQL → PostgreSQL 遷移、RDS Proxy、Redis / Valkey 7 切分遷移；主導 Airflow 2.0 升級；建置 DynamoDB 監控儀表板並導入 DevOps Guru
-- 多雲治理與資安：GCP 權限限縮與 API key 治理；以 AI 協助 DRM / WAF / CVE 稽核；Akamai LDS → DataStream 2 IaC 化；客戶專案環境建置與 CDN 網段白名單
+- 多雲治理與資安：GCP 權限限縮與 API key 治理；以 AI 協助 DRM / WAF / CVE 稽核；Akamai LDS → DataStream 2 IaC 化；盤點並清理閒置 EC2 snapshots；客戶專案環境建置與 CDN 網段白名單
 - 評估並導入 AWS Bedrock、Secrets Manager、Personalize；以 SQS 解決電信合作夥伴高量訂單瓶頸；設計 S3 + NAS 混合儲存與 Akamai IaC CDN 自動化
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03

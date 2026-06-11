@@ -38,10 +38,10 @@ pdf: /pdf/resume-ai-en.pdf
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
 - Led the team's coding-agent toolchain (command → plugin → skill), shipping reusable knowledge-base and credential skills; co-built an EKS reference environment with AI-assisted guardrails (pre-commit secret scan, PR gates, layered secret scanning)
 - Sole owner of the GitLab → Gitea migration; built Vaultwarden and rolled out Bitwarden; evaluated and adopted Bruno to replace Postman
-- Built a FAST-channel monitoring platform (weekly reports, real-time alerts, LINE Bot / Slack notifications); integrated AWS Elemental streaming (MediaLive / MediaPackage / MediaTailor, DRM, Global Accelerator, SPEKE, IVS)
+- Built a FAST-channel monitoring platform (weekly reports, real-time alerts, alert heatmaps, LINE Bot / Slack notifications); integrated AWS Elemental streaming (MediaLive / MediaPackage / MediaTailor, DRM, Global Accelerator, SPEKE, IVS, Elemental Link)
 - Built reusable Serverless Lambda Terraform modules and Jenkins automation; developed Jenkins deployment automation in Go (geo-block workflow)
 - Re-architected the data layer: Aurora read replicas, MySQL → PostgreSQL migration, RDS Proxy, Redis / Valkey 7 split migration; led the Airflow 2.0 upgrade; built a DynamoDB monitoring dashboard and adopted DevOps Guru
-- Multi-cloud governance and security: GCP permission tightening and API-key cleanup; AI-assisted DRM / WAF / CVE audits; Akamai LDS → DataStream 2 IaC; client-project environments and CDN network allowlists
+- Multi-cloud governance and security: GCP permission tightening and API-key cleanup; AI-assisted DRM / WAF / CVE audits; Akamai LDS → DataStream 2 IaC; audited and cleaned up idle EC2 snapshots; client-project environments and CDN network allowlists
 - Evaluated and rolled out AWS Bedrock, Secrets Manager, and Personalize; used SQS for a major telco partner's high-volume orders; designed S3 + NAS hybrid storage and Akamai IaC CDN automation
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03

@@ -43,12 +43,12 @@ pdf: /pdf/resume-sre-en.pdf
 ## Experience
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
-- Built a FAST-channel monitoring platform (weekly reports, real-time alerts, LINE Bot / Slack notifications); strengthened observability with a DynamoDB dashboard and DevOps Guru
+- Built a FAST-channel monitoring platform (weekly reports, real-time alerts, alert heatmaps, LINE Bot / Slack notifications); strengthened observability with a DynamoDB dashboard and DevOps Guru
 - Co-built an EKS reference environment with AI-assisted guardrails (pre-commit secret scan, PR gates, layered secret scanning)
 - Re-architected the data layer: Aurora read replicas, MySQL → PostgreSQL migration, RDS Proxy, Redis / Valkey 7 split migration; led the Airflow 2.0 upgrade (UAT / Production)
 - Sole owner of the GitLab → Gitea migration; built Serverless Lambda Terraform modules and Jenkins automation; developed geo-block deployment automation in Go
 - Used SQS for a major telco partner's high-volume orders; integrated Elemental streaming (DRM, Global Accelerator, SPEKE, IVS); migrated Akamai LDS → DataStream 2 via IaC
-- Multi-cloud governance and security: GCP permission tightening, Secrets Manager credential cleanup, DRM / WAF / CVE audits; client-project environments and CDN network allowlists
+- Multi-cloud governance and security: GCP permission tightening, Secrets Manager credential cleanup, DRM / WAF / CVE audits; audited and cleaned up idle EC2 snapshots; client-project environments and CDN network allowlists
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
 - Owned cross-service incident response; ran multiple disaster-recovery drills (resilience testing) and maintenance windows

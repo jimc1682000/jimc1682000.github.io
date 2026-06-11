@@ -43,12 +43,12 @@ pdf: /pdf/resume-sre-zh.pdf
 ## 工作經歷
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
-- 建置 FAST 頻道監控平台（週報、即時告警、LINE Bot / Slack 通知）；建置 DynamoDB 監控儀表板並導入 DevOps Guru，強化可觀測性與可靠度
+- 建置 FAST 頻道監控平台（週報、即時告警、告警熱力圖、LINE Bot / Slack 通知）；建置 DynamoDB 監控儀表板並導入 DevOps Guru，強化可觀測性與可靠度
 - 以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）
 - 重構資料庫架構：Aurora Read Replica、MySQL → PostgreSQL 遷移、RDS Proxy、Redis / Valkey 7 切分遷移；主導 Airflow 2.0 升級（UAT / Production）
 - 獨力完成 GitLab → Gitea 版控遷移；建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署；以 Go 開發 Geo-block 部署自動化
 - 以 SQS 解決電信合作夥伴高量訂單瓶頸；整合 Elemental 媒體串流（DRM、Global Accelerator、SPEKE、IVS）；Akamai LDS → DataStream 2 IaC 化
-- 多雲治理與資安：GCP 權限限縮、Secrets Manager 憑證整頓、DRM / WAF / CVE 稽核；客戶專案環境建置與 CDN 網段白名單
+- 多雲治理與資安：GCP 權限限縮、Secrets Manager 憑證整頓、DRM / WAF / CVE 稽核；盤點並清理閒置 EC2 snapshots；客戶專案環境建置與 CDN 網段白名單
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
 - 負責跨服務 Incident Response；執行多次災難復原演練（DR Drill / 韌性測試）與維護視窗（Maintenance Window）

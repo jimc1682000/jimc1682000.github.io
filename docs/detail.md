@@ -39,12 +39,12 @@ pdf: /pdf/resume-detail-zh.pdf
 ## 工作經歷
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
-- **AI 協作與 DevOps 工具鏈**：主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、憑證管理 skill 等共用資產；以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）；向 Tech team 分享 HITL 實戰與 ai-kb 方法論
-- **串流媒體與 FAST 頻道**：建置 FAST 頻道監控平台（週報、即時告警、LINE Bot / Slack 通知）；整合 AWS Elemental（MediaLive / MediaPackage / MediaTailor）、DRM、Global Accelerator、SPEKE、IVS、Elemental Link；MediaLive Reservations 採購與成本管理
+- **AI 協作與 DevOps 工具鏈**：主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、憑證管理 skill 等共用資產；以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）；對外分享 HITL 實戰與 ai-kb 方法論
+- **串流媒體與 FAST 頻道**：建置 FAST 頻道監控平台（週報、即時告警、告警熱力圖、LINE Bot / Slack 通知）；整合 AWS Elemental（MediaLive / MediaPackage / MediaTailor）、DRM、Global Accelerator、SPEKE、IVS、Elemental Link；MediaLive Reservations 採購與成本管理
 - **平台現代化與服務遷移**：獨力完成 GitLab → Gitea 版控遷移；建置 Vaultwarden 並導入 Bitwarden；評估並導入 Bruno 取代 Postman；修復 Akamai log server 並完成 LDS → DataStream 2 IaC 化；建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署
 - **資料庫、快取與部署自動化**：Aurora Read Replica 分散負載、版控平台資料庫 MySQL → PostgreSQL 遷移、導入 RDS Proxy 解決高併發連線、Redis / Valkey 7 切分遷移；主導 Airflow 2.0 升級（UAT / Production）；以 Go 開發 Jenkins 部署自動化（Geo-block 流程）；以 SQS 設計高流量訂單處理方案
-- **雲端治理、資安與客戶專案**：GCP 權限限縮與 API key 治理；客戶專案環境建置與 CDN 網段白名單（Akamai / CloudFront）；以 AI 協助 DRM / WAF / CVE 稽核；憑證帳號整頓（Secrets Manager）；引入 AWS Personalize、DynamoDB、Secrets Manager、Bedrock
-- **系統整合與架構**：建置 S3 / NAS 混合儲存優化影音內容、實作 S3 生命週期自動清理；開發 Akamai IaC 自動化 CDN 快取管理；建置短網址服務；建立 DynamoDB 監控儀表板並部署 DevOps Guru
+- **雲端治理、資安與客戶專案**：GCP 權限限縮與 API key 治理；客戶專案環境建置與 CDN 網段白名單（Akamai / CloudFront）；以 AI 協助 DRM / WAF / CVE 稽核；憑證帳號整頓（Secrets Manager）；盤點並清理閒置 EC2 snapshots；引入 AWS Personalize、DynamoDB、Secrets Manager、Bedrock
+- **系統整合與架構**：建置 S3 / NAS 混合儲存優化影音內容、實作 S3 生命週期自動清理；開發 Akamai IaC 自動化 CDN 快取管理；建置短網址服務；優化入口平台部署流程（build once, deploy anywhere）；建立 DynamoDB 監控儀表板並部署 DevOps Guru
 - *Tools：AWS（Elemental / EKS / Aurora / RDS Proxy / DynamoDB / SQS / IVS / Personalize / Bedrock / Secrets Manager / DevOps Guru）、GCP、Airflow、Gitea、Vaultwarden、Akamai DataStream、Claude Code / Skills / MCP、Bruno、Terraform、Kubernetes、Go、PostgreSQL*
 
 ### Senior SRE Engineer · TrendMicro（趨勢科技） @@ 2021.09 – 2024.03

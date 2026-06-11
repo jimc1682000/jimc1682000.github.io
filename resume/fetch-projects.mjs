@@ -12,6 +12,8 @@ const MAIN = USER + ".github.io";
 const out = resolve(repo, "docs/.vitepress/data/projects.auto.json");
 const denyPath = resolve(here, "projects.denylist.json");
 const deny = existsSync(denyPath) ? JSON.parse(readFileSync(denyPath, "utf8")) : [];
+const overridePath = resolve(here, "projects.override.json");
+const overrides = existsSync(overridePath) ? JSON.parse(readFileSync(overridePath, "utf8")) : {};
 
 const headers = { Accept: "application/vnd.github+json", "User-Agent": "resume-build" };
 if (process.env.GITHUB_TOKEN) headers.Authorization = "Bearer " + process.env.GITHUB_TOKEN;
@@ -30,13 +32,16 @@ try {
 
 const projects = repos
   .filter((r) => r.has_pages && !r.fork && !r.archived && r.name !== MAIN && !deny.includes(r.name))
-  .map((r) => ({
-    name: r.name,
-    desc: r.description || "",
-    url: `https://${MAIN}/${r.name}/`,
-    repo: r.html_url,
-    pushed: r.pushed_at,
-  }));
+  .map((r) => {
+    const patch = overrides[r.name] || {};
+    return {
+      name: r.name,
+      desc: patch.desc || r.description || "",
+      url: `https://${MAIN}/${r.name}/`,
+      repo: r.html_url,
+      pushed: r.pushed_at,
+    };
+  });
 
 mkdirSync(dirname(out), { recursive: true });
 writeFileSync(out, JSON.stringify(projects, null, 2) + "\n");
