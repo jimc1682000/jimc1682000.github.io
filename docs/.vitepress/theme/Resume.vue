@@ -119,7 +119,8 @@ onUnmounted(() => { if (io) io.disconnect(); cleanup.forEach((fn) => fn()); clea
 
     <nav class="toolbar" :class="{ scrolled }">
       <button class="brand" type="button" @click="scrollTop" aria-label="回到頂端" title="Top">
-        <span>陳</span><span>建</span><span>豪</span>
+        <span class="seal">陳建豪</span>
+        <span class="wm">Jimmy Chen</span>
       </button>
       <div class="ctrls">
         <div class="seg variant">
