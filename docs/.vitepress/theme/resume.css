@@ -88,14 +88,25 @@ html[data-mode="rich"] .aurora { opacity: 1; filter: blur(24px) saturate(1.35); 
 .toolbar.scrolled { border-bottom-color: var(--line); box-shadow: var(--shadow-soft); }
 .brand { display: inline-flex; border: 0; background: none; padding: 0; cursor: pointer; }
 .brand-text {
+  position: relative; display: inline-block;
   font-family: "Noto Sans TC", "Noto Sans CJK TC", sans-serif;
   font-weight: 700; font-size: 15px; letter-spacing: -.01em; line-height: 1.2;
   white-space: nowrap;
+}
+.brand-base { color: var(--ink); }
+.brand-fill {
+  position: absolute; left: 0; top: 0;
+  overflow: hidden; width: 0; max-width: 100%;
+  white-space: nowrap;
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  transition: filter .2s ease;
+  transition: width .38s cubic-bezier(.4, 0, .2, 1);
 }
-.brand:hover .brand-text { filter: brightness(1.12) saturate(1.15); }
+.brand:hover .brand-fill { width: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  .brand-fill { transition: none; }
+  .brand:hover .brand-fill { width: 100%; }
+}
 .ctrls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
 .seg {

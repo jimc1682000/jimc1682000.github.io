@@ -123,7 +123,10 @@ onUnmounted(() => { if (io) io.disconnect(); cleanup.forEach((fn) => fn()); clea
 
     <nav class="toolbar" :class="{ scrolled }">
       <button class="brand" type="button" @click="scrollTop" :aria-label="curLang === 'en' ? 'Back to top' : '回到頂端'" title="Top">
-        <span class="brand-text">{{ brandLabel }}</span>
+        <span class="brand-text">
+          <span class="brand-base">{{ brandLabel }}</span>
+          <span class="brand-fill" aria-hidden="true">{{ brandLabel }}</span>
+        </span>
       </button>
       <div class="ctrls">
         <div class="seg variant">
