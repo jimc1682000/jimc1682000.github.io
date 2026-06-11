@@ -102,7 +102,8 @@ html[data-mode="rich"] .aurora { opacity: 1; filter: blur(24px) saturate(1.35); 
   white-space: nowrap;
 }
 .seg a:hover, .seg button:hover { color: var(--accent); text-decoration: none; }
-.seg.pills button.active { background: var(--accent); color: #fff; font-weight: 600; }
+.seg.pills button.active,
+.seg.variant a.active { background: var(--accent); color: #fff; font-weight: 600; }
 
 .icon {
   display: inline-grid; place-items: center;
@@ -202,6 +203,7 @@ html[data-mode="rich"] .rh h1 .en { -webkit-text-fill-color: transparent; }
 .resume-body li { margin: 4px 0; }
 .resume-body li::marker { color: var(--accent); }
 .resume-body strong { font-weight: 600; }
+.resume-body em { color: var(--muted); font-style: normal; font-size: .92em; }
 
 /* projects */
 ul.projects .repo { font-size: 12px; color: var(--muted); margin-left: 6px; white-space: nowrap; }

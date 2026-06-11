@@ -1,9 +1,24 @@
 <script setup>
 import { useData, useRoute, Content } from "vitepress";
-import { onMounted, onUnmounted, nextTick, ref, watch } from "vue";
+import { onMounted, onUnmounted, nextTick, ref, watch, computed } from "vue";
 
 const { frontmatter, lang } = useData();
 const route = useRoute();
+
+// Variant navigation (3 versions × 2 languages).
+const VARIANTS = [
+  { key: "general", zh: "通用", en: "General" },
+  { key: "platform", zh: "Platform / SRE", en: "Platform / SRE" },
+  { key: "detail", zh: "完整詳細", en: "Full CV" },
+];
+const ROUTES = {
+  general: { zh: "/", en: "/en/" },
+  platform: { zh: "/platform", en: "/en/platform" },
+  detail: { zh: "/detail", en: "/en/detail" },
+};
+const curVariant = computed(() => frontmatter.value.variant || "general");
+const curLang = computed(() => (lang.value === "en" ? "en" : "zh"));
+const variantHref = (key, l) => ROUTES[key][l || curLang.value];
 
 const theme = ref("light");
 const mode = ref("minimal");
@@ -109,11 +124,11 @@ onUnmounted(() => { if (io) io.disconnect(); cleanup.forEach((fn) => fn()); clea
     <nav class="toolbar" :class="{ scrolled }">
       <span class="brand">{{ frontmatter.name }} <em>{{ frontmatter.nameEn }}</em></span>
       <div class="ctrls">
-        <div class="seg">
-          <a v-if="frontmatter.otherVariant" :href="frontmatter.otherVariant">{{ frontmatter.otherVariantLabel }}</a>
+        <div class="seg variant">
+          <a v-for="v in VARIANTS" :key="v.key" :href="variantHref(v.key)" :class="{ active: v.key === curVariant }">{{ curLang === "en" ? v.en : v.zh }}</a>
         </div>
         <div class="seg">
-          <a v-if="frontmatter.otherLang" :href="frontmatter.otherLang">{{ frontmatter.otherLangLabel }}</a>
+          <a :href="variantHref(curVariant, curLang === 'en' ? 'zh' : 'en')">{{ curLang === "en" ? "中文" : "EN" }}</a>
         </div>
         <div class="seg pills">
           <button :class="{ active: mode === 'minimal' }" @click="setMode('minimal')">{{ lang === "en" ? "Minimal" : "極簡" }}</button>
