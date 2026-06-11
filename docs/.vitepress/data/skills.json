@@ -1,4 +1,154 @@
 {
+  "platform": {
+    "zh": {
+      "headline": "Linux 系統 × 虛擬化 × 雲端平台 — 從 bare-metal 到 Kubernetes 全棧基礎架構",
+      "signature": ["Linux / 虛擬化", "HA / DR 架構", "IaC 自動化"],
+      "categories": [
+        {
+          "id": "linux",
+          "title": "Linux / 虛擬化",
+          "hero": true,
+          "items": [
+            { "name": "Linux", "hl": true },
+            { "name": "RHCE", "badge": "認證", "hl": true },
+            { "name": "KVM / QEMU", "hl": true },
+            { "name": "VMware", "hl": true },
+            { "name": "Docker" },
+            { "name": "yum / RPM" },
+            { "name": "Bash", "hl": true }
+          ]
+        },
+        {
+          "id": "ha",
+          "title": "HA / 可靠度",
+          "items": [
+            { "name": "HAProxy", "hl": true },
+            { "name": "DR / Failover 演練", "hl": true },
+            { "name": "Incident Response" },
+            { "name": "NFS" },
+            { "name": "HA 架構設計" }
+          ]
+        },
+        {
+          "id": "net",
+          "title": "網路 / 系統",
+          "items": [
+            { "name": "pfSense / Firewall" },
+            { "name": "BIND DNS" },
+            { "name": "TCP/IP" },
+            { "name": "VPN" },
+            { "name": "iptables" }
+          ]
+        },
+        {
+          "id": "cicd",
+          "title": "IaC / 自動化",
+          "items": [
+            { "name": "Ansible", "hl": true },
+            { "name": "Terraform", "hl": true },
+            { "name": "Go" },
+            { "name": "Python" },
+            { "name": "Jenkins" }
+          ]
+        },
+        {
+          "id": "observe",
+          "title": "可觀測性",
+          "items": [
+            { "name": "Prometheus" },
+            { "name": "Grafana" },
+            { "name": "ELK / EFK" },
+            { "name": "CloudWatch" }
+          ]
+        },
+        {
+          "id": "cloud",
+          "title": "雲端 / K8s",
+          "items": [
+            { "name": "Kubernetes" },
+            { "name": "EKS" },
+            { "name": "AWS", "badge": "深度" },
+            { "name": "ECS" },
+            { "name": "GCP" }
+          ]
+        }
+      ]
+    },
+    "en": {
+      "headline": "Linux systems × virtualisation × cloud platforms — full-stack infrastructure from bare-metal to Kubernetes",
+      "signature": ["Linux / virtualisation", "HA / DR architecture", "IaC automation"],
+      "categories": [
+        {
+          "id": "linux",
+          "title": "Linux / Virtualisation",
+          "hero": true,
+          "items": [
+            { "name": "Linux", "hl": true },
+            { "name": "RHCE", "badge": "cert", "hl": true },
+            { "name": "KVM / QEMU", "hl": true },
+            { "name": "VMware", "hl": true },
+            { "name": "Docker" },
+            { "name": "yum / RPM" },
+            { "name": "Bash", "hl": true }
+          ]
+        },
+        {
+          "id": "ha",
+          "title": "HA / Reliability",
+          "items": [
+            { "name": "HAProxy", "hl": true },
+            { "name": "DR / failover drills", "hl": true },
+            { "name": "Incident response" },
+            { "name": "NFS" },
+            { "name": "HA architecture" }
+          ]
+        },
+        {
+          "id": "net",
+          "title": "Networking / Systems",
+          "items": [
+            { "name": "pfSense / Firewall" },
+            { "name": "BIND DNS" },
+            { "name": "TCP/IP" },
+            { "name": "VPN" },
+            { "name": "iptables" }
+          ]
+        },
+        {
+          "id": "cicd",
+          "title": "IaC / Automation",
+          "items": [
+            { "name": "Ansible", "hl": true },
+            { "name": "Terraform", "hl": true },
+            { "name": "Go" },
+            { "name": "Python" },
+            { "name": "Jenkins" }
+          ]
+        },
+        {
+          "id": "observe",
+          "title": "Observability",
+          "items": [
+            { "name": "Prometheus" },
+            { "name": "Grafana" },
+            { "name": "ELK / EFK" },
+            { "name": "CloudWatch" }
+          ]
+        },
+        {
+          "id": "cloud",
+          "title": "Cloud / K8s",
+          "items": [
+            { "name": "Kubernetes" },
+            { "name": "EKS" },
+            { "name": "AWS", "badge": "deep" },
+            { "name": "ECS" },
+            { "name": "GCP" }
+          ]
+        }
+      ]
+    }
+  },
   "ai": {
     "zh": {
       "headline": "AI Agent 工程 × 大型雲端維運 — 把協作自動化落地到生產環境",

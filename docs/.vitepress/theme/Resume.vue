@@ -15,10 +15,11 @@ const ROUTES = {
   ai: { zh: "/", en: "/en/" },
   sre: { zh: "/sre", en: "/en/sre" },
   detail: { zh: "/detail", en: "/en/detail" },
+  platform: { zh: "/platform", en: "/en/platform" },
 };
 const curVariant = computed(() => frontmatter.value.variant || "ai");
 const curLang = computed(() => (frontmatter.value.lang === "en" ? "en" : "zh"));
-const variantHref = (key, l) => ROUTES[key][l || curLang.value];
+const variantHref = (key, l) => ROUTES[key]?.[l || curLang.value] ?? "#";
 const brandLabel = computed(() =>
   curLang.value === "en" ? "陳建豪 Jimmy Chen Resume" : "陳建豪 Jimmy Chen 簡歷"
 );
