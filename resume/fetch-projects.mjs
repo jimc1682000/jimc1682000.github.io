@@ -34,13 +34,19 @@ const projects = repos
   .filter((r) => r.has_pages && !r.fork && !r.archived && r.name !== MAIN && !deny.includes(r.name))
   .map((r) => {
     const patch = overrides[r.name] || {};
-    return {
+    const base = {
       name: r.name,
-      desc: patch.desc || r.description || "",
       url: `https://${MAIN}/${r.name}/`,
       repo: r.html_url,
       pushed: r.pushed_at,
     };
+    if (patch.desc_zh || patch.desc_en) {
+      base.desc_zh = patch.desc_zh || patch.desc || r.description || "";
+      base.desc_en = patch.desc_en || patch.desc || r.description || "";
+    } else {
+      base.desc = patch.desc || r.description || "";
+    }
+    return base;
   });
 
 mkdirSync(dirname(out), { recursive: true });

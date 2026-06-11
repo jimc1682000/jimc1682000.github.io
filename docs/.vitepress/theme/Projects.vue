@@ -7,7 +7,11 @@ import manual from "../data/projects.manual.json";
 const { lang } = useData();
 const sep = computed(() => (lang.value === "en" ? " — " : "："));
 const items = computed(() => [
-  ...auto.map((p) => ({ ...p, live: true })),
+  ...auto.map((p) => ({
+    ...p,
+    live: true,
+    desc: lang.value === "en" ? (p.desc_en || p.desc) : (p.desc_zh || p.desc),
+  })),
   ...(manual[lang.value] || manual.zh || []),
 ]);
 </script>

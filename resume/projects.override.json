@@ -1,5 +1,10 @@
 {
   "a-day-with-my-ai-wife": {
-    "desc": "我與老婆的一天 — HITL debugging a VCS migration OOM with Claude Code. 14 collaboration tips included."
+    "desc_zh": "我與老婆的一天 — 用 Claude Code 除錯 VCS 遷移 OOM 問題，含 14 條 AI 協作心得",
+    "desc_en": "我與老婆的一天 — HITL debugging a VCS migration OOM with Claude Code. 14 collaboration tips included."
+  },
+  "film-brain": {
+    "desc_zh": "AI 片庫大腦 — 靜態作品集展示：語意搜尋 replay、除錯 case study、eval 迭代記錄",
+    "desc_en": "AI film-library brain — static portfolio: semantic search replay, debugging case study, eval iteration story"
   }
 }

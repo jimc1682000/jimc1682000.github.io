@@ -51,7 +51,7 @@ pdf: /pdf/resume-detail-zh.pdf
 - 執行多次災難復原演練（DR Drill）與維護視窗（Maintenance Window），並負責各類事件處理（Incident Response）
 - 優化雲端成本：盤點並移除閒置 / 低使用資源、優化資料傳輸、調整日誌設定
 - 維運強化：Opsworks → ASG / SSM 遷移、建立端對端（E2E）監控機制、服務上線審查（Readiness Review）流程
-- *Tools：AWS（Opsworks / ASG / SSM / CloudWatch）*
+- *Tools：AWS（Opsworks / ASG / SSM / CloudWatch）、Chef*
 
 ### Senior DevOps Engineer · GoFreight（聖學科技） @@ 2020.10 – 2021.09
 - 容器化：取代 VM 的 dev / stage 環境、於 CI/CD 管線執行單元測試、提升管線效能與可靠度
@@ -71,7 +71,7 @@ pdf: /pdf/resume-detail-zh.pdf
 - 導入 Kubernetes、GitLab CI/CD、Ansible 強化自動化；檢查防火牆設定、修補弱點提升資安等級
 - *Tools：Docker、Kafka、Zookeeper、ELK、Grafana、Prometheus、Kubernetes、Ansible、GitLab CI/CD、GCP、MongoDB、Redis*
 
-### Senior Java Web Engineer · Groundhog Technologies @@ 2017.11 – 2018.09
+### Senior Java Web Engineer · Groundhog Technologies（現觀科技） @@ 2017.11 – 2018.09
 - 維護並開發 CovMo（手機訊號優化）系統新功能；重構程式碼提升可讀性；優化 SQL 查詢效能
 - *Tools：Java、JavaScript、GWT、Spring、Tomcat、MySQL*
 
