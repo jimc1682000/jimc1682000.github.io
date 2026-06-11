@@ -2,7 +2,7 @@
 import { useData, useRoute, Content } from "vitepress";
 import { onMounted, onUnmounted, nextTick, ref, watch, computed } from "vue";
 
-const { frontmatter, lang } = useData();
+const { frontmatter } = useData();
 const route = useRoute();
 
 // Variant navigation (3 versions × 2 languages).
@@ -17,7 +17,7 @@ const ROUTES = {
   detail: { zh: "/detail", en: "/en/detail" },
 };
 const curVariant = computed(() => frontmatter.value.variant || "ai");
-const curLang = computed(() => (lang.value === "en" ? "en" : "zh"));
+const curLang = computed(() => (frontmatter.value.lang === "en" ? "en" : "zh"));
 const variantHref = (key, l) => ROUTES[key][l || curLang.value];
 
 const theme = ref("light");
@@ -127,7 +127,7 @@ onUnmounted(() => { if (io) io.disconnect(); cleanup.forEach((fn) => fn()); clea
           <svg v-if="theme === 'dark'" class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4" /></svg>
           <svg v-else class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" /></svg>
         </button>
-        <a class="dl" :href="frontmatter.pdf" download>⬇︎&nbsp;{{ lang === "en" ? "PDF" : "下載 PDF" }}</a>
+        <a class="dl" :href="frontmatter.pdf" download>⬇︎&nbsp;{{ curLang === "en" ? "PDF" : "下載 PDF" }}</a>
       </div>
     </nav>
 
@@ -152,7 +152,7 @@ onUnmounted(() => { if (io) io.disconnect(); cleanup.forEach((fn) => fn()); clea
     </main>
 
     <footer class="foot">
-      <a :href="frontmatter.pdf" download>{{ lang === "en" ? "Download PDF" : "下載 PDF" }}</a>
+      <a :href="frontmatter.pdf" download>{{ curLang === "en" ? "Download PDF" : "下載 PDF" }}</a>
       <span class="sep">·</span>
       <a href="https://github.com/jimc1682000" target="_blank" rel="noopener">GitHub</a>
     </footer>
