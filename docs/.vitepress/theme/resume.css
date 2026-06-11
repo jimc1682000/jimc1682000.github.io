@@ -90,10 +90,12 @@ html[data-mode="rich"] .aurora { opacity: 1; filter: blur(24px) saturate(1.35); 
 .brand-text {
   font-family: "Noto Sans TC", "Noto Sans CJK TC", sans-serif;
   font-weight: 700; font-size: 15px; letter-spacing: -.01em; line-height: 1.2;
-  color: var(--ink); white-space: nowrap;
-  transition: color .2s ease;
+  white-space: nowrap;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  transition: filter .2s ease;
 }
-.brand:hover .brand-text { color: var(--accent); }
+.brand:hover .brand-text { filter: brightness(1.12) saturate(1.15); }
 .ctrls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
 .seg {
