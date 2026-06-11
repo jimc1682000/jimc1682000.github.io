@@ -15,7 +15,7 @@ contacts:
   - text: linkedin.com/in/594jimmychen
     href: https://www.linkedin.com/in/594jimmychen
   - text: Taipei / Tainan
-pdf: /pdf/resume-sre-en.pdf
+pdf: /pdf/resume-platform-en.pdf
 ---
 
 ## Core Skills

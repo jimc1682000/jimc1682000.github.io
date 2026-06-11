@@ -92,7 +92,7 @@ pdf: /pdf/resume-detail-zh.pdf
 
 ## 認證
 
-- **Red Hat**：RHCA · RHCE（EX200 / EX300）
+- **Red Hat**：RHCE（EX200 / EX300）
 - **資安 / 網路**：CEH（312-50）· ENSA（312-38）· CCNSP · CCNA（640-802）
 - **Microsoft**：MCITP（Windows Server 2008 R2：70-646 / 640 / 642）· MCSA · MCTS · MOS Master
 - **Java**：OCPJP7（1Z0-803 / 804）· SCJP
