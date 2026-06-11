@@ -1,12 +1,12 @@
 ---
 layout: resume
-variant: general
+variant: ai
 lang: en
 compact: true
 name: 陳建豪
 nameEn: Jimmy Chen
-role: DevOps / SRE / AI Engineer
-summary: 13 years across IT infrastructure and software engineering, with 5+ years focused on DevOps / SRE. I combine backend development (Java / Python) with large-scale cloud platform operations, and improve reliability through IaC, observability, and automation — recently bringing AI / agentic workflows into operations.
+role: AI Engineer · DevOps / SRE
+summary: 13 years of cloud / DevOps / SRE foundations, recently focused on AI / agentic engineering — self-hosting an AI platform, building Claude Code skills and agentic workflows, and knowledge-base automation — bringing AI into production and operations on the back of deep AWS operations and automation experience.
 contacts:
   - text: jimc1682000@gmail.com
     href: mailto:jimc1682000@gmail.com
@@ -15,21 +15,17 @@ contacts:
   - text: linkedin.com/in/594jimmychen
     href: https://www.linkedin.com/in/594jimmychen
   - text: Taipei, Taiwan
-pdf: /pdf/resume-general-en.pdf
-otherLang: /
-otherLangLabel: 中文
-otherVariant: /en/platform
-otherVariantLabel: Platform / SRE Focus
+pdf: /pdf/resume-ai-en.pdf
 ---
 
 ## Core Skills
 
+- **AI / Agentic**: AWS Bedrock, Claude Code, agentic workflows, RAG / knowledge-base automation, AWS Personalize
 - **Cloud / Platform**: AWS (deep), GCP, Kubernetes, EKS, Docker, ECS
 - **IaC / CI-CD**: Terraform, Ansible, GitLab CI, Jenkins
 - **Observability**: Prometheus, Grafana, ELK / EFK, CloudWatch, DevOps Guru
-- **Languages**: Java, Python, JavaScript, Bash
+- **Languages**: Python, Java, JavaScript, Bash
 - **Databases**: MySQL, PostgreSQL, Aurora, DynamoDB, MongoDB, Redis
-- **AI / Agentic**: AWS Bedrock, Claude Code, agentic workflows, RAG / knowledge-base automation
 
 ## AI / Agentic Engineering
 
@@ -42,8 +38,8 @@ otherVariantLabel: Platform / SRE Focus
 - Re-architected the data layer: introduced Aurora MySQL read replicas for load distribution, migrated MySQL to PostgreSQL, and adopted RDS Proxy to resolve high-concurrency connection bottlenecks
 - Built an AWS Elemental media streaming pipeline (MediaLive / MediaPackage / MediaTailor) integrated with DRM content protection
 - Upgraded Airflow to 2.0 across UAT and Production; built a DynamoDB monitoring dashboard and adopted AWS DevOps Guru to detect RDS anomalies
-- Evaluated and rolled out AWS Bedrock AI tooling and Secrets Manager; used SQS to relieve Telkomsel high-volume order-processing bottlenecks
-- Stood up an AWS Personalize environment and delivered recommendation features to BI / Backend teams; introduced DynamoDB for the CP4.0 platform
+- Evaluated and rolled out AWS Bedrock AI tooling and Secrets Manager; used SQS to relieve a major telco partner's high-volume order-processing bottlenecks
+- Stood up an AWS Personalize environment and delivered recommendation features to BI / Backend teams; introduced DynamoDB for the next-gen platform
 - Designed an S3 + NAS hybrid storage architecture and Akamai IaC CDN automation; redesigned the partner upload flow and lifecycle management
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03

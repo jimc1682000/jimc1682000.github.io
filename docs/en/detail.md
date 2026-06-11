@@ -41,7 +41,7 @@ pdf: /pdf/resume-detail-en.pdf
 - **Streaming media infrastructure**: integrated AWS Elemental (MediaLive / MediaPackage / MediaTailor), wired up DRM for content security, and coordinated cross-team integration to optimize the streaming architecture
 - **Database optimization & migration**: deployed Aurora read replicas to distribute load, migrated the GitLab database from MySQL to PostgreSQL, adopted RDS Proxy for high-concurrency connections, and optimized & migrated the Airflow database to a replica
 - **DevOps & monitoring**: built a DynamoDB monitoring dashboard for observability, deployed DevOps Guru for RDS anomaly detection, led the Airflow 2.0 upgrade (UAT / Production), and developed Akamai IaC for automated CDN cache management
-- **Cloud services adoption**: introduced AWS Personalize for recommendations, brought in DynamoDB for the CP4.0 platform, promoted AWS Secrets Manager for security, and introduced AWS Bedrock AI services to the team
+- **Cloud services adoption**: introduced AWS Personalize for recommendations, brought in DynamoDB for the next-gen platform, promoted AWS Secrets Manager for security, and introduced AWS Bedrock AI services to the team
 - **System integration & architecture**: designed high-traffic order processing with SQS, built S3 / NAS hybrid storage for video content, implemented S3 lifecycle auto-cleanup, and optimized the deployment pipeline for S3 integration
 - *Tools: AWS (Elemental / Aurora / RDS Proxy / DynamoDB / SQS / Personalize / Bedrock / Secrets Manager / DevOps Guru), Airflow, Akamai, S3 / NAS, Terraform, PostgreSQL*
 

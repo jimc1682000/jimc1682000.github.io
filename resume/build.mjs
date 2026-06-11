@@ -16,10 +16,10 @@ const dataDir = resolve(repo, "docs/.vitepress/data");
 
 // [input md, output pdf basename, lang]
 const targets = [
-  ["docs/index.md", "resume-general-zh", "zh"],
-  ["docs/en/index.md", "resume-general-en", "en"],
-  ["docs/platform.md", "resume-platform-zh", "zh"],
-  ["docs/en/platform.md", "resume-platform-en", "en"],
+  ["docs/index.md", "resume-ai-zh", "zh"],
+  ["docs/en/index.md", "resume-ai-en", "en"],
+  ["docs/sre.md", "resume-sre-zh", "zh"],
+  ["docs/en/sre.md", "resume-sre-en", "en"],
   ["docs/detail.md", "resume-detail-zh", "zh"],
   ["docs/en/detail.md", "resume-detail-en", "en"],
 ];

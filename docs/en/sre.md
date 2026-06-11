@@ -1,11 +1,11 @@
 ---
 layout: resume
-variant: platform
+variant: sre
 lang: en
 compact: true
 name: 陳建豪
 nameEn: Jimmy Chen
-role: SRE / Platform Engineer
+role: SRE / DevOps Engineer
 summary: 13 years across IT infrastructure and backend development, 5+ years focused on DevOps / SRE, centered on the Kubernetes platform lifecycle, observability, and system reliability. I combine backend development (Java / Python) with large-scale cloud platform architecture and operations, and am experienced in incident response, disaster-recovery / resilience drills, and design / readiness reviews — while bringing AI / agentic workflows into operational automation.
 contacts:
   - text: jimc1682000@gmail.com
@@ -15,11 +15,7 @@ contacts:
   - text: linkedin.com/in/594jimmychen
     href: https://www.linkedin.com/in/594jimmychen
   - text: Taipei, Taiwan (open to relocation)
-pdf: /pdf/resume-platform-en.pdf
-otherLang: /platform
-otherLangLabel: 中文
-otherVariant: /en/
-otherVariantLabel: General
+pdf: /pdf/resume-sre-en.pdf
 ---
 
 ## Core Skills
@@ -37,7 +33,7 @@ otherVariantLabel: General
 - **Kubernetes platform**: built highly-available EKS clusters with rolling upgrades; standardized deployment with Kubernetes, Ansible, GitLab CI/CD
 - **Observability**: DynamoDB monitoring dashboard + AWS DevOps Guru anomaly detection, centralized ELK logging, end-to-end (E2E) monitoring
 - **Reliability / SRE**: cross-service incident response, multiple DR / resilience drills, service readiness reviews
-- **High concurrency / scale**: RDS Proxy for connection bottlenecks, Aurora read replicas, SQS for Telkomsel high-volume orders
+- **High concurrency / scale**: RDS Proxy for connection bottlenecks, Aurora read replicas, SQS for a major telco partner's high-volume orders
 
 ## AI / Agentic for Operations
 
@@ -49,7 +45,7 @@ otherVariantLabel: General
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
 - Strengthened observability and reliability: built a DynamoDB monitoring dashboard and adopted AWS DevOps Guru to detect RDS anomalies
 - Re-architected the data layer: Aurora MySQL read replicas, MySQL → PostgreSQL migration, and RDS Proxy to resolve high-concurrency connection bottlenecks
-- Upgraded Airflow to 2.0 across UAT and Production; used SQS to relieve Telkomsel high-volume order processing
+- Upgraded Airflow to 2.0 across UAT and Production; used SQS to relieve a major telco partner's high-volume order processing
 - Other cloud operations (breadth): AWS Bedrock AI tooling and Secrets Manager, AWS Personalize for BI / Backend, Elemental media streaming (DRM), and an S3 + NAS hybrid store with Akamai IaC CDN
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03

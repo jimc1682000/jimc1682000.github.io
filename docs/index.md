@@ -1,11 +1,11 @@
 ---
 layout: resume
-variant: general
+variant: ai
 lang: zh
 name: 陳建豪
 nameEn: Jimmy Chen
-role: DevOps / SRE / AI Engineer
-summary: 13 年 IT 基礎架構與軟體開發經驗，其中 5+ 年專注 DevOps / SRE。兼具後端開發（Java / Python）與大型雲端平台維運能力，擅長以 IaC、可觀測性與自動化提升系統可靠度，近年並將 AI / Agentic 工作流導入維運場景。
+role: AI Engineer · DevOps / SRE
+summary: 具 13 年雲端 / DevOps / SRE 底子，近年聚焦 AI / Agentic Engineering：自建自託管 AI 平台、開發 Claude Code skills 與 agentic workflow、建置知識庫自動化，並以深厚 AWS 維運與自動化能力，將 AI 落地於生產與維運場景。
 contacts:
   - text: jimc1682000@gmail.com
     href: mailto:jimc1682000@gmail.com
@@ -14,21 +14,17 @@ contacts:
   - text: linkedin.com/in/594jimmychen
     href: https://www.linkedin.com/in/594jimmychen
   - text: Taipei, Taiwan
-pdf: /pdf/resume-general-zh.pdf
-otherLang: /en/
-otherLangLabel: EN
-otherVariant: /platform
-otherVariantLabel: Platform / SRE 深度版
+pdf: /pdf/resume-ai-zh.pdf
 ---
 
 ## 核心技能
 
+- **AI / Agentic**：AWS Bedrock、Claude Code、Agentic Workflow、RAG / 知識庫自動化、AWS Personalize
 - **雲端 / 平台**：AWS（深度）、GCP、Kubernetes、EKS、Docker、ECS
 - **IaC / CI-CD**：Terraform、Ansible、GitLab CI、Jenkins
 - **可觀測性**：Prometheus、Grafana、ELK / EFK、CloudWatch、DevOps Guru
-- **程式語言**：Java、Python、JavaScript、Bash
+- **程式語言**：Python、Java、JavaScript、Bash
 - **資料庫**：MySQL、PostgreSQL、Aurora、DynamoDB、MongoDB、Redis
-- **AI / Agentic**：AWS Bedrock、Claude Code、Agentic Workflow、RAG / 知識庫自動化
 
 ## AI / Agentic Engineering
 
@@ -41,8 +37,8 @@ otherVariantLabel: Platform / SRE 深度版
 - 重構資料庫架構：導入 Aurora MySQL Read Replica 分流、完成 MySQL → PostgreSQL 遷移、以 RDS Proxy 解決高併發連線瓶頸
 - 建置 AWS Elemental 媒體串流管線（MediaLive / MediaPackage / MediaTailor）並整合 DRM 內容保護
 - 升級 Airflow 至 2.0 並橫跨 UAT / Production；建置 DynamoDB 監控儀表板，導入 AWS DevOps Guru 自動偵測 RDS 異常
-- 評估並導入 AWS Bedrock AI 工具與 Secrets Manager；以 SQS 解決 Telkomsel 高量訂單處理瓶頸
-- 建置 AWS Personalize 推薦環境並導入推薦功能予 BI / Backend 團隊；為 CP4.0 平台導入 DynamoDB
+- 評估並導入 AWS Bedrock AI 工具與 Secrets Manager；以 SQS 解決 電信合作夥伴 高量訂單處理瓶頸
+- 建置 AWS Personalize 推薦環境並導入推薦功能予 BI / Backend 團隊；為 新一代平台導入 DynamoDB
 - 設計 S3 + NAS 混合儲存與 Akamai IaC CDN 自動化，重構夥伴上傳流程與生命週期管理
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03

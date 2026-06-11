@@ -1,10 +1,11 @@
 ---
 layout: resume
-variant: platform
+variant: sre
 lang: zh
+compact: true
 name: 陳建豪
 nameEn: Jimmy Chen
-role: SRE / Platform Engineer
+role: SRE / DevOps Engineer
 summary: 13 年 IT 基礎架構與後端開發經驗，5+ 年專注 DevOps / SRE，聚焦 Kubernetes 平台全生命週期、可觀測性與系統可靠度。兼具後端開發（Java / Python）與大型雲端平台架構與維運能力，熟悉 Incident Response、災難復原 / 韌性演練與服務上線審查（Design / Readiness Review），並將 AI / Agentic 工作流導入維運自動化。
 contacts:
   - text: jimc1682000@gmail.com
@@ -14,11 +15,7 @@ contacts:
   - text: linkedin.com/in/594jimmychen
     href: https://www.linkedin.com/in/594jimmychen
   - text: Taipei, Taiwan（可遷台南）
-pdf: /pdf/resume-platform-zh.pdf
-otherLang: /en/platform
-otherLangLabel: EN
-otherVariant: /
-otherVariantLabel: 通用版
+pdf: /pdf/resume-sre-zh.pdf
 ---
 
 ## 核心技能
@@ -36,7 +33,7 @@ otherVariantLabel: 通用版
 - **Kubernetes 平台**：建置 EKS 高可用叢集與滾動升級（rolling upgrade）；以 Kubernetes、Ansible、GitLab CI/CD 標準化部署
 - **可觀測性**：DynamoDB 監控儀表板 + AWS DevOps Guru 異常偵測、ELK 集中化日誌、端對端（E2E）監控
 - **可靠度 / SRE**：跨服務 Incident Response、多次 DR / 韌性演練、服務上線審查（Readiness Review）
-- **高併發 / 規模**：RDS Proxy 解高併發連線、Aurora Read Replica 分流、SQS 處理 Telkomsel 高量訂單
+- **高併發 / 規模**：RDS Proxy 解高併發連線、Aurora Read Replica 分流、SQS 處理 電信合作夥伴 高量訂單
 
 ## AI / Agentic for Operations
 
@@ -48,7 +45,7 @@ otherVariantLabel: 通用版
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
 - 建置 DynamoDB 監控儀表板並導入 AWS DevOps Guru 自動偵測 RDS 異常，強化系統可觀測性與可靠度
 - 重構資料庫架構：Aurora MySQL Read Replica 分流、MySQL → PostgreSQL 遷移、以 RDS Proxy 解決高併發連線瓶頸
-- 升級 Airflow 至 2.0 並橫跨 UAT / Production 雙環境；以 SQS 解決 Telkomsel 高量訂單處理瓶頸
+- 升級 Airflow 至 2.0 並橫跨 UAT / Production 雙環境；以 SQS 解決 電信合作夥伴 高量訂單處理瓶頸
 - 其他雲端維運（廣度）：AWS Bedrock AI 工具與 Secrets Manager、AWS Personalize 推薦環境、Elemental 媒體串流（DRM）、S3 + NAS 混合儲存與 Akamai IaC CDN
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03

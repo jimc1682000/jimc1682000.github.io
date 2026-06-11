@@ -41,7 +41,7 @@ pdf: /pdf/resume-detail-zh.pdf
 - **串流媒體基礎建設**：整合 AWS Elemental（MediaLive / MediaPackage / MediaTailor）、串接 DRM 確保內容安全、協調跨部門整合優化串流架構
 - **資料庫優化與遷移**：Aurora Read Replica 分散負載、GitLab 資料庫由 MySQL 遷移至 PostgreSQL、導入 RDS Proxy 解決高併發連線、Airflow 資料庫優化並遷至 Replica
 - **DevOps 與監控**：建立 DynamoDB 監控儀表板提升可觀測性、部署 DevOps Guru 實現 RDS 智能異常偵測、主導 Airflow 2.0 升級（UAT / Production）、開發 Akamai IaC 自動化 CDN 快取管理
-- **雲端服務導入**：引入 AWS Personalize 個人化推薦、導入 DynamoDB 協助開發 CP4.0 平台、推動 AWS Secrets Manager 強化資安、向團隊導入 AWS Bedrock AI 服務
+- **雲端服務導入**：引入 AWS Personalize 個人化推薦、導入 DynamoDB 協助開發 新一代平台、推動 AWS Secrets Manager 強化資安、向團隊導入 AWS Bedrock AI 服務
 - **系統整合與架構**：以 SQS 設計高流量訂單處理方案、建置 S3 / NAS 混合儲存優化影音內容、實作 S3 生命週期自動清理、優化部署流程協助團隊整合 S3
 - *Tools：AWS（Elemental / Aurora / RDS Proxy / DynamoDB / SQS / Personalize / Bedrock / Secrets Manager / DevOps Guru）、Airflow、Akamai、S3 / NAS、Terraform、PostgreSQL*
 

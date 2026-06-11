@@ -7,16 +7,16 @@ const route = useRoute();
 
 // Variant navigation (3 versions × 2 languages).
 const VARIANTS = [
-  { key: "general", zh: "通用", en: "General" },
-  { key: "platform", zh: "Platform / SRE", en: "Platform / SRE" },
+  { key: "ai", zh: "AI Engineer", en: "AI Engineer" },
+  { key: "sre", zh: "SRE / DevOps", en: "SRE / DevOps" },
   { key: "detail", zh: "完整詳細", en: "Full CV" },
 ];
 const ROUTES = {
-  general: { zh: "/", en: "/en/" },
-  platform: { zh: "/platform", en: "/en/platform" },
+  ai: { zh: "/", en: "/en/" },
+  sre: { zh: "/sre", en: "/en/sre" },
   detail: { zh: "/detail", en: "/en/detail" },
 };
-const curVariant = computed(() => frontmatter.value.variant || "general");
+const curVariant = computed(() => frontmatter.value.variant || "ai");
 const curLang = computed(() => (lang.value === "en" ? "en" : "zh"));
 const variantHref = (key, l) => ROUTES[key][l || curLang.value];
 
