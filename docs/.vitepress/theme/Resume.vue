@@ -19,6 +19,9 @@ const ROUTES = {
 const curVariant = computed(() => frontmatter.value.variant || "ai");
 const curLang = computed(() => (frontmatter.value.lang === "en" ? "en" : "zh"));
 const variantHref = (key, l) => ROUTES[key][l || curLang.value];
+const brandLabel = computed(() =>
+  curLang.value === "en" ? "陳建豪 Jimmy Chen Resume" : "陳建豪 Jimmy Chen 簡歷"
+);
 
 const theme = ref("light");
 const scrolled = ref(false);
@@ -119,11 +122,8 @@ onUnmounted(() => { if (io) io.disconnect(); cleanup.forEach((fn) => fn()); clea
     <div class="aurora" aria-hidden="true"></div>
 
     <nav class="toolbar" :class="{ scrolled }">
-      <button class="brand" type="button" @click="scrollTop" aria-label="回到頂端" title="Top">
-        <span class="seal">
-          <span class="zh">陳建豪</span>
-          <span class="wm">Jimmy Chen</span>
-        </span>
+      <button class="brand" type="button" @click="scrollTop" :aria-label="curLang === 'en' ? 'Back to top' : '回到頂端'" title="Top">
+        <span class="brand-text">{{ brandLabel }}</span>
       </button>
       <div class="ctrls">
         <div class="seg variant">

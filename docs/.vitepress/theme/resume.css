@@ -86,32 +86,14 @@ html[data-mode="rich"] .aurora { opacity: 1; filter: blur(24px) saturate(1.35); 
   transition: border-color .3s ease, box-shadow .3s ease, background-color .4s ease;
 }
 .toolbar.scrolled { border-bottom-color: var(--line); box-shadow: var(--shadow-soft); }
-/* Logo: rectangular seal — 陳建豪 inside, Jimmy Chen sitting on the bottom frame line, both white */
 .brand { display: inline-flex; border: 0; background: none; padding: 0; cursor: pointer; }
-.brand .seal {
-  position: relative;
-  display: flex; align-items: center; justify-content: center;
-  width: 60px; height: 40px; border-radius: 7px;
-  background: linear-gradient(140deg, var(--accent), var(--accent-2));
-  box-shadow: 0 3px 13px color-mix(in srgb, var(--accent) 45%, transparent);
-  transition: transform .2s, box-shadow .2s;
+.brand-text {
+  font-family: "Noto Sans TC", "Noto Sans CJK TC", sans-serif;
+  font-weight: 700; font-size: 15px; letter-spacing: -.01em; line-height: 1.2;
+  color: var(--ink); white-space: nowrap;
+  transition: color .2s ease;
 }
-.brand .seal::after {
-  content: ""; position: absolute; inset: 3px;
-  border: 1px solid rgba(255, 255, 255, .55); border-radius: 4px; pointer-events: none;
-}
-.brand .zh {
-  font-family: "Noto Sans TC", "Noto Sans CJK TC", sans-serif; font-weight: 800;
-  color: #fff; font-size: 14px; letter-spacing: 0; line-height: 1; margin-top: -5px;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
-}
-.brand .wm {
-  position: absolute; left: 50%; bottom: 3px; transform: translate(-50%, 50%);
-  padding: 0 4px; line-height: 1; white-space: nowrap;
-  font-size: 7.5px; font-weight: 700; letter-spacing: .08em; color: #fff;
-  background: var(--accent-2);
-}
-.brand:hover .seal { transform: translateY(-1px); box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 55%, transparent); }
+.brand:hover .brand-text { color: var(--accent); }
 .ctrls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
 .seg {
@@ -453,9 +435,7 @@ html[data-mode="rich"] ul.projects .badge {
   html[data-mode="rich"] .resume-body h2:first-of-type + ul,
   html[data-mode="rich"] ul.projects { grid-template-columns: 1fr; }
   .toolbar { padding: 9px 12px; }
-  .brand .seal { width: 54px; height: 36px; }
-  .brand .zh { font-size: 12px; }
-  .brand .wm { font-size: 6.5px; }
+  .brand-text { font-size: 13px; }
   .ctrls { gap: 6px; }
   .seg a, .seg button { padding: 6px 10px; font-size: 12.5px; }
 }
