@@ -31,6 +31,11 @@ otherVariantLabel: 通用版
 - **資料庫**：MySQL、PostgreSQL、Aurora、DynamoDB、Redis、MongoDB
 - **AI / Agentic**：AWS Bedrock、Claude Code、Agentic Workflow、知識庫自動化
 
+## AI / Agentic for Operations
+
+- 自建並維運自託管 AI 平台（OpenClaw on VPS）；開發 Claude Code skills 與 agentic workflow，應用於 DevOps / SRE 維運自動化
+- 建置知識庫自動化管線（精煉、發布、語意檢索），整合 Slack / Jira / Notion，加速事件分析與文件產出
+
 ## 工作經歷
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
@@ -65,11 +70,6 @@ otherVariantLabel: 通用版
 ### 早期經歷 @@ 2012 – 2015
 - **Gping Construction · Senior System Engineer**（2014.03 – 2015.04）：強化防火牆與網路拓樸、以 Acronis 建置備援
 - **Global Publishing · System Engineer**（2012.09 – 2014.03）：升級 Windows AD / Exchange，以 VMware 建置 HA
-
-## AI / Agentic for Operations
-
-- 自建並維運自託管 AI 平台（OpenClaw on VPS）；開發 Claude Code skills 與 agentic workflow，應用於 DevOps / SRE 維運自動化
-- 建置知識庫自動化管線（精煉、發布、語意檢索），整合 Slack / Jira / Notion，加速事件分析與文件產出
 
 ## 精選專案
 

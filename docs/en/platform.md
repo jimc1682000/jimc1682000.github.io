@@ -32,6 +32,11 @@ otherVariantLabel: General
 - **Databases**: MySQL, PostgreSQL, Aurora, DynamoDB, Redis, MongoDB
 - **AI / Agentic**: AWS Bedrock, Claude Code, agentic workflows, knowledge-base automation
 
+## AI / Agentic for Operations
+
+- Self-host and operate an AI platform (OpenClaw on VPS); build Claude Code skills and agentic workflows for DevOps / SRE automation
+- Built a knowledge-base automation pipeline (distill, publish, semantic search) integrated with Slack / Jira / Notion to speed up incident analysis and documentation
+
 ## Experience
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
@@ -66,11 +71,6 @@ otherVariantLabel: General
 ### Earlier Experience @@ 2012 – 2015
 - **Gping Construction · Senior System Engineer** (2014.03 – 2015.04): hardened firewall and network topology; built backup with Acronis
 - **Global Publishing · System Engineer** (2012.09 – 2014.03): upgraded Windows AD / Exchange; built HA with VMware
-
-## AI / Agentic for Operations
-
-- Self-host and operate an AI platform (OpenClaw on VPS); build Claude Code skills and agentic workflows for DevOps / SRE automation
-- Built a knowledge-base automation pipeline (distill, publish, semantic search) integrated with Slack / Jira / Notion to speed up incident analysis and documentation
 
 ## Selected Projects
 

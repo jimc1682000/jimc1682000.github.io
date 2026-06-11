@@ -31,6 +31,11 @@ otherVariantLabel: Platform / SRE Focus
 - **Databases**: MySQL, PostgreSQL, Aurora, DynamoDB, MongoDB, Redis
 - **AI / Agentic**: AWS Bedrock, Claude Code, agentic workflows, RAG / knowledge-base automation
 
+## AI / Agentic Engineering
+
+- Self-host and operate an AI platform (OpenClaw on VPS); build Claude Code skills and agentic workflows applied to DevOps / SRE operations
+- Built a knowledge-base automation pipeline (distill, publish, semantic search) integrated with Slack / Jira / Notion
+
 ## Experience
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
@@ -68,11 +73,6 @@ otherVariantLabel: Platform / SRE Focus
 
 ### System Engineer · Global Publishing @@ 2012.09 – 2014.03
 - Upgraded Windows AD (2000 → 2008) and Exchange; built HA with VMware, ran P2V migrations for legacy systems, and set up a WSUS server
-
-## AI / Agentic Engineering
-
-- Self-host and operate an AI platform (OpenClaw on VPS); build Claude Code skills and agentic workflows applied to DevOps / SRE operations
-- Built a knowledge-base automation pipeline (distill, publish, semantic search) integrated with Slack / Jira / Notion
 
 ## Selected Projects
 

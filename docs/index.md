@@ -30,6 +30,11 @@ otherVariantLabel: Platform / SRE 深度版
 - **資料庫**：MySQL、PostgreSQL、Aurora、DynamoDB、MongoDB、Redis
 - **AI / Agentic**：AWS Bedrock、Claude Code、Agentic Workflow、RAG / 知識庫自動化
 
+## AI / Agentic Engineering
+
+- 自建並維運自託管 AI 平台（OpenClaw on VPS）；開發 Claude Code skills 與 agentic workflow，應用於 DevOps / SRE 維運場景
+- 建置知識庫自動化管線（精煉、發布、語意檢索），整合 Slack / Jira / Notion 工作流
+
 ## 工作經歷
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
@@ -67,11 +72,6 @@ otherVariantLabel: Platform / SRE 深度版
 
 ### System Engineer · Global Publishing @@ 2012.09 – 2014.03
 - 升級 Windows AD（2000 → 2008）與 Exchange；以 VMware 建置 HA、P2V 遷移老舊系統、建置 WSUS
-
-## AI / Agentic Engineering
-
-- 自建並維運自託管 AI 平台（OpenClaw on VPS）；開發 Claude Code skills 與 agentic workflow，應用於 DevOps / SRE 維運場景
-- 建置知識庫自動化管線（精煉、發布、語意檢索），整合 Slack / Jira / Notion 工作流
 
 ## 精選專案
 
