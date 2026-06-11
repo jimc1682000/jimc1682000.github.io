@@ -40,8 +40,15 @@ function sortItems(items) {
   });
 }
 
+function sortCategories(cats) {
+  return [...cats].sort((a, b) => {
+    const pri = (cat) => (cat.hero ? 0 : 1);
+    return pri(a) - pri(b);
+  });
+}
+
 const categories = computed(() =>
-  (cfg.value.categories || []).map((cat) => ({
+  sortCategories(cfg.value.categories || []).map((cat) => ({
     ...cat,
     items: sortItems(cat.items || []),
   }))

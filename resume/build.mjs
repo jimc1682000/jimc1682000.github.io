@@ -49,6 +49,13 @@ function sortSkillItems(items) {
   });
 }
 
+function sortSkillCategories(cats) {
+  return [...cats].sort((a, b) => {
+    const pri = (cat) => (cat.hero ? 0 : 1);
+    return pri(a) - pri(b);
+  });
+}
+
 function skillsMarkdown(variant, lang) {
   const cfg = skills[variant]?.[lang] || skills[variant]?.zh;
   if (!cfg) return "";
@@ -58,7 +65,7 @@ function skillsMarkdown(variant, lang) {
     const label = lang === "en" ? "Core strengths" : "招牌能力";
     lines.push(`**${label}**：${cfg.signature.join(" · ")}`, "");
   }
-  for (const cat of cfg.categories || []) {
+  for (const cat of sortSkillCategories(cfg.categories || [])) {
     const items = sortSkillItems(cat.items).map((it) => {
       let s = it.name;
       if (it.badge) s += `（${it.badge}）`;
