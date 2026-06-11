@@ -42,6 +42,13 @@ function projectsMarkdown(lang) {
     .join("\n");
 }
 
+function sortSkillItems(items) {
+  return [...items].sort((a, b) => {
+    const pri = (it) => (it.hl || it.badge ? 0 : 1);
+    return pri(a) - pri(b);
+  });
+}
+
 function skillsMarkdown(variant, lang) {
   const cfg = skills[variant]?.[lang] || skills[variant]?.zh;
   if (!cfg) return "";
@@ -52,7 +59,7 @@ function skillsMarkdown(variant, lang) {
     lines.push(`**${label}**：${cfg.signature.join(" · ")}`, "");
   }
   for (const cat of cfg.categories || []) {
-    const items = cat.items.map((it) => {
+    const items = sortSkillItems(cat.items).map((it) => {
       let s = it.name;
       if (it.badge) s += `（${it.badge}）`;
       return s;

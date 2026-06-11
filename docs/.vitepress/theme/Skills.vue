@@ -32,6 +32,20 @@ const icons = {
 function iconPath(id) {
   return icons[id] || icons.cloud;
 }
+
+function sortItems(items) {
+  return [...items].sort((a, b) => {
+    const pri = (it) => (it.hl || it.badge ? 0 : 1);
+    return pri(a) - pri(b);
+  });
+}
+
+const categories = computed(() =>
+  (cfg.value.categories || []).map((cat) => ({
+    ...cat,
+    items: sortItems(cat.items || []),
+  }))
+);
 </script>
 
 <template>
@@ -45,7 +59,7 @@ function iconPath(id) {
 
     <div class="skills-grid">
       <article
-        v-for="cat in cfg.categories"
+        v-for="cat in categories"
         :key="cat.id"
         class="skill-card"
         :class="{ hero: cat.hero }"
