@@ -189,9 +189,11 @@ html[data-mode="rich"] .rh h1 .en { -webkit-text-fill-color: transparent; }
 @keyframes shine { to { background-position: 220% center; } }
 .rh .role { margin: 6px 0 9px; font-size: 14px; font-weight: 600; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
 .rh .contact { margin: 0; font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; gap: 2px 0; }
-.rh .contact a { color: var(--muted); word-break: break-all; }
+.rh .contact a { color: var(--muted); }
 .rh .contact a:hover { color: var(--accent); }
 .rh .contact .sep { margin: 0 7px; opacity: .5; flex-shrink: 0; }
+.rh .contact .contact-icon { display: inline-flex; align-items: center; justify-content: center; padding: 2px; transition: color .2s; }
+.rh .contact .contact-icon svg { width: 16px; height: 16px; display: block; }
 
 .summary {
   margin: 16px 0 4px; padding: 13px 17px;
