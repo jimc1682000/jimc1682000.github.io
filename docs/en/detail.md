@@ -19,16 +19,7 @@ pdf: /pdf/resume-detail-en.pdf
 
 ## Core Skills
 
-- **Cloud / AWS**: EC2, S3, Lambda, RDS / Aurora, DynamoDB, Route 53, ECS, EKS, SQS, Bedrock, Personalize, Elemental, Secrets Manager, DevOps Guru
-- **Containers / Orchestration**: Docker, Kubernetes, EKS, ECS, Vagrant
-- **IaC / CI-CD**: Terraform, Ansible, GitLab CI/CD, Jenkins, GitHub
-- **Observability / Logging**: Prometheus, Grafana, ELK (Elasticsearch / Logstash / Kibana / Filebeat / Curator), CloudWatch
-- **Messaging / Streaming**: Kafka, Zookeeper, ActiveMQ, RabbitMQ, SQS
-- **Databases**: MySQL, PostgreSQL, Aurora, MSSQL, MongoDB, Redis, DynamoDB
-- **Backend / Languages**: Java, Python, JavaScript / Node.js, Bash, Spring, Hibernate, ZK, GWT, Django, JMS, GSON, RESTful
-- **Systems / Network / Security**: Linux, Windows Server, VMware, Hyper-V, AD, Exchange, WSUS, UTM, TCP/IP, VLAN, VPN, iptables, IIS, IPS, ethical hacking / penetration testing (CEH)
-- **Testing / Load**: JMeter, Locust
-- **AI / Agentic**: Claude Code, skills / MCP, agentic workflows, RAG / knowledge-base automation, harness guardrails, AWS Bedrock
+<Skills />
 
 ## AI / Agentic Engineering
 

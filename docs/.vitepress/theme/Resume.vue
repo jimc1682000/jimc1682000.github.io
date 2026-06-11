@@ -69,7 +69,7 @@ function decorate() {
 
 function reveal() {
   const els = document.querySelectorAll(
-    ".resume .rh, .resume .summary, .resume-body h2, .resume-body h2 + ul, .resume-body .job"
+    ".resume .rh, .resume .summary, .resume-body h2, .resume-body .skills-panel, .resume-body .job"
   );
   if (io) io.disconnect();
   io = new IntersectionObserver(

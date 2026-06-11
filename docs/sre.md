@@ -20,13 +20,7 @@ pdf: /pdf/resume-sre-zh.pdf
 
 ## 核心技能
 
-- **Kubernetes / 平台**：Kubernetes（Networking / Storage / Controller 實務）、EKS、Docker、ECS
-- **可觀測性**：Prometheus、Grafana、ELK、CloudWatch、AWS DevOps Guru
-- **可靠度 / SRE**：Incident Response、DR / 韌性演練、Service Readiness Review、高併發優化
-- **CI/CD / IaC**：Gitea、Jenkins、Terraform、Ansible、Go
-- **後端 / 語言**：Java、Python、JavaScript、Bash、Go
-- **資料庫**：MySQL、PostgreSQL、Aurora、DynamoDB、Redis、MongoDB
-- **AI / Agentic**：Claude Code、Skills / MCP、Agentic Workflow、知識庫自動化、Harness Guardrails
+<Skills />
 
 ## 平台 / 可靠度亮點
 

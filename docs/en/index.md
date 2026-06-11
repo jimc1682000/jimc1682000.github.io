@@ -20,12 +20,7 @@ pdf: /pdf/resume-ai-en.pdf
 
 ## Core Skills
 
-- **AI / Agentic**: Claude Code, skills / MCP, agentic workflows, RAG / knowledge-base automation, harness guardrails, AWS Bedrock
-- **Cloud / Platform**: AWS (deep), GCP, Kubernetes, EKS, Docker, ECS
-- **IaC / CI-CD**: Terraform, Ansible, Gitea, Jenkins, Go
-- **Observability**: Prometheus, Grafana, ELK / EFK, CloudWatch, DevOps Guru
-- **Languages**: Python, Java, JavaScript, Bash, Go
-- **Databases**: MySQL, PostgreSQL, Aurora, DynamoDB, MongoDB, Redis
+<Skills />
 
 ## AI / Agentic Engineering
 

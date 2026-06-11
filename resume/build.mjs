@@ -14,19 +14,20 @@ const tmp = resolve(here, ".tmp");
 const outDir = resolve(repo, "docs/public/pdf");
 const dataDir = resolve(repo, "docs/.vitepress/data");
 
-// [input md, output pdf basename, lang]
+// [input md, output pdf basename, lang, variant]
 const targets = [
-  ["docs/index.md", "resume-ai-zh", "zh"],
-  ["docs/en/index.md", "resume-ai-en", "en"],
-  ["docs/sre.md", "resume-sre-zh", "zh"],
-  ["docs/en/sre.md", "resume-sre-en", "en"],
-  ["docs/detail.md", "resume-detail-zh", "zh"],
-  ["docs/en/detail.md", "resume-detail-en", "en"],
+  ["docs/index.md", "resume-ai-zh", "zh", "ai"],
+  ["docs/en/index.md", "resume-ai-en", "en", "ai"],
+  ["docs/sre.md", "resume-sre-zh", "zh", "sre"],
+  ["docs/en/sre.md", "resume-sre-en", "en", "sre"],
+  ["docs/detail.md", "resume-detail-zh", "zh", "detail"],
+  ["docs/en/detail.md", "resume-detail-en", "en", "detail"],
 ];
 
 const readJson = (p, fallback) => (existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : fallback);
 const auto = readJson(resolve(dataDir, "projects.auto.json"), []);
 const manual = readJson(resolve(dataDir, "projects.manual.json"), {});
+const skills = readJson(resolve(dataDir, "skills.json"), {});
 
 function projectsMarkdown(lang) {
   const sep = lang === "en" ? " — " : "：";
@@ -41,7 +42,27 @@ function projectsMarkdown(lang) {
     .join("\n");
 }
 
-function preprocess(md, lang) {
+function skillsMarkdown(variant, lang) {
+  const cfg = skills[variant]?.[lang] || skills[variant]?.zh;
+  if (!cfg) return "";
+  const lines = [];
+  if (cfg.headline) lines.push(cfg.headline, "");
+  if (cfg.signature?.length) {
+    const label = lang === "en" ? "Core strengths" : "招牌能力";
+    lines.push(`**${label}**：${cfg.signature.join(" · ")}`, "");
+  }
+  for (const cat of cfg.categories || []) {
+    const items = cat.items.map((it) => {
+      let s = it.name;
+      if (it.badge) s += `（${it.badge}）`;
+      return s;
+    }).join("、");
+    lines.push(`- **${cat.title}**：${items}`);
+  }
+  return lines.join("\n");
+}
+
+function preprocess(md, lang, variant) {
   // "### Title @@ Date" -> raw typst job() block
   md = md.replace(/^### (.+?) @@ (.+)$/gm, (_, title, date) => {
     const esc = (s) => s.trim().replace(/\\/g, "\\\\").replace(/]/g, "\\]");
@@ -50,6 +71,7 @@ function preprocess(md, lang) {
   // <Projects /> component -> generated markdown bullet list (only eat horizontal ws,
   // so the blank lines around the token stay intact and the next heading survives)
   md = md.replace(/^[ \t]*<Projects\s*\/>[ \t]*$/m, projectsMarkdown(lang));
+  md = md.replace(/^[ \t]*<Skills\s*\/>[ \t]*$/m, skillsMarkdown(variant, lang));
   return md;
 }
 
@@ -57,7 +79,7 @@ mkdirSync(tmp, { recursive: true });
 mkdirSync(outDir, { recursive: true });
 
 let built = 0;
-for (const [rel, name, lang] of targets) {
+for (const [rel, name, lang, variant] of targets) {
   const src = resolve(repo, rel);
   let md;
   try { md = readFileSync(src, "utf8"); }
@@ -67,7 +89,7 @@ for (const [rel, name, lang] of targets) {
   const typ = resolve(tmp, name + ".typ");
   const pdf = resolve(outDir, name + ".pdf");
 
-  writeFileSync(pre, preprocess(md, lang));
+  writeFileSync(pre, preprocess(md, lang, variant));
   execFileSync("pandoc", [pre, "--template=" + template, "-f", "markdown", "-t", "typst", "-o", typ], { stdio: "inherit" });
   execFileSync("typst", ["compile", typ, pdf], { stdio: "inherit" });
   console.log("built " + name + ".pdf");

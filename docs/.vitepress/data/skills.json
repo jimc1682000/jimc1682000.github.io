@@ -1,0 +1,502 @@
+{
+  "ai": {
+    "zh": {
+      "headline": "AI Agent 工程 × 大型雲端維運 — 把協作自動化落地到生產環境",
+      "signature": ["AI Agent 工具鏈", "AWS 深度維運", "EKS 平台工程"],
+      "categories": [
+        {
+          "id": "ai",
+          "title": "AI / Agentic",
+          "hero": true,
+          "items": [
+            { "name": "Claude Code", "hl": true },
+            { "name": "Skills / MCP", "hl": true },
+            { "name": "Agentic Workflow" },
+            { "name": "RAG / 知識庫" },
+            { "name": "Harness Guardrails", "hl": true },
+            { "name": "AWS Bedrock" }
+          ]
+        },
+        {
+          "id": "cloud",
+          "title": "雲端 / 平台",
+          "items": [
+            { "name": "AWS", "badge": "深度" },
+            { "name": "GCP" },
+            { "name": "Kubernetes" },
+            { "name": "EKS", "hl": true },
+            { "name": "Docker" },
+            { "name": "ECS" }
+          ]
+        },
+        {
+          "id": "cicd",
+          "title": "IaC / CI-CD",
+          "items": [
+            { "name": "Terraform", "hl": true },
+            { "name": "Ansible" },
+            { "name": "Gitea" },
+            { "name": "Jenkins" },
+            { "name": "Go" }
+          ]
+        },
+        {
+          "id": "observe",
+          "title": "可觀測性",
+          "items": [
+            { "name": "Prometheus" },
+            { "name": "Grafana" },
+            { "name": "ELK / EFK" },
+            { "name": "CloudWatch" },
+            { "name": "DevOps Guru" }
+          ]
+        },
+        {
+          "id": "code",
+          "title": "程式語言",
+          "items": [
+            { "name": "Python" },
+            { "name": "Java" },
+            { "name": "JavaScript" },
+            { "name": "Bash" },
+            { "name": "Go", "hl": true }
+          ]
+        },
+        {
+          "id": "database",
+          "title": "資料庫",
+          "items": [
+            { "name": "MySQL" },
+            { "name": "PostgreSQL" },
+            { "name": "Aurora" },
+            { "name": "DynamoDB" },
+            { "name": "MongoDB" },
+            { "name": "Redis" }
+          ]
+        }
+      ]
+    },
+    "en": {
+      "headline": "AI agent engineering × large-scale cloud ops — shipping automation into production",
+      "signature": ["AI agent toolchain", "Deep AWS operations", "EKS platform engineering"],
+      "categories": [
+        {
+          "id": "ai",
+          "title": "AI / Agentic",
+          "hero": true,
+          "items": [
+            { "name": "Claude Code", "hl": true },
+            { "name": "Skills / MCP", "hl": true },
+            { "name": "Agentic workflows" },
+            { "name": "RAG / knowledge base" },
+            { "name": "Harness guardrails", "hl": true },
+            { "name": "AWS Bedrock" }
+          ]
+        },
+        {
+          "id": "cloud",
+          "title": "Cloud / Platform",
+          "items": [
+            { "name": "AWS", "badge": "deep" },
+            { "name": "GCP" },
+            { "name": "Kubernetes" },
+            { "name": "EKS", "hl": true },
+            { "name": "Docker" },
+            { "name": "ECS" }
+          ]
+        },
+        {
+          "id": "cicd",
+          "title": "IaC / CI-CD",
+          "items": [
+            { "name": "Terraform", "hl": true },
+            { "name": "Ansible" },
+            { "name": "Gitea" },
+            { "name": "Jenkins" },
+            { "name": "Go" }
+          ]
+        },
+        {
+          "id": "observe",
+          "title": "Observability",
+          "items": [
+            { "name": "Prometheus" },
+            { "name": "Grafana" },
+            { "name": "ELK / EFK" },
+            { "name": "CloudWatch" },
+            { "name": "DevOps Guru" }
+          ]
+        },
+        {
+          "id": "code",
+          "title": "Languages",
+          "items": [
+            { "name": "Python" },
+            { "name": "Java" },
+            { "name": "JavaScript" },
+            { "name": "Bash" },
+            { "name": "Go", "hl": true }
+          ]
+        },
+        {
+          "id": "database",
+          "title": "Databases",
+          "items": [
+            { "name": "MySQL" },
+            { "name": "PostgreSQL" },
+            { "name": "Aurora" },
+            { "name": "DynamoDB" },
+            { "name": "MongoDB" },
+            { "name": "Redis" }
+          ]
+        }
+      ]
+    }
+  },
+  "sre": {
+    "zh": {
+      "headline": "Kubernetes 平台 × 可靠度工程 — 從可觀測性到事件響應",
+      "signature": ["K8s / EKS 平台", "可觀測性與可靠度", "Incident Response"],
+      "categories": [
+        {
+          "id": "cloud",
+          "title": "Kubernetes / 平台",
+          "hero": true,
+          "items": [
+            { "name": "Kubernetes", "hl": true },
+            { "name": "Networking / Storage", "hl": true },
+            { "name": "Controllers" },
+            { "name": "EKS", "hl": true },
+            { "name": "Docker" },
+            { "name": "ECS" }
+          ]
+        },
+        {
+          "id": "observe",
+          "title": "可觀測性",
+          "items": [
+            { "name": "Prometheus", "hl": true },
+            { "name": "Grafana" },
+            { "name": "ELK" },
+            { "name": "CloudWatch" },
+            { "name": "DevOps Guru" }
+          ]
+        },
+        {
+          "id": "reliability",
+          "title": "可靠度 / SRE",
+          "hero": true,
+          "items": [
+            { "name": "Incident Response", "hl": true },
+            { "name": "DR / 韌性演練" },
+            { "name": "Readiness Review" },
+            { "name": "高併發優化" }
+          ]
+        },
+        {
+          "id": "cicd",
+          "title": "CI/CD / IaC",
+          "items": [
+            { "name": "Gitea" },
+            { "name": "Jenkins" },
+            { "name": "Terraform", "hl": true },
+            { "name": "Ansible" },
+            { "name": "Go" }
+          ]
+        },
+        {
+          "id": "code",
+          "title": "後端 / 語言",
+          "items": [
+            { "name": "Java" },
+            { "name": "Python" },
+            { "name": "JavaScript" },
+            { "name": "Bash" },
+            { "name": "Go" }
+          ]
+        },
+        {
+          "id": "database",
+          "title": "資料庫",
+          "items": [
+            { "name": "MySQL" },
+            { "name": "PostgreSQL" },
+            { "name": "Aurora" },
+            { "name": "DynamoDB" },
+            { "name": "Redis" },
+            { "name": "MongoDB" }
+          ]
+        },
+        {
+          "id": "ai",
+          "title": "AI / Agentic",
+          "items": [
+            { "name": "Claude Code" },
+            { "name": "Skills / MCP" },
+            { "name": "Agentic Workflow" },
+            { "name": "知識庫自動化" },
+            { "name": "Harness Guardrails" }
+          ]
+        }
+      ]
+    },
+    "en": {
+      "headline": "Kubernetes platforms × reliability engineering — from observability to incident response",
+      "signature": ["K8s / EKS platforms", "Observability & reliability", "Incident response"],
+      "categories": [
+        {
+          "id": "cloud",
+          "title": "Kubernetes / Platform",
+          "hero": true,
+          "items": [
+            { "name": "Kubernetes", "hl": true },
+            { "name": "Networking / storage", "hl": true },
+            { "name": "Controllers" },
+            { "name": "EKS", "hl": true },
+            { "name": "Docker" },
+            { "name": "ECS" }
+          ]
+        },
+        {
+          "id": "observe",
+          "title": "Observability",
+          "items": [
+            { "name": "Prometheus", "hl": true },
+            { "name": "Grafana" },
+            { "name": "ELK" },
+            { "name": "CloudWatch" },
+            { "name": "DevOps Guru" }
+          ]
+        },
+        {
+          "id": "reliability",
+          "title": "Reliability / SRE",
+          "hero": true,
+          "items": [
+            { "name": "Incident response", "hl": true },
+            { "name": "DR / resilience drills" },
+            { "name": "Readiness review" },
+            { "name": "High-concurrency tuning" }
+          ]
+        },
+        {
+          "id": "cicd",
+          "title": "CI/CD / IaC",
+          "items": [
+            { "name": "Gitea" },
+            { "name": "Jenkins" },
+            { "name": "Terraform", "hl": true },
+            { "name": "Ansible" },
+            { "name": "Go" }
+          ]
+        },
+        {
+          "id": "code",
+          "title": "Backend / Languages",
+          "items": [
+            { "name": "Java" },
+            { "name": "Python" },
+            { "name": "JavaScript" },
+            { "name": "Bash" },
+            { "name": "Go" }
+          ]
+        },
+        {
+          "id": "database",
+          "title": "Databases",
+          "items": [
+            { "name": "MySQL" },
+            { "name": "PostgreSQL" },
+            { "name": "Aurora" },
+            { "name": "DynamoDB" },
+            { "name": "Redis" },
+            { "name": "MongoDB" }
+          ]
+        },
+        {
+          "id": "ai",
+          "title": "AI / Agentic",
+          "items": [
+            { "name": "Claude Code" },
+            { "name": "Skills / MCP" },
+            { "name": "Agentic workflows" },
+            { "name": "Knowledge-base automation" },
+            { "name": "Harness guardrails" }
+          ]
+        }
+      ]
+    }
+  },
+  "detail": {
+    "zh": {
+      "headline": "13 年全棧維運 — 從系統工程到 AI Agent 落地",
+      "signature": ["AWS 大型平台", "Kubernetes / 自動化", "AI Agent 工程"],
+      "compact": true,
+      "categories": [
+        {
+          "id": "cloud",
+          "title": "雲端 / AWS",
+          "items": [
+            { "name": "EC2" }, { "name": "S3" }, { "name": "Lambda" }, { "name": "RDS / Aurora", "hl": true },
+            { "name": "DynamoDB" }, { "name": "EKS", "hl": true }, { "name": "SQS" }, { "name": "Elemental" },
+            { "name": "Bedrock" }, { "name": "Personalize" }, { "name": "Secrets Manager" }, { "name": "DevOps Guru" }
+          ]
+        },
+        {
+          "id": "container",
+          "title": "容器 / 編排",
+          "items": [
+            { "name": "Docker" }, { "name": "Kubernetes", "hl": true }, { "name": "EKS" }, { "name": "ECS" }, { "name": "Vagrant" }
+          ]
+        },
+        {
+          "id": "cicd",
+          "title": "IaC / CI-CD",
+          "items": [
+            { "name": "Terraform", "hl": true }, { "name": "Ansible" }, { "name": "GitLab CI/CD" },
+            { "name": "Jenkins" }, { "name": "GitHub" }, { "name": "Gitea" }
+          ]
+        },
+        {
+          "id": "observe",
+          "title": "可觀測性 / 日誌",
+          "items": [
+            { "name": "Prometheus" }, { "name": "Grafana" }, { "name": "ELK" }, { "name": "Filebeat" }, { "name": "CloudWatch" }
+          ]
+        },
+        {
+          "id": "message",
+          "title": "訊息 / 串流",
+          "items": [
+            { "name": "Kafka" }, { "name": "RabbitMQ" }, { "name": "SQS" }, { "name": "ActiveMQ" }
+          ]
+        },
+        {
+          "id": "database",
+          "title": "資料庫",
+          "items": [
+            { "name": "MySQL" }, { "name": "PostgreSQL" }, { "name": "Aurora" }, { "name": "Redis" },
+            { "name": "MongoDB" }, { "name": "DynamoDB" }, { "name": "MSSQL" }
+          ]
+        },
+        {
+          "id": "backend",
+          "title": "後端 / 語言",
+          "items": [
+            { "name": "Java", "hl": true }, { "name": "Python" }, { "name": "JavaScript" }, { "name": "Bash" },
+            { "name": "Spring" }, { "name": "Django" }, { "name": "RESTful" }
+          ]
+        },
+        {
+          "id": "security",
+          "title": "系統 / 網路 / 資安",
+          "items": [
+            { "name": "Linux" }, { "name": "VMware" }, { "name": "TCP/IP" }, { "name": "VPN" },
+            { "name": "CEH", "badge": "認證" }, { "name": "iptables" }
+          ]
+        },
+        {
+          "id": "test",
+          "title": "測試 / 壓測",
+          "items": [
+            { "name": "JMeter" }, { "name": "Locust" }
+          ]
+        },
+        {
+          "id": "ai",
+          "title": "AI / Agentic",
+          "hero": true,
+          "items": [
+            { "name": "Claude Code", "hl": true }, { "name": "Skills / MCP" }, { "name": "RAG" },
+            { "name": "Harness Guardrails" }, { "name": "AWS Bedrock" }
+          ]
+        }
+      ]
+    },
+    "en": {
+      "headline": "13 years across ops — from systems engineering to AI agents in production",
+      "signature": ["Large-scale AWS", "Kubernetes & automation", "AI agent engineering"],
+      "compact": true,
+      "categories": [
+        {
+          "id": "cloud",
+          "title": "Cloud / AWS",
+          "items": [
+            { "name": "EC2" }, { "name": "S3" }, { "name": "Lambda" }, { "name": "RDS / Aurora", "hl": true },
+            { "name": "DynamoDB" }, { "name": "EKS", "hl": true }, { "name": "SQS" }, { "name": "Elemental" },
+            { "name": "Bedrock" }, { "name": "Personalize" }, { "name": "Secrets Manager" }, { "name": "DevOps Guru" }
+          ]
+        },
+        {
+          "id": "container",
+          "title": "Containers / Orchestration",
+          "items": [
+            { "name": "Docker" }, { "name": "Kubernetes", "hl": true }, { "name": "EKS" }, { "name": "ECS" }, { "name": "Vagrant" }
+          ]
+        },
+        {
+          "id": "cicd",
+          "title": "IaC / CI-CD",
+          "items": [
+            { "name": "Terraform", "hl": true }, { "name": "Ansible" }, { "name": "GitLab CI/CD" },
+            { "name": "Jenkins" }, { "name": "GitHub" }, { "name": "Gitea" }
+          ]
+        },
+        {
+          "id": "observe",
+          "title": "Observability / Logging",
+          "items": [
+            { "name": "Prometheus" }, { "name": "Grafana" }, { "name": "ELK" }, { "name": "Filebeat" }, { "name": "CloudWatch" }
+          ]
+        },
+        {
+          "id": "message",
+          "title": "Messaging / Streaming",
+          "items": [
+            { "name": "Kafka" }, { "name": "RabbitMQ" }, { "name": "SQS" }, { "name": "ActiveMQ" }
+          ]
+        },
+        {
+          "id": "database",
+          "title": "Databases",
+          "items": [
+            { "name": "MySQL" }, { "name": "PostgreSQL" }, { "name": "Aurora" }, { "name": "Redis" },
+            { "name": "MongoDB" }, { "name": "DynamoDB" }, { "name": "MSSQL" }
+          ]
+        },
+        {
+          "id": "backend",
+          "title": "Backend / Languages",
+          "items": [
+            { "name": "Java", "hl": true }, { "name": "Python" }, { "name": "JavaScript" }, { "name": "Bash" },
+            { "name": "Spring" }, { "name": "Django" }, { "name": "RESTful" }
+          ]
+        },
+        {
+          "id": "security",
+          "title": "Systems / Network / Security",
+          "items": [
+            { "name": "Linux" }, { "name": "VMware" }, { "name": "TCP/IP" }, { "name": "VPN" },
+            { "name": "CEH", "badge": "cert" }, { "name": "iptables" }
+          ]
+        },
+        {
+          "id": "test",
+          "title": "Testing / Load",
+          "items": [
+            { "name": "JMeter" }, { "name": "Locust" }
+          ]
+        },
+        {
+          "id": "ai",
+          "title": "AI / Agentic",
+          "hero": true,
+          "items": [
+            { "name": "Claude Code", "hl": true }, { "name": "Skills / MCP" }, { "name": "RAG" },
+            { "name": "Harness guardrails" }, { "name": "AWS Bedrock" }
+          ]
+        }
+      ]
+    }
+  }
+}

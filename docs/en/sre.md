@@ -20,13 +20,7 @@ pdf: /pdf/resume-sre-en.pdf
 
 ## Core Skills
 
-- **Kubernetes / Platform**: Kubernetes (hands-on networking / storage / controllers), EKS, Docker, ECS
-- **Observability**: Prometheus, Grafana, ELK, CloudWatch, AWS DevOps Guru
-- **Reliability / SRE**: incident response, DR / resilience drills, service readiness review, high-concurrency tuning
-- **CI/CD / IaC**: Gitea, Jenkins, Terraform, Ansible, Go
-- **Backend / Languages**: Java, Python, JavaScript, Bash, Go
-- **Databases**: MySQL, PostgreSQL, Aurora, DynamoDB, Redis, MongoDB
-- **AI / Agentic**: Claude Code, skills / MCP, agentic workflows, knowledge-base automation, harness guardrails
+<Skills />
 
 ## Platform / Reliability Highlights
 

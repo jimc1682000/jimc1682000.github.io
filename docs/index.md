@@ -19,12 +19,7 @@ pdf: /pdf/resume-ai-zh.pdf
 
 ## 核心技能
 
-- **AI / Agentic**：Claude Code、Skills / MCP、Agentic Workflow、RAG / 知識庫自動化、Harness Guardrails、AWS Bedrock
-- **雲端 / 平台**：AWS（深度）、GCP、Kubernetes、EKS、Docker、ECS
-- **IaC / CI-CD**：Terraform、Ansible、Gitea、Jenkins、Go
-- **可觀測性**：Prometheus、Grafana、ELK / EFK、CloudWatch、DevOps Guru
-- **程式語言**：Python、Java、JavaScript、Bash、Go
-- **資料庫**：MySQL、PostgreSQL、Aurora、DynamoDB、MongoDB、Redis
+<Skills />
 
 ## AI / Agentic Engineering
 

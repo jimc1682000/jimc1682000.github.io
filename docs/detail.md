@@ -19,16 +19,7 @@ pdf: /pdf/resume-detail-zh.pdf
 
 ## 核心技能
 
-- **雲端 / AWS**：EC2、S3、Lambda、RDS / Aurora、DynamoDB、Route 53、ECS、EKS、SQS、Bedrock、Personalize、Elemental、Secrets Manager、DevOps Guru
-- **容器 / 編排**：Docker、Kubernetes、EKS、ECS、Vagrant
-- **IaC / CI-CD**：Terraform、Ansible、GitLab CI/CD、Jenkins、GitHub
-- **可觀測性 / 日誌**：Prometheus、Grafana、ELK（Elasticsearch / Logstash / Kibana / Filebeat / Curator）、CloudWatch
-- **訊息 / 串流**：Kafka、Zookeeper、ActiveMQ、RabbitMQ、SQS
-- **資料庫**：MySQL、PostgreSQL、Aurora、MSSQL、MongoDB、Redis、DynamoDB
-- **後端 / 語言**：Java、Python、JavaScript / Node.js、Bash、Spring、Hibernate、ZK、GWT、Django、JMS、GSON、RESTful
-- **系統 / 網路 / 資安**：Linux、Windows Server、VMware、Hyper-V、AD、Exchange、WSUS、UTM、TCP/IP、VLAN、VPN、iptables、IIS、IPS、Ethical Hacking / 滲透測試（CEH）
-- **測試 / 壓測**：JMeter、Locust
-- **AI / Agentic**：Claude Code、Skills / MCP、Agentic Workflow、RAG / 知識庫自動化、Harness Guardrails、AWS Bedrock
+<Skills />
 
 ## AI / Agentic Engineering
 
