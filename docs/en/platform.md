@@ -26,7 +26,7 @@ pdf: /pdf/resume-sre-en.pdf
 
 - **Virtualisation**: deployed a full OKD 4.4 (OpenShift upstream) cluster on two physical KVM/QEMU hosts, covering HAProxy / BIND / NFS / pfSense end-to-end; earlier built enterprise VMware vSphere HA environments and performed P2V migrations
 - **HA architecture**: HAProxy multi-backend load balancing (API 6443 / MCS 22623 / Ingress 80/443); Kubernetes EKS rolling upgrades; multiple DR drills and resilience tests at TrendMicro; Aurora Read Replica + RDS Proxy HA at CATCHPLAY
-- **Linux systems**: RHCE certified; ran a yum server for centralised RPM distribution (Groundhog DSP/DMP, CATCHPLAY); Kubernetes node-level cgroup / namespace management (EKS); Fedora CoreOS (FCOS) ignition provisioning
+- **Linux systems**: RHCE certified; ran a yum server for centralised RPM distribution (CATCHPLAY); Kubernetes node-level cgroup / namespace management (EKS); Fedora CoreOS (FCOS) ignition provisioning
 - **Networking / Storage**: pfSense DHCP / NAT / firewall rules; BIND DNS forward/reverse zones; NFS persistent storage (OKD4 Image Registry PV); iptables / VPN
 
 ## Automation / IaC
@@ -65,7 +65,7 @@ pdf: /pdf/resume-sre-en.pdf
 - Replaced cron jobs and ETL with Airflow; centralised log parsing with ELK + Curator
 
 ### Senior Java / DevOps Engineer · Groundhog Tech @@ 2017.11 – 2019.02
-- Deployed and managed DSP / DMP Linux systems with Ansible; ran a yum server for centralised RPM distribution
+- Deployed DSP / DMP container images to customer Linux environments with Ansible
 - Introduced Kubernetes and GitLab CI/CD; hardened system performance and security
 
 ### Senior Java Web Engineer · Bank SinoPac @@ 2015.04 – 2017.11
