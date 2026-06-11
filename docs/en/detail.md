@@ -65,7 +65,7 @@ pdf: /pdf/resume-detail-en.pdf
 - *Tools: Ansible, Terraform, Docker, ELK, GitLab, Jenkins, AWS, Airflow, RabbitMQ, ECS, Lambda, Locust, JMeter*
 
 ### DevOps Automation Engineer · Groundhog Technologies @@ 2018.09 – 2019.02
-- Deployed DSP / DMP systems to customer environments; built connectivity-monitoring tools between servers; improved performance by removing redundant components / tuning settings
+- Deployed DSP / DMP (real-time ad bidding) systems to customer environments; built connectivity-monitoring tools between servers; improved performance by removing redundant components / tuning settings
 - Introduced Kubernetes, GitLab CI/CD, and Ansible to increase automation; hardened firewall settings and fixed vulnerabilities to raise the security level
 - *Tools: Docker, Kafka, Zookeeper, ELK, Grafana, Prometheus, Kubernetes, Ansible, GitLab CI/CD, GCP, MongoDB, Redis*
 
@@ -74,7 +74,7 @@ pdf: /pdf/resume-detail-en.pdf
 - *Tools: Java, JavaScript, GWT, Spring, Tomcat, MySQL*
 
 ### Senior Java Web Engineer · Bank SinoPac @@ 2015.04 – 2017.11
-- Gathered user requirements and built an investment-process system from the ground up; built multiple services with ZK, Hibernate, JMS, and GSON, many of them RESTful web services
+- Gathered user requirements and built, from the ground up, a system digitizing the four core investment-trust workflows (analysis reports, sign-off, order placement & trading, risk control (pre / real-time / post), performance analysis, audit trail); built multiple RESTful web services with ZK, Hibernate, JMS, and GSON
 - *Tools: Java, ZK, Hibernate, JMS, GSON, Tomcat, ActiveMQ, MSSQL*
 
 ### Senior System Engineer · Gping Construction @@ 2014.03 – 2015.04
@@ -82,7 +82,8 @@ pdf: /pdf/resume-detail-en.pdf
 - *Tools: Windows Server, Acronis, Network Administration*
 
 ### System Engineer · Gobooks Publishing @@ 2012.09 – 2014.03
-- Upgraded Windows AD (2000 → 2008) and Exchange (2000 → 2007); ran P2V migrations for legacy systems and built HA with VMware; upgraded UTM and set up a WSUS server
+- Upgraded Windows AD (2000 → 2008) and Exchange (2000 → 2007); ran P2V migrations for legacy systems, built HA with VMware, and set up backup / DR
+- Migrated Fortigate → Cyberoam UTM, deployed a Sophos antivirus console, set up WSUS; mitigated a denial-of-service (DoS) attack incident
 - *Tools: Windows Server, VMware, Hyper-V, Exchange, AD, WSUS, UTM, ERP*
 
 ## Selected Projects

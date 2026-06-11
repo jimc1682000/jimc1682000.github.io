@@ -65,7 +65,7 @@ pdf: /pdf/resume-detail-zh.pdf
 - *Tools：Ansible、Terraform、Docker、ELK、GitLab、Jenkins、AWS、Airflow、RabbitMQ、ECS、Lambda、Locust、JMeter*
 
 ### DevOps Automation Engineer · Groundhog Technologies（現觀科技） @@ 2018.09 – 2019.02
-- 部署 DSP / DMP 系統至客戶環境；開發伺服器間連線監控工具；移除冗餘元件 / 調整服務設定提升效能
+- 部署 DSP / DMP（線上即時廣告競標）系統至客戶環境；開發伺服器間連線監控工具；移除冗餘元件 / 調整服務設定提升效能
 - 導入 Kubernetes、GitLab CI/CD、Ansible 強化自動化；檢查防火牆設定、修補弱點提升資安等級
 - *Tools：Docker、Kafka、Zookeeper、ELK、Grafana、Prometheus、Kubernetes、Ansible、GitLab CI/CD、GCP、MongoDB、Redis*
 
@@ -74,7 +74,7 @@ pdf: /pdf/resume-detail-zh.pdf
 - *Tools：Java、JavaScript、GWT、Spring、Tomcat、MySQL*
 
 ### Senior Java Web Engineer · Bank SinoPac（永豐） @@ 2015.04 – 2017.11
-- 訪談使用者釐清需求，從零打造投資流程系統；以 ZK、Hibernate、JMS、GSON 建置多項服務，多為 RESTful Web 服務
+- 訪談使用者釐清需求，從零打造投信四大流程電子化系統（投資報告、簽核流程、開單交易、風控（事前 / 即時 / 事後）、績效分析、軌跡紀錄）；以 ZK、Hibernate、JMS、GSON 建置多項 RESTful Web 服務
 - *Tools：Java、ZK、Hibernate、JMS、GSON、Tomcat、ActiveMQ、MSSQL*
 
 ### Senior System Engineer · Gping Construction（集品建設） @@ 2014.03 – 2015.04
@@ -82,7 +82,8 @@ pdf: /pdf/resume-detail-zh.pdf
 - *Tools：Windows Server、Acronis、Network Administration*
 
 ### System Engineer · Gobooks Publishing（高寶出版） @@ 2012.09 – 2014.03
-- 升級 Windows AD（2000 → 2008）與 Exchange（2000 → 2007）；以 P2V 遷移老舊系統、VMware 建置 HA；升級 UTM、建置 WSUS
+- 升級 Windows AD（2000 → 2008）與 Exchange（2000 → 2007）；以 P2V 遷移老舊系統、VMware 建置 HA、建置備援與資料備份
+- 汰換 Fortigate → Cyberoam UTM、導入 Sophos 防毒中控台、建置 WSUS；處置阻斷服務（DoS）攻擊事件
 - *Tools：Windows Server、VMware、Hyper-V、Exchange、AD、WSUS、UTM、ERP*
 
 ## 精選專案
