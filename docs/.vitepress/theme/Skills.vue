@@ -56,15 +56,15 @@ function iconPath(id) {
           </span>
           <h3>{{ cat.title }}</h3>
         </header>
-        <div class="skill-tags">
+        <div class="skill-tags" aria-label="skill list">
           <span
             v-for="(item, i) in cat.items"
             :key="i"
-            class="tag"
-            :class="{ hl: item.hl }"
+            class="skill-tag"
+            :class="{ 'is-key': item.hl }"
           >
-            {{ item.name }}
-            <em v-if="item.badge" class="tag-badge">{{ item.badge }}</em>
+            <span class="skill-name">{{ item.name }}</span>
+            <span v-if="item.badge" class="skill-level">{{ item.badge }}</span>
           </span>
         </div>
       </article>
