@@ -14,7 +14,7 @@ contacts:
     href: https://github.com/jimc1682000
   - text: linkedin.com/in/594jimmychen
     href: https://www.linkedin.com/in/594jimmychen
-  - text: Taipei, Taiwan (open to relocation)
+  - text: Taipei / Tainan
 pdf: /pdf/resume-sre-en.pdf
 ---
 

@@ -13,7 +13,7 @@ contacts:
     href: https://github.com/jimc1682000
   - text: linkedin.com/in/594jimmychen
     href: https://www.linkedin.com/in/594jimmychen
-  - text: Taipei, Taiwan
+  - text: Taipei / Tainan
 pdf: /pdf/resume-detail-zh.pdf
 ---
 
