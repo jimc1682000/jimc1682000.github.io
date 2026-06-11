@@ -19,27 +19,29 @@ pdf: /pdf/resume-ai-zh.pdf
 
 ## 核心技能
 
-- **AI / Agentic**：AWS Bedrock、Claude Code、Agentic Workflow、RAG / 知識庫自動化、AWS Personalize
+- **AI / Agentic**：Claude Code、Skills / MCP、Agentic Workflow、RAG / 知識庫自動化、Harness Guardrails、AWS Bedrock
 - **雲端 / 平台**：AWS（深度）、GCP、Kubernetes、EKS、Docker、ECS
-- **IaC / CI-CD**：Terraform、Ansible、GitLab CI、Jenkins
+- **IaC / CI-CD**：Terraform、Ansible、Gitea、Jenkins、Go
 - **可觀測性**：Prometheus、Grafana、ELK / EFK、CloudWatch、DevOps Guru
-- **程式語言**：Python、Java、JavaScript、Bash
+- **程式語言**：Python、Java、JavaScript、Bash、Go
 - **資料庫**：MySQL、PostgreSQL、Aurora、DynamoDB、MongoDB、Redis
 
 ## AI / Agentic Engineering
 
-- 自建並維運自託管 AI 平台（OpenClaw on VPS）；開發 Claude Code skills 與 agentic workflow，應用於 DevOps / SRE 維運場景
-- 建置知識庫自動化管線（精煉、發布、語意檢索），整合 Slack / Jira / Notion 工作流
+- 主導團隊 coding agent 工具鏈演進（command → plugin → skill）；開發知識庫與憑證管理 skill，應用於 DevOps / SRE 維運場景
+- 建置知識庫自動化管線（raw → digest → 語意檢索 / NotebookLM），整合 Jira / Notion 工作流；對外分享 HITL 實戰並開源 ai-kb 方法論
+- 自建並維運自託管 AI 平台（OpenClaw on VPS），將 agentic workflow 落地於生產維運
 
 ## 工作經歷
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
-- 重構資料庫架構：導入 Aurora MySQL Read Replica 分流、完成 MySQL → PostgreSQL 遷移、以 RDS Proxy 解決高併發連線瓶頸
-- 建置 AWS Elemental 媒體串流管線（MediaLive / MediaPackage / MediaTailor）並整合 DRM 內容保護
-- 升級 Airflow 至 2.0 並橫跨 UAT / Production；建置 DynamoDB 監控儀表板，導入 AWS DevOps Guru 自動偵測 RDS 異常
-- 評估並導入 AWS Bedrock AI 工具與 Secrets Manager；以 SQS 解決 電信合作夥伴 高量訂單處理瓶頸
-- 建置 AWS Personalize 推薦環境並導入推薦功能予 BI / Backend 團隊；為 新一代平台導入 DynamoDB
-- 設計 S3 + NAS 混合儲存與 Akamai IaC CDN 自動化，重構夥伴上傳流程與生命週期管理
+- 主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、憑證管理 skill 等共用資產；以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）
+- 獨力完成 GitLab → Gitea 版控遷移；建置 Vaultwarden 並導入 Bitwarden；評估並導入 Bruno 取代 Postman
+- 建置 FAST 頻道監控平台（週報、即時告警、LINE Bot / Slack 通知）；整合 AWS Elemental 媒體串流（MediaLive / MediaPackage / MediaTailor、DRM、Global Accelerator、SPEKE、IVS）
+- 建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署；以 Go 開發 Jenkins 部署自動化（Geo-block 流程）
+- 重構資料庫架構：Aurora Read Replica、MySQL → PostgreSQL 遷移、RDS Proxy、Redis / Valkey 7 切分遷移；主導 Airflow 2.0 升級；建置 DynamoDB 監控儀表板並導入 DevOps Guru
+- 多雲治理與資安：GCP 權限限縮與 API key 治理；以 AI 協助 DRM / WAF / CVE 稽核；Akamai LDS → DataStream 2 IaC 化；客戶專案環境建置與 CDN 網段白名單
+- 評估並導入 AWS Bedrock、Secrets Manager、Personalize；以 SQS 解決電信合作夥伴高量訂單瓶頸；設計 S3 + NAS 混合儲存與 Akamai IaC CDN 自動化
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
 - 執行多次災難復原演練（DR Drill）與維護視窗（Maintenance Window），負責跨服務事件處理（Incident Response）

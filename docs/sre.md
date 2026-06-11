@@ -23,30 +23,32 @@ pdf: /pdf/resume-sre-zh.pdf
 - **Kubernetes / 平台**：Kubernetes（Networking / Storage / Controller 實務）、EKS、Docker、ECS
 - **可觀測性**：Prometheus、Grafana、ELK、CloudWatch、AWS DevOps Guru
 - **可靠度 / SRE**：Incident Response、DR / 韌性演練、Service Readiness Review、高併發優化
-- **CI/CD / IaC**：GitLab CI、Jenkins、Terraform、Ansible
-- **後端 / 語言**：Java、Python、JavaScript、Bash
+- **CI/CD / IaC**：Gitea、Jenkins、Terraform、Ansible、Go
+- **後端 / 語言**：Java、Python、JavaScript、Bash、Go
 - **資料庫**：MySQL、PostgreSQL、Aurora、DynamoDB、Redis、MongoDB
-- **AI / Agentic**：AWS Bedrock、Claude Code、Agentic Workflow、知識庫自動化
+- **AI / Agentic**：Claude Code、Skills / MCP、Agentic Workflow、知識庫自動化、Harness Guardrails
 
 ## 平台 / 可靠度亮點
 
-- **Kubernetes 平台**：建置 EKS 高可用叢集與滾動升級（rolling upgrade）；以 Kubernetes、Ansible、GitLab CI/CD 標準化部署
-- **可觀測性**：DynamoDB 監控儀表板 + AWS DevOps Guru 異常偵測、ELK 集中化日誌、端對端（E2E）監控
-- **可靠度 / SRE**：跨服務 Incident Response、多次 DR / 韌性演練、服務上線審查（Readiness Review）
-- **高併發 / 規模**：RDS Proxy 解高併發連線、Aurora Read Replica 分流、SQS 處理 電信合作夥伴 高量訂單
+- **Kubernetes 平台**：建置 EKS 參考環境與滾動升級（rolling upgrade）；以 Kubernetes、Ansible、Gitea / Jenkins 標準化部署
+- **可觀測性**：FAST 頻道監控平台、DynamoDB 監控儀表板 + DevOps Guru 異常偵測、ELK 集中化日誌、端對端（E2E）監控
+- **可靠度 / SRE**：跨服務 Incident Response、多次 DR / 韌性演練、服務上線審查（Readiness Review）；落地 pre-commit / PR gate guardrails
+- **高併發 / 規模**：RDS Proxy 解高併發連線、Aurora Read Replica 分流、Redis / Valkey 7 遷移、SQS 處理電信合作夥伴高量訂單
 
 ## AI / Agentic for Operations
 
-- 自建並維運自託管 AI 平台（OpenClaw on VPS）；開發 Claude Code skills 與 agentic workflow，應用於 DevOps / SRE 維運自動化
-- 建置知識庫自動化管線（精煉、發布、語意檢索），整合 Slack / Jira / Notion，加速事件分析與文件產出
+- 主導團隊 coding agent 工具鏈演進（command → plugin → skill）；開發知識庫與憑證管理 skill，應用於 DevOps / SRE 維運自動化
+- 建置知識庫自動化管線（raw → digest → 語意檢索），整合 Jira / Notion，加速事件分析與文件產出
 
 ## 工作經歷
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
-- 建置 DynamoDB 監控儀表板並導入 AWS DevOps Guru 自動偵測 RDS 異常，強化系統可觀測性與可靠度
-- 重構資料庫架構：Aurora MySQL Read Replica 分流、MySQL → PostgreSQL 遷移、以 RDS Proxy 解決高併發連線瓶頸
-- 升級 Airflow 至 2.0 並橫跨 UAT / Production 雙環境；以 SQS 解決 電信合作夥伴 高量訂單處理瓶頸
-- 其他雲端維運（廣度）：AWS Bedrock AI 工具與 Secrets Manager、AWS Personalize 推薦環境、Elemental 媒體串流（DRM）、S3 + NAS 混合儲存與 Akamai IaC CDN
+- 建置 FAST 頻道監控平台（週報、即時告警、LINE Bot / Slack 通知）；建置 DynamoDB 監控儀表板並導入 DevOps Guru，強化可觀測性與可靠度
+- 以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）
+- 重構資料庫架構：Aurora Read Replica、MySQL → PostgreSQL 遷移、RDS Proxy、Redis / Valkey 7 切分遷移；主導 Airflow 2.0 升級（UAT / Production）
+- 獨力完成 GitLab → Gitea 版控遷移；建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署；以 Go 開發 Geo-block 部署自動化
+- 以 SQS 解決電信合作夥伴高量訂單瓶頸；整合 Elemental 媒體串流（DRM、Global Accelerator、SPEKE、IVS）；Akamai LDS → DataStream 2 IaC 化
+- 多雲治理與資安：GCP 權限限縮、Secrets Manager 憑證整頓、DRM / WAF / CVE 稽核；客戶專案環境建置與 CDN 網段白名單
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
 - 負責跨服務 Incident Response；執行多次災難復原演練（DR Drill / 韌性測試）與維護視窗（Maintenance Window）

@@ -20,27 +20,29 @@ pdf: /pdf/resume-ai-en.pdf
 
 ## Core Skills
 
-- **AI / Agentic**: AWS Bedrock, Claude Code, agentic workflows, RAG / knowledge-base automation, AWS Personalize
+- **AI / Agentic**: Claude Code, skills / MCP, agentic workflows, RAG / knowledge-base automation, harness guardrails, AWS Bedrock
 - **Cloud / Platform**: AWS (deep), GCP, Kubernetes, EKS, Docker, ECS
-- **IaC / CI-CD**: Terraform, Ansible, GitLab CI, Jenkins
+- **IaC / CI-CD**: Terraform, Ansible, Gitea, Jenkins, Go
 - **Observability**: Prometheus, Grafana, ELK / EFK, CloudWatch, DevOps Guru
-- **Languages**: Python, Java, JavaScript, Bash
+- **Languages**: Python, Java, JavaScript, Bash, Go
 - **Databases**: MySQL, PostgreSQL, Aurora, DynamoDB, MongoDB, Redis
 
 ## AI / Agentic Engineering
 
-- Self-host and operate an AI platform (OpenClaw on VPS); build Claude Code skills and agentic workflows applied to DevOps / SRE operations
-- Built a knowledge-base automation pipeline (distill, publish, semantic search) integrated with Slack / Jira / Notion
+- Led the team's coding-agent toolchain evolution (command → plugin → skill); built reusable knowledge-base and credential-management skills for DevOps / SRE operations
+- Built a knowledge-base automation pipeline (raw → digest → semantic search / NotebookLM) integrated with Jira / Notion; shared HITL practices publicly and open-sourced the ai-kb methodology
+- Self-host and operate an AI platform (OpenClaw on VPS), bringing agentic workflows into production operations
 
 ## Experience
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
-- Re-architected the data layer: introduced Aurora MySQL read replicas for load distribution, migrated MySQL to PostgreSQL, and adopted RDS Proxy to resolve high-concurrency connection bottlenecks
-- Built an AWS Elemental media streaming pipeline (MediaLive / MediaPackage / MediaTailor) integrated with DRM content protection
-- Upgraded Airflow to 2.0 across UAT and Production; built a DynamoDB monitoring dashboard and adopted AWS DevOps Guru to detect RDS anomalies
-- Evaluated and rolled out AWS Bedrock AI tooling and Secrets Manager; used SQS to relieve a major telco partner's high-volume order-processing bottlenecks
-- Stood up an AWS Personalize environment and delivered recommendation features to BI / Backend teams; introduced DynamoDB for the next-gen platform
-- Designed an S3 + NAS hybrid storage architecture and Akamai IaC CDN automation; redesigned the partner upload flow and lifecycle management
+- Led the team's coding-agent toolchain (command → plugin → skill), shipping reusable knowledge-base and credential skills; co-built an EKS reference environment with AI-assisted guardrails (pre-commit secret scan, PR gates, layered secret scanning)
+- Sole owner of the GitLab → Gitea migration; built Vaultwarden and rolled out Bitwarden; evaluated and adopted Bruno to replace Postman
+- Built a FAST-channel monitoring platform (weekly reports, real-time alerts, LINE Bot / Slack notifications); integrated AWS Elemental streaming (MediaLive / MediaPackage / MediaTailor, DRM, Global Accelerator, SPEKE, IVS)
+- Built reusable Serverless Lambda Terraform modules and Jenkins automation; developed Jenkins deployment automation in Go (geo-block workflow)
+- Re-architected the data layer: Aurora read replicas, MySQL → PostgreSQL migration, RDS Proxy, Redis / Valkey 7 split migration; led the Airflow 2.0 upgrade; built a DynamoDB monitoring dashboard and adopted DevOps Guru
+- Multi-cloud governance and security: GCP permission tightening and API-key cleanup; AI-assisted DRM / WAF / CVE audits; Akamai LDS → DataStream 2 IaC; client-project environments and CDN network allowlists
+- Evaluated and rolled out AWS Bedrock, Secrets Manager, and Personalize; used SQS for a major telco partner's high-volume orders; designed S3 + NAS hybrid storage and Akamai IaC CDN automation
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
 - Ran multiple disaster-recovery drills and maintenance windows, and owned cross-service incident response

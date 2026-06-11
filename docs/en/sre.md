@@ -23,30 +23,32 @@ pdf: /pdf/resume-sre-en.pdf
 - **Kubernetes / Platform**: Kubernetes (hands-on networking / storage / controllers), EKS, Docker, ECS
 - **Observability**: Prometheus, Grafana, ELK, CloudWatch, AWS DevOps Guru
 - **Reliability / SRE**: incident response, DR / resilience drills, service readiness review, high-concurrency tuning
-- **CI/CD / IaC**: GitLab CI, Jenkins, Terraform, Ansible
-- **Backend / Languages**: Java, Python, JavaScript, Bash
+- **CI/CD / IaC**: Gitea, Jenkins, Terraform, Ansible, Go
+- **Backend / Languages**: Java, Python, JavaScript, Bash, Go
 - **Databases**: MySQL, PostgreSQL, Aurora, DynamoDB, Redis, MongoDB
-- **AI / Agentic**: AWS Bedrock, Claude Code, agentic workflows, knowledge-base automation
+- **AI / Agentic**: Claude Code, skills / MCP, agentic workflows, knowledge-base automation, harness guardrails
 
 ## Platform / Reliability Highlights
 
-- **Kubernetes platform**: built highly-available EKS clusters with rolling upgrades; standardized deployment with Kubernetes, Ansible, GitLab CI/CD
-- **Observability**: DynamoDB monitoring dashboard + AWS DevOps Guru anomaly detection, centralized ELK logging, end-to-end (E2E) monitoring
-- **Reliability / SRE**: cross-service incident response, multiple DR / resilience drills, service readiness reviews
-- **High concurrency / scale**: RDS Proxy for connection bottlenecks, Aurora read replicas, SQS for a major telco partner's high-volume orders
+- **Kubernetes platform**: built an EKS reference environment with rolling upgrades; standardized deployment with Kubernetes, Ansible, Gitea / Jenkins
+- **Observability**: FAST-channel monitoring platform, DynamoDB dashboard + DevOps Guru anomaly detection, centralized ELK logging, end-to-end (E2E) monitoring
+- **Reliability / SRE**: cross-service incident response, multiple DR / resilience drills, service readiness reviews; pre-commit / PR-gate guardrails in production workflows
+- **High concurrency / scale**: RDS Proxy for connection bottlenecks, Aurora read replicas, Redis / Valkey 7 migration, SQS for a major telco partner's high-volume orders
 
 ## AI / Agentic for Operations
 
-- Self-host and operate an AI platform (OpenClaw on VPS); build Claude Code skills and agentic workflows for DevOps / SRE automation
-- Built a knowledge-base automation pipeline (distill, publish, semantic search) integrated with Slack / Jira / Notion to speed up incident analysis and documentation
+- Led the team's coding-agent toolchain evolution (command → plugin → skill); built knowledge-base and credential skills for DevOps / SRE automation
+- Built a knowledge-base automation pipeline (raw → distill → semantic search) integrated with Jira / Notion to speed up incident analysis and documentation
 
 ## Experience
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
-- Strengthened observability and reliability: built a DynamoDB monitoring dashboard and adopted AWS DevOps Guru to detect RDS anomalies
-- Re-architected the data layer: Aurora MySQL read replicas, MySQL → PostgreSQL migration, and RDS Proxy to resolve high-concurrency connection bottlenecks
-- Upgraded Airflow to 2.0 across UAT and Production; used SQS to relieve a major telco partner's high-volume order processing
-- Other cloud operations (breadth): AWS Bedrock AI tooling and Secrets Manager, AWS Personalize for BI / Backend, Elemental media streaming (DRM), and an S3 + NAS hybrid store with Akamai IaC CDN
+- Built a FAST-channel monitoring platform (weekly reports, real-time alerts, LINE Bot / Slack notifications); strengthened observability with a DynamoDB dashboard and DevOps Guru
+- Co-built an EKS reference environment with AI-assisted guardrails (pre-commit secret scan, PR gates, layered secret scanning)
+- Re-architected the data layer: Aurora read replicas, MySQL → PostgreSQL migration, RDS Proxy, Redis / Valkey 7 split migration; led the Airflow 2.0 upgrade (UAT / Production)
+- Sole owner of the GitLab → Gitea migration; built Serverless Lambda Terraform modules and Jenkins automation; developed geo-block deployment automation in Go
+- Used SQS for a major telco partner's high-volume orders; integrated Elemental streaming (DRM, Global Accelerator, SPEKE, IVS); migrated Akamai LDS → DataStream 2 via IaC
+- Multi-cloud governance and security: GCP permission tightening, Secrets Manager credential cleanup, DRM / WAF / CVE audits; client-project environments and CDN network allowlists
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
 - Owned cross-service incident response; ran multiple disaster-recovery drills (resilience testing) and maintenance windows

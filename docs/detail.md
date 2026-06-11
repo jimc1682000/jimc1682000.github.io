@@ -28,22 +28,24 @@ pdf: /pdf/resume-detail-zh.pdf
 - **後端 / 語言**：Java、Python、JavaScript / Node.js、Bash、Spring、Hibernate、ZK、GWT、Django、JMS、GSON、RESTful
 - **系統 / 網路 / 資安**：Linux、Windows Server、VMware、Hyper-V、AD、Exchange、WSUS、UTM、TCP/IP、VLAN、VPN、iptables、IIS、IPS、Ethical Hacking / 滲透測試（CEH）
 - **測試 / 壓測**：JMeter、Locust
-- **AI / Agentic**：AWS Bedrock、Claude Code、Agentic Workflow、RAG / 知識庫自動化
+- **AI / Agentic**：Claude Code、Skills / MCP、Agentic Workflow、RAG / 知識庫自動化、Harness Guardrails、AWS Bedrock
 
 ## AI / Agentic Engineering
 
-- 自建並維運自託管 AI 平台（OpenClaw on VPS）；開發 Claude Code skills 與 agentic workflow，應用於 DevOps / SRE 維運場景
-- 建置知識庫自動化管線（精煉、發布、語意檢索），整合 Slack / Jira / Notion 工作流
+- 主導團隊 coding agent 工具鏈演進（command → plugin → skill）；開發知識庫與憑證管理 skill，應用於 DevOps / SRE 維運場景
+- 建置知識庫自動化管線（raw → digest → 語意檢索 / NotebookLM），整合 Jira / Notion 工作流；對外分享 HITL 實戰並開源 ai-kb 方法論
+- 自建並維運自託管 AI 平台（OpenClaw on VPS），將 agentic workflow 落地於生產維運
 
 ## 工作經歷
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
-- **串流媒體基礎建設**：整合 AWS Elemental（MediaLive / MediaPackage / MediaTailor）、串接 DRM 確保內容安全、協調跨部門整合優化串流架構
-- **資料庫優化與遷移**：Aurora Read Replica 分散負載、GitLab 資料庫由 MySQL 遷移至 PostgreSQL、導入 RDS Proxy 解決高併發連線、Airflow 資料庫優化並遷至 Replica
-- **DevOps 與監控**：建立 DynamoDB 監控儀表板提升可觀測性、部署 DevOps Guru 實現 RDS 智能異常偵測、主導 Airflow 2.0 升級（UAT / Production）、開發 Akamai IaC 自動化 CDN 快取管理
-- **雲端服務導入**：引入 AWS Personalize 個人化推薦、導入 DynamoDB 協助開發 新一代平台、推動 AWS Secrets Manager 強化資安、向團隊導入 AWS Bedrock AI 服務
-- **系統整合與架構**：以 SQS 設計高流量訂單處理方案、建置 S3 / NAS 混合儲存優化影音內容、實作 S3 生命週期自動清理、優化部署流程協助團隊整合 S3
-- *Tools：AWS（Elemental / Aurora / RDS Proxy / DynamoDB / SQS / Personalize / Bedrock / Secrets Manager / DevOps Guru）、Airflow、Akamai、S3 / NAS、Terraform、PostgreSQL*
+- **AI 協作與 DevOps 工具鏈**：主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、憑證管理 skill 等共用資產；以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）；向 Tech team 分享 HITL 實戰與 ai-kb 方法論
+- **串流媒體與 FAST 頻道**：建置 FAST 頻道監控平台（週報、即時告警、LINE Bot / Slack 通知）；整合 AWS Elemental（MediaLive / MediaPackage / MediaTailor）、DRM、Global Accelerator、SPEKE、IVS、Elemental Link；MediaLive Reservations 採購與成本管理
+- **平台現代化與服務遷移**：獨力完成 GitLab → Gitea 版控遷移；建置 Vaultwarden 並導入 Bitwarden；評估並導入 Bruno 取代 Postman；修復 Akamai log server 並完成 LDS → DataStream 2 IaC 化；建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署
+- **資料庫、快取與部署自動化**：Aurora Read Replica 分散負載、版控平台資料庫 MySQL → PostgreSQL 遷移、導入 RDS Proxy 解決高併發連線、Redis / Valkey 7 切分遷移；主導 Airflow 2.0 升級（UAT / Production）；以 Go 開發 Jenkins 部署自動化（Geo-block 流程）；以 SQS 設計高流量訂單處理方案
+- **雲端治理、資安與客戶專案**：GCP 權限限縮與 API key 治理；客戶專案環境建置與 CDN 網段白名單（Akamai / CloudFront）；以 AI 協助 DRM / WAF / CVE 稽核；憑證帳號整頓（Secrets Manager）；引入 AWS Personalize、DynamoDB、Secrets Manager、Bedrock
+- **系統整合與架構**：建置 S3 / NAS 混合儲存優化影音內容、實作 S3 生命週期自動清理；開發 Akamai IaC 自動化 CDN 快取管理；建置短網址服務；建立 DynamoDB 監控儀表板並部署 DevOps Guru
+- *Tools：AWS（Elemental / EKS / Aurora / RDS Proxy / DynamoDB / SQS / IVS / Personalize / Bedrock / Secrets Manager / DevOps Guru）、GCP、Airflow、Gitea、Vaultwarden、Akamai DataStream、Claude Code / Skills / MCP、Bruno、Terraform、Kubernetes、Go、PostgreSQL*
 
 ### Senior SRE Engineer · TrendMicro（趨勢科技） @@ 2021.09 – 2024.03
 - 執行多次災難復原演練（DR Drill）與維護視窗（Maintenance Window），並負責各類事件處理（Incident Response）
