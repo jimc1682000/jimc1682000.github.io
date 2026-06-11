@@ -31,7 +31,7 @@ pdf: /pdf/resume-detail-zh.pdf
 
 - **虛擬化**：以 KVM/QEMU 於兩台實體機部署 OKD 4.4（OpenShift upstream）完整叢集，涵蓋 HAProxy / BIND / NFS / pfSense 全流程；早期以 VMware vSphere 建置企業 HA 環境並執行 P2V 遷移
 - **HA 架構**：HAProxy 多 backend 負載均衡（API 6443 / MCS 22623 / Ingress 80/443）；TrendMicro 多次 DR Drill / 韌性演練；Aurora Read Replica + RDS Proxy 高可用資料庫架構
-- **Linux 系統**：RHCE 認證；yum server 集中管理 RPM 套件（Groundhog DSP/DMP）；Kubernetes node 層 cgroup / namespace 管理；FCOS ignition 配置
+- **Linux 系統**：RHCE 認證；yum server 集中管理 RPM 套件（Groundhog DSP/DMP、CATCHPLAY）；Kubernetes node 層 cgroup / namespace 管理；FCOS ignition 配置
 - **網路 / 儲存**：pfSense DHCP/NAT/Firewall；BIND DNS 正/反向 zone；NFS persistent storage（OKD4 registry PV）；iptables / VPN
 
 ## 工作經歷

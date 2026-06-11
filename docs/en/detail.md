@@ -31,7 +31,7 @@ pdf: /pdf/resume-detail-en.pdf
 
 - **Virtualisation**: deployed a full OKD 4.4 (OpenShift upstream) cluster on two physical KVM/QEMU hosts, covering HAProxy / BIND / NFS / pfSense end-to-end; earlier built enterprise VMware vSphere HA environments and ran P2V migrations
 - **HA architecture**: HAProxy multi-backend load balancing (API 6443 / MCS 22623 / Ingress 80/443); multiple DR drills / resilience tests at TrendMicro; Aurora Read Replica + RDS Proxy HA at CATCHPLAY
-- **Linux systems**: RHCE certified; ran a yum server for centralised RPM distribution (Groundhog DSP/DMP); Kubernetes node-level cgroup / namespace management; FCOS ignition provisioning
+- **Linux systems**: RHCE certified; ran a yum server for centralised RPM distribution (Groundhog DSP/DMP, CATCHPLAY); Kubernetes node-level cgroup / namespace management; FCOS ignition provisioning
 - **Networking / Storage**: pfSense DHCP / NAT / Firewall; BIND DNS forward/reverse zones; NFS persistent storage (OKD4 registry PV); iptables / VPN
 
 ## Experience
