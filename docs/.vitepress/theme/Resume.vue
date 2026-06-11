@@ -9,6 +9,7 @@ const route = useRoute();
 const VARIANTS = [
   { key: "ai", zh: "AI Engineer", en: "AI Engineer" },
   { key: "sre", zh: "SRE / DevOps", en: "SRE / DevOps" },
+  { key: "platform", zh: "Platform Engineer", en: "Platform Engineer" },
   { key: "detail", zh: "完整詳細", en: "Full CV" },
 ];
 const ROUTES = {

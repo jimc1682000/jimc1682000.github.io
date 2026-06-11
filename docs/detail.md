@@ -27,6 +27,13 @@ pdf: /pdf/resume-detail-zh.pdf
 - 建置知識庫自動化管線（raw → digest → 語意檢索 / NotebookLM），整合 Jira / Notion 工作流；對外分享 HITL 實戰並開源 ai-kb 方法論
 - 自建並維運自託管 AI 平台（OpenClaw on VPS），將 agentic workflow 落地於生產維運
 
+## 基礎架構 / 系統平台
+
+- **虛擬化**：以 KVM/QEMU 於兩台實體機部署 OKD 4.4（OpenShift upstream）完整叢集，涵蓋 HAProxy / BIND / NFS / pfSense 全流程；早期以 VMware vSphere 建置企業 HA 環境並執行 P2V 遷移
+- **HA 架構**：HAProxy 多 backend 負載均衡（API 6443 / MCS 22623 / Ingress 80/443）；TrendMicro 多次 DR Drill / 韌性演練；Aurora Read Replica + RDS Proxy 高可用資料庫架構
+- **Linux 系統**：RHCE 認證；yum server 集中管理 RPM 套件（Groundhog DSP/DMP）；Kubernetes node 層 cgroup / namespace 管理；FCOS ignition 配置
+- **網路 / 儲存**：pfSense DHCP/NAT/Firewall；BIND DNS 正/反向 zone；NFS persistent storage（OKD4 registry PV）；iptables / VPN
+
 ## 工作經歷
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
@@ -58,7 +65,7 @@ pdf: /pdf/resume-detail-zh.pdf
 - *Tools：Ansible、Terraform、Docker、ELK、GitLab、Jenkins、AWS、Airflow、RabbitMQ、ECS、Lambda、Locust、JMeter*
 
 ### DevOps Automation Engineer · Groundhog Technologies（現觀科技） @@ 2018.09 – 2019.02
-- 部署 DSP / DMP（線上即時廣告競標）系統至客戶環境；開發伺服器間連線監控工具；移除冗餘元件 / 調整服務設定提升效能
+- 部署 DSP / DMP（線上即時廣告競標）系統至客戶 Linux 環境；以 yum server 集中管理 RPM 套件；開發伺服器間連線監控工具；移除冗餘元件 / 調整服務設定提升效能
 - 導入 Kubernetes、GitLab CI/CD、Ansible 強化自動化；檢查防火牆設定、修補弱點提升資安等級
 - *Tools：Docker、Kafka、Zookeeper、ELK、Grafana、Prometheus、Kubernetes、Ansible、GitLab CI/CD、GCP、MongoDB、Redis*
 

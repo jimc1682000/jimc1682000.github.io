@@ -27,6 +27,13 @@ pdf: /pdf/resume-detail-en.pdf
 - Built a knowledge-base automation pipeline (raw → distill → semantic search / NotebookLM) integrated with Jira / Notion; shared HITL practices publicly and open-sourced the ai-kb methodology
 - Self-host and operate an AI platform (OpenClaw on VPS), bringing agentic workflows into production operations
 
+## Infrastructure / Systems Platform
+
+- **Virtualisation**: deployed a full OKD 4.4 (OpenShift upstream) cluster on two physical KVM/QEMU hosts, covering HAProxy / BIND / NFS / pfSense end-to-end; earlier built enterprise VMware vSphere HA environments and ran P2V migrations
+- **HA architecture**: HAProxy multi-backend load balancing (API 6443 / MCS 22623 / Ingress 80/443); multiple DR drills / resilience tests at TrendMicro; Aurora Read Replica + RDS Proxy HA at CATCHPLAY
+- **Linux systems**: RHCE certified; ran a yum server for centralised RPM distribution (Groundhog DSP/DMP); Kubernetes node-level cgroup / namespace management; FCOS ignition provisioning
+- **Networking / Storage**: pfSense DHCP / NAT / Firewall; BIND DNS forward/reverse zones; NFS persistent storage (OKD4 registry PV); iptables / VPN
+
 ## Experience
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
@@ -58,8 +65,8 @@ pdf: /pdf/resume-detail-en.pdf
 - *Tools: Ansible, Terraform, Docker, ELK, GitLab, Jenkins, AWS, Airflow, RabbitMQ, ECS, Lambda, Locust, JMeter*
 
 ### DevOps Automation Engineer · Groundhog Technologies @@ 2018.09 – 2019.02
-- Deployed DSP / DMP (real-time ad bidding) systems to customer environments; built connectivity-monitoring tools between servers; improved performance by removing redundant components / tuning settings
-- Introduced Kubernetes, GitLab CI/CD, and Ansible to increase automation; hardened firewall settings and fixed vulnerabilities to raise the security level
+- Deployed DSP / DMP (real-time ad bidding) systems to customer Linux environments; ran a yum server for centralised RPM distribution; built connectivity-monitoring tools; removed redundant components and tuned settings for performance
+- Introduced Kubernetes, GitLab CI/CD, and Ansible to increase automation; hardened firewall settings and fixed vulnerabilities
 - *Tools: Docker, Kafka, Zookeeper, ELK, Grafana, Prometheus, Kubernetes, Ansible, GitLab CI/CD, GCP, MongoDB, Redis*
 
 ### Senior Java Web Engineer · Groundhog Technologies @@ 2017.11 – 2018.09

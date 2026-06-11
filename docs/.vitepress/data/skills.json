@@ -588,14 +588,19 @@
         },
         {
           "id": "security",
-          "title": "系統 / 網路 / 資安",
+          "title": "系統 / 虛擬化 / 資安",
           "items": [
-            { "name": "Linux" },
+            { "name": "Linux", "hl": true },
+            { "name": "RHCE", "badge": "認證" },
+            { "name": "KVM / QEMU" },
             { "name": "VMware" },
+            { "name": "HAProxy" },
+            { "name": "NFS" },
+            { "name": "yum / RPM" },
+            { "name": "pfSense / BIND" },
             { "name": "TCP/IP" },
-            { "name": "VPN" },
-            { "name": "CEH", "badge": "認證" },
-            { "name": "iptables" }
+            { "name": "iptables" },
+            { "name": "CEH", "badge": "認證" }
           ]
         },
         {
@@ -720,14 +725,19 @@
         },
         {
           "id": "security",
-          "title": "Systems / Network / Security",
+          "title": "Systems / Virtualisation / Security",
           "items": [
-            { "name": "Linux" },
+            { "name": "Linux", "hl": true },
+            { "name": "RHCE", "badge": "cert" },
+            { "name": "KVM / QEMU" },
             { "name": "VMware" },
+            { "name": "HAProxy" },
+            { "name": "NFS" },
+            { "name": "yum / RPM" },
+            { "name": "pfSense / BIND" },
             { "name": "TCP/IP" },
-            { "name": "VPN" },
-            { "name": "CEH", "badge": "cert" },
-            { "name": "iptables" }
+            { "name": "iptables" },
+            { "name": "CEH", "badge": "cert" }
           ]
         },
         {
