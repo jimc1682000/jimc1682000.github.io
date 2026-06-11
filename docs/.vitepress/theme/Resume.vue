@@ -44,6 +44,7 @@ function scrollTop() {
 // "Title @@ Date" -> title + right-aligned date; then group each h3 + its <ul> into a .job card.
 function decorate() {
   document.querySelectorAll(".resume-body h3").forEach((h) => {
+    if (h.closest(".skills-panel") || h.closest(".skill-card")) return;
     if (!h.dataset.done) {
       const i = h.textContent.indexOf(" @@ ");
       if (i > -1) {

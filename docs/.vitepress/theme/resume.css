@@ -279,12 +279,23 @@ html[data-theme="dark"] .skill-card { background: rgba(255,255,255,.03); }
 html[data-theme="dark"] .skill-card.hero {
   background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, transparent), rgba(255,255,255,.03));
 }
-/* Skills cards are informational — no hover lift (avoid faux-button affordance) */
-.skill-card::before { display: none; }
+.skill-card::before {
+  content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transform: scaleX(0); transform-origin: left; transition: transform .28s ease;
+}
+.skill-card:hover::before { transform: scaleX(1); }
 html[data-mode="rich"] .skill-card:hover {
-  transform: none;
-  box-shadow: none;
-  border-color: var(--line);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--line));
+}
+/* Safety: skill h3 must not inherit job-card chrome if decorate() ran earlier */
+.skills-panel .job {
+  background: none; border: none; padding: 0; margin: 0;
+}
+html[data-mode="rich"] .skills-panel .job:hover {
+  transform: none; box-shadow: none; border-color: transparent;
 }
 /* Reset global job-style h3 inside skills cards */
 .skills-panel .skill-card-head {
