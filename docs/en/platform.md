@@ -37,7 +37,7 @@ pdf: /pdf/resume-sre-en.pdf
 
 ## Observability / Incident Response
 
-- FAST-channel monitoring (Prometheus + Grafana + LINE Bot / Slack; weekly reports + alert heatmaps); DynamoDB dashboard + DevOps Guru anomaly detection
+- FAST-channel monitoring (LINE Bot / Slack; weekly reports + alert heatmaps); DynamoDB dashboard + DevOps Guru anomaly detection
 - Cross-service incident response at TrendMicro; E2E monitoring; Service Readiness Review; centralised ELK logging
 
 ## Experience

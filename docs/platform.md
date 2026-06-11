@@ -37,7 +37,7 @@ pdf: /pdf/resume-sre-zh.pdf
 
 ## 可觀測性 / Incident Response
 
-- FAST 頻道監控平台（Prometheus + Grafana + LINE Bot / Slack；週報 + 熱力圖）；DynamoDB 儀表板 + DevOps Guru 異常偵測
+- FAST 頻道監控平台（LINE Bot / Slack；週報 + 告警熱力圖）；DynamoDB 儀表板 + DevOps Guru 異常偵測
 - TrendMicro 跨服務 Incident Response；端對端（E2E）監控；Service Readiness Review 流程；ELK 集中化日誌（GoFreight / CATCHPLAY）
 
 ## 工作經歷
