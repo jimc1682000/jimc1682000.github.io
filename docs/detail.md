@@ -13,6 +13,8 @@ contacts:
     href: https://github.com/jimc1682000
   - text: linkedin.com/in/594jimmychen
     href: https://www.linkedin.com/in/594jimmychen
+  - text: jimc1682000.blogspot.com
+    href: https://jimc1682000.blogspot.com
   - text: Taipei / Tainan
 pdf: /pdf/resume-detail-zh.pdf
 ---
