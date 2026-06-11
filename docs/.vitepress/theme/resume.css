@@ -188,10 +188,10 @@ html[data-mode="rich"] .rh h1 .en { -webkit-text-fill-color: transparent; }
 }
 @keyframes shine { to { background-position: 220% center; } }
 .rh .role { margin: 6px 0 9px; font-size: 14px; font-weight: 600; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
-.rh .contact { margin: 0; font-size: 13px; color: var(--muted); }
-.rh .contact a { color: var(--muted); }
+.rh .contact { margin: 0; font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; gap: 2px 0; }
+.rh .contact a { color: var(--muted); word-break: break-all; }
 .rh .contact a:hover { color: var(--accent); }
-.rh .contact .sep { margin: 0 7px; opacity: .5; }
+.rh .contact .sep { margin: 0 7px; opacity: .5; flex-shrink: 0; }
 
 .summary {
   margin: 16px 0 4px; padding: 13px 17px;
@@ -447,8 +447,10 @@ html[data-mode="rich"] ul.projects .badge {
   .skills-panel.compact .skills-grid { grid-template-columns: 1fr; }
   html[data-mode="rich"] .resume-body h2:first-of-type + ul,
   html[data-mode="rich"] ul.projects { grid-template-columns: 1fr; }
-  .toolbar { padding: 9px 12px; }
+  .toolbar { padding: 9px 12px; flex-wrap: wrap; gap: 8px 6px; }
   .brand-text { font-size: 13px; }
-  .ctrls { gap: 6px; }
+  .ctrls { gap: 6px; flex-wrap: wrap; justify-content: flex-end; flex: 1; }
   .seg a, .seg button { padding: 6px 10px; font-size: 12.5px; }
+  .seg.variant { order: 10; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
+  .seg.variant::-webkit-scrollbar { display: none; }
 }
