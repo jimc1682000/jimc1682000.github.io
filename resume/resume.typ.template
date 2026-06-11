@@ -19,6 +19,9 @@
 
 #set list(indent: 3pt, body-indent: 6pt, spacing: listEm, marker: text(fill: accent)[•])
 
+// Keep each bullet on one page; page breaks may fall between items, not inside one.
+#show list.item: it => block(breakable: false, width: 100%)[#it]
+
 #show heading.where(level: 2): it => block(above: secAbove, below: secBelow, width: 100%)[
   #set text(size: 11.8pt, fill: accent, weight: "bold")
   #upper(it.body)
