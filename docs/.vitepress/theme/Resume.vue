@@ -115,7 +115,7 @@ onUnmounted(() => { if (io) io.disconnect(); cleanup.forEach((fn) => fn()); clea
     <div class="aurora" aria-hidden="true"></div>
 
     <nav class="toolbar" :class="{ scrolled }">
-      <span class="brand">{{ frontmatter.name }} <em>{{ frontmatter.nameEn }}</em></span>
+      <a class="brand" :href="variantHref('ai', curLang)" aria-label="Home">JC</a>
       <div class="ctrls">
         <div class="seg variant">
           <a v-for="v in VARIANTS" :key="v.key" :href="variantHref(v.key)" :class="{ active: v.key === curVariant }">{{ curLang === "en" ? v.en : v.zh }}</a>
