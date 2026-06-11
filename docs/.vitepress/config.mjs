@@ -10,7 +10,7 @@ export default defineConfig({
   appearance: false,
   metaChunk: true,
   head: [
-    ["meta", { name: "robots", content: "index,follow" }],
+    ["meta", { name: "robots", content: "noindex,nofollow" }],
     ["meta", { property: "og:title", content: "陳建豪 Jimmy Chen — DevOps / SRE / AI Engineer" }],
     ["meta", { property: "og:type", content: "profile" }],
     // Apply saved theme/mode before first paint to avoid a flash.
