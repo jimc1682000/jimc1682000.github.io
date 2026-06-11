@@ -71,7 +71,7 @@ otherVariantLabel: Platform / SRE Focus
 ### Senior System Engineer · Gping Construction @@ 2014.03 – 2015.04
 - Hardened firewall and network topology; built a backup server with Acronis
 
-### System Engineer · Global Publishing @@ 2012.09 – 2014.03
+### System Engineer · Gobooks Publishing @@ 2012.09 – 2014.03
 - Upgraded Windows AD (2000 → 2008) and Exchange; built HA with VMware, ran P2V migrations for legacy systems, and set up a WSUS server
 
 ## Selected Projects

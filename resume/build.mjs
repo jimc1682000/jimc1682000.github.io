@@ -32,7 +32,9 @@ function projectsMarkdown(lang) {
   return list
     .map((p) => {
       const nm = p.url ? `[${p.name}](${p.url})` : p.name;
-      return `- **${nm}**` + (p.desc ? sep + p.desc : "");
+      let line = `- **${nm}**` + (p.desc ? sep + p.desc : "");
+      if (p.links) line += p.links.map((l) => ` · [${l.label} ↗](${l.url})`).join("");
+      return line;
     })
     .join("\n");
 }

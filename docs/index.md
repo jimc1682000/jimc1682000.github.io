@@ -70,7 +70,7 @@ otherVariantLabel: Platform / SRE 深度版
 ### Senior System Engineer · Gping Construction @@ 2014.03 – 2015.04
 - 強化防火牆設定與網路拓樸；以 Acronis 建置備援伺服器
 
-### System Engineer · Global Publishing @@ 2012.09 – 2014.03
+### System Engineer · Gobooks Publishing @@ 2012.09 – 2014.03
 - 升級 Windows AD（2000 → 2008）與 Exchange；以 VMware 建置 HA、P2V 遷移老舊系統、建置 WSUS
 
 ## 精選專案

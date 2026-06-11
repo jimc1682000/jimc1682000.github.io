@@ -75,7 +75,7 @@ otherVariantLabel: 通用版
 
 ### 早期經歷 @@ 2012 – 2015
 - **Gping Construction · Senior System Engineer**（2014.03 – 2015.04）：強化防火牆與網路拓樸、以 Acronis 建置備援
-- **Global Publishing · System Engineer**（2012.09 – 2014.03）：升級 Windows AD / Exchange，以 VMware 建置 HA
+- **Gobooks Publishing · System Engineer**（2012.09 – 2014.03）：升級 Windows AD / Exchange，以 VMware 建置 HA
 
 ## 精選專案
 

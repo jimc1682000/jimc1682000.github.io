@@ -76,7 +76,7 @@ otherVariantLabel: General
 
 ### Earlier Experience @@ 2012 – 2015
 - **Gping Construction · Senior System Engineer** (2014.03 – 2015.04): hardened firewall and network topology; built backup with Acronis
-- **Global Publishing · System Engineer** (2012.09 – 2014.03): upgraded Windows AD / Exchange; built HA with VMware
+- **Gobooks Publishing · System Engineer** (2012.09 – 2014.03): upgraded Windows AD / Exchange; built HA with VMware
 
 ## Selected Projects
 
