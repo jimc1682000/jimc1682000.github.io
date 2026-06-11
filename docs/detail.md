@@ -95,6 +95,7 @@ pdf: /pdf/resume-detail-zh.pdf
 - **資安 / 網路**：CEH（312-50）· ENSA（312-38）· CCNSP · CCNA（640-802）
 - **Microsoft**：MCITP（Windows Server 2008 R2：70-646 / 640 / 642）· MCSA · MCTS · MOS Master
 - **Java**：OCPJP7（1Z0-803 / 804）· SCJP
+- **SRE / 事件管理**：PagerDuty Incident Responder
 - **其他**：國際貿易大會考 · 人身保險業務員（壽險公會）
 
 ## 專業訓練

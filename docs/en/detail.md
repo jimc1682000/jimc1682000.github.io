@@ -95,6 +95,7 @@ pdf: /pdf/resume-detail-en.pdf
 - **Security / Network**: CEH (312-50) · ENSA (312-38) · CCNSP · CCNA (640-802)
 - **Microsoft**: MCITP (Windows Server 2008 R2: 70-646 / 640 / 642) · MCSA · MCTS · MOS Master
 - **Java**: OCPJP7 (1Z0-803 / 804) · SCJP
+- **SRE / Incident**: PagerDuty Incident Responder
 - **Other**: International Trade Proficiency Exam · Life Insurance Agent (LIA-ROC)
 
 ## Professional Training
