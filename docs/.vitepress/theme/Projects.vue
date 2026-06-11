@@ -19,6 +19,7 @@ const items = computed(() => [
         <a v-if="p.url" :href="p.url" target="_blank" rel="noopener">{{ p.name }}</a>
         <span v-else>{{ p.name }}</span>
       </strong>
+      <span v-if="p.live" class="badge">Live</span>
       <template v-if="p.desc">{{ sep }}{{ p.desc }}</template>
       <a v-if="p.live && p.repo" :href="p.repo" class="repo" target="_blank" rel="noopener">↗&nbsp;repo</a>
     </li>

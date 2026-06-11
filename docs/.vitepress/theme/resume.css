@@ -61,8 +61,10 @@ a:hover { text-decoration: underline; }
   opacity: .7;
 }
 html[data-mode="minimal"] .aurora { opacity: .42; }
+html[data-mode="rich"] .aurora { opacity: 1; filter: blur(24px) saturate(1.35); }
 @media (prefers-reduced-motion: no-preference) {
   .aurora { animation: drift 26s ease-in-out infinite alternate; }
+  html[data-mode="rich"] .aurora { animation-duration: 16s; }
 }
 @keyframes drift {
   0%   { transform: translate3d(0,0,0) scale(1); }
@@ -105,10 +107,11 @@ html[data-mode="minimal"] .aurora { opacity: .42; }
 .icon {
   display: inline-grid; place-items: center;
   width: 34px; height: 34px; border-radius: 9px; cursor: pointer;
-  border: 1px solid var(--line); background: var(--card);
-  font-size: 15px; line-height: 1; transition: transform .2s, border-color .2s, background-color .25s;
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  font-size: 15px; line-height: 1; transition: transform .2s, border-color .2s, background-color .25s, color .25s;
 }
-.icon:hover { transform: translateY(-1px); border-color: var(--accent); }
+.icon .ti { width: 17px; height: 17px; display: block; }
+.icon:hover { transform: translateY(-1px); border-color: var(--accent); color: var(--accent); }
 
 .dl {
   position: relative; overflow: hidden;
@@ -155,10 +158,15 @@ html[data-mode="rich"] .resume:hover .spotlight { opacity: 1; }
 .rh h1 { margin: 0; font-size: 31px; font-weight: 800; letter-spacing: .01em; line-height: 1.12; }
 .rh h1 .en { color: var(--accent); font-weight: 700; }
 html[data-mode="rich"] .rh h1 {
-  background: linear-gradient(100deg, var(--ink) 30%, var(--accent) 60%, var(--accent-2));
+  background: linear-gradient(100deg, var(--accent), var(--accent-2), var(--accent));
+  background-size: 220% auto;
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
 html[data-mode="rich"] .rh h1 .en { -webkit-text-fill-color: transparent; }
+@media (prefers-reduced-motion: no-preference) {
+  html[data-mode="rich"] .rh h1 { animation: shine 7s linear infinite; }
+}
+@keyframes shine { to { background-position: 220% center; } }
 .rh .role { margin: 6px 0 9px; font-size: 14px; font-weight: 600; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
 .rh .contact { margin: 0; font-size: 13px; color: var(--muted); }
 .rh .contact a { color: var(--muted); }
@@ -236,6 +244,49 @@ html[data-theme="dark"][data-mode="rich"] ul.projects > li { background: rgba(25
 html[data-mode="rich"] ul.projects > li.live { border-left: 3px solid var(--accent); }
 html[data-mode="rich"] ul.projects > li:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
 html[data-mode="rich"] ul.projects > li::marker { content: ""; }
+
+/* ---- rich-mode amplifiers (more "pop") ---- */
+/* gradient section titles */
+html[data-mode="rich"] .resume-body h2 {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+/* punchier card hover: bigger lift, scale, accent-coloured glow */
+html[data-mode="rich"] .job:hover,
+html[data-mode="rich"] ul.projects > li:hover,
+html[data-mode="rich"] .resume-body > h2:first-of-type + ul > li:hover {
+  transform: translateY(-5px) scale(1.015);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--accent) 30%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 60%, var(--line));
+}
+/* accent top bar that lights up on hover (skills + projects cards) */
+html[data-mode="rich"] ul.projects > li,
+html[data-mode="rich"] .resume-body > h2:first-of-type + ul > li { position: relative; overflow: hidden; }
+html[data-mode="rich"] ul.projects > li::before,
+html[data-mode="rich"] .resume-body > h2:first-of-type + ul > li::before {
+  content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
+}
+html[data-mode="rich"] ul.projects > li:hover::before,
+html[data-mode="rich"] .resume-body > h2:first-of-type + ul > li:hover::before { transform: scaleX(1); }
+/* glowing summary in rich */
+html[data-mode="rich"] .summary {
+  border-left-width: 4px;
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+/* Live badge for auto-detected GitHub Pages projects */
+ul.projects .badge { display: none; }
+html[data-mode="rich"] ul.projects .badge {
+  display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .04em; vertical-align: middle;
+  color: #fff; background: linear-gradient(120deg, var(--accent), var(--accent-2));
+}
+/* bolder reveal in rich */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-mode="rich"] .reveal { transform: translateY(22px) scale(.985); }
+  html[data-mode="rich"] .reveal.in { transform: none; }
+}
 
 /* ===================== Reveal animations ===================== */
 @media (prefers-reduced-motion: no-preference) {
