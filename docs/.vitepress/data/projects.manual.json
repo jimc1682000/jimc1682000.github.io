@@ -1,12 +1,14 @@
 {
   "zh": [
     { "name": "OKD4 Home Lab", "desc": "兩台實體機 KVM/QEMU 跑生產級 OKD 4.4（OpenShift upstream）；自建 pfSense / HAProxy / BIND / NFS / FCOS 節點全流程", "url": "https://jimc1682000.github.io/okd4_files/", "links": [{ "label": "Config Files", "url": "https://github.com/jimc1682000/okd4_files" }] },
+    { "name": "CDN Traffic Report", "desc": "瀏覽器自動化擷取 Akamai Control Center SPA 流量數據 + AWS CloudFront；同時是 Claude Code Plugin，可讓 AI agent 直接調用產出週報", "url": "https://jimc1682000.github.io/cdn-traffic-report/", "links": [{ "label": "GitHub", "url": "https://github.com/jimc1682000/cdn-traffic-report" }] },
     { "name": "以悟易物（UnionPay 行動應用大賽）", "desc": "後端組長帶 3 人；UnionPay 金流 API + 性格測驗購物體驗，獲昕創 App 大賽前五名", "url": "https://drive.google.com/file/d/1ESBJlcwt5-4uGmTehJD_UBdfv_P2yNfU/view", "links": [{ "label": "Demo", "url": "https://youtu.be/1cPPJpAbw6g" }] },
     { "name": "Java 道場 — 重構套路", "desc": "重構手法技術分享", "url": "https://prezi.com/wrffukwxl_gp/" },
     { "name": "ZK 101", "desc": "ZK 框架入門教學分享", "url": "https://www.slideshare.net/secret/oLkuCFwBVSidag" }
   ],
   "en": [
     { "name": "OKD4 Home Lab", "desc": "Bare-metal OKD 4.4 (OpenShift upstream) on two physical KVM/QEMU hosts; self-built pfSense / HAProxy / BIND / NFS / FCOS cluster end-to-end", "url": "https://jimc1682000.github.io/okd4_files/", "links": [{ "label": "Config Files", "url": "https://github.com/jimc1682000/okd4_files" }] },
+    { "name": "CDN Traffic Report", "desc": "Browser-automation scraper for Akamai Control Center SPA + AWS CloudFront traffic data; also a Claude Code Plugin for AI-agent-driven weekly reporting", "url": "https://jimc1682000.github.io/cdn-traffic-report/", "links": [{ "label": "GitHub", "url": "https://github.com/jimc1682000/cdn-traffic-report" }] },
     { "name": "Enlighten by Item (UnionPay Mobile App Contest)", "desc": "led a 3-person backend team; shopping experience on UnionPay's payment API + a personality quiz; top-5 finalist", "url": "https://drive.google.com/file/d/1ESBJlcwt5-4uGmTehJD_UBdfv_P2yNfU/view", "links": [{ "label": "Demo", "url": "https://youtu.be/1cPPJpAbw6g" }] },
     { "name": "Java Dojo — Refactoring Patterns", "desc": "talk on refactoring techniques", "url": "https://prezi.com/wrffukwxl_gp/" },
     { "name": "ZK 101", "desc": "introductory tutorial on the ZK framework", "url": "https://www.slideshare.net/secret/oLkuCFwBVSidag" }
