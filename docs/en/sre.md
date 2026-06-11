@@ -37,7 +37,7 @@ pdf: /pdf/resume-sre-en.pdf
 
 ## AI / Agentic for Operations
 
-- Led the team's coding-agent toolchain evolution (command → plugin → skill); built knowledge-base and credential skills for DevOps / SRE automation
+- Led the team's coding-agent toolchain evolution (command → plugin → skill); built knowledge-base and account & secrets management skills for DevOps / SRE automation
 - Built a knowledge-base automation pipeline (raw → distill → semantic search) integrated with Jira / Notion to speed up incident analysis and documentation
 
 ## Experience

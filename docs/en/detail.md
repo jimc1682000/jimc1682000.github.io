@@ -32,14 +32,14 @@ pdf: /pdf/resume-detail-en.pdf
 
 ## AI / Agentic Engineering
 
-- Led the team's coding-agent toolchain evolution (command → plugin → skill); built reusable knowledge-base and credential-management skills for DevOps / SRE operations
+- Led the team's coding-agent toolchain evolution (command → plugin → skill); built reusable knowledge-base and account & secrets management skills for DevOps / SRE operations
 - Built a knowledge-base automation pipeline (raw → distill → semantic search / NotebookLM) integrated with Jira / Notion; shared HITL practices publicly and open-sourced the ai-kb methodology
 - Self-host and operate an AI platform (OpenClaw on VPS), bringing agentic workflows into production operations
 
 ## Experience
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
-- **AI collaboration & DevOps toolchain**: led the coding-agent toolchain (command → plugin → skill), shipping reusable knowledge-base and credential skills; co-built an EKS reference environment with guardrails (pre-commit secret scan, PR gates, layered secret scanning); shared HITL practices and the ai-kb methodology publicly
+- **AI collaboration & DevOps toolchain**: led the coding-agent toolchain (command → plugin → skill), shipping reusable knowledge-base and account & secrets management skills; co-built an EKS reference environment with guardrails (pre-commit secret scan, PR gates, layered secret scanning); shared HITL practices and the ai-kb methodology publicly
 - **Streaming media & FAST channel**: built a FAST-channel monitoring platform (weekly reports, real-time alerts, alert heatmaps, LINE Bot / Slack notifications); integrated AWS Elemental (MediaLive / MediaPackage / MediaTailor), DRM, Global Accelerator, SPEKE, IVS, and Elemental Link; managed MediaLive reservation purchasing and cost
 - **Platform modernization & service migration**: sole owner of the GitLab → Gitea migration; built Vaultwarden and rolled out Bitwarden; evaluated and adopted Bruno to replace Postman; fixed the Akamai log server and completed LDS → DataStream 2 IaC; built Serverless Lambda Terraform modules and Jenkins automation
 - **Database, cache & deployment automation**: Aurora read replicas, VCS-platform database MySQL → PostgreSQL migration, RDS Proxy for high-concurrency connections, Redis / Valkey 7 split migration; led the Airflow 2.0 upgrade (UAT / Production); developed Jenkins deployment automation in Go (geo-block workflow); designed high-traffic order processing with SQS

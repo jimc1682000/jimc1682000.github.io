@@ -29,14 +29,14 @@ pdf: /pdf/resume-ai-en.pdf
 
 ## AI / Agentic Engineering
 
-- Led the team's coding-agent toolchain evolution (command → plugin → skill); built reusable knowledge-base and credential-management skills for DevOps / SRE operations
+- Led the team's coding-agent toolchain evolution (command → plugin → skill); built reusable knowledge-base and account & secrets management skills for DevOps / SRE operations
 - Built a knowledge-base automation pipeline (raw → digest → semantic search / NotebookLM) integrated with Jira / Notion; shared HITL practices publicly and open-sourced the ai-kb methodology
 - Self-host and operate an AI platform (OpenClaw on VPS), bringing agentic workflows into production operations
 
 ## Experience
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
-- Led the team's coding-agent toolchain (command → plugin → skill), shipping reusable knowledge-base and credential skills; co-built an EKS reference environment with AI-assisted guardrails (pre-commit secret scan, PR gates, layered secret scanning)
+- Led the team's coding-agent toolchain (command → plugin → skill), shipping reusable knowledge-base and account & secrets management skills; co-built an EKS reference environment with AI-assisted guardrails (pre-commit secret scan, PR gates, layered secret scanning)
 - Sole owner of the GitLab → Gitea migration; built Vaultwarden and rolled out Bitwarden; evaluated and adopted Bruno to replace Postman
 - Built a FAST-channel monitoring platform (weekly reports, real-time alerts, alert heatmaps, LINE Bot / Slack notifications); integrated AWS Elemental streaming (MediaLive / MediaPackage / MediaTailor, DRM, Global Accelerator, SPEKE, IVS, Elemental Link)
 - Built reusable Serverless Lambda Terraform modules and Jenkins automation; developed Jenkins deployment automation in Go (geo-block workflow)

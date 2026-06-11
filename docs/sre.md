@@ -37,7 +37,7 @@ pdf: /pdf/resume-sre-zh.pdf
 
 ## AI / Agentic for Operations
 
-- 主導團隊 coding agent 工具鏈演進（command → plugin → skill）；開發知識庫與憑證管理 skill，應用於 DevOps / SRE 維運自動化
+- 主導團隊 coding agent 工具鏈演進（command → plugin → skill）；開發知識庫與帳密管理 skill，應用於 DevOps / SRE 維運自動化
 - 建置知識庫自動化管線（raw → digest → 語意檢索），整合 Jira / Notion，加速事件分析與文件產出
 
 ## 工作經歷

@@ -28,14 +28,14 @@ pdf: /pdf/resume-ai-zh.pdf
 
 ## AI / Agentic Engineering
 
-- 主導團隊 coding agent 工具鏈演進（command → plugin → skill）；開發知識庫與憑證管理 skill，應用於 DevOps / SRE 維運場景
+- 主導團隊 coding agent 工具鏈演進（command → plugin → skill）；開發知識庫與帳密管理 skill，應用於 DevOps / SRE 維運場景
 - 建置知識庫自動化管線（raw → digest → 語意檢索 / NotebookLM），整合 Jira / Notion 工作流；對外分享 HITL 實戰並開源 ai-kb 方法論
 - 自建並維運自託管 AI 平台（OpenClaw on VPS），將 agentic workflow 落地於生產維運
 
 ## 工作經歷
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
-- 主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、憑證管理 skill 等共用資產；以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）
+- 主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、帳密管理 skill 等共用資產；以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）
 - 獨力完成 GitLab → Gitea 版控遷移；建置 Vaultwarden 並導入 Bitwarden；評估並導入 Bruno 取代 Postman
 - 建置 FAST 頻道監控平台（週報、即時告警、告警熱力圖、LINE Bot / Slack 通知）；整合 AWS Elemental 媒體串流（MediaLive / MediaPackage / MediaTailor、DRM、Global Accelerator、SPEKE、IVS、Elemental Link）
 - 建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署；以 Go 開發 Jenkins 部署自動化（Geo-block 流程）

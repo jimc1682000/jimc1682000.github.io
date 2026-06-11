@@ -32,14 +32,14 @@ pdf: /pdf/resume-detail-zh.pdf
 
 ## AI / Agentic Engineering
 
-- 主導團隊 coding agent 工具鏈演進（command → plugin → skill）；開發知識庫與憑證管理 skill，應用於 DevOps / SRE 維運場景
+- 主導團隊 coding agent 工具鏈演進（command → plugin → skill）；開發知識庫與帳密管理 skill，應用於 DevOps / SRE 維運場景
 - 建置知識庫自動化管線（raw → digest → 語意檢索 / NotebookLM），整合 Jira / Notion 工作流；對外分享 HITL 實戰並開源 ai-kb 方法論
 - 自建並維運自託管 AI 平台（OpenClaw on VPS），將 agentic workflow 落地於生產維運
 
 ## 工作經歷
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
-- **AI 協作與 DevOps 工具鏈**：主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、憑證管理 skill 等共用資產；以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）；對外分享 HITL 實戰與 ai-kb 方法論
+- **AI 協作與 DevOps 工具鏈**：主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、帳密管理 skill 等共用資產；以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）；對外分享 HITL 實戰與 ai-kb 方法論
 - **串流媒體與 FAST 頻道**：建置 FAST 頻道監控平台（週報、即時告警、告警熱力圖、LINE Bot / Slack 通知）；整合 AWS Elemental（MediaLive / MediaPackage / MediaTailor）、DRM、Global Accelerator、SPEKE、IVS、Elemental Link；MediaLive Reservations 採購與成本管理
 - **平台現代化與服務遷移**：獨力完成 GitLab → Gitea 版控遷移；建置 Vaultwarden 並導入 Bitwarden；評估並導入 Bruno 取代 Postman；修復 Akamai log server 並完成 LDS → DataStream 2 IaC 化；建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署
 - **資料庫、快取與部署自動化**：Aurora Read Replica 分散負載、版控平台資料庫 MySQL → PostgreSQL 遷移、導入 RDS Proxy 解決高併發連線、Redis / Valkey 7 切分遷移；主導 Airflow 2.0 升級（UAT / Production）；以 Go 開發 Jenkins 部署自動化（Geo-block 流程）；以 SQS 設計高流量訂單處理方案
