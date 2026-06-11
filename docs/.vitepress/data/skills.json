@@ -53,7 +53,7 @@
         },
         {
           "id": "code",
-          "title": "程式語言",
+          "title": "語言 / 後端",
           "items": [
             { "name": "Python" },
             { "name": "Java" },
@@ -129,7 +129,7 @@
         },
         {
           "id": "code",
-          "title": "Languages",
+          "title": "Languages / Backend",
           "items": [
             { "name": "Python" },
             { "name": "Java" },
@@ -194,7 +194,7 @@
         },
         {
           "id": "cicd",
-          "title": "CI/CD / IaC",
+          "title": "IaC / CI-CD",
           "items": [
             { "name": "Gitea" },
             { "name": "Jenkins" },
@@ -205,7 +205,7 @@
         },
         {
           "id": "code",
-          "title": "後端 / 語言",
+          "title": "語言 / 後端",
           "items": [
             { "name": "Java" },
             { "name": "Python" },
@@ -279,7 +279,7 @@
         },
         {
           "id": "cicd",
-          "title": "CI/CD / IaC",
+          "title": "IaC / CI-CD",
           "items": [
             { "name": "Gitea" },
             { "name": "Jenkins" },
@@ -290,7 +290,7 @@
         },
         {
           "id": "code",
-          "title": "Backend / Languages",
+          "title": "Languages / Backend",
           "items": [
             { "name": "Java" },
             { "name": "Python" },
@@ -329,84 +329,131 @@
     "zh": {
       "headline": "13 年全棧維運 — 從系統工程到 AI Agent 落地",
       "signature": ["AWS 大型平台", "Kubernetes / 自動化", "AI Agent 工程"],
-      "compact": true,
       "categories": [
         {
-          "id": "cloud",
-          "title": "雲端 / AWS",
+          "id": "ai",
+          "title": "AI / Agentic",
+          "hero": true,
           "items": [
-            { "name": "EC2" }, { "name": "S3" }, { "name": "Lambda" }, { "name": "RDS / Aurora", "hl": true },
-            { "name": "DynamoDB" }, { "name": "EKS", "hl": true }, { "name": "SQS" }, { "name": "Elemental" },
-            { "name": "Bedrock" }, { "name": "Personalize" }, { "name": "Secrets Manager" }, { "name": "DevOps Guru" }
+            { "name": "Claude Code", "hl": true },
+            { "name": "Skills / MCP", "hl": true },
+            { "name": "Agentic Workflow" },
+            { "name": "RAG / 知識庫" },
+            { "name": "Harness Guardrails", "hl": true },
+            { "name": "AWS Bedrock" }
           ]
         },
         {
-          "id": "container",
-          "title": "容器 / 編排",
+          "id": "cloud",
+          "title": "雲端 / 平台",
           "items": [
-            { "name": "Docker" }, { "name": "Kubernetes", "hl": true }, { "name": "EKS" }, { "name": "ECS" }, { "name": "Vagrant" }
+            { "name": "AWS", "badge": "深度" },
+            { "name": "EKS", "hl": true },
+            { "name": "Kubernetes", "hl": true },
+            { "name": "RDS / Aurora", "hl": true },
+            { "name": "DynamoDB", "hl": true },
+            { "name": "Elemental", "hl": true },
+            { "name": "SQS", "hl": true },
+            { "name": "Docker" },
+            { "name": "ECS" },
+            { "name": "Lambda" },
+            { "name": "S3" },
+            { "name": "Secrets Manager" },
+            { "name": "Bedrock" },
+            { "name": "Personalize" },
+            { "name": "DevOps Guru" },
+            { "name": "GCP" },
+            { "name": "Vagrant" }
+          ]
+        },
+        {
+          "id": "reliability",
+          "title": "可靠度 / SRE",
+          "items": [
+            { "name": "Incident Response", "hl": true },
+            { "name": "DR / 韌性演練" },
+            { "name": "Readiness Review" },
+            { "name": "高併發優化" }
           ]
         },
         {
           "id": "cicd",
           "title": "IaC / CI-CD",
           "items": [
-            { "name": "Terraform", "hl": true }, { "name": "Ansible" }, { "name": "GitLab CI/CD" },
-            { "name": "Jenkins" }, { "name": "GitHub" }, { "name": "Gitea" }
+            { "name": "Terraform", "hl": true },
+            { "name": "Ansible" },
+            { "name": "Gitea" },
+            { "name": "Jenkins" },
+            { "name": "GitLab CI/CD" },
+            { "name": "GitHub" }
           ]
         },
         {
           "id": "observe",
-          "title": "可觀測性 / 日誌",
+          "title": "可觀測性",
           "items": [
-            { "name": "Prometheus" }, { "name": "Grafana" }, { "name": "ELK" }, { "name": "Filebeat" }, { "name": "CloudWatch" }
+            { "name": "Prometheus", "hl": true },
+            { "name": "Grafana" },
+            { "name": "ELK / EFK" },
+            { "name": "Filebeat" },
+            { "name": "CloudWatch" },
+            { "name": "DevOps Guru" }
           ]
         },
         {
-          "id": "message",
-          "title": "訊息 / 串流",
+          "id": "code",
+          "title": "語言 / 後端",
           "items": [
-            { "name": "Kafka" }, { "name": "RabbitMQ" }, { "name": "SQS" }, { "name": "ActiveMQ" }
+            { "name": "Java", "hl": true },
+            { "name": "Python" },
+            { "name": "Go" },
+            { "name": "JavaScript" },
+            { "name": "Bash" },
+            { "name": "Spring" },
+            { "name": "Django" },
+            { "name": "RESTful" }
           ]
         },
         {
           "id": "database",
           "title": "資料庫",
           "items": [
-            { "name": "MySQL" }, { "name": "PostgreSQL" }, { "name": "Aurora" }, { "name": "Redis" },
-            { "name": "MongoDB" }, { "name": "DynamoDB" }, { "name": "MSSQL" }
+            { "name": "PostgreSQL", "hl": true },
+            { "name": "Aurora", "hl": true },
+            { "name": "MySQL" },
+            { "name": "Redis" },
+            { "name": "MongoDB" },
+            { "name": "DynamoDB" },
+            { "name": "MSSQL" }
           ]
         },
         {
-          "id": "backend",
-          "title": "後端 / 語言",
+          "id": "message",
+          "title": "訊息 / 串流",
           "items": [
-            { "name": "Java", "hl": true }, { "name": "Python" }, { "name": "JavaScript" }, { "name": "Bash" },
-            { "name": "Spring" }, { "name": "Django" }, { "name": "RESTful" }
+            { "name": "Kafka", "hl": true },
+            { "name": "RabbitMQ" },
+            { "name": "ActiveMQ" }
           ]
         },
         {
           "id": "security",
           "title": "系統 / 網路 / 資安",
           "items": [
-            { "name": "Linux" }, { "name": "VMware" }, { "name": "TCP/IP" }, { "name": "VPN" },
-            { "name": "CEH", "badge": "認證" }, { "name": "iptables" }
+            { "name": "Linux" },
+            { "name": "VMware" },
+            { "name": "TCP/IP" },
+            { "name": "VPN" },
+            { "name": "CEH", "badge": "認證" },
+            { "name": "iptables" }
           ]
         },
         {
           "id": "test",
           "title": "測試 / 壓測",
           "items": [
-            { "name": "JMeter" }, { "name": "Locust" }
-          ]
-        },
-        {
-          "id": "ai",
-          "title": "AI / Agentic",
-          "hero": true,
-          "items": [
-            { "name": "Claude Code", "hl": true }, { "name": "Skills / MCP" }, { "name": "RAG" },
-            { "name": "Harness Guardrails" }, { "name": "AWS Bedrock" }
+            { "name": "JMeter" },
+            { "name": "Locust" }
           ]
         }
       ]
@@ -414,84 +461,131 @@
     "en": {
       "headline": "13 years across ops — from systems engineering to AI agents in production",
       "signature": ["Large-scale AWS", "Kubernetes & automation", "AI agent engineering"],
-      "compact": true,
       "categories": [
         {
-          "id": "cloud",
-          "title": "Cloud / AWS",
+          "id": "ai",
+          "title": "AI / Agentic",
+          "hero": true,
           "items": [
-            { "name": "EC2" }, { "name": "S3" }, { "name": "Lambda" }, { "name": "RDS / Aurora", "hl": true },
-            { "name": "DynamoDB" }, { "name": "EKS", "hl": true }, { "name": "SQS" }, { "name": "Elemental" },
-            { "name": "Bedrock" }, { "name": "Personalize" }, { "name": "Secrets Manager" }, { "name": "DevOps Guru" }
+            { "name": "Claude Code", "hl": true },
+            { "name": "Skills / MCP", "hl": true },
+            { "name": "Agentic workflows" },
+            { "name": "RAG / knowledge base" },
+            { "name": "Harness guardrails", "hl": true },
+            { "name": "AWS Bedrock" }
           ]
         },
         {
-          "id": "container",
-          "title": "Containers / Orchestration",
+          "id": "cloud",
+          "title": "Cloud / Platform",
           "items": [
-            { "name": "Docker" }, { "name": "Kubernetes", "hl": true }, { "name": "EKS" }, { "name": "ECS" }, { "name": "Vagrant" }
+            { "name": "AWS", "badge": "deep" },
+            { "name": "EKS", "hl": true },
+            { "name": "Kubernetes", "hl": true },
+            { "name": "RDS / Aurora", "hl": true },
+            { "name": "DynamoDB", "hl": true },
+            { "name": "Elemental", "hl": true },
+            { "name": "SQS", "hl": true },
+            { "name": "Docker" },
+            { "name": "ECS" },
+            { "name": "Lambda" },
+            { "name": "S3" },
+            { "name": "Secrets Manager" },
+            { "name": "Bedrock" },
+            { "name": "Personalize" },
+            { "name": "DevOps Guru" },
+            { "name": "GCP" },
+            { "name": "Vagrant" }
+          ]
+        },
+        {
+          "id": "reliability",
+          "title": "Reliability / SRE",
+          "items": [
+            { "name": "Incident response", "hl": true },
+            { "name": "DR / resilience drills" },
+            { "name": "Readiness review" },
+            { "name": "High-concurrency tuning" }
           ]
         },
         {
           "id": "cicd",
           "title": "IaC / CI-CD",
           "items": [
-            { "name": "Terraform", "hl": true }, { "name": "Ansible" }, { "name": "GitLab CI/CD" },
-            { "name": "Jenkins" }, { "name": "GitHub" }, { "name": "Gitea" }
+            { "name": "Terraform", "hl": true },
+            { "name": "Ansible" },
+            { "name": "Gitea" },
+            { "name": "Jenkins" },
+            { "name": "GitLab CI/CD" },
+            { "name": "GitHub" }
           ]
         },
         {
           "id": "observe",
-          "title": "Observability / Logging",
+          "title": "Observability",
           "items": [
-            { "name": "Prometheus" }, { "name": "Grafana" }, { "name": "ELK" }, { "name": "Filebeat" }, { "name": "CloudWatch" }
+            { "name": "Prometheus", "hl": true },
+            { "name": "Grafana" },
+            { "name": "ELK / EFK" },
+            { "name": "Filebeat" },
+            { "name": "CloudWatch" },
+            { "name": "DevOps Guru" }
           ]
         },
         {
-          "id": "message",
-          "title": "Messaging / Streaming",
+          "id": "code",
+          "title": "Languages / Backend",
           "items": [
-            { "name": "Kafka" }, { "name": "RabbitMQ" }, { "name": "SQS" }, { "name": "ActiveMQ" }
+            { "name": "Java", "hl": true },
+            { "name": "Python" },
+            { "name": "Go" },
+            { "name": "JavaScript" },
+            { "name": "Bash" },
+            { "name": "Spring" },
+            { "name": "Django" },
+            { "name": "RESTful" }
           ]
         },
         {
           "id": "database",
           "title": "Databases",
           "items": [
-            { "name": "MySQL" }, { "name": "PostgreSQL" }, { "name": "Aurora" }, { "name": "Redis" },
-            { "name": "MongoDB" }, { "name": "DynamoDB" }, { "name": "MSSQL" }
+            { "name": "PostgreSQL", "hl": true },
+            { "name": "Aurora", "hl": true },
+            { "name": "MySQL" },
+            { "name": "Redis" },
+            { "name": "MongoDB" },
+            { "name": "DynamoDB" },
+            { "name": "MSSQL" }
           ]
         },
         {
-          "id": "backend",
-          "title": "Backend / Languages",
+          "id": "message",
+          "title": "Messaging / Streaming",
           "items": [
-            { "name": "Java", "hl": true }, { "name": "Python" }, { "name": "JavaScript" }, { "name": "Bash" },
-            { "name": "Spring" }, { "name": "Django" }, { "name": "RESTful" }
+            { "name": "Kafka", "hl": true },
+            { "name": "RabbitMQ" },
+            { "name": "ActiveMQ" }
           ]
         },
         {
           "id": "security",
           "title": "Systems / Network / Security",
           "items": [
-            { "name": "Linux" }, { "name": "VMware" }, { "name": "TCP/IP" }, { "name": "VPN" },
-            { "name": "CEH", "badge": "cert" }, { "name": "iptables" }
+            { "name": "Linux" },
+            { "name": "VMware" },
+            { "name": "TCP/IP" },
+            { "name": "VPN" },
+            { "name": "CEH", "badge": "cert" },
+            { "name": "iptables" }
           ]
         },
         {
           "id": "test",
           "title": "Testing / Load",
           "items": [
-            { "name": "JMeter" }, { "name": "Locust" }
-          ]
-        },
-        {
-          "id": "ai",
-          "title": "AI / Agentic",
-          "hero": true,
-          "items": [
-            { "name": "Claude Code", "hl": true }, { "name": "Skills / MCP" }, { "name": "RAG" },
-            { "name": "Harness guardrails" }, { "name": "AWS Bedrock" }
+            { "name": "JMeter" },
+            { "name": "Locust" }
           ]
         }
       ]
