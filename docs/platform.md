@@ -31,6 +31,13 @@ otherVariantLabel: 通用版
 - **資料庫**：MySQL、PostgreSQL、Aurora、DynamoDB、Redis、MongoDB
 - **AI / Agentic**：AWS Bedrock、Claude Code、Agentic Workflow、知識庫自動化
 
+## 平台 / 可靠度亮點
+
+- **Kubernetes 平台**：建置 EKS 高可用叢集與滾動升級（rolling upgrade）；以 Kubernetes、Ansible、GitLab CI/CD 標準化部署
+- **可觀測性**：DynamoDB 監控儀表板 + AWS DevOps Guru 異常偵測、ELK 集中化日誌、端對端（E2E）監控
+- **可靠度 / SRE**：跨服務 Incident Response、多次 DR / 韌性演練、服務上線審查（Readiness Review）
+- **高併發 / 規模**：RDS Proxy 解高併發連線、Aurora Read Replica 分流、SQS 處理 Telkomsel 高量訂單
+
 ## AI / Agentic for Operations
 
 - 自建並維運自託管 AI 平台（OpenClaw on VPS）；開發 Claude Code skills 與 agentic workflow，應用於 DevOps / SRE 維運自動化
@@ -42,8 +49,7 @@ otherVariantLabel: 通用版
 - 建置 DynamoDB 監控儀表板並導入 AWS DevOps Guru 自動偵測 RDS 異常，強化系統可觀測性與可靠度
 - 重構資料庫架構：Aurora MySQL Read Replica 分流、MySQL → PostgreSQL 遷移、以 RDS Proxy 解決高併發連線瓶頸
 - 升級 Airflow 至 2.0 並橫跨 UAT / Production 雙環境；以 SQS 解決 Telkomsel 高量訂單處理瓶頸
-- 評估並導入 AWS Bedrock AI 工具與 Secrets Manager；建置 AWS Personalize 推薦環境予 BI / Backend 團隊
-- 建置 AWS Elemental 媒體串流管線並整合 DRM；設計 S3 + NAS 混合儲存與 Akamai IaC CDN 自動化
+- 其他雲端維運（廣度）：AWS Bedrock AI 工具與 Secrets Manager、AWS Personalize 推薦環境、Elemental 媒體串流（DRM）、S3 + NAS 混合儲存與 Akamai IaC CDN
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
 - 負責跨服務 Incident Response；執行多次災難復原演練（DR Drill / 韌性測試）與維護視窗（Maintenance Window）

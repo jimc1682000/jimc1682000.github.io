@@ -32,6 +32,13 @@ otherVariantLabel: General
 - **Databases**: MySQL, PostgreSQL, Aurora, DynamoDB, Redis, MongoDB
 - **AI / Agentic**: AWS Bedrock, Claude Code, agentic workflows, knowledge-base automation
 
+## Platform / Reliability Highlights
+
+- **Kubernetes platform**: built highly-available EKS clusters with rolling upgrades; standardized deployment with Kubernetes, Ansible, GitLab CI/CD
+- **Observability**: DynamoDB monitoring dashboard + AWS DevOps Guru anomaly detection, centralized ELK logging, end-to-end (E2E) monitoring
+- **Reliability / SRE**: cross-service incident response, multiple DR / resilience drills, service readiness reviews
+- **High concurrency / scale**: RDS Proxy for connection bottlenecks, Aurora read replicas, SQS for Telkomsel high-volume orders
+
 ## AI / Agentic for Operations
 
 - Self-host and operate an AI platform (OpenClaw on VPS); build Claude Code skills and agentic workflows for DevOps / SRE automation
@@ -43,8 +50,7 @@ otherVariantLabel: General
 - Strengthened observability and reliability: built a DynamoDB monitoring dashboard and adopted AWS DevOps Guru to detect RDS anomalies
 - Re-architected the data layer: Aurora MySQL read replicas, MySQL → PostgreSQL migration, and RDS Proxy to resolve high-concurrency connection bottlenecks
 - Upgraded Airflow to 2.0 across UAT and Production; used SQS to relieve Telkomsel high-volume order processing
-- Evaluated and rolled out AWS Bedrock AI tooling and Secrets Manager; stood up an AWS Personalize environment for BI / Backend teams
-- Built an AWS Elemental media pipeline with DRM; designed an S3 + NAS hybrid store and Akamai IaC CDN automation
+- Other cloud operations (breadth): AWS Bedrock AI tooling and Secrets Manager, AWS Personalize for BI / Backend, Elemental media streaming (DRM), and an S3 + NAS hybrid store with Akamai IaC CDN
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
 - Owned cross-service incident response; ran multiple disaster-recovery drills (resilience testing) and maintenance windows

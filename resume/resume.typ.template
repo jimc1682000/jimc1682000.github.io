@@ -2,13 +2,13 @@
 #set page(paper: "a4", margin: (x: 14mm, top: 13mm, bottom: 12mm))
 
 // Per-language density: English is taller, so EN files set `compact: true`.
-#let baseSize  = $if(compact)$10.2pt$else$10.8pt$endif$
-#let leadEm    = $if(compact)$0.82em$else$1.04em$endif$
-#let listEm    = $if(compact)$0.84em$else$1.0em$endif$
-#let secAbove  = $if(compact)$15pt$else$20pt$endif$
-#let secBelow  = $if(compact)$8pt$else$10pt$endif$
-#let jobAbove  = $if(compact)$11pt$else$14pt$endif$
-#let jobBelow  = $if(compact)$4pt$else$5pt$endif$
+#let baseSize  = $if(compact)$10.1pt$else$10.8pt$endif$
+#let leadEm    = $if(compact)$0.74em$else$1.04em$endif$
+#let listEm    = $if(compact)$0.76em$else$1.0em$endif$
+#let secAbove  = $if(compact)$12pt$else$20pt$endif$
+#let secBelow  = $if(compact)$6pt$else$10pt$endif$
+#let jobAbove  = $if(compact)$9pt$else$14pt$endif$
+#let jobBelow  = $if(compact)$3pt$else$5pt$endif$
 
 #set text(font: ("Inter", "PingFang TC", "Noto Sans CJK TC", "Noto Sans TC"), size: baseSize, lang: "$lang$", fill: rgb("#1f2933"))
 #set par(leading: leadEm, justify: false, spacing: leadEm)
