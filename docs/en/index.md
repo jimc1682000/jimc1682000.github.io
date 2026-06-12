@@ -42,33 +42,26 @@ pdf: /pdf/resume-ai-en.pdf
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
 - Led the team's coding-agent toolchain (command → plugin → skill), shipping reusable knowledge-base and account & secrets management skills; co-built an EKS reference environment with AI-assisted guardrails (pre-commit secret scan, PR gates, layered secret scanning); member of the ai-squad (a Tech-Lead-formed AI initiative)
 - Sole owner of the GitLab → Gitea migration (hundreds of repos, the whole engineering org, < 2h off-peak cutover); built Vaultwarden and rolled out Bitwarden; evaluated and adopted Bruno to replace Postman
-- Built a multi-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, alert heatmaps, automated weekly reports, Terraform IaC)
-- Integrated AWS Elemental streaming (MediaLive / MediaPackage / MediaTailor, DRM, Global Accelerator, SPEKE, IVS)
-- Built reusable Serverless Lambda Terraform modules and Jenkins automation; developed Jenkins deployment automation in Go (geo-block workflow)
+- Built a multi-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, alert heatmaps, automated weekly reports, Terraform IaC); integrated AWS Elemental (MediaLive / MediaPackage / MediaTailor, DRM, Global Accelerator, SPEKE, IVS)
+- Built reusable Serverless Lambda Terraform modules and Jenkins automation; developed Geo-block deployment automation in Go
 - Re-architected the data layer: Aurora read replicas, MySQL / PostgreSQL parallel operation, RDS Proxy (absorbing bursts of thousands of simultaneous connections), Redis 5 → Valkey 7 upgrade (cost + EOL); led the Airflow 1.x → 2.0 upgrade (UAT + Production, many DAGs); built a DynamoDB monitoring dashboard + DevOps Guru
 - Multi-cloud governance and security: GCP permission tightening and API-key cleanup; AI-assisted DRM / WAF / CVE audits; Akamai LDS → DataStream 2 IaC; audited and cleaned up idle EC2 snapshots; client-project environments and CDN network allowlists
 - Used SQS for a major telco partner's high-volume orders; evaluated and rolled out AWS Bedrock, Secrets Manager, and Personalize; designed S3 + NAS hybrid storage and Akamai IaC CDN automation
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
-- Ran multiple disaster-recovery drills and maintenance windows, and owned cross-service incident response
-- Optimized cloud cost by auditing and decommissioning idle / low-utilization resources, and tuned data transfer and logging
-- Drove the Opsworks → ASG / SSM migration, built end-to-end (E2E) monitoring, and established a service readiness review process
+- Multiple DR drills / maintenance windows + cross-service incident response; audited and decommissioned idle resources for cost, tuned data transfer and logging
+- Drove the Opsworks → ASG / SSM migration; built E2E monitoring and a service readiness review process
 
 ### Senior DevOps Engineer · GoFreight @@ 2020.10 – 2021.09
-- Replaced dev / stage environments with containers and ran unit tests in the CI/CD pipeline to improve reliability
-- Built EKS for high availability and rolling upgrades; introduced ELK for centralized log management
-- Cut cost with EC2 RIs / right-sized instances; upgraded MySQL 5.6 to 8.0 and the DMS engine
-- Added autoscaling Jenkins workers for peak load
+- Built EKS for HA and rolling upgrades; containerized dev / stage environments with CI/CD unit tests; introduced ELK for centralized logging
+- EC2 RIs / right-sizing for cost; MySQL 5.6 → 8.0 + DMS upgrade; autoscaling Jenkins workers integrated with GitHub
 
 ### Senior DevOps Engineer · CATCHPLAY @@ 2019.02 – 2020.10
-- Created a one-click CI/CD pipeline for multi-environment deployment; built a stress-test environment to locate performance bottlenecks
-- Replaced cron jobs with Airflow scheduling; refactored part of the ETL automation
-- Cut cloud cost with EC2 Spot / RIs; consolidated multi-source logs with Lambda
-- Standardized components via containers; managed log parsing with ELK + Curator
+- One-click CI/CD pipeline for multi-environment deploys; stress-test environment to locate bottlenecks; replaced cron jobs with Airflow, refactored ETL
+- EC2 Spot / RIs for cost; Lambda log consolidation; ELK + Curator centralized logging; containerized component standardization
 
 ### Senior Java / DevOps Engineer · Groundhog Tech @@ 2017.11 – 2019.02
-- Deployed DSP / DMP systems and tuned performance; introduced Kubernetes, Ansible, and GitLab CI/CD to strengthen automation
-- Audited firewall settings to improve system security
+- Deployed DSP / DMP systems; introduced Kubernetes, Ansible, GitLab CI/CD for automation; audited firewall for security
 - Maintained and extended the CovMo signal-optimization system; refactored code and tuned SQL queries
 
 ### Early Career @@ 2012 – 2017

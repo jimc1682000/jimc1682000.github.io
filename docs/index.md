@@ -48,9 +48,8 @@ pdf: /pdf/resume-ai-zh.pdf
 - 以 SQS 解決電信夥伴高量訂單瓶頸；評估並導入 AWS Bedrock、Secrets Manager、Personalize；設計 S3 + NAS 混合儲存與 Akamai IaC CDN 自動化
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
-- 執行多次災難復原演練（DR Drill）與維護視窗（Maintenance Window），負責跨服務事件處理（Incident Response）
-- 透過盤點並下線閒置 / 低使用資源優化雲端成本，調整資料傳輸與日誌設定
-- 推動 Opsworks → ASG / SSM 遷移、建立端對端（E2E）監控機制與服務上線審查（Service Readiness Review）流程
+- 多次 DR Drill / 維護視窗 + 跨服務 Incident Response；盤點下線閒置資源優化雲成本、調整資料傳輸與日誌
+- 推動 Opsworks → ASG / SSM 遷移；建立 E2E 監控與服務上線審查（Readiness Review）流程
 
 ### Senior DevOps Engineer · GoFreight @@ 2020.10 – 2021.09
 - 建置 EKS 達成高可用與滾動升級；容器化取代 dev / stage 環境並於 CI/CD 執行單元測試；導入 ELK 集中化日誌

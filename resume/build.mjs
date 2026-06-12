@@ -31,9 +31,16 @@ const auto = readJson(resolve(dataDir, "projects.auto.json"), []);
 const manual = readJson(resolve(dataDir, "projects.manual.json"), {});
 const skills = readJson(resolve(dataDir, "skills.json"), {});
 
-function projectsMarkdown(lang) {
+function projectsMarkdown(lang, compact) {
   const sep = lang === "en" ? " — " : "：";
-  const list = [...auto.map((p) => ({ name: p.name, desc: p.desc, url: p.url })), ...(manual[lang] || manual.zh || [])];
+  let list = [...auto.map((p) => ({ name: p.name, desc: p.desc, url: p.url })), ...(manual[lang] || manual.zh || [])];
+  // Compact variants (ai/sre/platform): collapse the whole list into ONE inline
+  // line of linked names to keep the PDF to 2 pages. Website + detail PDF keep
+  // the full bulleted list with descriptions.
+  if (compact) {
+    const names = list.map((p) => (p.url ? `[${p.name}](${p.url})` : p.name));
+    return "- " + names.join(" · ");
+  }
   return list
     .map((p) => {
       const nm = p.url ? `[${p.name}](${p.url})` : p.name;
@@ -58,12 +65,13 @@ function sortSkillCategories(cats) {
   });
 }
 
-function skillsMarkdown(variant, lang) {
+function skillsMarkdown(variant, lang, compact) {
   const cfg = skills[variant]?.[lang] || skills[variant]?.zh;
   if (!cfg) return "";
   const lines = [];
-  if (cfg.headline) lines.push(cfg.headline, "");
-  if (cfg.signature?.length) {
+  // Compact variants: skip headline + signature line to save vertical space.
+  if (cfg.headline && !compact) lines.push(cfg.headline, "");
+  if (cfg.signature?.length && !compact) {
     const label = lang === "en" ? "Core strengths" : "招牌能力";
     lines.push(`**${label}**：${cfg.signature.join(" · ")}`, "");
   }
@@ -86,8 +94,8 @@ function preprocess(md, lang, variant) {
   });
   // <Projects /> component -> generated markdown bullet list (only eat horizontal ws,
   // so the blank lines around the token stay intact and the next heading survives)
-  md = md.replace(/^[ \t]*<Projects\s*\/>[ \t]*$/m, projectsMarkdown(lang));
-  md = md.replace(/^[ \t]*<Skills\s*\/>[ \t]*$/m, skillsMarkdown(variant, lang));
+  md = md.replace(/^[ \t]*<Projects\s*\/>[ \t]*$/m, projectsMarkdown(lang, variant !== "detail"));
+  md = md.replace(/^[ \t]*<Skills\s*\/>[ \t]*$/m, skillsMarkdown(variant, lang, variant !== "detail"));
   return md;
 }
 
