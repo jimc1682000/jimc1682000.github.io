@@ -24,6 +24,10 @@ pdf: /pdf/resume-sre-en.pdf
 
 <Skills />
 
+## Recent Focus
+
+- Agentic Workflow · self-hosted LLM inference · RAG / LLM eval · EKS · Terraform
+
 ## SRE / Reliability Core Competencies
 
 - **Kubernetes platform**: built an EKS reference environment with rolling upgrades; standardized deployment with Kubernetes, Ansible, Gitea / Jenkins
@@ -38,7 +42,7 @@ pdf: /pdf/resume-sre-en.pdf
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
 - Built a FAST-channel monitoring platform (weekly reports, real-time alerts, alert heatmaps, LINE Bot / Slack notifications); strengthened observability with a DynamoDB dashboard and DevOps Guru
 - Co-built an EKS reference environment with AI-assisted guardrails (pre-commit secret scan, PR gates, layered secret scanning)
-- Re-architected the data layer: Aurora read replicas, MySQL → PostgreSQL migration, RDS Proxy, Redis / Valkey 7 split migration; led the Airflow 2.0 upgrade (UAT / Production)
+- Re-architected the data layer: Aurora read replicas, MySQL / PostgreSQL parallel operation, RDS Proxy, Redis → Valkey 7 upgrade (some legacy systems still on Redis); led the Airflow 2.0 upgrade (UAT / Production)
 - Sole owner of the GitLab → Gitea migration; built Serverless Lambda Terraform modules and Jenkins automation; developed geo-block deployment automation in Go
 - Used SQS to handle a major telco partner's high-volume order throughput
 - Integrated AWS Elemental streaming (DRM, Global Accelerator, SPEKE, IVS); migrated Akamai LDS → DataStream 2 via IaC
@@ -80,5 +84,5 @@ pdf: /pdf/resume-sre-en.pdf
 ## Education, Certifications & Languages
 
 - **Education**: Soochow University, B.A. (2007 – 2012) · Tainan First Senior High School (2004 – 2007)
-- **Certifications**: OCPJP7 · CEH · RHCE · MCITP · CCNA
+- **Certifications**: RHCE · CEH · OCPJP7 · MCITP · CCNA
 - **Languages**: Chinese (native) · English (professional working proficiency · TOEIC 845)

@@ -23,21 +23,27 @@ pdf: /pdf/resume-ai-zh.pdf
 
 <Skills />
 
+## 近期專注
+
+- Agentic Workflow · 自託管 LLM 推論 · RAG / LLM eval · EKS · Terraform
+
 ## AI / Agentic Engineering
 
 - 主導團隊 coding agent 工具鏈演進（command → plugin → skill）；開發知識庫與帳密管理 skill，應用於 DevOps / SRE 維運場景
 - 建置知識庫自動化管線（raw → digest → 語意檢索 / NotebookLM），整合 Jira / Notion 工作流；對外分享 HITL 實戰並開源 ai-kb 方法論
 - 自建並維運自託管 AI 平台（OpenClaw on VPS），將 agentic workflow 落地於生產維運
+- 自託管 / 開源 LLM 推論評估：於 AWS GPU EC2 評估較大開源 MoE 模型（gemma-4-26B-A4B-it、Qwen3.6-35B-A3B）作為自託管候選；另在無 GPU 環境以 Ollama 跑通查詢展開與 LLM-as-judge 自評管線（模型選型 MoE 35B → 8B dense @ NPU，含 streaming / 重試熱身 / 輸出預算等推論基建排錯）
+- 商學底子 × AI agent 治理：以商管訓練的管理視角看待 multi-agent 編排與維運決策——guardrails ≈ 問責控制、scoped authorization ≈ 授權委派、harness / loop ≈ 組織設計
 
 ## 工作經歷
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
-- 主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、帳密管理 skill 等共用資產；以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）
+- 主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、帳密管理 skill 等共用資產；與同事協作、AI 輔助建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）
 - 獨力完成 GitLab → Gitea 版控遷移；建置 Vaultwarden 並導入 Bitwarden；評估並導入 Bruno 取代 Postman
 - 建置 FAST 頻道監控平台（週報、即時告警、告警熱力圖、LINE Bot / Slack 通知）
 - 整合 AWS Elemental 媒體串流（MediaLive / MediaPackage / MediaTailor、DRM、Global Accelerator、SPEKE、IVS）
 - 建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署；以 Go 開發 Jenkins 部署自動化（Geo-block 流程）
-- 重構資料庫架構：Aurora Read Replica、MySQL → PostgreSQL 遷移、RDS Proxy、Redis / Valkey 7 切分遷移；主導 Airflow 2.0 升級（UAT / Production）
+- 重構資料庫架構：Aurora Read Replica、MySQL / PostgreSQL 併行維運、RDS Proxy、Redis → Valkey 7 升級（部分舊系統續用 Redis）；主導 Airflow 2.0 升級（UAT / Production）
 - 建置 DynamoDB 監控儀表板並導入 DevOps Guru
 - 多雲治理與資安：GCP 權限限縮與 API key 治理；以 AI 協助 DRM / WAF / CVE 稽核；Akamai LDS → DataStream 2 IaC 化；盤點並清理閒置 EC2 snapshots；客戶專案環境建置與 CDN 網段白名單
 - 以 SQS 設計解決電信合作夥伴高量訂單瓶頸
@@ -81,5 +87,5 @@ pdf: /pdf/resume-ai-zh.pdf
 ## 學歷、認證 & 語言
 
 - **學歷**：東吳大學 學士（2007 – 2012）· 國立臺南第一高級中學（2004 – 2007）
-- **認證**：OCPJP7 · CEH · RHCE · MCITP · CCNA
+- **認證**：RHCE · CEH · OCPJP7 · MCITP · CCNA
 - **語言**：中文（母語）· English（專業工作能力 · TOEIC 845）

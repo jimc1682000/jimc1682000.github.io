@@ -24,6 +24,10 @@ pdf: /pdf/resume-sre-zh.pdf
 
 <Skills />
 
+## 近期專注
+
+- Agentic Workflow · 自託管 LLM 推論 · RAG / LLM eval · EKS · Terraform
+
 ## SRE / 可靠度核心能力
 
 - **Kubernetes 平台**：建置 EKS 參考環境與滾動升級（rolling upgrade）；以 Kubernetes、Ansible、Gitea / Jenkins 標準化部署
@@ -37,8 +41,8 @@ pdf: /pdf/resume-sre-zh.pdf
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
 - 建置 FAST 頻道監控平台（週報、即時告警、告警熱力圖、LINE Bot / Slack 通知）；建置 DynamoDB 監控儀表板並導入 DevOps Guru，強化可觀測性與可靠度
-- 以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）
-- 重構資料庫架構：Aurora Read Replica、MySQL → PostgreSQL 遷移、RDS Proxy、Redis / Valkey 7 切分遷移；主導 Airflow 2.0 升級（UAT / Production）
+- 與同事協作、AI 輔助建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）
+- 重構資料庫架構：Aurora Read Replica、MySQL / PostgreSQL 併行維運、RDS Proxy、Redis → Valkey 7 升級（部分舊系統續用 Redis）；主導 Airflow 2.0 升級（UAT / Production）
 - 獨力完成 GitLab → Gitea 版控遷移；建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署；以 Go 開發 Geo-block 部署自動化
 - 以 SQS 設計解決電信合作夥伴高量訂單瓶頸
 - 整合 AWS Elemental 媒體串流（DRM、Global Accelerator、SPEKE、IVS）；完成 Akamai LDS → DataStream 2 IaC 化
@@ -80,5 +84,5 @@ pdf: /pdf/resume-sre-zh.pdf
 ## 學歷、認證 & 語言
 
 - **學歷**：東吳大學 學士（2007 – 2012）· 國立臺南第一高級中學（2004 – 2007）
-- **認證**：OCPJP7 · CEH · RHCE · MCITP · CCNA
+- **認證**：RHCE · CEH · OCPJP7 · MCITP · CCNA
 - **語言**：中文（母語）· English（專業工作能力 · TOEIC 845）

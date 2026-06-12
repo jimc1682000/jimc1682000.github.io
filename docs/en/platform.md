@@ -24,6 +24,10 @@ pdf: /pdf/resume-platform-en.pdf
 
 <Skills />
 
+## Recent Focus
+
+- Agentic Workflow · self-hosted LLM inference · RAG / LLM eval · EKS · Terraform
+
 ## Platform Engineering Core Competencies
 
 - **Virtualisation / HA**: KVM/QEMU OKD 4.4 full cluster (HAProxy / BIND / NFS / pfSense); VMware vSphere HA + P2V migrations; HAProxy multi-backend load balancing; EKS rolling upgrades; Aurora Read Replica + RDS Proxy HA; multiple DR drills at TrendMicro
@@ -37,7 +41,7 @@ pdf: /pdf/resume-platform-en.pdf
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
 - Built an EKS reference environment with Ansible + Terraform; deployed guardrails (pre-commit secret scan, PR gates, layered secret scanning)
 - Built a FAST-channel monitoring platform (weekly reports, real-time alerts, heatmaps, LINE Bot / Slack notifications); added DynamoDB dashboard + DevOps Guru
-- Re-architected HA database layer: Aurora read replicas, MySQL → PostgreSQL migration, RDS Proxy, Redis / Valkey 7 split migration; led Airflow 2.0 upgrade
+- Re-architected HA database layer: Aurora read replicas, MySQL / PostgreSQL parallel operation, RDS Proxy, Redis → Valkey 7 upgrade (some legacy systems still on Redis); led Airflow 2.0 upgrade
 - Sole owner of GitLab → Gitea migration; built serverless Lambda Terraform modules and Jenkins automation; developed Geo-block deployment in Go
 - Used SQS to handle high-volume telco partner orders
 - Integrated AWS Elemental streaming (DRM, Global Accelerator, SPEKE, IVS); migrated Akamai LDS → DataStream 2 via IaC
@@ -81,5 +85,5 @@ pdf: /pdf/resume-platform-en.pdf
 ## Education, Certifications & Languages
 
 - **Education**: Soochow University, B.A. (2007 – 2012) · Tainan First Senior High School (2004 – 2007)
-- **Certifications**: RHCE · OCPJP7 · CEH · MCITP · CCNA
+- **Certifications**: RHCE · CEH · OCPJP7 · MCITP · CCNA
 - **Languages**: Chinese (native) · English (professional working proficiency · TOEIC 845)

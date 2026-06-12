@@ -23,23 +23,26 @@ pdf: /pdf/resume-detail-zh.pdf
 
 <Skills />
 
+## 近期專注
+
+- Agentic Workflow · 自託管 LLM 推論 · RAG / LLM eval · EKS · Terraform
+
 ## AI / 跨域技術定位
 
-- 主導團隊 coding agent 工具鏈演進（command → plugin → skill）；開發知識庫與帳密管理 skill，應用於 DevOps / SRE 維運場景
-- 建置知識庫自動化管線（raw → digest → 語意檢索 / NotebookLM），整合 Jira / Notion 工作流；對外分享 HITL 實戰並開源 ai-kb 方法論
-- 自建並維運自託管 AI 平台（OpenClaw on VPS），將 agentic workflow 落地於生產維運
-- **虛擬化**：以 KVM/QEMU 於兩台實體機部署 OKD 4.4（OpenShift upstream）完整叢集，涵蓋 HAProxy / BIND / NFS / pfSense 全流程；早期以 VMware vSphere 建置企業 HA 環境並執行 P2V 遷移
-- **HA 架構**：HAProxy 多 backend 負載均衡（API 6443 / MCS 22623 / Ingress 80/443）；TrendMicro 多次 DR Drill / 韌性演練；Aurora Read Replica + RDS Proxy 高可用資料庫架構
-- **Linux 系統**：RHCE 認證；yum server 集中管理 RPM 套件（CATCHPLAY）；Kubernetes node 層 cgroup / namespace 管理；FCOS ignition 配置
-- **網路 / 儲存**：pfSense DHCP/NAT/Firewall；BIND DNS 正/反向 zone；NFS persistent storage（OKD4 registry PV）；iptables / VPN
+- **AI 協作落地維運（agent-native + AIOps）**：以 AI 為共同開發者，把零散需求收斂成可被他人重用的 coding-agent skill 生態與安全護欄（CI 自動 gate、context / 帳密邊界），而非一次性腳本——重點在「能否被重用、邊界是否清楚」；並將 AI 落地維運：協助 DRM / WAF / CVE 稽核與 GCP 權限治理，與團隊協作多語精靈翻譯模型生命週期（GPT-4-turbo → GPT-5.4、UAT → Prod、prod GPU 根因排查）
+- **自託管 AI 平台與開源 LLM 推論**：自建並維運自託管 AI 平台（OpenClaw on VPS）落地生產 agentic workflow；於 AWS GPU EC2 評估較大開源 MoE 模型（gemma-4-26B-A4B-it、Qwen3.6-35B-A3B）作為自託管候選；另以 Ollama 在無 GPU 環境跑通查詢展開與 LLM-as-judge 自評管線（模型選型 MoE 35B → 8B dense @ NPU，含 streaming / 重試熱身 / 輸出預算等推論基建排錯）
+- **知識沉澱與方法論**：建置 raw → digest → 語意檢索 / NotebookLM 管線並整合 Jira / Notion，把個人 PoC 與踩坑轉成團隊可查用的共享記憶（降低重複試錯與理解債）並開源為 ai-kb；探索 Harness → Loop（從「人設計 harness、agent 籠內協作」到「人設計 loop、專注驗證閉環」），於 Tech team 分享 HITL 實戰（「我與 Claude Code 的一天」）
+- **商學底子 × 工程決策**：以商管訓練的管理視角分析維運與團隊決策——曾以數據與成本 / ROI 框架駁回低效提案，改以 span of control、bounded rationality 設計 forcing-function escalation（把無法 team 內解的問題用 data + automation 推到能解的人面前）；同一套思維延伸為 AI agent 治理的類比框架：guardrails ≈ 問責控制、scoped authorization ≈ 授權委派、harness / loop ≈ 組織設計
+- **雲端規模與可靠度（SRE）**：AWS 大規模維運與多雲治理；高併發架構（RDS Proxy 連線池、SQS 高量訂單削峰）；可靠度工程（TrendMicro 多次 DR / 韌性演練、E2E 監控、服務上線審查）；可觀測性（Prometheus / Grafana / ELK / CloudWatch）；Aurora Read Replica + RDS Proxy 高可用資料庫；Linux 底層 cgroup / namespace、FCOS ignition
+- **虛擬化與自建平台**：以 KVM/QEMU 於兩台實體機部署 OKD 4.4（OpenShift upstream）完整叢集，涵蓋 HAProxy / BIND / NFS / pfSense 全流程；早期以 VMware vSphere 建置企業 HA 環境並執行 P2V 遷移
 
 ## 工作經歷
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
-- **AI 協作與 DevOps 工具鏈**：主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、帳密管理 skill 等共用資產；以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）；對外分享 HITL 實戰與 ai-kb 方法論
+- **AI 協作與 DevOps 工具鏈**：主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、帳密管理 skill 等共用資產；與同事協作、AI 輔助建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）；對外分享 HITL 實戰與 ai-kb 方法論
 - **串流媒體與 FAST 頻道**：建置 FAST 頻道監控平台（週報、即時告警、告警熱力圖、LINE Bot / Slack 通知）；整合 AWS Elemental（MediaLive / MediaPackage / MediaTailor）、DRM、Global Accelerator、SPEKE、IVS、Elemental Link；MediaLive Reservations 採購與成本管理
 - **平台現代化與服務遷移**：獨力完成 GitLab → Gitea 版控遷移；建置 Vaultwarden 並導入 Bitwarden；評估並導入 Bruno 取代 Postman；修復 Akamai log server 並完成 LDS → DataStream 2 IaC 化；建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署
-- **資料庫、快取與部署自動化**：Aurora Read Replica 分散負載、版控平台資料庫 MySQL → PostgreSQL 遷移、導入 RDS Proxy 解決高併發連線、Redis / Valkey 7 切分遷移；主導 Airflow 2.0 升級（UAT / Production）；以 Go 開發 Jenkins 部署自動化（Geo-block 流程）；以 SQS 設計高流量訂單處理方案
+- **資料庫、快取與部署自動化**：Aurora Read Replica 分散負載、版控平台資料庫 MySQL / PostgreSQL 併行維運、導入 RDS Proxy 解決高併發連線、Redis → Valkey 7 升級（部分舊系統續用 Redis）；主導 Airflow 2.0 升級（UAT / Production）；以 Go 開發 Jenkins 部署自動化（Geo-block 流程）；以 SQS 設計高流量訂單處理方案
 - **雲端治理、資安與客戶專案**：GCP 權限限縮與 API key 治理；客戶專案環境建置與 CDN 網段白名單（Akamai / CloudFront）；以 AI 協助 DRM / WAF / CVE 稽核；憑證帳號整頓（Secrets Manager）；盤點並清理閒置 EC2 snapshots；引入 AWS Personalize、DynamoDB、Secrets Manager、Bedrock
 - **系統整合與架構**：建置 S3 / NAS 混合儲存優化影音內容、實作 S3 生命週期自動清理；開發 Akamai IaC 自動化 CDN 快取管理；建置短網址服務；優化入口平台部署流程（build once, deploy anywhere）；建立 DynamoDB 監控儀表板並部署 DevOps Guru
 - *Tools：AWS（Elemental / EKS / Aurora / RDS Proxy / DynamoDB / SQS / IVS / Personalize / Bedrock / Secrets Manager / DevOps Guru）、GCP、Airflow、Gitea、Vaultwarden、Akamai DataStream、Claude Code / Skills / MCP、Bruno、Terraform、Kubernetes、Go、PostgreSQL*
@@ -116,6 +119,7 @@ pdf: /pdf/resume-detail-zh.pdf
 - **恆逸資訊**「EC-Council CEH 駭客技術專家認證課程」（2013，40 小時）
 - **巨匠電腦**「Android APP 培訓課程（含 OCPJP）」（2013 – 14，264 小時）
 - **巨匠電腦**「OCPJWCD（原 SCWCD）」（2014，48 小時）
+- **多奇教育訓練**「企業級 LLM 叢集部署實戰 — 以推論 DeepSeek-R1 671B 滿血版模型為例」（2025.03，實作認證）
 
 ## 學歷
 

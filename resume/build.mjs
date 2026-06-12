@@ -22,6 +22,8 @@ const targets = [
   ["docs/en/sre.md", "resume-sre-en", "en", "sre"],
   ["docs/detail.md", "resume-detail-zh", "zh", "detail"],
   ["docs/en/detail.md", "resume-detail-en", "en", "detail"],
+  ["docs/platform.md", "resume-platform-zh", "zh", "platform"],
+  ["docs/en/platform.md", "resume-platform-en", "en", "platform"],
 ];
 
 const readJson = (p, fallback) => (existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : fallback);

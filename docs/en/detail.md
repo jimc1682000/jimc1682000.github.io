@@ -23,15 +23,18 @@ pdf: /pdf/resume-detail-en.pdf
 
 <Skills />
 
+## Recent Focus
+
+- Agentic Workflow · self-hosted LLM inference · RAG / LLM eval · EKS · Terraform
+
 ## AI / Cross-Domain Technical Profile
 
-- Led the team's coding-agent toolchain evolution (command → plugin → skill); built reusable knowledge-base and account & secrets management skills for DevOps / SRE operations
-- Built a knowledge-base automation pipeline (raw → distill → semantic search / NotebookLM) integrated with Jira / Notion; shared HITL practices publicly and open-sourced the ai-kb methodology
-- Self-host and operate an AI platform (OpenClaw on VPS), bringing agentic workflows into production operations
-- **Virtualisation**: deployed a full OKD 4.4 (OpenShift upstream) cluster on two physical KVM/QEMU hosts, covering HAProxy / BIND / NFS / pfSense end-to-end; earlier built enterprise VMware vSphere HA environments and ran P2V migrations
-- **HA architecture**: HAProxy multi-backend load balancing (API 6443 / MCS 22623 / Ingress 80/443); multiple DR drills / resilience tests at TrendMicro; Aurora Read Replica + RDS Proxy HA at CATCHPLAY
-- **Linux systems**: RHCE certified; ran a yum server for centralised RPM distribution (CATCHPLAY); Kubernetes node-level cgroup / namespace management; FCOS ignition provisioning
-- **Networking / Storage**: pfSense DHCP / NAT / Firewall; BIND DNS forward/reverse zones; NFS persistent storage (OKD4 registry PV); iptables / VPN
+- **Agent-native engineering & AIOps**: treat AI as a co-developer — converging ad-hoc needs into a reusable coding-agent skill ecosystem and safety guardrails (CI auto-gates, context / secrets boundaries) rather than one-off scripts; and apply AI to operations — DRM / WAF / CVE audits and GCP permission governance, plus collaborating on the multilingual-assistant translation-model lifecycle (GPT-4-turbo → GPT-5.4, UAT → Prod, prod GPU root-cause)
+- **Self-hosted AI platform & open-weight LLM inference**: self-host and operate an AI platform (OpenClaw on VPS) running production agentic workflows; evaluated larger open-weight MoE models (gemma-4-26B-A4B-it, Qwen3.6-35B-A3B) on AWS GPU EC2 as self-hosting candidates; separately ran query expansion + an LLM-as-judge eval pipeline via Ollama on no-GPU hardware (model selection MoE 35B → 8B dense @ NPU, with inference-infra fixes — streaming cancel, retry warmup, output budget)
+- **Knowledge & methodology**: built a raw → digest → semantic-search / NotebookLM pipeline integrated with Jira / Notion, turning personal PoCs and lessons into queryable shared team memory (cutting repeated trial-and-error) and open-sourced as ai-kb; exploring Harness → Loop (from "humans design the harness, agents collaborate inside" to "humans design the loop, focus on the verification closure"), and shared HITL practices with the Tech team ("A Day with My AI Wife")
+- **Business foundation × engineering judgment**: apply a management lens (BBA training) to ops and team decisions — used data and cost / ROI reasoning to push back on a low-value proposal, redesigning it as a forcing-function escalation (span of control, bounded rationality) that routes out-of-scope problems to whoever can actually solve them; extend the same thinking as an analogy for AI-agent governance — guardrails ≈ accountability controls, scoped authorization ≈ delegation, harness / loop ≈ organizational design
+- **Cloud scale & reliability (SRE)**: large-scale AWS operations and multi-cloud governance; high-concurrency architecture (RDS Proxy connection pooling, SQS high-volume order smoothing); reliability engineering (multiple DR / resilience drills at TrendMicro, E2E monitoring, service readiness reviews); observability (Prometheus / Grafana / ELK / CloudWatch); Aurora Read Replica + RDS Proxy HA; Linux-level cgroup / namespace, FCOS ignition
+- **Virtualisation & self-built platforms**: deployed a full OKD 4.4 (OpenShift upstream) cluster on two physical KVM/QEMU hosts, covering HAProxy / BIND / NFS / pfSense end-to-end; earlier built enterprise VMware vSphere HA environments and ran P2V migrations
 
 ## Experience
 
@@ -39,7 +42,7 @@ pdf: /pdf/resume-detail-en.pdf
 - **AI collaboration & DevOps toolchain**: led the coding-agent toolchain (command → plugin → skill), shipping reusable knowledge-base and account & secrets management skills; co-built an EKS reference environment with guardrails (pre-commit secret scan, PR gates, layered secret scanning); shared HITL practices and the ai-kb methodology publicly
 - **Streaming media & FAST channel**: built a FAST-channel monitoring platform (weekly reports, real-time alerts, alert heatmaps, LINE Bot / Slack notifications); integrated AWS Elemental (MediaLive / MediaPackage / MediaTailor), DRM, Global Accelerator, SPEKE, IVS, and Elemental Link; managed MediaLive reservation purchasing and cost
 - **Platform modernization & service migration**: sole owner of the GitLab → Gitea migration; built Vaultwarden and rolled out Bitwarden; evaluated and adopted Bruno to replace Postman; fixed the Akamai log server and completed LDS → DataStream 2 IaC; built Serverless Lambda Terraform modules and Jenkins automation
-- **Database, cache & deployment automation**: Aurora read replicas, VCS-platform database MySQL → PostgreSQL migration, RDS Proxy for high-concurrency connections, Redis / Valkey 7 split migration; led the Airflow 2.0 upgrade (UAT / Production); developed Jenkins deployment automation in Go (geo-block workflow); designed high-traffic order processing with SQS
+- **Database, cache & deployment automation**: Aurora read replicas, VCS-platform database MySQL / PostgreSQL parallel operation, RDS Proxy for high-concurrency connections, Redis → Valkey 7 upgrade (some legacy systems still on Redis); led the Airflow 2.0 upgrade (UAT / Production); developed Jenkins deployment automation in Go (geo-block workflow); designed high-traffic order processing with SQS
 - **Cloud governance, security & client projects**: GCP permission tightening and API-key cleanup; client-project environments and CDN network allowlists (Akamai / CloudFront); AI-assisted DRM / WAF / CVE audits; credential cleanup (Secrets Manager); audited and cleaned up idle EC2 snapshots; introduced AWS Personalize, DynamoDB, Secrets Manager, and Bedrock
 - **System integration & architecture**: built S3 / NAS hybrid storage for video content and S3 lifecycle auto-cleanup; developed Akamai IaC for automated CDN cache management; built a short-link service; optimized portal deployment (build once, deploy anywhere); built a DynamoDB monitoring dashboard and deployed DevOps Guru
 - *Tools: AWS (Elemental / EKS / Aurora / RDS Proxy / DynamoDB / SQS / IVS / Personalize / Bedrock / Secrets Manager / DevOps Guru), GCP, Airflow, Gitea, Vaultwarden, Akamai DataStream, Claude Code / skills / MCP, Bruno, Terraform, Kubernetes, Go, PostgreSQL*
@@ -116,6 +119,7 @@ pdf: /pdf/resume-detail-en.pdf
 - **Uniforce** "EC-Council CEH ethical hacking course" (2013, 40 hours)
 - **PCSCHOOL** "Android app training (incl. OCPJP)" (2013 – 14, 264 hours)
 - **PCSCHOOL** "OCPJWCD (formerly SCWCD)" (2014, 48 hours)
+- **Duotify** "Enterprise LLM Cluster Deployment — inferencing the full DeepSeek-R1 671B model" (2025.03, hands-on certification)
 
 ## Education
 

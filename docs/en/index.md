@@ -24,11 +24,17 @@ pdf: /pdf/resume-ai-en.pdf
 
 <Skills />
 
+## Recent Focus
+
+- Agentic Workflow · self-hosted LLM inference · RAG / LLM eval · EKS · Terraform
+
 ## AI / Agentic Engineering
 
 - Led the team's coding-agent toolchain evolution (command → plugin → skill); built reusable knowledge-base and account & secrets management skills for DevOps / SRE operations
 - Built a knowledge-base automation pipeline (raw → digest → semantic search / NotebookLM) integrated with Jira / Notion; shared HITL practices publicly and open-sourced the ai-kb methodology
 - Self-host and operate an AI platform (OpenClaw on VPS), bringing agentic workflows into production operations
+- Self-hosted / open-weight LLM inference evaluation: assessed larger open-weight MoE models (gemma-4-26B-A4B-it, Qwen3.6-35B-A3B) on AWS GPU EC2 as self-hosting candidates; separately ran query expansion + an LLM-as-judge eval pipeline via Ollama on no-GPU hardware (model selection MoE 35B → 8B dense @ NPU, with inference-infra fixes — streaming cancel, retry warmup, output budget)
+- Business foundation × AI-agent governance: a management lens on multi-agent orchestration and ops decisions — guardrails ≈ accountability controls, scoped authorization ≈ delegation, harness / loop ≈ organizational design
 
 ## Experience
 
@@ -38,7 +44,7 @@ pdf: /pdf/resume-ai-en.pdf
 - Built a FAST-channel monitoring platform (weekly reports, real-time alerts, alert heatmaps, LINE Bot / Slack notifications)
 - Integrated AWS Elemental streaming (MediaLive / MediaPackage / MediaTailor, DRM, Global Accelerator, SPEKE, IVS)
 - Built reusable Serverless Lambda Terraform modules and Jenkins automation; developed Jenkins deployment automation in Go (geo-block workflow)
-- Re-architected the data layer: Aurora read replicas, MySQL → PostgreSQL migration, RDS Proxy, Redis / Valkey 7 split migration; led the Airflow 2.0 upgrade (UAT / Production)
+- Re-architected the data layer: Aurora read replicas, MySQL / PostgreSQL parallel operation, RDS Proxy, Redis → Valkey 7 upgrade (some legacy systems still on Redis); led the Airflow 2.0 upgrade (UAT / Production)
 - Built a DynamoDB monitoring dashboard and adopted DevOps Guru
 - Multi-cloud governance and security: GCP permission tightening and API-key cleanup; AI-assisted DRM / WAF / CVE audits; Akamai LDS → DataStream 2 IaC; audited and cleaned up idle EC2 snapshots; client-project environments and CDN network allowlists
 - Used SQS to handle a major telco partner's high-volume orders
@@ -82,5 +88,5 @@ pdf: /pdf/resume-ai-en.pdf
 ## Education, Certifications & Languages
 
 - **Education**: Soochow University, B.A. (2007 – 2012) · Tainan First Senior High School (2004 – 2007)
-- **Certifications**: OCPJP7 · CEH · RHCE · MCITP · CCNA
+- **Certifications**: RHCE · CEH · OCPJP7 · MCITP · CCNA
 - **Languages**: Chinese (native) · English (professional working proficiency · TOEIC 845)
