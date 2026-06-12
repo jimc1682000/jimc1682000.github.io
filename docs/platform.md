@@ -24,23 +24,13 @@ pdf: /pdf/resume-platform-zh.pdf
 
 <Skills />
 
-## 平台 / 基礎架構亮點
+## Platform Engineering 核心能力
 
-- **虛擬化**：以 KVM/QEMU 於兩台實體機部署 OKD 4.4（OpenShift upstream）完整叢集，涵蓋 HAProxy / BIND / NFS / pfSense 全流程；早期以 VMware vSphere 建置企業 HA 環境並執行 P2V 遷移
-- **HA 架構**：HAProxy 多 backend 負載均衡（API 6443 / MCS 22623 / Ingress 80/443 分流）；Kubernetes EKS 滾動升級；TrendMicro 多次 DR Drill / 韌性演練；CATCHPLAY Aurora Read Replica + RDS Proxy 高可用資料庫架構
-- **Linux 系統**：RHCE 認證；yum server 集中管理 RPM 套件（CATCHPLAY）；Kubernetes node 層 cgroup / namespace 管理（EKS）；FCOS（Fedora CoreOS）ignition 配置
-- **網路 / 儲存**：pfSense DHCP/NAT/Firewall 規則管理；BIND DNS 正/反向 zone；NFS persistent storage（OKD4 registry PV / Image Registry）；iptables / VPN
-
-## 自動化 / IaC
-
-- **Ansible**：Groundhog DSP/DMP 系統部署自動化；OKD4 節點 Playbook；Kubernetes + Gitea / Jenkins 標準化部署
-- **Terraform**：Serverless Lambda 模組；EKS infra；Akamai DataStream 2 IaC 化；多個 AWS 服務 IaC 化
-- **Go / Bash**：Jenkins Geo-block 部署自動化；yum / RPM 管理腳本；OKD4 bootstrap 自動化腳本
-
-## 可觀測性 / Incident Response
-
-- FAST 頻道監控平台（LINE Bot / Slack；週報 + 告警熱力圖）；DynamoDB 儀表板 + DevOps Guru 異常偵測
-- TrendMicro 跨服務 Incident Response；端對端（E2E）監控；Service Readiness Review 流程；ELK 集中化日誌（GoFreight / CATCHPLAY）
+- **虛擬化 / HA**：KVM/QEMU 部署 OKD 4.4 完整叢集（HAProxy / BIND / NFS / pfSense）；VMware vSphere HA + P2V 遷移；HAProxy 多 backend 負載均衡；EKS 滾動升級；Aurora Read Replica + RDS Proxy 高可用架構；TrendMicro 多次 DR Drill
+- **Linux / 網路 / 儲存**：RHCE 認證；yum server 集中管理 RPM；Kubernetes node 層 cgroup / namespace；FCOS ignition；pfSense DHCP/NAT/Firewall；BIND DNS；NFS persistent storage；iptables / VPN
+- **自動化 / IaC**：Ansible（DSP/DMP 部署、OKD4 Playbook、Kubernetes + Gitea / Jenkins）；Terraform（Lambda 模組、EKS infra、Akamai DataStream 2、多個 AWS 服務）；Go / Bash（Geo-block 部署自動化、yum/RPM 管理、OKD4 bootstrap）
+- **可觀測性**：FAST 頻道監控平台（LINE Bot / Slack；週報 + 告警熱力圖）；DynamoDB 儀表板 + DevOps Guru 異常偵測；ELK 集中化日誌；端對端（E2E）監控
+- **Incident Response / SRE**：TrendMicro 跨服務 Incident Response；Service Readiness Review 流程；多次 DR Drill / 韌性演練；pre-commit / PR gate guardrails
 
 ## 工作經歷
 

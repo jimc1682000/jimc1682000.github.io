@@ -24,15 +24,12 @@ pdf: /pdf/resume-sre-en.pdf
 
 <Skills />
 
-## Platform / Reliability Highlights
+## SRE / Reliability Core Competencies
 
 - **Kubernetes platform**: built an EKS reference environment with rolling upgrades; standardized deployment with Kubernetes, Ansible, Gitea / Jenkins
 - **Observability**: FAST-channel monitoring platform, DynamoDB dashboard + DevOps Guru anomaly detection, centralized ELK logging, end-to-end (E2E) monitoring
 - **Reliability / SRE**: cross-service incident response, multiple DR / resilience drills, service readiness reviews; pre-commit / PR-gate guardrails in production workflows
 - **High concurrency / scale**: RDS Proxy for connection bottlenecks, Aurora read replicas, Redis / Valkey 7 migration, SQS for a major telco partner's high-volume orders
-
-## AI / Agentic for Operations
-
 - Led the team's coding-agent toolchain evolution (command → plugin → skill); built knowledge-base and account & secrets management skills for DevOps / SRE automation
 - Built a knowledge-base automation pipeline (raw → distill → semantic search) integrated with Jira / Notion to speed up incident analysis and documentation
 

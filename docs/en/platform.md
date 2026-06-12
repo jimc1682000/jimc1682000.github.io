@@ -24,23 +24,13 @@ pdf: /pdf/resume-platform-en.pdf
 
 <Skills />
 
-## Platform / Infrastructure Highlights
+## Platform Engineering Core Competencies
 
-- **Virtualisation**: deployed a full OKD 4.4 (OpenShift upstream) cluster on two physical KVM/QEMU hosts, covering HAProxy / BIND / NFS / pfSense end-to-end; earlier built enterprise VMware vSphere HA environments and performed P2V migrations
-- **HA architecture**: HAProxy multi-backend load balancing (API 6443 / MCS 22623 / Ingress 80/443); Kubernetes EKS rolling upgrades; multiple DR drills and resilience tests at TrendMicro; Aurora Read Replica + RDS Proxy HA at CATCHPLAY
-- **Linux systems**: RHCE certified; ran a yum server for centralised RPM distribution (CATCHPLAY); Kubernetes node-level cgroup / namespace management (EKS); Fedora CoreOS (FCOS) ignition provisioning
-- **Networking / Storage**: pfSense DHCP / NAT / firewall rules; BIND DNS forward/reverse zones; NFS persistent storage (OKD4 Image Registry PV); iptables / VPN
-
-## Automation / IaC
-
-- **Ansible**: DSP/DMP deployment at Groundhog; OKD4 node playbooks; Kubernetes + Gitea / Jenkins standardised deployments
-- **Terraform**: serverless Lambda modules; EKS infra; Akamai DataStream 2 IaC; multiple AWS services
-- **Go / Bash**: Jenkins Geo-block deploy automation; yum / RPM management scripts; OKD4 bootstrap automation
-
-## Observability / Incident Response
-
-- FAST-channel monitoring (LINE Bot / Slack; weekly reports + alert heatmaps); DynamoDB dashboard + DevOps Guru anomaly detection
-- Cross-service incident response at TrendMicro; E2E monitoring; Service Readiness Review; centralised ELK logging
+- **Virtualisation / HA**: KVM/QEMU OKD 4.4 full cluster (HAProxy / BIND / NFS / pfSense); VMware vSphere HA + P2V migrations; HAProxy multi-backend load balancing; EKS rolling upgrades; Aurora Read Replica + RDS Proxy HA; multiple DR drills at TrendMicro
+- **Linux / Networking / Storage**: RHCE certified; yum server for centralised RPM; Kubernetes node-level cgroup / namespace; FCOS ignition; pfSense DHCP/NAT/Firewall; BIND DNS; NFS persistent storage; iptables / VPN
+- **Automation / IaC**: Ansible (DSP/DMP deployments, OKD4 playbooks, Kubernetes + Gitea / Jenkins); Terraform (Lambda modules, EKS infra, Akamai DataStream 2, multiple AWS services); Go / Bash (Geo-block automation, yum/RPM scripts, OKD4 bootstrap)
+- **Observability**: FAST-channel monitoring (LINE Bot / Slack; weekly reports + alert heatmaps); DynamoDB dashboard + DevOps Guru anomaly detection; centralised ELK logging; end-to-end (E2E) monitoring
+- **Incident Response / SRE**: cross-service incident response at TrendMicro; Service Readiness Review; multiple DR drills / resilience tests; pre-commit / PR-gate guardrails
 
 ## Experience
 

@@ -24,15 +24,12 @@ pdf: /pdf/resume-sre-zh.pdf
 
 <Skills />
 
-## 平台 / 可靠度亮點
+## SRE / 可靠度核心能力
 
 - **Kubernetes 平台**：建置 EKS 參考環境與滾動升級（rolling upgrade）；以 Kubernetes、Ansible、Gitea / Jenkins 標準化部署
 - **可觀測性**：FAST 頻道監控平台、DynamoDB 監控儀表板 + DevOps Guru 異常偵測、ELK 集中化日誌、端對端（E2E）監控
 - **可靠度 / SRE**：跨服務 Incident Response、多次 DR / 韌性演練、服務上線審查（Readiness Review）；落地 pre-commit / PR gate guardrails
 - **高併發 / 規模**：RDS Proxy 解高併發連線、Aurora Read Replica 分流、Redis / Valkey 7 遷移、SQS 處理電信合作夥伴高量訂單
-
-## AI / Agentic for Operations
-
 - 主導團隊 coding agent 工具鏈演進（command → plugin → skill）；開發知識庫與帳密管理 skill，應用於 DevOps / SRE 維運自動化
 - 建置知識庫自動化管線（raw → digest → 語意檢索），整合 Jira / Notion，加速事件分析與文件產出
 

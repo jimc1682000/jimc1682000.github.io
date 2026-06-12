@@ -23,14 +23,11 @@ pdf: /pdf/resume-detail-zh.pdf
 
 <Skills />
 
-## AI / Agentic Engineering
+## AI / 跨域技術定位
 
 - 主導團隊 coding agent 工具鏈演進（command → plugin → skill）；開發知識庫與帳密管理 skill，應用於 DevOps / SRE 維運場景
 - 建置知識庫自動化管線（raw → digest → 語意檢索 / NotebookLM），整合 Jira / Notion 工作流；對外分享 HITL 實戰並開源 ai-kb 方法論
 - 自建並維運自託管 AI 平台（OpenClaw on VPS），將 agentic workflow 落地於生產維運
-
-## 基礎架構 / 系統平台
-
 - **虛擬化**：以 KVM/QEMU 於兩台實體機部署 OKD 4.4（OpenShift upstream）完整叢集，涵蓋 HAProxy / BIND / NFS / pfSense 全流程；早期以 VMware vSphere 建置企業 HA 環境並執行 P2V 遷移
 - **HA 架構**：HAProxy 多 backend 負載均衡（API 6443 / MCS 22623 / Ingress 80/443）；TrendMicro 多次 DR Drill / 韌性演練；Aurora Read Replica + RDS Proxy 高可用資料庫架構
 - **Linux 系統**：RHCE 認證；yum server 集中管理 RPM 套件（CATCHPLAY）；Kubernetes node 層 cgroup / namespace 管理；FCOS ignition 配置
