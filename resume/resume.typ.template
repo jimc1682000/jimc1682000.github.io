@@ -1,5 +1,5 @@
 #set document(title: "$name$ $nameEn$ — Resume")
-#set page(paper: "a4", margin: (x: 14mm, top: 13mm, bottom: 12mm))
+#set page(paper: "a4", margin: (x: $if(compact)$10mm$else$14mm$endif$, top: $if(compact)$10mm$else$13mm$endif$, bottom: $if(compact)$9mm$else$12mm$endif$))
 
 // Per-language density: English is taller, so EN files set `compact: true`.
 #let baseSize  = $if(compact)$9.2pt$else$10.8pt$endif$
