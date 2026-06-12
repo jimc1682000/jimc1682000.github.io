@@ -315,10 +315,11 @@ html[data-mode="rich"] .skills-panel .job:hover {
 
 /* Static skill badges — not interactive pills (see kb: badges-chips-tags-pills) */
 .skill-tags {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 5px 6px;
+  display: flex; flex-wrap: wrap; gap: 5px 6px;
   cursor: default; user-select: none;
 }
 .skill-tag {
+  flex: 1 1 auto;
   display: flex; align-items: center; justify-content: center; gap: 4px;
   font-size: 11.5px; line-height: 1.35; padding: 2px 7px; border-radius: 4px;
   background: color-mix(in srgb, var(--ink) 3%, transparent);
