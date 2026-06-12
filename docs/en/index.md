@@ -30,14 +30,11 @@ pdf: /pdf/resume-ai-en.pdf
 - Self-hosted / open-weight LLM inference evaluation (open-weight MoE on AWS GPU EC2) + an LLM-as-judge eval loop (film-brain nDCG@5 0.93 → 0.96)
 - Sole owner of the GitLab → Gitea migration: hundreds of repos, the whole engineering org, < 2h off-peak cutover
 - Cloud cost optimization: EC2 RIs / Fargate Spot ~20% each, MediaLive Reservations ~50%
-- Built a multi-channel event-driven FAST monitoring platform (Terraform IaC)
 
 ## AI / Agentic Engineering
 
-- Led the team's coding-agent toolchain evolution (command → plugin → skill); built reusable knowledge-base and account & secrets management skills for DevOps / SRE operations
 - Built a knowledge-base automation pipeline (raw → digest → semantic search / NotebookLM) integrated with Jira / Notion; shared HITL practices publicly and open-sourced the ai-kb methodology
 - Self-host and operate an AI platform (OpenClaw on VPS), bringing agentic workflows into production operations
-- Self-hosted / open-weight LLM inference evaluation: assessed larger open-weight MoE models (gemma-4-26B-A4B-it, Qwen3.6-35B-A3B) on AWS GPU EC2 as self-hosting candidates; separately ran query expansion + an LLM-as-judge eval pipeline via Ollama on no-GPU hardware (model selection MoE 35B → 8B dense @ NPU, with inference-infra fixes — streaming cancel, retry warmup, output budget)
 - Business foundation × AI-agent governance: a management lens on multi-agent orchestration and ops decisions — guardrails ≈ accountability controls, scoped authorization ≈ delegation, harness / loop ≈ organizational design
 
 ## Experience
@@ -48,11 +45,9 @@ pdf: /pdf/resume-ai-en.pdf
 - Built a multi-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, alert heatmaps, automated weekly reports, Terraform IaC)
 - Integrated AWS Elemental streaming (MediaLive / MediaPackage / MediaTailor, DRM, Global Accelerator, SPEKE, IVS)
 - Built reusable Serverless Lambda Terraform modules and Jenkins automation; developed Jenkins deployment automation in Go (geo-block workflow)
-- Re-architected the data layer: Aurora read replicas, MySQL / PostgreSQL parallel operation, RDS Proxy (absorbing bursts of thousands of simultaneous connections), Redis 5 → Valkey 7 upgrade (cost + EOL, some legacy systems retained); led the Airflow 1.x → 2.0 upgrade (UAT + Production, many DAGs)
-- Built a DynamoDB monitoring dashboard and adopted DevOps Guru
+- Re-architected the data layer: Aurora read replicas, MySQL / PostgreSQL parallel operation, RDS Proxy (absorbing bursts of thousands of simultaneous connections), Redis 5 → Valkey 7 upgrade (cost + EOL); led the Airflow 1.x → 2.0 upgrade (UAT + Production, many DAGs); built a DynamoDB monitoring dashboard + DevOps Guru
 - Multi-cloud governance and security: GCP permission tightening and API-key cleanup; AI-assisted DRM / WAF / CVE audits; Akamai LDS → DataStream 2 IaC; audited and cleaned up idle EC2 snapshots; client-project environments and CDN network allowlists
-- Used SQS to handle a major telco partner's high-volume orders
-- Evaluated and rolled out AWS Bedrock, Secrets Manager, and Personalize; designed S3 + NAS hybrid storage and Akamai IaC CDN automation
+- Used SQS for a major telco partner's high-volume orders; evaluated and rolled out AWS Bedrock, Secrets Manager, and Personalize; designed S3 + NAS hybrid storage and Akamai IaC CDN automation
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
 - Ran multiple disaster-recovery drills and maintenance windows, and owned cross-service incident response
