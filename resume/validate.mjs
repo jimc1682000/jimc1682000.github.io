@@ -81,6 +81,9 @@ const banned = [
   ["AI 協作建置 EKS", "EKS was co-built with a colleague — use 與同事協作"],
   ["600 repo", "use 數百 repo / hundreds (conservative, avoids exact internal scale)"],
   ["600 repos", "use hundreds of repos (conservative)"],
+  ["~30 頻道", "channel count blurred for confidentiality — use 多頻道"],
+  ["~30-channel", "channel count blurred — use multi-channel"],
+  ["~180 DAG", "DAG count blurred for confidentiality — use 大量 DAG / many DAGs"],
 ];
 for (const f of mdFiles) {
   for (const [phrase, why] of banned) {

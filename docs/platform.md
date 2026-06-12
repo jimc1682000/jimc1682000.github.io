@@ -28,8 +28,8 @@ pdf: /pdf/resume-platform-zh.pdf
 
 - 自建 OKD 4.4（OpenShift upstream）完整叢集（KVM/QEMU 兩台實體機，HAProxy / BIND / NFS / pfSense 全棧）
 - 獨力完成 GitLab → Gitea 版控遷移：數百 repo、全工程團隊，< 2 小時離峰切換
-- 建置 ~30 頻道 event-driven FAST 監控平台（CloudWatch → SNS → Lambda，Terraform IaC）
-- 主導 Airflow 1.x → 2.0 升級（UAT + Production 雙環境，承載 ~180 DAG）
+- 建置 多頻道 event-driven FAST 監控平台（CloudWatch → SNS → Lambda，Terraform IaC）
+- 主導 Airflow 1.x → 2.0 升級（UAT + Production 雙環境，承載 大量 DAG）
 - 雲成本優化：EC2 RI / Fargate Spot 各約降兩成、MediaLive Reservation 約降五成
 
 ## Platform Engineering 核心能力
@@ -44,8 +44,8 @@ pdf: /pdf/resume-platform-zh.pdf
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
 - 以 Ansible + Terraform 建置 EKS 參考環境，落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）
-- 建置 ~30 頻道 event-driven FAST 監控平台（CloudWatch → SNS → Lambda → Slack / LINE、告警熱力圖、自動週報，Terraform IaC）；建置 DynamoDB 儀表板並導入 DevOps Guru
-- 重構資料庫 HA 架構：Aurora Read Replica、MySQL / PostgreSQL 併行維運、RDS Proxy 解瞬間數千級連線、Redis 5 → Valkey 7 升級（成本 + 汰役，部分舊系統續用）；主導 Airflow 1.x → 2.0 升級（UAT + Production，~180 DAG）
+- 建置 多頻道 event-driven FAST 監控平台（CloudWatch → SNS → Lambda → Slack / LINE、告警熱力圖、自動週報，Terraform IaC）；建置 DynamoDB 儀表板並導入 DevOps Guru
+- 重構資料庫 HA 架構：Aurora Read Replica、MySQL / PostgreSQL 併行維運、RDS Proxy 解瞬間數千級連線、Redis 5 → Valkey 7 升級（成本 + 汰役，部分舊系統續用）；主導 Airflow 1.x → 2.0 升級（UAT + Production，大量 DAG）
 - 獨力完成 GitLab → Gitea 版控遷移（數百 repo、全工程團隊，< 2 小時離峰切換）；建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署；以 Go 開發 Geo-block 部署自動化
 - 以 SQS 設計解決電信合作夥伴高量訂單瓶頸
 - 整合 AWS Elemental 媒體串流（DRM、Global Accelerator、SPEKE、IVS）；完成 Akamai LDS → DataStream 2 IaC 化

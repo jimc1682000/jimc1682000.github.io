@@ -28,8 +28,8 @@ pdf: /pdf/resume-platform-en.pdf
 
 - Self-built a full OKD 4.4 (OpenShift upstream) cluster (two physical KVM/QEMU hosts, HAProxy / BIND / NFS / pfSense end-to-end)
 - Sole owner of the GitLab → Gitea migration: hundreds of repos, the whole engineering org, < 2h off-peak cutover
-- Built a ~30-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda, Terraform IaC)
-- Led the Airflow 1.x → 2.0 upgrade (UAT + Production, carrying ~180 DAGs)
+- Built a multi-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda, Terraform IaC)
+- Led the Airflow 1.x → 2.0 upgrade (UAT + Production, carrying many DAGs)
 - Cloud cost optimization: EC2 RIs / Fargate Spot ~20% each, MediaLive Reservations ~50%
 
 ## Platform Engineering Core Competencies
@@ -44,8 +44,8 @@ pdf: /pdf/resume-platform-en.pdf
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
 - Built an EKS reference environment with Ansible + Terraform; deployed guardrails (pre-commit secret scan, PR gates, layered secret scanning)
-- Built a ~30-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, heatmaps, automated weekly reports, Terraform IaC); added DynamoDB dashboard + DevOps Guru
-- Re-architected HA database layer: Aurora read replicas, MySQL / PostgreSQL parallel operation, RDS Proxy (bursts of thousands of connections), Redis 5 → Valkey 7 upgrade (cost + EOL, some legacy systems retained); led Airflow 1.x → 2.0 upgrade (UAT + Production, ~180 DAGs)
+- Built a multi-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, heatmaps, automated weekly reports, Terraform IaC); added DynamoDB dashboard + DevOps Guru
+- Re-architected HA database layer: Aurora read replicas, MySQL / PostgreSQL parallel operation, RDS Proxy (bursts of thousands of connections), Redis 5 → Valkey 7 upgrade (cost + EOL, some legacy systems retained); led Airflow 1.x → 2.0 upgrade (UAT + Production, many DAGs)
 - Sole owner of GitLab → Gitea migration (hundreds of repos, the whole engineering org, < 2h off-peak cutover); built serverless Lambda Terraform modules and Jenkins automation; developed Geo-block deployment in Go
 - Used SQS to handle high-volume telco partner orders
 - Integrated AWS Elemental streaming (DRM, Global Accelerator, SPEKE, IVS); migrated Akamai LDS → DataStream 2 via IaC

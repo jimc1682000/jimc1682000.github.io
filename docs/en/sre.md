@@ -27,8 +27,8 @@ pdf: /pdf/resume-sre-en.pdf
 ## Impact Highlights
 
 - Regular DR / resilience drills at TrendMicro (every six months to quarterly, 5–6+ over tenure) across multiple core services
-- Led the Airflow 1.x → 2.0 upgrade (UAT + Production, carrying ~180 DAGs)
-- Built a ~30-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, Terraform IaC)
+- Led the Airflow 1.x → 2.0 upgrade (UAT + Production, carrying many DAGs)
+- Built a multi-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, Terraform IaC)
 - High concurrency / scale: RDS Proxy absorbing bursts of thousands of connections, Aurora read replicas, SQS for high-volume orders
 - Cloud cost optimization: EC2 RIs / Fargate Spot ~20% each, MediaLive Reservations ~50%
 
@@ -44,9 +44,9 @@ pdf: /pdf/resume-sre-en.pdf
 ## Experience
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
-- Built a ~30-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, alert heatmaps, automated weekly reports, Terraform IaC); strengthened observability with a DynamoDB dashboard and DevOps Guru
+- Built a multi-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, alert heatmaps, automated weekly reports, Terraform IaC); strengthened observability with a DynamoDB dashboard and DevOps Guru
 - Co-built an EKS reference environment with AI-assisted guardrails (pre-commit secret scan, PR gates, layered secret scanning)
-- Re-architected the data layer: Aurora read replicas, MySQL / PostgreSQL parallel operation, RDS Proxy (bursts of thousands of connections), Redis 5 → Valkey 7 upgrade (cost + EOL, some legacy systems retained); led the Airflow 1.x → 2.0 upgrade (UAT + Production, ~180 DAGs)
+- Re-architected the data layer: Aurora read replicas, MySQL / PostgreSQL parallel operation, RDS Proxy (bursts of thousands of connections), Redis 5 → Valkey 7 upgrade (cost + EOL, some legacy systems retained); led the Airflow 1.x → 2.0 upgrade (UAT + Production, many DAGs)
 - Sole owner of the GitLab → Gitea migration (hundreds of repos, the whole engineering org, < 2h off-peak cutover); built Serverless Lambda Terraform modules and Jenkins automation; developed geo-block deployment automation in Go
 - Used SQS to handle a major telco partner's high-volume order throughput
 - Integrated AWS Elemental streaming (DRM, Global Accelerator, SPEKE, IVS); migrated Akamai LDS → DataStream 2 via IaC

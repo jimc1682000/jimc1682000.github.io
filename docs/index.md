@@ -29,7 +29,7 @@ pdf: /pdf/resume-ai-zh.pdf
 - 自託管 / 開源 LLM 推論評估（AWS GPU EC2 開源 MoE）+ LLM-as-judge eval 閉環（film-brain nDCG@5 0.93 → 0.96）
 - 獨力完成 GitLab → Gitea 版控遷移：數百 repo、全工程團隊，< 2 小時離峰切換
 - 雲成本優化：EC2 RI / Fargate Spot 各約降兩成、MediaLive Reservation 約降五成
-- 建置 ~30 頻道 event-driven FAST 監控平台（Terraform IaC）
+- 建置 多頻道 event-driven FAST 監控平台（Terraform IaC）
 
 ## AI / Agentic Engineering
 
@@ -44,10 +44,10 @@ pdf: /pdf/resume-ai-zh.pdf
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
 - 主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、帳密管理 skill 等共用資產；與同事協作、AI 輔助建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）；ai-squad（Tech Lead 發起的 AI 專案小組）成員
 - 獨力完成 GitLab → Gitea 版控遷移（數百 repo、全工程團隊，< 2 小時離峰切換）；建置 Vaultwarden 並導入 Bitwarden；評估並導入 Bruno 取代 Postman
-- 建置 ~30 頻道 event-driven FAST 監控平台（CloudWatch → SNS → Lambda → Slack / LINE、告警熱力圖、自動週報，Terraform IaC）
+- 建置 多頻道 event-driven FAST 監控平台（CloudWatch → SNS → Lambda → Slack / LINE、告警熱力圖、自動週報，Terraform IaC）
 - 整合 AWS Elemental 媒體串流（MediaLive / MediaPackage / MediaTailor、DRM、Global Accelerator、SPEKE、IVS）
 - 建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署；以 Go 開發 Jenkins 部署自動化（Geo-block 流程）
-- 重構資料庫架構：Aurora Read Replica、MySQL / PostgreSQL 併行維運、RDS Proxy 解瞬間數千級連線、Redis 5 → Valkey 7 升級（成本 + 汰役，部分舊系統續用）；主導 Airflow 1.x → 2.0 升級（UAT + Production，~180 DAG）
+- 重構資料庫架構：Aurora Read Replica、MySQL / PostgreSQL 併行維運、RDS Proxy 解瞬間數千級連線、Redis 5 → Valkey 7 升級（成本 + 汰役，部分舊系統續用）；主導 Airflow 1.x → 2.0 升級（UAT + Production，大量 DAG）
 - 建置 DynamoDB 監控儀表板並導入 DevOps Guru
 - 多雲治理與資安：GCP 權限限縮與 API key 治理；以 AI 協助 DRM / WAF / CVE 稽核；Akamai LDS → DataStream 2 IaC 化；盤點並清理閒置 EC2 snapshots；客戶專案環境建置與 CDN 網段白名單
 - 以 SQS 設計解決電信合作夥伴高量訂單瓶頸

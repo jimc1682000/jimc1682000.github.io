@@ -27,8 +27,8 @@ pdf: /pdf/resume-sre-zh.pdf
 ## 重點成果
 
 - TrendMicro 定期 DR / 韌性演練（半年至每季、累計 5–6 次以上），涵蓋多個核心服務
-- 主導 Airflow 1.x → 2.0 升級（UAT + Production 雙環境，承載 ~180 DAG）
-- 建置 ~30 頻道 event-driven FAST 監控平台（CloudWatch → SNS → Lambda → Slack / LINE，Terraform IaC）
+- 主導 Airflow 1.x → 2.0 升級（UAT + Production 雙環境，承載 大量 DAG）
+- 建置 多頻道 event-driven FAST 監控平台（CloudWatch → SNS → Lambda → Slack / LINE，Terraform IaC）
 - 高併發 / 規模：RDS Proxy 解瞬間數千級連線、Aurora Read Replica 分流、SQS 處理高量訂單
 - 雲成本優化：EC2 RI / Fargate Spot 各約降兩成、MediaLive Reservation 約降五成
 
@@ -44,9 +44,9 @@ pdf: /pdf/resume-sre-zh.pdf
 ## 工作經歷
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
-- 建置 ~30 頻道 event-driven FAST 監控平台（CloudWatch → SNS → Lambda → Slack / LINE、告警熱力圖、自動週報，Terraform IaC）；建置 DynamoDB 監控儀表板並導入 DevOps Guru，強化可觀測性與可靠度
+- 建置 多頻道 event-driven FAST 監控平台（CloudWatch → SNS → Lambda → Slack / LINE、告警熱力圖、自動週報，Terraform IaC）；建置 DynamoDB 監控儀表板並導入 DevOps Guru，強化可觀測性與可靠度
 - 與同事協作、AI 輔助建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）
-- 重構資料庫架構：Aurora Read Replica、MySQL / PostgreSQL 併行維運、RDS Proxy 解瞬間數千級連線、Redis 5 → Valkey 7 升級（成本 + 汰役，部分舊系統續用）；主導 Airflow 1.x → 2.0 升級（UAT + Production，~180 DAG）
+- 重構資料庫架構：Aurora Read Replica、MySQL / PostgreSQL 併行維運、RDS Proxy 解瞬間數千級連線、Redis 5 → Valkey 7 升級（成本 + 汰役，部分舊系統續用）；主導 Airflow 1.x → 2.0 升級（UAT + Production，大量 DAG）
 - 獨力完成 GitLab → Gitea 版控遷移（數百 repo、全工程團隊，< 2 小時離峰切換）；建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署；以 Go 開發 Geo-block 部署自動化
 - 以 SQS 設計解決電信合作夥伴高量訂單瓶頸
 - 整合 AWS Elemental 媒體串流（DRM、Global Accelerator、SPEKE、IVS）；完成 Akamai LDS → DataStream 2 IaC 化
