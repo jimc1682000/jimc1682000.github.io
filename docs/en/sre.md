@@ -24,32 +24,36 @@ pdf: /pdf/resume-sre-en.pdf
 
 <Skills />
 
-## Recent Focus
+## Impact Highlights
 
-- Agentic Workflow · self-hosted LLM inference · RAG / LLM eval · EKS · Terraform
+- Regular DR / resilience drills at TrendMicro (every six months to quarterly, 5–6+ over tenure) across multiple core services
+- Led the Airflow 1.x → 2.0 upgrade (UAT + Production, carrying ~180 DAGs)
+- Built a ~30-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, Terraform IaC)
+- High concurrency / scale: RDS Proxy absorbing bursts of thousands of connections, Aurora read replicas, SQS for high-volume orders
+- Cloud cost optimization: EC2 RIs / Fargate Spot ~20% each, MediaLive Reservations ~50%
 
 ## SRE / Reliability Core Competencies
 
 - **Kubernetes platform**: built an EKS reference environment with rolling upgrades; standardized deployment with Kubernetes, Ansible, Gitea / Jenkins
 - **Observability**: FAST-channel monitoring platform, DynamoDB dashboard + DevOps Guru anomaly detection, centralized ELK logging, end-to-end (E2E) monitoring
 - **Reliability / SRE**: cross-service incident response, multiple DR / resilience drills, service readiness reviews; pre-commit / PR-gate guardrails in production workflows
-- **High concurrency / scale**: RDS Proxy for connection bottlenecks, Aurora read replicas, Redis / Valkey 7 migration, SQS for a major telco partner's high-volume orders
+- **High concurrency / scale**: RDS Proxy absorbing bursts of thousands of connections, Aurora read replicas, Redis 5 → Valkey 7 upgrade, SQS for a major telco partner's high-volume orders
 - Led the team's coding-agent toolchain evolution (command → plugin → skill); built knowledge-base and account & secrets management skills for DevOps / SRE automation
 - Built a knowledge-base automation pipeline (raw → distill → semantic search) integrated with Jira / Notion to speed up incident analysis and documentation
 
 ## Experience
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
-- Built a FAST-channel monitoring platform (weekly reports, real-time alerts, alert heatmaps, LINE Bot / Slack notifications); strengthened observability with a DynamoDB dashboard and DevOps Guru
+- Built a ~30-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, alert heatmaps, automated weekly reports, Terraform IaC); strengthened observability with a DynamoDB dashboard and DevOps Guru
 - Co-built an EKS reference environment with AI-assisted guardrails (pre-commit secret scan, PR gates, layered secret scanning)
-- Re-architected the data layer: Aurora read replicas, MySQL / PostgreSQL parallel operation, RDS Proxy, Redis → Valkey 7 upgrade (some legacy systems still on Redis); led the Airflow 2.0 upgrade (UAT / Production)
-- Sole owner of the GitLab → Gitea migration; built Serverless Lambda Terraform modules and Jenkins automation; developed geo-block deployment automation in Go
+- Re-architected the data layer: Aurora read replicas, MySQL / PostgreSQL parallel operation, RDS Proxy (bursts of thousands of connections), Redis 5 → Valkey 7 upgrade (cost + EOL, some legacy systems retained); led the Airflow 1.x → 2.0 upgrade (UAT + Production, ~180 DAGs)
+- Sole owner of the GitLab → Gitea migration (hundreds of repos, the whole engineering org, < 2h off-peak cutover); built Serverless Lambda Terraform modules and Jenkins automation; developed geo-block deployment automation in Go
 - Used SQS to handle a major telco partner's high-volume order throughput
 - Integrated AWS Elemental streaming (DRM, Global Accelerator, SPEKE, IVS); migrated Akamai LDS → DataStream 2 via IaC
 - Multi-cloud governance and security: GCP permission tightening, Secrets Manager credential cleanup, DRM / WAF / CVE audits; audited and cleaned up idle EC2 snapshots; client-project environments and CDN network allowlists
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
-- Owned cross-service incident response; ran multiple disaster-recovery drills (resilience testing) and maintenance windows
+- Owned cross-service incident response; ran regular disaster-recovery drills (resilience testing, every six months to quarterly, 5–6+ over tenure across multiple core services) and maintenance windows
 - Built end-to-end (E2E) monitoring and established a service readiness review process
 - Drove the Opsworks → ASG / SSM migration; audited and decommissioned idle resources to cut cloud cost and tune logging
 

@@ -23,9 +23,13 @@ pdf: /pdf/resume-detail-zh.pdf
 
 <Skills />
 
-## 近期專注
+## 重點成果
 
-- Agentic Workflow · 自託管 LLM 推論 · RAG / LLM eval · EKS · Terraform
+- 獨力完成 GitLab → Gitea 版控遷移：數百 repo、全工程團隊，< 2 小時離峰切換
+- 雲成本優化：EC2 RI / Fargate Spot 各約降兩成、MediaLive Reservation 約降五成
+- 主導團隊 coding-agent 工具鏈，產出 5 個共用 skill（全 DevOps 採用，bw 推展至 Tech team）
+- 建置 ~30 頻道 event-driven FAST 監控平台（CloudWatch → SNS → Lambda → Slack / LINE，Terraform IaC）
+- 主導 Airflow 1.x → 2.0 升級（UAT + Production 雙環境，承載 ~180 DAG）
 
 ## AI / 跨域技術定位
 
@@ -39,16 +43,16 @@ pdf: /pdf/resume-detail-zh.pdf
 ## 工作經歷
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
-- **AI 協作與 DevOps 工具鏈**：主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、帳密管理 skill 等共用資產；與同事協作、AI 輔助建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）；對外分享 HITL 實戰與 ai-kb 方法論
-- **串流媒體與 FAST 頻道**：建置 FAST 頻道監控平台（週報、即時告警、告警熱力圖、LINE Bot / Slack 通知）；整合 AWS Elemental（MediaLive / MediaPackage / MediaTailor）、DRM、Global Accelerator、SPEKE、IVS、Elemental Link；MediaLive Reservations 採購與成本管理
-- **平台現代化與服務遷移**：獨力完成 GitLab → Gitea 版控遷移；建置 Vaultwarden 並導入 Bitwarden；評估並導入 Bruno 取代 Postman；修復 Akamai log server 並完成 LDS → DataStream 2 IaC 化；建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署
-- **資料庫、快取與部署自動化**：Aurora Read Replica 分散負載、版控平台資料庫 MySQL / PostgreSQL 併行維運、導入 RDS Proxy 解決高併發連線、Redis → Valkey 7 升級（部分舊系統續用 Redis）；主導 Airflow 2.0 升級（UAT / Production）；以 Go 開發 Jenkins 部署自動化（Geo-block 流程）；以 SQS 設計高流量訂單處理方案
+- **AI 協作與 DevOps 工具鏈**：主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、帳密管理 skill 等共用資產；與同事協作、AI 輔助建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）；ai-squad（Tech Lead 發起的 AI 專案小組）成員、mentor 一名轉組同事；對外分享 HITL 實戰與 ai-kb 方法論
+- **串流媒體與 FAST 頻道**：建置 ~30 頻道 event-driven FAST 監控平台（CloudWatch → SNS → Lambda → Slack / LINE、告警熱力圖、自動週報，Terraform IaC）；整合 AWS Elemental（MediaLive / MediaPackage / MediaTailor）、DRM、Global Accelerator、SPEKE、IVS、Elemental Link；MediaLive Reservations 採購與成本管理（約降五成）
+- **平台現代化與服務遷移**：獨力完成 GitLab → Gitea 版控遷移（數百 repo、全工程團隊，< 2 小時離峰切換）；建置 Vaultwarden 並導入 Bitwarden；評估並導入 Bruno 取代 Postman；修復 Akamai log server 並完成 LDS → DataStream 2 IaC 化；建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署
+- **資料庫、快取與部署自動化**：Aurora Read Replica 分散負載、版控平台資料庫 MySQL / PostgreSQL 併行維運、導入 RDS Proxy 解決瞬間數千級連線建立的高併發、Redis 5 → Valkey 7 升級（成本優化 + 汰役，部分舊系統續用）；主導 Airflow 1.x → 2.0 升級（UAT + Production 雙環境，承載 ~180 DAG）；以 Go 開發 Jenkins 部署自動化（Geo-block 流程）；以 SQS 設計高流量訂單處理方案
 - **雲端治理、資安與客戶專案**：GCP 權限限縮與 API key 治理；客戶專案環境建置與 CDN 網段白名單（Akamai / CloudFront）；以 AI 協助 DRM / WAF / CVE 稽核；憑證帳號整頓（Secrets Manager）；盤點並清理閒置 EC2 snapshots；引入 AWS Personalize、DynamoDB、Secrets Manager、Bedrock
 - **系統整合與架構**：建置 S3 / NAS 混合儲存優化影音內容、實作 S3 生命週期自動清理；開發 Akamai IaC 自動化 CDN 快取管理；建置短網址服務；優化入口平台部署流程（build once, deploy anywhere）；建立 DynamoDB 監控儀表板並部署 DevOps Guru
 - *Tools：AWS（Elemental / EKS / Aurora / RDS Proxy / DynamoDB / SQS / IVS / Personalize / Bedrock / Secrets Manager / DevOps Guru）、GCP、Airflow、Gitea、Vaultwarden、Akamai DataStream、Claude Code / Skills / MCP、Bruno、Terraform、Kubernetes、Go、PostgreSQL*
 
 ### Senior SRE Engineer · TrendMicro（趨勢科技） @@ 2021.09 – 2024.03
-- 執行多次災難復原演練（DR Drill）與維護視窗（Maintenance Window），並負責各類事件處理（Incident Response）
+- 定期執行災難復原演練（DR Drill，半年至每季一次、累計 5–6 次以上）與維護視窗，涵蓋多個核心服務；負責各類事件處理（Incident Response）
 - 優化雲端成本：盤點並移除閒置 / 低使用資源、優化資料傳輸、調整日誌設定
 - 維運強化：Opsworks → ASG / SSM 遷移、建立端對端（E2E）監控機制、服務上線審查（Readiness Review）流程
 - *Tools：AWS（Opsworks / ASG / SSM / CloudWatch）、Chef*
@@ -74,6 +78,7 @@ pdf: /pdf/resume-detail-zh.pdf
 - *Tools：Ansible、Terraform、Docker、ELK、GitLab、Jenkins、AWS、Airflow、RabbitMQ、ECS、Lambda、Locust、JMeter*
 
 ### DevOps Automation Engineer · Groundhog Technologies（現觀科技） @@ 2018.09 – 2019.02
+- 帶領小組（含 1 名 junior）推進部署與維運自動化
 - 部署 DSP / DMP（線上即時廣告競標）container image 至客戶 Linux 環境
 - 移除冗餘元件、調整服務設定，提升系統效能
 - 開發伺服器間連線監控工具，主動偵測節點異常

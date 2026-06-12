@@ -23,9 +23,13 @@ pdf: /pdf/resume-detail-en.pdf
 
 <Skills />
 
-## Recent Focus
+## Impact Highlights
 
-- Agentic Workflow · self-hosted LLM inference · RAG / LLM eval · EKS · Terraform
+- Sole owner of the GitLab → Gitea migration: hundreds of repos, the whole engineering org, < 2h off-peak cutover
+- Cloud cost optimization: EC2 RIs / Fargate Spot ~20% each, MediaLive Reservations ~50%
+- Led the team coding-agent toolchain, shipping 5 shared skills (adopted org-wide in DevOps, bw rolling out to the Tech team)
+- Built a ~30-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, Terraform IaC)
+- Led the Airflow 1.x → 2.0 upgrade (UAT + Production, carrying ~180 DAGs)
 
 ## AI / Cross-Domain Technical Profile
 
@@ -39,16 +43,16 @@ pdf: /pdf/resume-detail-en.pdf
 ## Experience
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
-- **AI collaboration & DevOps toolchain**: led the coding-agent toolchain (command → plugin → skill), shipping reusable knowledge-base and account & secrets management skills; co-built an EKS reference environment with guardrails (pre-commit secret scan, PR gates, layered secret scanning); shared HITL practices and the ai-kb methodology publicly
-- **Streaming media & FAST channel**: built a FAST-channel monitoring platform (weekly reports, real-time alerts, alert heatmaps, LINE Bot / Slack notifications); integrated AWS Elemental (MediaLive / MediaPackage / MediaTailor), DRM, Global Accelerator, SPEKE, IVS, and Elemental Link; managed MediaLive reservation purchasing and cost
-- **Platform modernization & service migration**: sole owner of the GitLab → Gitea migration; built Vaultwarden and rolled out Bitwarden; evaluated and adopted Bruno to replace Postman; fixed the Akamai log server and completed LDS → DataStream 2 IaC; built Serverless Lambda Terraform modules and Jenkins automation
-- **Database, cache & deployment automation**: Aurora read replicas, VCS-platform database MySQL / PostgreSQL parallel operation, RDS Proxy for high-concurrency connections, Redis → Valkey 7 upgrade (some legacy systems still on Redis); led the Airflow 2.0 upgrade (UAT / Production); developed Jenkins deployment automation in Go (geo-block workflow); designed high-traffic order processing with SQS
+- **AI collaboration & DevOps toolchain**: led the coding-agent toolchain (command → plugin → skill), shipping reusable knowledge-base and account & secrets management skills; co-built an EKS reference environment with guardrails (pre-commit secret scan, PR gates, layered secret scanning); member of the ai-squad (a Tech-Lead-formed AI initiative) and mentored a transferring colleague; shared HITL practices and the ai-kb methodology publicly
+- **Streaming media & FAST channel**: built a ~30-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, alert heatmaps, automated weekly reports, Terraform IaC); integrated AWS Elemental (MediaLive / MediaPackage / MediaTailor), DRM, Global Accelerator, SPEKE, IVS, and Elemental Link; managed MediaLive reservation purchasing and cost (~50% savings)
+- **Platform modernization & service migration**: sole owner of the GitLab → Gitea migration (hundreds of repos, the whole engineering org, < 2h off-peak cutover); built Vaultwarden and rolled out Bitwarden; evaluated and adopted Bruno to replace Postman; fixed the Akamai log server and completed LDS → DataStream 2 IaC; built Serverless Lambda Terraform modules and Jenkins automation
+- **Database, cache & deployment automation**: Aurora read replicas, VCS-platform database MySQL / PostgreSQL parallel operation, RDS Proxy to absorb bursts of thousands of simultaneous connections, Redis 5 → Valkey 7 upgrade (cost + EOL, some legacy systems retained); led the Airflow 1.x → 2.0 upgrade (UAT + Production, carrying ~180 DAGs); developed Jenkins deployment automation in Go (geo-block workflow); designed high-traffic order processing with SQS
 - **Cloud governance, security & client projects**: GCP permission tightening and API-key cleanup; client-project environments and CDN network allowlists (Akamai / CloudFront); AI-assisted DRM / WAF / CVE audits; credential cleanup (Secrets Manager); audited and cleaned up idle EC2 snapshots; introduced AWS Personalize, DynamoDB, Secrets Manager, and Bedrock
 - **System integration & architecture**: built S3 / NAS hybrid storage for video content and S3 lifecycle auto-cleanup; developed Akamai IaC for automated CDN cache management; built a short-link service; optimized portal deployment (build once, deploy anywhere); built a DynamoDB monitoring dashboard and deployed DevOps Guru
 - *Tools: AWS (Elemental / EKS / Aurora / RDS Proxy / DynamoDB / SQS / IVS / Personalize / Bedrock / Secrets Manager / DevOps Guru), GCP, Airflow, Gitea, Vaultwarden, Akamai DataStream, Claude Code / skills / MCP, Bruno, Terraform, Kubernetes, Go, PostgreSQL*
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
-- Performed multiple disaster-recovery drills and maintenance windows, and responded to a range of incidents (incident response)
+- Ran regular disaster-recovery drills (DR Drill, every six months to quarterly, 5–6+ over tenure) and maintenance windows across multiple core services; owned incident response
 - Optimized cloud cost by identifying and removing unused / low-utilization resources, tuning data transfer, and adjusting logging
 - Strengthened operations: Opsworks → ASG / SSM migration, end-to-end (E2E) monitoring, and a service readiness review process
 - *Tools: AWS (Opsworks / ASG / SSM / CloudWatch), Chef*
@@ -74,6 +78,7 @@ pdf: /pdf/resume-detail-en.pdf
 - *Tools: Ansible, Terraform, Docker, ELK, GitLab, Jenkins, AWS, Airflow, RabbitMQ, ECS, Lambda, Locust, JMeter*
 
 ### DevOps Automation Engineer · Groundhog Technologies @@ 2018.09 – 2019.02
+- Led a small team (including a junior) driving deployment and operations automation
 - Deployed DSP / DMP (real-time ad bidding) container images to customer Linux environments
 - Removed redundant components and tuned service settings to improve performance
 - Built inter-server connectivity monitoring tools for proactive anomaly detection
