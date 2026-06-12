@@ -38,7 +38,10 @@ function projectsMarkdown(lang, compact) {
   // line of linked names to keep the PDF to 2 pages. Website + detail PDF keep
   // the full bulleted list with descriptions.
   if (compact) {
-    const names = list.map((p) => (p.url ? `[${p.name}](${p.url})` : p.name));
+    // Short names only (drop "（…）" parentheticals and " — subtitle"): a long
+    // linked name wraps mid-link and renders as broken fragments in the PDF.
+    const short = (n) => n.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").replace(/\s+[—–]\s+.*$/, "").trim();
+    const names = list.map((p) => { const nm = short(p.name); return p.url ? `[${nm}](${p.url})` : nm; });
     return "- " + names.join(" · ");
   }
   return list
