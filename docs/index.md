@@ -52,20 +52,16 @@ pdf: /pdf/resume-ai-zh.pdf
 - 推動 Opsworks → ASG / SSM 遷移；建立 E2E 監控與服務上線審查（Readiness Review）流程
 
 ### Senior DevOps Engineer · GoFreight @@ 2020.10 – 2021.09
-- 建置 EKS 達成高可用與滾動升級；容器化取代 dev / stage 環境並於 CI/CD 執行單元測試；導入 ELK 集中化日誌
-- EC2 RI / 機型優化降成本；MySQL 5.6 → 8.0、DMS 升級；Jenkins worker 尖峰自動擴展並整合 GitHub
+- EKS 高可用 / 滾動升級；容器化 + CI/CD 單元測試；ELK 集中化日誌；EC2 RI 降成本；MySQL 5.6 → 8.0
 
 ### Senior DevOps Engineer · CATCHPLAY @@ 2019.02 – 2020.10
-- 打造一鍵式 CI/CD 多環境部署管線；建立壓力測試環境定位效能瓶頸；以 Airflow 取代 cronjob 排程、重構 ETL
-- EC2 Spot / RI 降成本；以 Lambda 整併日誌；ELK + Curator 集中化日誌；容器化標準化元件
+- 一鍵式 CI/CD 多環境部署 + 壓測定位瓶頸；Airflow 取代 cronjob；ELK + Curator 日誌；EC2 Spot / RI 降成本
 
 ### Senior Java / DevOps Engineer · Groundhog Tech @@ 2017.11 – 2019.02
-- 部署 DSP / DMP 系統；導入 Kubernetes、Ansible、GitLab CI/CD 強化自動化；稽查防火牆提升資安
-- 維護並開發 CovMo 訊號優化系統新功能；重構程式碼、優化 SQL 查詢效能
+- 部署 DSP / DMP；導入 Kubernetes / Ansible / GitLab CI/CD；防火牆資安稽查；維護 CovMo 訊號優化系統
 
 ### 早期經歷 @@ 2012 – 2017
-- **Bank SinoPac · Senior Java Web Engineer**（2015 – 2017）：從零打造投信投資流程系統與 RESTful Web 服務（Java backend）
-- **Gping Construction / Gobooks Publishing · System Engineer**（2012 – 2015）：防火牆與網路拓樸、Acronis 備援、Windows AD / Exchange 升級、VMware HA + P2V、WSUS
+- **Bank SinoPac**（Java Web，2015 – 2017）投信流程系統 + RESTful 服務；**Gping / Gobooks**（System Eng，2012 – 2015）防火牆 / 網路、VMware HA + P2V、Windows AD / Exchange、WSUS
 
 ## 精選專案
 

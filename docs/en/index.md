@@ -53,20 +53,16 @@ pdf: /pdf/resume-ai-en.pdf
 - Drove the Opsworks → ASG / SSM migration; built E2E monitoring and a service readiness review process
 
 ### Senior DevOps Engineer · GoFreight @@ 2020.10 – 2021.09
-- Built EKS for HA and rolling upgrades; containerized dev / stage environments with CI/CD unit tests; introduced ELK for centralized logging
-- EC2 RIs / right-sizing for cost; MySQL 5.6 → 8.0 + DMS upgrade; autoscaling Jenkins workers integrated with GitHub
+- EKS HA / rolling upgrades; containerization + CI/CD unit tests; ELK centralized logging; EC2 RIs for cost; MySQL 5.6 → 8.0
 
 ### Senior DevOps Engineer · CATCHPLAY @@ 2019.02 – 2020.10
-- One-click CI/CD pipeline for multi-environment deploys; stress-test environment to locate bottlenecks; replaced cron jobs with Airflow, refactored ETL
-- EC2 Spot / RIs for cost; Lambda log consolidation; ELK + Curator centralized logging; containerized component standardization
+- One-click multi-env CI/CD + stress-test profiling; Airflow scheduling; ELK + Curator logging; EC2 Spot / RIs for cost
 
 ### Senior Java / DevOps Engineer · Groundhog Tech @@ 2017.11 – 2019.02
-- Deployed DSP / DMP systems; introduced Kubernetes, Ansible, GitLab CI/CD for automation; audited firewall for security
-- Maintained and extended the CovMo signal-optimization system; refactored code and tuned SQL queries
+- Deployed DSP / DMP; introduced Kubernetes / Ansible / GitLab CI/CD; firewall security audits; maintained the CovMo signal-optimization system
 
 ### Early Career @@ 2012 – 2017
-- **Bank SinoPac · Senior Java Web Engineer** (2015 – 2017): built an investment-workflow system and RESTful web services from the ground up (Java backend)
-- **Gping Construction / Gobooks Publishing · System Engineer** (2012 – 2015): firewall & network topology, Acronis backup, Windows AD / Exchange upgrades, VMware HA + P2V, WSUS
+- **Bank SinoPac** (Java Web, 2015 – 2017) investment-workflow system + RESTful services; **Gping / Gobooks** (System Eng, 2012 – 2015) firewall / network, VMware HA + P2V, Windows AD / Exchange, WSUS
 
 ## Selected Projects
 
