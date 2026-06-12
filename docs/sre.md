@@ -74,12 +74,9 @@ pdf: /pdf/resume-sre-zh.pdf
 - 導入 Kubernetes、Ansible 與 GitLab CI/CD；部署 DSP / DMP 系統並強化效能與安全性
 - 維護 CovMo 訊號優化系統並開發新功能；重構程式碼、優化 SQL 查詢效能
 
-### Senior Java Web Engineer · Bank SinoPac @@ 2015.04 – 2017.11
-- 訪談使用者釐清需求，從零打造投資流程系統與 RESTful Web 服務（後端 Java）
-
-### 早期經歷 @@ 2012 – 2015
-- **Gping Construction · Senior System Engineer**（2014.03 – 2015.04）：強化防火牆與網路拓樸、以 Acronis 建置備援
-- **Gobooks Publishing · System Engineer**（2012.09 – 2014.03）：升級 Windows AD / Exchange，以 VMware 建置 HA
+### 早期經歷 @@ 2012 – 2017
+- **Bank SinoPac · Senior Java Web Engineer**（2015 – 2017）：從零打造投資流程系統與 RESTful Web 服務（Java backend）
+- **Gping / Gobooks · System Engineer**（2012 – 2015）：防火牆與網路拓樸、Acronis 備援、Windows AD / Exchange、VMware HA + P2V
 
 ## 精選專案
 

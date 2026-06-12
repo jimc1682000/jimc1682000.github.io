@@ -74,12 +74,9 @@ pdf: /pdf/resume-sre-en.pdf
 - Introduced Kubernetes, Ansible, and GitLab CI/CD; deployed DSP / DMP systems with improved performance and security
 - Maintained and extended the CovMo signal-optimization system; refactored code and tuned SQL queries
 
-### Senior Java Web Engineer · Bank SinoPac @@ 2015.04 – 2017.11
-- Gathered user requirements and built an investment-workflow system and RESTful web services from scratch (Java backend)
-
-### Earlier Experience @@ 2012 – 2015
-- **Gping Construction · Senior System Engineer** (2014.03 – 2015.04): hardened firewall and network topology; built backup with Acronis
-- **Gobooks Publishing · System Engineer** (2012.09 – 2014.03): upgraded Windows AD / Exchange; built HA with VMware
+### Early Career @@ 2012 – 2017
+- **Bank SinoPac · Senior Java Web Engineer** (2015 – 2017): built an investment-workflow system and RESTful web services from scratch (Java backend)
+- **Gping / Gobooks · System Engineer** (2012 – 2015): firewall & network topology, Acronis backup, Windows AD / Exchange, VMware HA + P2V
 
 ## Selected Projects
 

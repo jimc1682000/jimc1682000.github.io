@@ -71,16 +71,9 @@ pdf: /pdf/resume-platform-en.pdf
 - Deployed DSP / DMP container images to customer Linux environments with Ansible
 - Introduced Kubernetes and GitLab CI/CD; hardened system performance and security
 
-### Senior Java Web Engineer · Bank SinoPac @@ 2015.04 – 2017.11
-- Built an investment-workflow system and RESTful web services from scratch (Java backend)
-
-### Senior System Engineer · Gping Construction @@ 2014.03 – 2015.04
-- Designed and hardened enterprise firewall rules and network topology (routing, VLAN, NAT)
-- Built backup/recovery with Acronis; managed Windows Server infrastructure
-
-### System Engineer · Gobooks Publishing @@ 2012.09 – 2014.03
-- Built VMware vSphere HA environment (VM clustering) and performed P2V migrations
-- Upgraded Windows AD (2000 → 2008) and Exchange; deployed WSUS for centralised patch management
+### Early Career @@ 2012 – 2017
+- **Bank SinoPac · Senior Java Web Engineer** (2015 – 2017): investment-workflow system and RESTful web services from scratch (Java backend)
+- **Gping / Gobooks · System Engineer** (2012 – 2015): firewall & network topology (routing / VLAN / NAT), Acronis backup, VMware vSphere HA + P2V, Windows AD / Exchange, WSUS
 
 ## Selected Projects
 

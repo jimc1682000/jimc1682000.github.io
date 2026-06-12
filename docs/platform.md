@@ -71,16 +71,9 @@ pdf: /pdf/resume-platform-zh.pdf
 - 以 Ansible 部署並管理 DSP / DMP container image 至客戶 Linux 系統
 - 導入 Kubernetes 與 GitLab CI/CD；強化效能調校與系統安全設定
 
-### Senior Java Web Engineer · Bank SinoPac @@ 2015.04 – 2017.11
-- 從零打造投資流程系統與 RESTful Web 服務（Java backend）
-
-### Senior System Engineer · Gping Construction @@ 2014.03 – 2015.04
-- 規劃並強化企業防火牆設定與網路拓樸（routing、VLAN、NAT）
-- 以 Acronis 建置備援伺服器；管理 Windows Server 基礎架構
-
-### System Engineer · Gobooks Publishing @@ 2012.09 – 2014.03
-- 以 VMware vSphere 建置 HA 環境（VM clustering）並執行 P2V 遷移
-- 升級 Windows AD（2000 → 2008）與 Exchange；建置 WSUS 補丁集中管理
+### 早期經歷 @@ 2012 – 2017
+- **Bank SinoPac · Senior Java Web Engineer**（2015 – 2017）：投資流程系統與 RESTful Web 服務（Java backend）
+- **Gping / Gobooks · System Engineer**（2012 – 2015）：防火牆與網路拓樸（routing / VLAN / NAT）、Acronis 備援、VMware vSphere HA + P2V、Windows AD / Exchange、WSUS
 
 ## 精選專案
 

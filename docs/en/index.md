@@ -76,14 +76,9 @@ pdf: /pdf/resume-ai-en.pdf
 - Audited firewall settings to improve system security
 - Maintained and extended the CovMo signal-optimization system; refactored code and tuned SQL queries
 
-### Senior Java Web Engineer · Bank SinoPac @@ 2015.04 – 2017.11
-- Gathered requirements from users and built an investment-workflow system and RESTful web services from the ground up
-
-### Senior System Engineer · Gping Construction @@ 2014.03 – 2015.04
-- Hardened firewall and network topology; built a backup server with Acronis
-
-### System Engineer · Gobooks Publishing @@ 2012.09 – 2014.03
-- Upgraded Windows AD (2000 → 2008) and Exchange; built HA with VMware, ran P2V migrations for legacy systems, and set up a WSUS server
+### Early Career @@ 2012 – 2017
+- **Bank SinoPac · Senior Java Web Engineer** (2015 – 2017): built an investment-workflow system and RESTful web services from the ground up (Java backend)
+- **Gping Construction / Gobooks Publishing · System Engineer** (2012 – 2015): firewall & network topology, Acronis backup, Windows AD / Exchange upgrades, VMware HA + P2V, WSUS
 
 ## Selected Projects
 
