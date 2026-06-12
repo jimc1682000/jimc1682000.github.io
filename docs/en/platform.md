@@ -49,7 +49,8 @@ pdf: /pdf/resume-platform-en.pdf
 - Built a FAST-channel monitoring platform (weekly reports, real-time alerts, heatmaps, LINE Bot / Slack notifications); added DynamoDB dashboard + DevOps Guru
 - Re-architected HA database layer: Aurora read replicas, MySQL → PostgreSQL migration, RDS Proxy, Redis / Valkey 7 split migration; led Airflow 2.0 upgrade
 - Sole owner of GitLab → Gitea migration; built serverless Lambda Terraform modules and Jenkins automation; developed Geo-block deployment in Go
-- Used SQS for high-volume telco orders; integrated Elemental streaming (DRM, Global Accelerator, SPEKE, IVS); Akamai LDS → DataStream 2 via IaC
+- Used SQS to handle high-volume telco partner orders
+- Integrated AWS Elemental streaming (DRM, Global Accelerator, SPEKE, IVS); migrated Akamai LDS → DataStream 2 via IaC
 - Multi-cloud governance: GCP permission hardening, Secrets Manager cleanup, WAF / CVE audits; audited and removed idle EC2 snapshots
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
@@ -60,11 +61,13 @@ pdf: /pdf/resume-platform-en.pdf
 ### Senior DevOps Engineer · GoFreight @@ 2020.10 – 2021.09
 - Built EKS for high availability and rolling upgrades; replaced dev / stage environments with containers
 - Introduced centralised ELK logging; added autoscaling Jenkins workers for peak load
-- Cut cost with EC2 RIs / right-sizing and DMS migrations; upgraded MySQL 5.6 → 8.0
+- Cut cost with EC2 RIs / right-sizing; upgraded MySQL 5.6 → 8.0 and the DMS engine
 
 ### Senior DevOps Engineer · CATCHPLAY @@ 2019.02 – 2020.10
-- Built a one-click CI/CD pipeline for multi-environment deployment; set up load-test environments to locate bottlenecks
-- Replaced cron jobs and ETL with Airflow; centralised log parsing with ELK + Curator
+- Built a one-click CI/CD pipeline for multi-environment deployment
+- Set up load-test environments (Locust / JMeter) to locate performance bottlenecks
+- Replaced cron jobs with Airflow scheduling; refactored part of the ETL automation
+- Centralised log management with ELK + Curator; tuned Logstash parsing rules
 
 ### Senior Java / DevOps Engineer · Groundhog Tech @@ 2017.11 – 2019.02
 - Deployed DSP / DMP container images to customer Linux environments with Ansible

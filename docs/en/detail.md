@@ -54,21 +54,31 @@ pdf: /pdf/resume-detail-en.pdf
 - *Tools: AWS (Opsworks / ASG / SSM / CloudWatch), Chef*
 
 ### Senior DevOps Engineer · GoFreight @@ 2020.10 – 2021.09
-- Containerization: replaced VM dev / stage environments, ran unit tests in the CI/CD pipeline, and improved pipeline performance and reliability
-- Built Kubernetes (EKS) for HA and rolling upgrades; built an ELK stack for centralized log management
-- Cost: right-sized EC2 instances + RIs; deployed / troubleshot the GoFreight FMS system for customers
-- Upgraded MySQL to 8.0, upgraded the DMS engine and fixed DMS tasks, upgraded UTM; added autoscaling Jenkins workers and integrated GitHub
+- Containerized dev / stage environments (replacing VMs); ran unit tests in the CI/CD pipeline, improving pipeline performance and reliability
+- Built Kubernetes (EKS) for high availability and rolling upgrades
+- Built an ELK stack for centralized log management; deployed Filebeat to collect service logs
+- Right-sized EC2 instances + RIs to reduce cloud cost
+- Upgraded MySQL 5.6 to 8.0, upgraded the DMS engine and fixed DMS tasks; upgraded UTM
+- Added autoscaling Jenkins workers and integrated GitHub
+- Deployed and troubleshot the GoFreight FMS system for customers
 - *Tools: Ansible, Terraform, Docker, Node.js, Nginx, ELK, Filebeat, GitHub, Jenkins, AWS, EKS, Redis, Django, Vagrant*
 
 ### Senior DevOps Engineer · CATCHPLAY @@ 2019.02 – 2020.10
-- Built a stress-test environment to find system bottlenecks; created a one-click CI/CD pipeline for RDs to deploy across environments; replaced cron jobs and some ETL with Airflow
-- Used EC2 Spot and RIs to cut cost; wrote monitoring scripts with Slack alerts; used Lambda to consolidate logs and align load-balancer settings
-- Standardized components via containers (multi-layer images); maintained Elasticsearch with Curator and tuned Logstash parsing rules
+- Built a one-click CI/CD pipeline for RDs to deploy across environments
+- Built a stress-test environment (Locust / JMeter) to identify performance bottlenecks; tuned AWS load-balancer settings
+- Replaced cron jobs with Airflow scheduling and refactored part of the ETL automation
+- Cut cloud cost using EC2 Spot + RIs
+- Wrote monitoring scripts with Slack alerts; used Lambda to consolidate multi-source logs
+- Standardized components via containers (multi-layer images)
+- Maintained Elasticsearch index lifecycle with Curator; tuned Logstash parsing rules to improve log ingestion
 - *Tools: Ansible, Terraform, Docker, ELK, GitLab, Jenkins, AWS, Airflow, RabbitMQ, ECS, Lambda, Locust, JMeter*
 
 ### DevOps Automation Engineer · Groundhog Technologies @@ 2018.09 – 2019.02
-- Deployed DSP / DMP (real-time ad bidding) container images to customer Linux environments; built connectivity-monitoring tools; removed redundant components and tuned settings for performance
-- Introduced Kubernetes, GitLab CI/CD, and Ansible to increase automation; hardened firewall settings and fixed vulnerabilities
+- Deployed DSP / DMP (real-time ad bidding) container images to customer Linux environments
+- Removed redundant components and tuned service settings to improve performance
+- Built inter-server connectivity monitoring tools for proactive anomaly detection
+- Introduced Kubernetes, GitLab CI/CD, and Ansible to strengthen deployment automation
+- Audited firewall settings and patched security vulnerabilities
 - *Tools: Docker, Kafka, Zookeeper, ELK, Grafana, Prometheus, Kubernetes, Ansible, GitLab CI/CD, GCP, MongoDB, Redis*
 
 ### Senior Java Web Engineer · Groundhog Technologies (Xianguan Technology) @@ 2017.11 – 2018.09
@@ -80,12 +90,14 @@ pdf: /pdf/resume-detail-en.pdf
 - *Tools: Java, ZK, Hibernate, JMS, GSON, Tomcat, ActiveMQ, MSSQL*
 
 ### Senior System Engineer · Gping Construction @@ 2014.03 – 2015.04
-- Hardened firewall settings and upgraded network topology; built a backup server with Acronis
+- Hardened firewall settings and upgraded network topology (routing, VLAN, NAT)
+- Built a backup server with Acronis
 - *Tools: Windows Server, Acronis, Network Administration*
 
 ### System Engineer · Gobooks Publishing @@ 2012.09 – 2014.03
 - Upgraded Windows AD (2000 → 2008) and Exchange (2000 → 2007); ran P2V migrations for legacy systems, built HA with VMware, and set up backup / DR
-- Migrated Fortigate → Cyberoam UTM, deployed a Sophos antivirus console, set up WSUS; mitigated a denial-of-service (DoS) attack incident
+- Migrated Fortigate → Cyberoam UTM; deployed a Sophos antivirus console; set up WSUS for centralized patch management
+- Successfully mitigated a denial-of-service (DoS) attack incident
 - *Tools: Windows Server, VMware, Hyper-V, Exchange, AD, WSUS, UTM, ERP*
 
 ## Selected Projects

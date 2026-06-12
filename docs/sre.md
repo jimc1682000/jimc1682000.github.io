@@ -43,7 +43,8 @@ pdf: /pdf/resume-sre-zh.pdf
 - 以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）
 - 重構資料庫架構：Aurora Read Replica、MySQL → PostgreSQL 遷移、RDS Proxy、Redis / Valkey 7 切分遷移；主導 Airflow 2.0 升級（UAT / Production）
 - 獨力完成 GitLab → Gitea 版控遷移；建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署；以 Go 開發 Geo-block 部署自動化
-- 以 SQS 解決電信合作夥伴高量訂單瓶頸；整合 Elemental 媒體串流（DRM、Global Accelerator、SPEKE、IVS）；Akamai LDS → DataStream 2 IaC 化
+- 以 SQS 設計解決電信合作夥伴高量訂單瓶頸
+- 整合 AWS Elemental 媒體串流（DRM、Global Accelerator、SPEKE、IVS）；完成 Akamai LDS → DataStream 2 IaC 化
 - 多雲治理與資安：GCP 權限限縮、Secrets Manager 憑證整頓、DRM / WAF / CVE 稽核；盤點並清理閒置 EC2 snapshots；客戶專案環境建置與 CDN 網段白名單
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
@@ -54,12 +55,15 @@ pdf: /pdf/resume-sre-zh.pdf
 ### Senior DevOps Engineer · GoFreight @@ 2020.10 – 2021.09
 - 建置 EKS（Kubernetes）達成高可用與滾動升級（rolling upgrade），容器化取代 dev / stage 環境
 - 導入 ELK 集中化日誌管理；於 CI/CD 管線執行單元測試以提升可靠度
-- 以 EC2 RI / 最佳化機型與 DMS 遷移降低成本，將 MySQL 由 5.6 升級至 8.0；Jenkins worker 支援尖峰自動擴展
+- EC2 RI / 最佳化機型降低雲端成本；將 MySQL 5.6 升至 8.0 並升級 DMS 引擎
+- Jenkins worker 支援尖峰自動擴展並整合 GitHub
 
 ### Senior DevOps Engineer · CATCHPLAY @@ 2019.02 – 2020.10
-- 建立壓力測試環境定位系統瓶頸；打造一鍵式 CI/CD 管線供研發部署多環境
-- 以 Airflow 取代 cronjob 與 ETL；容器化標準化元件，並以 ELK + Curator 管理與解析日誌
-- 善用 EC2 Spot / RI 降低成本；以 Lambda 整併日誌
+- 打造一鍵式 CI/CD 管線供研發一鍵部署多環境；建立壓力測試環境（Locust / JMeter）定位效能瓶頸
+- 以 Airflow 取代 cronjob 排程，重構部分 ETL 自動化流程
+- 容器化標準化元件（多層映像檔）
+- 以 ELK + Curator 集中化日誌管理；調整 Logstash 解析規則
+- 善用 EC2 Spot / RI 降低雲端成本；以 Lambda 整併多來源日誌
 
 ### Senior Java / DevOps Engineer · Groundhog Tech @@ 2017.11 – 2019.02
 - 導入 Kubernetes、Ansible 與 GitLab CI/CD；部署 DSP / DMP 系統並強化效能與安全性

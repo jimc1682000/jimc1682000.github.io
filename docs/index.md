@@ -34,11 +34,14 @@ pdf: /pdf/resume-ai-zh.pdf
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – 至今
 - 主導團隊 coding agent 工具鏈（command → plugin → skill），產出知識庫 skill、帳密管理 skill 等共用資產；以 AI 協作建置 EKS 參考環境並落地 guardrails（pre-commit secret scan、PR gate、多層 secret scanning）
 - 獨力完成 GitLab → Gitea 版控遷移；建置 Vaultwarden 並導入 Bitwarden；評估並導入 Bruno 取代 Postman
-- 建置 FAST 頻道監控平台（週報、即時告警、告警熱力圖、LINE Bot / Slack 通知）；整合 AWS Elemental 媒體串流（MediaLive / MediaPackage / MediaTailor、DRM、Global Accelerator、SPEKE、IVS、Elemental Link）
+- 建置 FAST 頻道監控平台（週報、即時告警、告警熱力圖、LINE Bot / Slack 通知）
+- 整合 AWS Elemental 媒體串流（MediaLive / MediaPackage / MediaTailor、DRM、Global Accelerator、SPEKE、IVS）
 - 建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署；以 Go 開發 Jenkins 部署自動化（Geo-block 流程）
-- 重構資料庫架構：Aurora Read Replica、MySQL → PostgreSQL 遷移、RDS Proxy、Redis / Valkey 7 切分遷移；主導 Airflow 2.0 升級；建置 DynamoDB 監控儀表板並導入 DevOps Guru
+- 重構資料庫架構：Aurora Read Replica、MySQL → PostgreSQL 遷移、RDS Proxy、Redis / Valkey 7 切分遷移；主導 Airflow 2.0 升級（UAT / Production）
+- 建置 DynamoDB 監控儀表板並導入 DevOps Guru
 - 多雲治理與資安：GCP 權限限縮與 API key 治理；以 AI 協助 DRM / WAF / CVE 稽核；Akamai LDS → DataStream 2 IaC 化；盤點並清理閒置 EC2 snapshots；客戶專案環境建置與 CDN 網段白名單
-- 評估並導入 AWS Bedrock、Secrets Manager、Personalize；以 SQS 解決電信合作夥伴高量訂單瓶頸；設計 S3 + NAS 混合儲存與 Akamai IaC CDN 自動化
+- 以 SQS 設計解決電信合作夥伴高量訂單瓶頸
+- 評估並導入 AWS Bedrock、Secrets Manager、Personalize；設計 S3 + NAS 混合儲存與 Akamai IaC CDN 自動化
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
 - 執行多次災難復原演練（DR Drill）與維護視窗（Maintenance Window），負責跨服務事件處理（Incident Response）
@@ -48,15 +51,18 @@ pdf: /pdf/resume-ai-zh.pdf
 ### Senior DevOps Engineer · GoFreight @@ 2020.10 – 2021.09
 - 以容器化取代 dev / stage 環境，於 CI/CD 管線執行單元測試以提升可靠度
 - 建置 EKS 達成高可用與滾動升級（rolling upgrade）；導入 ELK 集中化日誌管理
-- 以 EC2 RI / 最佳化機型與 DMS 遷移降低成本，將 MySQL 由 5.6 升級至 8.0；Jenkins worker 支援尖峰自動擴展
+- EC2 RI / 最佳化機型降低雲端成本；將 MySQL 5.6 升至 8.0 並升級 DMS 引擎
+- Jenkins worker 支援尖峰自動擴展並整合 GitHub
 
 ### Senior DevOps Engineer · CATCHPLAY @@ 2019.02 – 2020.10
-- 建立壓力測試環境定位系統瓶頸；打造一鍵式 CI/CD 管線供研發部署多環境
-- 以 Airflow 取代 cronjob 與 ETL；善用 EC2 Spot / RI 降低成本；以 Lambda 整併日誌
-- 容器化標準化元件，並以 ELK + Curator 管理與解析日誌
+- 打造一鍵式 CI/CD 管線供研發一鍵部署多環境；建立壓力測試環境定位系統效能瓶頸
+- 以 Airflow 取代 cronjob 排程，重構部分 ETL 自動化流程
+- 善用 EC2 Spot / RI 降低雲端成本；以 Lambda 整併多來源日誌
+- 容器化標準化元件；以 ELK + Curator 集中化日誌管理
 
 ### Senior Java / DevOps Engineer · Groundhog Tech @@ 2017.11 – 2019.02
-- 部署 DSP / DMP 系統並強化效能與安全性；導入 Kubernetes、Ansible 與 GitLab CI/CD
+- 部署 DSP / DMP 系統並強化效能；導入 Kubernetes、Ansible 與 GitLab CI/CD 強化自動化
+- 稽查防火牆設定，提升系統資安等級
 - 維護 CovMo 訊號優化系統並開發新功能；重構程式碼、優化 SQL 查詢效能
 
 ### Senior Java Web Engineer · Bank SinoPac @@ 2015.04 – 2017.11

@@ -43,7 +43,8 @@ pdf: /pdf/resume-sre-en.pdf
 - Co-built an EKS reference environment with AI-assisted guardrails (pre-commit secret scan, PR gates, layered secret scanning)
 - Re-architected the data layer: Aurora read replicas, MySQL → PostgreSQL migration, RDS Proxy, Redis / Valkey 7 split migration; led the Airflow 2.0 upgrade (UAT / Production)
 - Sole owner of the GitLab → Gitea migration; built Serverless Lambda Terraform modules and Jenkins automation; developed geo-block deployment automation in Go
-- Used SQS for a major telco partner's high-volume orders; integrated Elemental streaming (DRM, Global Accelerator, SPEKE, IVS); migrated Akamai LDS → DataStream 2 via IaC
+- Used SQS to handle a major telco partner's high-volume order throughput
+- Integrated AWS Elemental streaming (DRM, Global Accelerator, SPEKE, IVS); migrated Akamai LDS → DataStream 2 via IaC
 - Multi-cloud governance and security: GCP permission tightening, Secrets Manager credential cleanup, DRM / WAF / CVE audits; audited and cleaned up idle EC2 snapshots; client-project environments and CDN network allowlists
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
@@ -54,12 +55,15 @@ pdf: /pdf/resume-sre-en.pdf
 ### Senior DevOps Engineer · GoFreight @@ 2020.10 – 2021.09
 - Built EKS (Kubernetes) for high availability and rolling upgrades; replaced dev / stage environments with containers
 - Introduced ELK for centralized logging; ran unit tests in the CI/CD pipeline to improve reliability
-- Cut cost with EC2 RIs / right-sizing and DMS migrations; upgraded MySQL 5.6 → 8.0; added autoscaling Jenkins workers
+- Cut cost with EC2 RIs / right-sizing; upgraded MySQL 5.6 → 8.0 and upgraded the DMS engine
+- Added autoscaling Jenkins workers for peak load
 
 ### Senior DevOps Engineer · CATCHPLAY @@ 2019.02 – 2020.10
-- Built a stress-test environment to locate bottlenecks; created a one-click CI/CD pipeline for multi-environment deployment
-- Replaced cron jobs and ETL with Airflow; standardized components via containers and managed log parsing with ELK + Curator
-- Used EC2 Spot / RIs to cut cost; consolidated logs with Lambda
+- Created a one-click CI/CD pipeline for multi-environment deployment; built a stress-test environment (Locust / JMeter) to locate performance bottlenecks
+- Replaced cron jobs with Airflow scheduling; refactored part of the ETL automation
+- Standardized components via containers (multi-layer images)
+- Centralized log management with ELK + Curator; tuned Logstash parsing rules
+- Cut cloud cost with EC2 Spot / RIs; consolidated multi-source logs with Lambda
 
 ### Senior Java / DevOps Engineer · Groundhog Tech @@ 2017.11 – 2019.02
 - Introduced Kubernetes, Ansible, and GitLab CI/CD; deployed DSP / DMP systems with improved performance and security

@@ -54,21 +54,31 @@ pdf: /pdf/resume-detail-zh.pdf
 - *Tools：AWS（Opsworks / ASG / SSM / CloudWatch）、Chef*
 
 ### Senior DevOps Engineer · GoFreight（聖學科技） @@ 2020.10 – 2021.09
-- 容器化：取代 VM 的 dev / stage 環境、於 CI/CD 管線執行單元測試、提升管線效能與可靠度
-- 建置 Kubernetes（EKS）達成高可用與滾動升級；建置 ELK 作為集中化日誌管理方案
-- 成本：EC2 最佳化機型 + RI；部署 / 排障客戶 GoFreight FMS 系統
-- 將 MySQL 升至 8.0、升級 DMS 引擎並修復 DMS 任務、升級 UTM；Jenkins worker 支援尖峰擴展並整合 GitHub
+- 容器化取代 VM dev / stage 環境；於 CI/CD 管線執行單元測試，提升管線效能與可靠度
+- 建置 Kubernetes（EKS）達成高可用架構與滾動升級
+- 建置 ELK 集中化日誌管理；導入 Filebeat 蒐集各服務日誌
+- EC2 最佳化機型 + RI 降低雲端成本
+- 將 MySQL 5.6 升至 8.0、升級 DMS 引擎並修復 DMS 任務；升級 UTM
+- Jenkins worker 支援尖峰自動擴展並整合 GitHub
+- 部署並排障客戶 GoFreight FMS 系統
 - *Tools：Ansible、Terraform、Docker、Node.js、Nginx、ELK、Filebeat、GitHub、Jenkins、AWS、EKS、Redis、Django、Vagrant*
 
 ### Senior DevOps Engineer · CATCHPLAY @@ 2019.02 – 2020.10
-- 建立壓力測試環境定位系統瓶頸；打造一鍵式 CI/CD 管線供 RD 一鍵部署多環境；以 Airflow 取代 cronjob 與部分 ETL
-- 善用 EC2 Spot 與 RI 降低成本；撰寫監控腳本 + Slack 告警；以 Lambda 整併日誌並校準負載平衡設定
-- 容器化標準化元件（多層映像檔）；以 Curator 維護 Elasticsearch、調整 Logstash 解析規則
+- 打造一鍵式 CI/CD 管線供 RD 一鍵部署多環境
+- 建立壓力測試環境（Locust / JMeter）定位系統效能瓶頸；校準 AWS 負載平衡設定
+- 以 Airflow 取代 cronjob 排程，重構部分 ETL 自動化流程
+- 善用 EC2 Spot + RI 降低雲端成本
+- 撰寫監控腳本 + Slack 告警；以 Lambda 整併多來源日誌
+- 容器化標準化元件（多層映像檔）
+- 以 Curator 維護 Elasticsearch 索引生命週期；調整 Logstash 解析規則優化日誌入庫
 - *Tools：Ansible、Terraform、Docker、ELK、GitLab、Jenkins、AWS、Airflow、RabbitMQ、ECS、Lambda、Locust、JMeter*
 
 ### DevOps Automation Engineer · Groundhog Technologies（現觀科技） @@ 2018.09 – 2019.02
-- 部署 DSP / DMP（線上即時廣告競標）container image 至客戶 Linux 環境；開發伺服器間連線監控工具；移除冗餘元件 / 調整服務設定提升效能
-- 導入 Kubernetes、GitLab CI/CD、Ansible 強化自動化；檢查防火牆設定、修補弱點提升資安等級
+- 部署 DSP / DMP（線上即時廣告競標）container image 至客戶 Linux 環境
+- 移除冗餘元件、調整服務設定，提升系統效能
+- 開發伺服器間連線監控工具，主動偵測節點異常
+- 導入 Kubernetes、GitLab CI/CD、Ansible 強化部署自動化
+- 稽查防火牆設定、修補安全弱點，提升資安等級
 - *Tools：Docker、Kafka、Zookeeper、ELK、Grafana、Prometheus、Kubernetes、Ansible、GitLab CI/CD、GCP、MongoDB、Redis*
 
 ### Senior Java Web Engineer · Groundhog Technologies（現觀科技） @@ 2017.11 – 2018.09
@@ -80,12 +90,14 @@ pdf: /pdf/resume-detail-zh.pdf
 - *Tools：Java、ZK、Hibernate、JMS、GSON、Tomcat、ActiveMQ、MSSQL*
 
 ### Senior System Engineer · Gping Construction（集品建設） @@ 2014.03 – 2015.04
-- 強化防火牆設定、升級網路拓樸；以 Acronis 建置備援伺服器
+- 強化防火牆設定、升級網路拓樸（routing、VLAN、NAT）
+- 以 Acronis 建置備援伺服器
 - *Tools：Windows Server、Acronis、Network Administration*
 
 ### System Engineer · Gobooks Publishing（高寶出版） @@ 2012.09 – 2014.03
 - 升級 Windows AD（2000 → 2008）與 Exchange（2000 → 2007）；以 P2V 遷移老舊系統、VMware 建置 HA、建置備援與資料備份
-- 汰換 Fortigate → Cyberoam UTM、導入 Sophos 防毒中控台、建置 WSUS；處置阻斷服務（DoS）攻擊事件
+- 汰換 Fortigate → Cyberoam UTM；導入 Sophos 防毒中控台；建置 WSUS 補丁集中管理
+- 成功處置一次阻斷服務（DoS）攻擊事件
 - *Tools：Windows Server、VMware、Hyper-V、Exchange、AD、WSUS、UTM、ERP*
 
 ## 精選專案

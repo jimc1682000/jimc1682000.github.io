@@ -35,11 +35,14 @@ pdf: /pdf/resume-ai-en.pdf
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
 - Led the team's coding-agent toolchain (command → plugin → skill), shipping reusable knowledge-base and account & secrets management skills; co-built an EKS reference environment with AI-assisted guardrails (pre-commit secret scan, PR gates, layered secret scanning)
 - Sole owner of the GitLab → Gitea migration; built Vaultwarden and rolled out Bitwarden; evaluated and adopted Bruno to replace Postman
-- Built a FAST-channel monitoring platform (weekly reports, real-time alerts, alert heatmaps, LINE Bot / Slack notifications); integrated AWS Elemental streaming (MediaLive / MediaPackage / MediaTailor, DRM, Global Accelerator, SPEKE, IVS, Elemental Link)
+- Built a FAST-channel monitoring platform (weekly reports, real-time alerts, alert heatmaps, LINE Bot / Slack notifications)
+- Integrated AWS Elemental streaming (MediaLive / MediaPackage / MediaTailor, DRM, Global Accelerator, SPEKE, IVS)
 - Built reusable Serverless Lambda Terraform modules and Jenkins automation; developed Jenkins deployment automation in Go (geo-block workflow)
-- Re-architected the data layer: Aurora read replicas, MySQL → PostgreSQL migration, RDS Proxy, Redis / Valkey 7 split migration; led the Airflow 2.0 upgrade; built a DynamoDB monitoring dashboard and adopted DevOps Guru
+- Re-architected the data layer: Aurora read replicas, MySQL → PostgreSQL migration, RDS Proxy, Redis / Valkey 7 split migration; led the Airflow 2.0 upgrade (UAT / Production)
+- Built a DynamoDB monitoring dashboard and adopted DevOps Guru
 - Multi-cloud governance and security: GCP permission tightening and API-key cleanup; AI-assisted DRM / WAF / CVE audits; Akamai LDS → DataStream 2 IaC; audited and cleaned up idle EC2 snapshots; client-project environments and CDN network allowlists
-- Evaluated and rolled out AWS Bedrock, Secrets Manager, and Personalize; used SQS for a major telco partner's high-volume orders; designed S3 + NAS hybrid storage and Akamai IaC CDN automation
+- Used SQS to handle a major telco partner's high-volume orders
+- Evaluated and rolled out AWS Bedrock, Secrets Manager, and Personalize; designed S3 + NAS hybrid storage and Akamai IaC CDN automation
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
 - Ran multiple disaster-recovery drills and maintenance windows, and owned cross-service incident response
@@ -49,15 +52,18 @@ pdf: /pdf/resume-ai-en.pdf
 ### Senior DevOps Engineer · GoFreight @@ 2020.10 – 2021.09
 - Replaced dev / stage environments with containers and ran unit tests in the CI/CD pipeline to improve reliability
 - Built EKS for high availability and rolling upgrades; introduced ELK for centralized log management
-- Cut cost with EC2 RIs / right-sized instances and DMS migrations; upgraded MySQL from 5.6 to 8.0; added autoscaling Jenkins workers for peak load
+- Cut cost with EC2 RIs / right-sized instances; upgraded MySQL 5.6 to 8.0 and the DMS engine
+- Added autoscaling Jenkins workers for peak load
 
 ### Senior DevOps Engineer · CATCHPLAY @@ 2019.02 – 2020.10
-- Built a stress-test environment to locate system bottlenecks; created a one-click CI/CD pipeline for multi-environment deployment
-- Replaced cron jobs and ETL with Airflow; used EC2 Spot / RIs to cut cost; consolidated logs with Lambda
-- Standardized components via containers and managed log parsing with ELK + Curator
+- Created a one-click CI/CD pipeline for multi-environment deployment; built a stress-test environment to locate performance bottlenecks
+- Replaced cron jobs with Airflow scheduling; refactored part of the ETL automation
+- Cut cloud cost with EC2 Spot / RIs; consolidated multi-source logs with Lambda
+- Standardized components via containers; managed log parsing with ELK + Curator
 
 ### Senior Java / DevOps Engineer · Groundhog Tech @@ 2017.11 – 2019.02
-- Deployed DSP / DMP systems with improved performance and security; introduced Kubernetes, Ansible, and GitLab CI/CD
+- Deployed DSP / DMP systems and tuned performance; introduced Kubernetes, Ansible, and GitLab CI/CD to strengthen automation
+- Audited firewall settings to improve system security
 - Maintained and extended the CovMo signal-optimization system; refactored code and tuned SQL queries
 
 ### Senior Java Web Engineer · Bank SinoPac @@ 2015.04 – 2017.11

@@ -17,7 +17,7 @@ contacts:
   - text: jimc1682000.blogspot.com
     href: https://jimc1682000.blogspot.com
   - text: Taipei / Tainan
-pdf: /pdf/resume-sre-zh.pdf
+pdf: /pdf/resume-platform-zh.pdf
 ---
 
 ## 核心技能
@@ -49,7 +49,8 @@ pdf: /pdf/resume-sre-zh.pdf
 - 建置 FAST 頻道監控平台（週報、即時告警、告警熱力圖、LINE Bot / Slack 通知）；建置 DynamoDB 儀表板並導入 DevOps Guru
 - 重構資料庫 HA 架構：Aurora Read Replica、MySQL → PostgreSQL 遷移、RDS Proxy、Redis / Valkey 7 切分遷移；主導 Airflow 2.0 升級（UAT / Production）
 - 獨力完成 GitLab → Gitea 版控遷移；建立 Serverless Lambda Terraform 模組與 Jenkins 自動化部署；以 Go 開發 Geo-block 部署自動化
-- 以 SQS 解決電信合作夥伴高量訂單瓶頸；整合 Elemental 媒體串流（DRM、Global Accelerator、SPEKE、IVS）；Akamai LDS → DataStream 2 IaC 化
+- 以 SQS 設計解決電信合作夥伴高量訂單瓶頸
+- 整合 AWS Elemental 媒體串流（DRM、Global Accelerator、SPEKE、IVS）；完成 Akamai LDS → DataStream 2 IaC 化
 - 多雲治理：GCP 權限限縮、Secrets Manager 憑證整頓、WAF / CVE 稽核；盤點清理閒置 EC2 snapshots
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
@@ -63,8 +64,10 @@ pdf: /pdf/resume-sre-zh.pdf
 - EC2 RI / 機型優化 + DMS 遷移降低成本；MySQL 5.6 → 8.0 升級
 
 ### Senior DevOps Engineer · CATCHPLAY @@ 2019.02 – 2020.10
-- 打造一鍵式 CI/CD 管線供研發部署多環境；建立壓力測試環境定位系統瓶頸
-- 以 Airflow 取代 cronjob 與 ETL；以 ELK + Curator 集中化日誌
+- 打造一鍵式 CI/CD 管線供研發一鍵部署多環境
+- 建立壓力測試環境（Locust / JMeter）定位系統效能瓶頸
+- 以 Airflow 取代 cronjob 排程，重構部分 ETL 自動化流程
+- 以 ELK + Curator 集中化日誌管理；調整 Logstash 解析規則
 
 ### Senior Java / DevOps Engineer · Groundhog Tech @@ 2017.11 – 2019.02
 - 以 Ansible 部署並管理 DSP / DMP container image 至客戶 Linux 系統
