@@ -35,7 +35,7 @@ pdf: /pdf/resume-detail-zh.pdf
 
 - **AI 協作落地維運（agent-native + AIOps）**：以 AI 為共同開發者，把零散需求收斂成可被他人重用的 coding-agent skill 生態與安全護欄（CI 自動 gate、context / 帳密邊界），而非一次性腳本——重點在「能否被重用、邊界是否清楚」；並將 AI 落地維運：協助 DRM / WAF / CVE 稽核與 GCP 權限治理，與團隊協作多語精靈翻譯模型生命週期（GPT-4-turbo → GPT-5.4、UAT → Prod、prod GPU 根因排查）
 - **自託管 AI 平台與開源 LLM 推論**：自建並維運自託管 AI 平台（OpenClaw on VPS）落地生產 agentic workflow；於 AWS GPU EC2 評估較大開源 MoE 模型（gemma-4-26B-A4B-it、Qwen3.6-35B-A3B）作為自託管候選；另以 Ollama 在無 GPU 環境跑通查詢展開與 LLM-as-judge 自評管線（模型選型 MoE 35B → 8B dense @ NPU，含 streaming / 重試熱身 / 輸出預算等推論基建排錯）
-- **知識沉澱與方法論**：建置 raw → digest → 語意檢索 / NotebookLM 管線並整合 Jira / Notion，把個人 PoC 與踩坑轉成團隊可查用的共享記憶（降低重複試錯與理解債）並開源為 ai-kb；探索 Harness → Loop（從「人設計 harness、agent 籠內協作」到「人設計 loop、專注驗證閉環」），於 Tech team 分享 HITL 實戰（「我與 Claude Code 的一天」）
+- **知識沉澱與方法論**：建置 raw → digest → 語意檢索 / NotebookLM 管線並整合 Jira / Notion，把個人 PoC 與踩坑轉成團隊可查用的共享記憶（降低重複試錯與理解債）並開源為 ai-kb；探索 Harness → Loop（從「人設計 harness、agent 籠內協作」到「人設計 loop、專注驗證閉環」），於 Tech team 分享 HITL 實戰（「與 AI 妻子的一天 / A Day with My AI Wife」）
 - **商學底子 × 工程決策**：以商管訓練的管理視角分析維運與團隊決策——曾以數據與成本 / ROI 框架駁回低效提案，改以 span of control、bounded rationality 設計 forcing-function escalation（把無法 team 內解的問題用 data + automation 推到能解的人面前）；同一套思維延伸為 AI agent 治理的類比框架：guardrails ≈ 問責控制、scoped authorization ≈ 授權委派、harness / loop ≈ 組織設計
 - **雲端規模與可靠度（SRE）**：AWS 大規模維運與多雲治理；高併發架構（RDS Proxy 連線池、SQS 高量訂單削峰）；可靠度工程（TrendMicro 多次 DR / 韌性演練、E2E 監控、服務上線審查）；可觀測性（Prometheus / Grafana / ELK / CloudWatch）；Aurora Read Replica + RDS Proxy 高可用資料庫；Linux 底層 cgroup / namespace、FCOS ignition
 - **虛擬化與自建平台**：以 KVM/QEMU 於兩台實體機部署 OKD 4.4（OpenShift upstream）完整叢集，涵蓋 HAProxy / BIND / NFS / pfSense 全流程；早期以 VMware vSphere 建置企業 HA 環境並執行 P2V 遷移

@@ -52,7 +52,7 @@ pdf: /pdf/resume-detail-en.pdf
 - *Tools: AWS (Elemental / EKS / Aurora / RDS Proxy / DynamoDB / SQS / IVS / Personalize / Bedrock / Secrets Manager / DevOps Guru), GCP, Airflow, Gitea, Vaultwarden, Akamai DataStream, Claude Code / skills / MCP, Bruno, Terraform, Kubernetes, Go, PostgreSQL*
 
 ### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
-- Ran regular disaster-recovery drills (DR Drill, every six months to quarterly, 5–6+ over tenure) and maintenance windows across multiple core services; owned incident response
+- Ran regular disaster-recovery drills (DR Drill, every six months to quarterly, 5–6+ over tenure) and maintenance windows across multiple core services; handled incident response
 - Optimized cloud cost by identifying and removing unused / low-utilization resources, tuning data transfer, and adjusting logging
 - Strengthened operations: Opsworks → ASG / SSM migration, end-to-end (E2E) monitoring, and a service readiness review process
 - *Tools: AWS (Opsworks / ASG / SSM / CloudWatch), Chef*
