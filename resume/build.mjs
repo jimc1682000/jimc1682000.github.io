@@ -33,7 +33,7 @@ const skills = readJson(resolve(dataDir, "skills.json"), {});
 
 function projectsMarkdown(lang, compact) {
   const sep = lang === "en" ? " — " : "：";
-  let list = [...auto.map((p) => ({ name: p.name, desc: p.desc, url: p.url })), ...(manual[lang] || manual.zh || [])];
+  let list = [...auto.map((p) => ({ name: p.name, desc: p[`desc_${lang}`] ?? p.desc, url: p.url })), ...(manual[lang] || manual.zh || [])];
   // Compact variants (ai/sre/platform): collapse the whole list into ONE inline
   // line of linked names to keep the PDF to 2 pages. Website + detail PDF keep
   // the full bulleted list with descriptions.
