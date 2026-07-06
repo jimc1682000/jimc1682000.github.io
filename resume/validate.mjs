@@ -84,6 +84,10 @@ const banned = [
   ["~30 頻道", "channel count blurred for confidentiality — use 多頻道"],
   ["~30-channel", "channel count blurred — use multi-channel"],
   ["~180 DAG", "DAG count blurred for confidentiality — use 大量 DAG / many DAGs"],
+  ["TrendMicro", "official name is 'Trend Micro' (two words)"],
+  ["(Xianguan Technology)", "redundant transliteration — company EN name is Groundhog Technologies"],
+  ["bw 推展", "bare internal alias — use 帳密管理 skill（Bitwarden）推展"],
+  ["bw rolling out", "bare internal alias — use the secrets-management skill (Bitwarden-based) rolling out"],
 ];
 for (const f of mdFiles) {
   for (const [phrase, why] of banned) {
@@ -104,6 +108,27 @@ for (const [z, e] of pairs) {
   const et = mdFiles.find((f) => f.rel === e)?.txt;
   if (zt && et && h2(zt) !== h2(et)) {
     warnings.push(`${z} vs ${e}: '##' section count differs (${h2(zt)} vs ${h2(et)}) — zh/en out of sync?`);
+  }
+}
+
+// ── 6. tenure staleness (career started 2012-09) ──────────────────
+// Leading "<N> 年" / "<N> years" in each summary must not lag reality.
+// Hardcoded (no '+') and behind → error; with '+' and ≥2 years behind → warn.
+const CAREER_START = { year: 2012, month: 9 }; // 2012-09
+const nowD = new Date();
+let careerYears = nowD.getFullYear() - CAREER_START.year;
+if (nowD.getMonth() + 1 < CAREER_START.month) careerYears -= 1;
+for (const f of mdFiles) {
+  const sm = f.txt.match(/^summary:\s*(.+)$/m);
+  if (!sm) continue;
+  const lead = sm[1].match(/^\D{0,3}(\d+)(\+)?\s?(?:年|years?)/);
+  if (!lead) continue;
+  const n = Number(lead[1]);
+  const plus = Boolean(lead[2]);
+  if (!plus && n < careerYears) {
+    errors.push(`${f.rel}: summary leads with "${n} 年/years" but career is ${careerYears} full years since 2012-09 — stale; update or use "${careerYears}+"`);
+  } else if (plus && careerYears - n >= 2) {
+    warnings.push(`${f.rel}: summary leads with "${n}+" but career is ${careerYears} full years since 2012-09 — consider bumping`);
   }
 }
 
