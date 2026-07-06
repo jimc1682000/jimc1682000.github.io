@@ -6,7 +6,7 @@ compact: true
 name: 陳建豪
 nameEn: Jimmy Chen
 role: AI Engineer · DevOps / SRE
-summary: 13 years of cloud / DevOps / SRE foundations, recently focused on AI / agentic engineering — self-hosting an AI platform, building Claude Code skills and agentic workflows, and knowledge-base automation — bringing AI into production and operations on the back of deep AWS operations and automation experience.
+summary: 13+ years in IT (7+ years DevOps / SRE), recently focused on AI / agentic engineering — self-hosting an AI platform, building Claude Code skills and agentic workflows, and knowledge-base automation — bringing AI into production and operations on the back of deep AWS operations and automation experience.
 contacts:
   - text: jimc1682000@gmail.com
     href: mailto:jimc1682000@gmail.com
@@ -26,7 +26,7 @@ pdf: /pdf/resume-ai-en.pdf
 
 ## Impact Highlights
 
-- Led the team coding-agent toolchain, shipping 5 shared skills (adopted org-wide in DevOps, bw rolling out to the Tech team)
+- Led the team coding-agent toolchain, shipping 5 shared skills (adopted org-wide in DevOps, the secrets-management skill — Bitwarden-based — rolling out to the Tech team)
 - Self-hosted / open-weight LLM inference evaluation (open-weight MoE on AWS GPU EC2) + an LLM-as-judge eval loop (film-brain nDCG@5 0.93 → 0.96)
 - Sole owner of the GitLab → Gitea migration: hundreds of repos, the whole engineering org, < 2h off-peak cutover
 - Cloud cost optimization: EC2 RIs / Fargate Spot ~20% each, MediaLive Reservations ~50%
@@ -40,15 +40,15 @@ pdf: /pdf/resume-ai-en.pdf
 ## Experience
 
 ### Staff DevOps Engineer · CATCHPLAY @@ 2024.04 – Present
-- Led the team's coding-agent toolchain (command → plugin → skill), shipping reusable knowledge-base and account & secrets management skills; co-built an EKS reference environment with AI-assisted guardrails (pre-commit secret scan, PR gates, layered secret scanning); member of the ai-squad (a Tech-Lead-formed AI initiative)
+- Led the team's coding-agent toolchain (command → plugin → skill), shipping reusable knowledge-base and account & secrets management skills; member of the ai-squad (a Tech-Lead-formed AI initiative)
+- Evaluated and rolled out AWS Bedrock and Personalize; AI-assisted DRM / WAF / CVE audits
+- Co-built an EKS reference environment with AI-assisted guardrails (pre-commit secret scan, PR gates, layered secret scanning)
 - Sole owner of the GitLab → Gitea migration (hundreds of repos, the whole engineering org, < 2h off-peak cutover); built Vaultwarden and rolled out Bitwarden; evaluated and adopted Bruno to replace Postman
-- Built a multi-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, alert heatmaps, automated weekly reports, Terraform IaC); integrated AWS Elemental (MediaLive / MediaPackage / MediaTailor, DRM, Global Accelerator, SPEKE, IVS)
-- Built reusable Serverless Lambda Terraform modules and Jenkins automation; developed Geo-block deployment automation in Go
-- Re-architected the data layer: Aurora read replicas, MySQL / PostgreSQL parallel operation, RDS Proxy (absorbing bursts of thousands of simultaneous connections), Redis 5 → Valkey 7 upgrade (cost + EOL); led the Airflow 1.x → 2.0 upgrade (UAT + Production, many DAGs); built a DynamoDB monitoring dashboard + DevOps Guru
-- Multi-cloud governance and security: GCP permission tightening and API-key cleanup; AI-assisted DRM / WAF / CVE audits; Akamai LDS → DataStream 2 IaC; audited and cleaned up idle EC2 snapshots; client-project environments and CDN network allowlists
-- Used SQS for a major telco partner's high-volume orders; evaluated and rolled out AWS Bedrock, Secrets Manager, and Personalize; designed S3 + NAS hybrid storage and Akamai IaC CDN automation
+- Built a multi-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, alert heatmaps, automated weekly reports, Terraform IaC); integrated AWS Elemental (MediaLive / MediaPackage / MediaTailor, DRM, Global Accelerator, SPEKE, IVS); built a DynamoDB monitoring dashboard + DevOps Guru
+- Re-architected the data layer: Aurora read replicas, MySQL / PostgreSQL parallel operation, RDS Proxy (absorbing bursts of thousands of simultaneous connections), Redis 5 → Valkey 7 upgrade (cost + EOL); led the Airflow 1.x → 2.0 upgrade (UAT + Production, many DAGs); used SQS for a major telco partner's high-volume orders
+- Automation & multi-cloud governance: Serverless Lambda Terraform modules and Jenkins automation, Geo-block deployment automation in Go, Akamai IaC CDN automation and LDS → DataStream 2, S3 + NAS hybrid storage; GCP permission tightening and API-key cleanup, Secrets Manager rollout, idle EC2 snapshot cleanup, client-project environments and CDN network allowlists
 
-### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
+### Senior SRE Engineer · Trend Micro @@ 2021.09 – 2024.03
 - Multiple DR drills / maintenance windows + cross-service incident response; audited and decommissioned idle resources for cost, tuned data transfer and logging
 - Drove the Opsworks → ASG / SSM migration; built E2E monitoring and a service readiness review process
 
@@ -70,6 +70,7 @@ pdf: /pdf/resume-ai-en.pdf
 
 ## Education, Certifications & Languages
 
-- **Education**: Soochow University, B.A. (2007 – 2012) · Tainan First Senior High School (2004 – 2007)
+- **Education**: Soochow University, B.B.A. (2007 – 2012) · Tainan First Senior High School (2004 – 2007)
+- **Recent focus**: Agentic Workflow · EKS · Terraform · AWS Bedrock · Self-hosted LLM Inference
 - **Certifications**: RHCE · CEH · OCPJP7 · MCITP · CCNA
 - **Languages**: Chinese (native) · English (professional working proficiency · TOEIC 845)

@@ -5,8 +5,8 @@ lang: en
 compact: true
 name: 陳建豪
 nameEn: Jimmy Chen
-role: Senior Platform Engineer
-summary: 13 years across IT infrastructure and cloud platforms. Linux systems administration (RHCE), KVM/VMware virtualisation, and HAProxy HA architecture — extending into large-scale Kubernetes/EKS platform engineering. Deploys infrastructure automation with Ansible / Terraform / Go, and brings hands-on SRE depth in incident response, DR drills, and full-stack observability with Prometheus / Grafana / ELK.
+role: Staff Platform Engineer
+summary: 13+ years across IT infrastructure and cloud platforms. Linux systems administration (RHCE), KVM/VMware virtualisation, and HAProxy HA architecture — extending into large-scale Kubernetes/EKS platform engineering. Deploys infrastructure automation with Ansible / Terraform / Go, and brings hands-on SRE depth in incident response, DR drills, and full-stack observability with Prometheus / Grafana / ELK.
 contacts:
   - text: jimc1682000@gmail.com
     href: mailto:jimc1682000@gmail.com
@@ -34,11 +34,11 @@ pdf: /pdf/resume-platform-en.pdf
 
 ## Platform Engineering Core Competencies
 
-- **Virtualisation / HA**: KVM/QEMU OKD 4.4 full cluster (HAProxy / BIND / NFS / pfSense); VMware vSphere HA + P2V migrations; HAProxy multi-backend load balancing; EKS rolling upgrades; Aurora Read Replica + RDS Proxy HA; multiple DR drills at TrendMicro
+- **Virtualisation / HA**: KVM/QEMU OKD 4.4 full cluster (HAProxy / BIND / NFS / pfSense); VMware vSphere HA + P2V migrations; HAProxy multi-backend load balancing; EKS rolling upgrades; Aurora Read Replica + RDS Proxy HA; multiple DR drills at Trend Micro
 - **Linux / Networking / Storage**: RHCE certified; yum server for centralised RPM; Kubernetes node-level cgroup / namespace; FCOS ignition; pfSense DHCP/NAT/Firewall; BIND DNS; NFS persistent storage; iptables / VPN
 - **Automation / IaC**: Ansible (DSP/DMP deployments, OKD4 playbooks, Kubernetes + Gitea / Jenkins); Terraform (Lambda modules, EKS infra, Akamai DataStream 2, multiple AWS services); Go / Bash (Geo-block automation, yum/RPM scripts, OKD4 bootstrap)
 - **Observability**: FAST-channel monitoring (LINE Bot / Slack; weekly reports + alert heatmaps); DynamoDB dashboard + DevOps Guru anomaly detection; centralised ELK logging; end-to-end (E2E) monitoring
-- **Incident Response / SRE**: cross-service incident response at TrendMicro; Service Readiness Review; multiple DR drills / resilience tests; pre-commit / PR-gate guardrails
+- **Incident Response / SRE**: cross-service incident response at Trend Micro; Service Readiness Review; multiple DR drills / resilience tests; pre-commit / PR-gate guardrails
 
 ## Experience
 
@@ -51,7 +51,7 @@ pdf: /pdf/resume-platform-en.pdf
 - Integrated AWS Elemental streaming (DRM, Global Accelerator, SPEKE, IVS); migrated Akamai LDS → DataStream 2 via IaC
 - Multi-cloud governance: GCP permission hardening, Secrets Manager cleanup, WAF / CVE audits; audited and removed idle EC2 snapshots
 
-### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
+### Senior SRE Engineer · Trend Micro @@ 2021.09 – 2024.03
 - Owned cross-service incident response; ran regular DR drills / resilience tests (every six months to quarterly, 5–6+ over tenure) and maintenance windows
 - Built end-to-end (E2E) monitoring and a Service Readiness Review process
 - Drove Opsworks → ASG / SSM migration; audited and decommissioned idle resources
@@ -81,6 +81,7 @@ pdf: /pdf/resume-platform-en.pdf
 
 ## Education, Certifications & Languages
 
-- **Education**: Soochow University, B.A. (2007 – 2012) · Tainan First Senior High School (2004 – 2007)
+- **Education**: Soochow University, B.B.A. (2007 – 2012) · Tainan First Senior High School (2004 – 2007)
+- **Recent focus**: Agentic Workflow · EKS · Terraform · AWS Bedrock · Self-hosted LLM Inference
 - **Certifications**: RHCE · CEH · OCPJP7 · MCITP · CCNA
 - **Languages**: Chinese (native) · English (professional working proficiency · TOEIC 845)

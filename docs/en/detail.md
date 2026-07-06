@@ -5,7 +5,7 @@ lang: en
 name: 陳建豪
 nameEn: Jimmy Chen
 role: DevOps / SRE / AI Engineer
-summary: A 13-year IT career spanning systems engineering, backend development, and DevOps / SRE. Starting in network and server operations, moving through Java web backend development, and in recent years specializing in large-scale cloud platform operations and automation. Experienced in AWS at scale, Kubernetes, observability, CI/CD, and information security (CEH), and bringing AI / agentic workflows into operations. Full history below.
+summary: 13+ years of IT experience spanning systems engineering, backend development, and DevOps / SRE. Starting in network and server operations, moving through Java web backend development, and in recent years specializing in large-scale cloud platform operations and automation. Experienced in AWS at scale, Kubernetes, observability, CI/CD, and information security (CEH), and bringing AI / agentic workflows into operations. Full history below.
 contacts:
   - text: jimc1682000@gmail.com
     href: mailto:jimc1682000@gmail.com
@@ -27,17 +27,17 @@ pdf: /pdf/resume-detail-en.pdf
 
 - Sole owner of the GitLab → Gitea migration: hundreds of repos, the whole engineering org, < 2h off-peak cutover
 - Cloud cost optimization: EC2 RIs / Fargate Spot ~20% each, MediaLive Reservations ~50%
-- Led the team coding-agent toolchain, shipping 5 shared skills (adopted org-wide in DevOps, bw rolling out to the Tech team)
+- Led the team coding-agent toolchain, shipping 5 shared skills (adopted org-wide in DevOps, the secrets-management skill — Bitwarden-based — rolling out to the Tech team)
 - Built a multi-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, Terraform IaC)
 - Led the Airflow 1.x → 2.0 upgrade (UAT + Production, carrying many DAGs)
 
 ## AI / Cross-Domain Technical Profile
 
 - **Agent-native engineering & AIOps**: treat AI as a co-developer — converging ad-hoc needs into a reusable coding-agent skill ecosystem and safety guardrails (CI auto-gates, context / secrets boundaries) rather than one-off scripts; and apply AI to operations — DRM / WAF / CVE audits and GCP permission governance, plus collaborating on the multilingual-assistant translation-model lifecycle (GPT-4-turbo → GPT-5.4, UAT → Prod, prod GPU root-cause)
-- **Self-hosted AI platform & open-weight LLM inference**: self-host and operate an AI platform (OpenClaw on VPS) running production agentic workflows; evaluated larger open-weight MoE models (gemma-4-26B-A4B-it, Qwen3.6-35B-A3B) on AWS GPU EC2 as self-hosting candidates; separately ran query expansion + an LLM-as-judge eval pipeline via Ollama on no-GPU hardware (model selection MoE 35B → 8B dense @ NPU, with inference-infra fixes — streaming cancel, retry warmup, output budget)
+- **Self-hosted AI platform & open-weight LLM inference**: self-host and operate an AI platform (OpenClaw on VPS) running production agentic workflows; evaluated larger open-weight MoE models (Gemma-4-26B-A4B-it, Qwen3.6-35B-A3B) on AWS GPU EC2 as self-hosting candidates; separately ran query expansion + an LLM-as-judge eval pipeline via Ollama on no-GPU hardware (model selection MoE 35B → 8B dense @ NPU, with inference-infra fixes — streaming cancel, retry warmup, output budget)
 - **Knowledge & methodology**: built a raw → digest → semantic-search / NotebookLM pipeline integrated with Jira / Notion, turning personal PoCs and lessons into queryable shared team memory (cutting repeated trial-and-error) and open-sourced as ai-kb; exploring Harness → Loop (from "humans design the harness, agents collaborate inside" to "humans design the loop, focus on the verification closure"), and shared HITL practices with the Tech team ("A Day with My AI Wife")
 - **Business foundation × engineering judgment**: apply a management lens (BBA training) to ops and team decisions — used data and cost / ROI reasoning to push back on a low-value proposal, redesigning it as a forcing-function escalation (span of control, bounded rationality) that routes out-of-scope problems to whoever can actually solve them; extend the same thinking as an analogy for AI-agent governance — guardrails ≈ accountability controls, scoped authorization ≈ delegation, harness / loop ≈ organizational design
-- **Cloud scale & reliability (SRE)**: large-scale AWS operations and multi-cloud governance; high-concurrency architecture (RDS Proxy connection pooling, SQS high-volume order smoothing); reliability engineering (multiple DR / resilience drills at TrendMicro, E2E monitoring, service readiness reviews); observability (Prometheus / Grafana / ELK / CloudWatch); Aurora Read Replica + RDS Proxy HA; Linux-level cgroup / namespace, FCOS ignition
+- **Cloud scale & reliability (SRE)**: large-scale AWS operations and multi-cloud governance; high-concurrency architecture (RDS Proxy connection pooling, SQS high-volume order smoothing); reliability engineering (multiple DR / resilience drills at Trend Micro, E2E monitoring, service readiness reviews); observability (Prometheus / Grafana / ELK / CloudWatch); Aurora Read Replica + RDS Proxy HA; Linux-level cgroup / namespace, FCOS ignition
 - **Virtualisation & self-built platforms**: deployed a full OKD 4.4 (OpenShift upstream) cluster on two physical KVM/QEMU hosts, covering HAProxy / BIND / NFS / pfSense end-to-end; earlier built enterprise VMware vSphere HA environments and ran P2V migrations
 
 ## Experience
@@ -51,7 +51,7 @@ pdf: /pdf/resume-detail-en.pdf
 - **System integration & architecture**: built S3 / NAS hybrid storage for video content and S3 lifecycle auto-cleanup; developed Akamai IaC for automated CDN cache management; built a short-link service; optimized portal deployment (build once, deploy anywhere); built a DynamoDB monitoring dashboard and deployed DevOps Guru
 - *Tools: AWS (Elemental / EKS / Aurora / RDS Proxy / DynamoDB / SQS / IVS / Personalize / Bedrock / Secrets Manager / DevOps Guru), GCP, Airflow, Gitea, Vaultwarden, Akamai DataStream, Claude Code / skills / MCP, Bruno, Terraform, Kubernetes, Go, PostgreSQL*
 
-### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
+### Senior SRE Engineer · Trend Micro @@ 2021.09 – 2024.03
 - Ran regular disaster-recovery drills (DR Drill, every six months to quarterly, 5–6+ over tenure) and maintenance windows across multiple core services; handled incident response
 - Optimized cloud cost by identifying and removing unused / low-utilization resources, tuning data transfer, and adjusting logging
 - Strengthened operations: Opsworks → ASG / SSM migration, end-to-end (E2E) monitoring, and a service readiness review process
@@ -86,12 +86,12 @@ pdf: /pdf/resume-detail-en.pdf
 - Audited firewall settings and patched security vulnerabilities
 - *Tools: Docker, Kafka, Zookeeper, ELK, Grafana, Prometheus, Kubernetes, Ansible, GitLab CI/CD, GCP, MongoDB, Redis*
 
-### Senior Java Web Engineer · Groundhog Technologies (Xianguan Technology) @@ 2017.11 – 2018.09
+### Senior Java Web Engineer · Groundhog Technologies @@ 2017.11 – 2018.09
 - Maintained and built new features for the CovMo (cellphone signal optimization) system; refactored code for readability; tuned SQL queries for performance
 - *Tools: Java, JavaScript, GWT, Spring, Tomcat, MySQL*
 
 ### Senior Java Web Engineer · Bank SinoPac @@ 2015.04 – 2017.11
-- Gathered user requirements and built, from the ground up, a system digitizing the four core investment-trust workflows (analysis reports, sign-off, order placement & trading, risk control (pre / real-time / post), performance analysis, audit trail); built multiple RESTful web services with ZK, Hibernate, JMS, and GSON
+- Gathered user requirements and built, from the ground up, a system digitizing the core investment-trust workflows (analysis reports, sign-off, order placement & trading, risk control (pre / real-time / post), performance analysis, audit trail); built multiple RESTful web services with ZK, Hibernate, JMS, and GSON
 - *Tools: Java, ZK, Hibernate, JMS, GSON, Tomcat, ActiveMQ, MSSQL*
 
 ### Senior System Engineer · Gping Construction @@ 2014.03 – 2015.04

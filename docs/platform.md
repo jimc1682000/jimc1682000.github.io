@@ -5,8 +5,8 @@ lang: zh
 compact: true
 name: 陳建豪
 nameEn: Jimmy Chen
-role: Senior Platform Engineer
-summary: 13 年 IT 基礎架構與雲端平台經驗。Linux 系統管理（RHCE 認證）、KVM/VMware 虛擬化、HAProxy HA 架構設計，延伸至大規模 Kubernetes/EKS 平台工程。以 Ansible / Terraform / Go 落地自動化，具備 Incident Response、多次 DR 演練、Prometheus/Grafana/ELK 可觀測性等完整 SRE 實戰背景。
+role: Staff Platform Engineer
+summary: 13+ 年 IT 基礎架構與雲端平台經驗。Linux 系統管理（RHCE 認證）、KVM/VMware 虛擬化、HAProxy HA 架構設計，延伸至大規模 Kubernetes/EKS 平台工程。以 Ansible / Terraform / Go 落地自動化，具備 Incident Response、多次 DR 演練、Prometheus/Grafana/ELK 可觀測性等完整 SRE 實戰背景。
 contacts:
   - text: jimc1682000@gmail.com
     href: mailto:jimc1682000@gmail.com
@@ -34,11 +34,11 @@ pdf: /pdf/resume-platform-zh.pdf
 
 ## Platform Engineering 核心能力
 
-- **虛擬化 / HA**：KVM/QEMU 部署 OKD 4.4 完整叢集（HAProxy / BIND / NFS / pfSense）；VMware vSphere HA + P2V 遷移；HAProxy 多 backend 負載均衡；EKS 滾動升級；Aurora Read Replica + RDS Proxy 高可用架構；TrendMicro 多次 DR Drill
+- **虛擬化 / HA**：KVM/QEMU 部署 OKD 4.4 完整叢集（HAProxy / BIND / NFS / pfSense）；VMware vSphere HA + P2V 遷移；HAProxy 多 backend 負載均衡；EKS 滾動升級；Aurora Read Replica + RDS Proxy 高可用架構；Trend Micro 多次 DR Drill
 - **Linux / 網路 / 儲存**：RHCE 認證；yum server 集中管理 RPM；Kubernetes node 層 cgroup / namespace；FCOS ignition；pfSense DHCP/NAT/Firewall；BIND DNS；NFS persistent storage；iptables / VPN
 - **自動化 / IaC**：Ansible（DSP/DMP 部署、OKD4 Playbook、Kubernetes + Gitea / Jenkins）；Terraform（Lambda 模組、EKS infra、Akamai DataStream 2、多個 AWS 服務）；Go / Bash（Geo-block 部署自動化、yum/RPM 管理、OKD4 bootstrap）
 - **可觀測性**：FAST 頻道監控平台（LINE Bot / Slack；週報 + 告警熱力圖）；DynamoDB 儀表板 + DevOps Guru 異常偵測；ELK 集中化日誌；端對端（E2E）監控
-- **Incident Response / SRE**：TrendMicro 跨服務 Incident Response；Service Readiness Review 流程；多次 DR Drill / 韌性演練；pre-commit / PR gate guardrails
+- **Incident Response / SRE**：Trend Micro 跨服務 Incident Response；Service Readiness Review 流程；多次 DR Drill / 韌性演練；pre-commit / PR gate guardrails
 
 ## 工作經歷
 
@@ -51,7 +51,7 @@ pdf: /pdf/resume-platform-zh.pdf
 - 整合 AWS Elemental 媒體串流（DRM、Global Accelerator、SPEKE、IVS）；完成 Akamai LDS → DataStream 2 IaC 化
 - 多雲治理：GCP 權限限縮、Secrets Manager 憑證整頓、WAF / CVE 稽核；盤點清理閒置 EC2 snapshots
 
-### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
+### Senior SRE Engineer · Trend Micro @@ 2021.09 – 2024.03
 - 負責跨服務 Incident Response；定期執行 DR Drill / 韌性演練（半年至每季、累計 5–6 次以上）與 Maintenance Window
 - 建立端對端（E2E）監控與 Service Readiness Review 流程
 - 推動 Opsworks → ASG / SSM 遷移；盤點下線閒置資源優化雲端成本
@@ -82,5 +82,6 @@ pdf: /pdf/resume-platform-zh.pdf
 ## 學歷、認證 & 語言
 
 - **學歷**：東吳大學 學士（2007 – 2012）· 國立臺南第一高級中學（2004 – 2007）
+- **近期焦點**：Agentic Workflow · EKS · Terraform · AWS Bedrock · 自託管 LLM 推論
 - **認證**：RHCE · CEH · OCPJP7 · MCITP · CCNA
 - **語言**：中文（母語）· English（專業工作能力 · TOEIC 845）

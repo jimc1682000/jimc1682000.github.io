@@ -6,7 +6,7 @@ compact: true
 name: 陳建豪
 nameEn: Jimmy Chen
 role: SRE / DevOps Engineer
-summary: 13 年 IT 基礎架構與後端開發經驗，5+ 年專注 DevOps / SRE，聚焦 Kubernetes 平台全生命週期、可觀測性與系統可靠度。兼具後端開發（Java / Python）與大型雲端平台架構與維運能力，熟悉 Incident Response、災難復原 / 韌性演練與服務上線審查（Design / Readiness Review），並將 AI / Agentic 工作流導入維運自動化。
+summary: 13+ 年 IT 基礎架構與後端開發經驗，7+ 年專注 DevOps / SRE，聚焦 Kubernetes 平台全生命週期、可觀測性與系統可靠度。兼具後端開發（Java / Python）與大型雲端平台架構與維運能力，熟悉 Incident Response、災難復原 / 韌性演練與服務上線審查（Design / Readiness Review），並將 AI / Agentic 工作流導入維運自動化。
 contacts:
   - text: jimc1682000@gmail.com
     href: mailto:jimc1682000@gmail.com
@@ -26,7 +26,7 @@ pdf: /pdf/resume-sre-zh.pdf
 
 ## 重點成果
 
-- TrendMicro 定期 DR / 韌性演練（半年至每季、累計 5–6 次以上），涵蓋多個核心服務
+- Trend Micro 定期 DR / 韌性演練（半年至每季、累計 5–6 次以上），涵蓋多個核心服務
 - 主導 Airflow 1.x → 2.0 升級（UAT + Production 雙環境，承載 大量 DAG）
 - 建置 多頻道 event-driven FAST 監控平台（CloudWatch → SNS → Lambda → Slack / LINE，Terraform IaC）
 - 高併發 / 規模：RDS Proxy 解瞬間數千級連線、Aurora Read Replica 分流、SQS 處理高量訂單
@@ -52,7 +52,7 @@ pdf: /pdf/resume-sre-zh.pdf
 - 整合 AWS Elemental 媒體串流（DRM、Global Accelerator、SPEKE、IVS）；完成 Akamai LDS → DataStream 2 IaC 化
 - 多雲治理與資安：GCP 權限限縮、Secrets Manager 憑證整頓、DRM / WAF / CVE 稽核；盤點並清理閒置 EC2 snapshots；客戶專案環境建置與 CDN 網段白名單
 
-### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
+### Senior SRE Engineer · Trend Micro @@ 2021.09 – 2024.03
 - 負責跨服務 Incident Response；定期執行災難復原演練（DR Drill / 韌性測試，半年至每季、累計 5–6 次以上，涵蓋多個核心服務）與維護視窗（Maintenance Window）
 - 建立端對端（E2E）監控機制與服務上線審查（Service Readiness Review）流程
 - 推動 Opsworks → ASG / SSM 遷移；盤點並下線閒置資源優化雲端成本與日誌設定
@@ -85,5 +85,6 @@ pdf: /pdf/resume-sre-zh.pdf
 ## 學歷、認證 & 語言
 
 - **學歷**：東吳大學 學士（2007 – 2012）· 國立臺南第一高級中學（2004 – 2007）
+- **近期焦點**：Agentic Workflow · EKS · Terraform · AWS Bedrock · 自託管 LLM 推論
 - **認證**：RHCE · CEH · OCPJP7 · MCITP · CCNA
 - **語言**：中文（母語）· English（專業工作能力 · TOEIC 845）

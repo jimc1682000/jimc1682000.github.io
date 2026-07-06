@@ -6,7 +6,7 @@ compact: true
 name: 陳建豪
 nameEn: Jimmy Chen
 role: SRE / DevOps Engineer
-summary: 13 years across IT infrastructure and backend development, 5+ years focused on DevOps / SRE, centered on the Kubernetes platform lifecycle, observability, and system reliability. I combine backend development (Java / Python) with large-scale cloud platform architecture and operations, and am experienced in incident response, disaster-recovery / resilience drills, and design / readiness reviews — while bringing AI / agentic workflows into operational automation.
+summary: 13+ years across IT infrastructure and backend development, 7+ years focused on DevOps / SRE, centered on the Kubernetes platform lifecycle, observability, and system reliability. I combine backend development (Java / Python) with large-scale cloud platform architecture and operations, and am experienced in incident response, disaster-recovery / resilience drills, and design / readiness reviews — while bringing AI / agentic workflows into operational automation.
 contacts:
   - text: jimc1682000@gmail.com
     href: mailto:jimc1682000@gmail.com
@@ -26,7 +26,7 @@ pdf: /pdf/resume-sre-en.pdf
 
 ## Impact Highlights
 
-- Regular DR / resilience drills at TrendMicro (every six months to quarterly, 5–6+ over tenure) across multiple core services
+- Regular DR / resilience drills at Trend Micro (every six months to quarterly, 5–6+ over tenure) across multiple core services
 - Led the Airflow 1.x → 2.0 upgrade (UAT + Production, carrying many DAGs)
 - Built a multi-channel event-driven FAST monitoring platform (CloudWatch → SNS → Lambda → Slack / LINE, Terraform IaC)
 - High concurrency / scale: RDS Proxy absorbing bursts of thousands of connections, Aurora read replicas, SQS for high-volume orders
@@ -52,7 +52,7 @@ pdf: /pdf/resume-sre-en.pdf
 - Integrated AWS Elemental streaming (DRM, Global Accelerator, SPEKE, IVS); migrated Akamai LDS → DataStream 2 via IaC
 - Multi-cloud governance and security: GCP permission tightening, Secrets Manager credential cleanup, DRM / WAF / CVE audits; audited and cleaned up idle EC2 snapshots; client-project environments and CDN network allowlists
 
-### Senior SRE Engineer · TrendMicro @@ 2021.09 – 2024.03
+### Senior SRE Engineer · Trend Micro @@ 2021.09 – 2024.03
 - Owned cross-service incident response; ran regular disaster-recovery drills (resilience testing, every six months to quarterly, 5–6+ over tenure across multiple core services) and maintenance windows
 - Built end-to-end (E2E) monitoring and established a service readiness review process
 - Drove the Opsworks → ASG / SSM migration; audited and decommissioned idle resources to cut cloud cost and tune logging
@@ -84,6 +84,7 @@ pdf: /pdf/resume-sre-en.pdf
 
 ## Education, Certifications & Languages
 
-- **Education**: Soochow University, B.A. (2007 – 2012) · Tainan First Senior High School (2004 – 2007)
+- **Education**: Soochow University, B.B.A. (2007 – 2012) · Tainan First Senior High School (2004 – 2007)
+- **Recent focus**: Agentic Workflow · EKS · Terraform · AWS Bedrock · Self-hosted LLM Inference
 - **Certifications**: RHCE · CEH · OCPJP7 · MCITP · CCNA
 - **Languages**: Chinese (native) · English (professional working proficiency · TOEIC 845)
