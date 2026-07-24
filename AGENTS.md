@@ -18,7 +18,18 @@
 1. 文章放 `content/blog/YYYY/<slug>.md`（繁中）；英文譯文放 `content/blog/en/YYYY/<slug>.md`。
 2. `<slug>` 用小寫、連字號分隔（kebab-case），對應產出的 `/blog/<slug>`。slug 取檔名 basename（忽略 `YYYY/` 目錄），故 **同語系內 slug 必須唯一**（例：`2025/foo.md` 與 `2026/foo.md` 會撞路由並中斷 build）。
 3. 起頭以 **GitHub Draft PR** 進行；**不要**用 frontmatter draft 欄位（本站無此機制）。
-4. 完稿、review 後再轉正式 PR 合併。
+4. 完稿後把 PR 標成 **Ready for review**，即進入自動合併判斷。
+
+## 自動合併管線（`.github/workflows/auto-merge.yml`）
+
+| 條件 | 行為 |
+|------|------|
+| PR 還是 **Draft** | 不動作（草稿階段） |
+| Ready + **只動 `content/blog/**` 或 `public/blog/**`** | 跑 `astro build` gate，綠則自動 squash-merge，並觸發部署 |
+| Ready + 含**其他檔案**（版型／token／路由／設定／workflow） | **不自動合併**，留言提示需人工 review |
+
+- 自動合併用 `GITHUB_TOKEN`，其 push 不會自動觸發 deploy，故合併後 workflow 會顯式 `workflow_dispatch` 觸發 `deploy.yml`。
+- 合併後子站與 brand 一併重新組裝、部署到 CF（canonical）與 GH Pages（mirror）。
 
 ## Frontmatter
 
