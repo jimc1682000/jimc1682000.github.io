@@ -2,14 +2,7 @@
 title: "介紹幾個比較常見的雲端IDE(Cloud IDE)"
 pubDate: 2015-09-06
 description: "今天我來跟各位介紹幾個比較常見的雲端IDE，因為目前雲端IDE愈來愈多了，這邊以我認為開發Java的方便度以及根據Slant上面的評分( What is the best cloud IDE?"
-tags:
-  - "Koding"
-  - "介紹"
-  - "Codeanywhere"
-  - "Codenvy"
-  - "IDE"
-  - "Cloud IDE"
-  - "Cloud9"
+tags: [雲端開發]
 ---
 今天我來跟各位介紹幾個比較常見的雲端IDE，因為目前雲端IDE愈來愈多了，這邊以我認為開發Java的方便度以及根據Slant上面的評分( [What is the best cloud IDE? - Slant](http://www.slant.co/topics/713/~what-is-the-best-cloud-ide) )，選出前幾名來介紹：  
   

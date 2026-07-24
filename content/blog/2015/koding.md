@@ -2,25 +2,7 @@
 title: "Koding環境設定筆記"
 pubDate: 2015-09-06
 description: "先說明一下，在Koding環境當中，有一個Koding Package Manger ( kpm ) 的程式包管理員存在，如果在下面的教學中，有kpm的話會在最"
-tags:
-  - "Nginx"
-  - "AngularJS"
-  - "Tomcat"
-  - "ftp"
-  - "phpMyAdmin"
-  - "介紹"
-  - "Koding"
-  - "Github"
-  - "VNC"
-  - "VirtualDirectory"
-  - "Apache Tomcat"
-  - "Apache"
-  - "Cloud IDE"
-  - "NodeJS"
-  - "MySQL"
-  - "PHP"
-  - "Dropbox"
-  - "vsftpd"
+tags: [雲端開發]
 ---
 先說明一下，在Koding環境當中，有一個Koding Package Manger ( kpm ) 的程式包管理員存在，如果在下面的教學中，有kpm的話會在最上方，用kpm的方式安裝後，就不用再按照下方的分解步驟安裝了，不過如果想要練功夫的話，倒是可以先用分解步驟安裝。  
   

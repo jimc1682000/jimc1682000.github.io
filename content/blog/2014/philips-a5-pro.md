@@ -2,13 +2,7 @@
 title: "[心得] 在加煒試聽Philips A5 Pro心得"
 pubDate: 2014-05-26
 description: "身為一個擁有Philips S2以及Philips X1的消費者， 對於Philips這次跟Armin Van Buuren合作推出的A5 Pro，說不會有所期"
-tags:
-  - "Philips X1"
-  - "耳機"
-  - "Philips"
-  - "Philips A5 Pro"
-  - "音響"
-  - "心得"
+tags: [評測, 音響]
 ---
 身為一個擁有Philips S2以及Philips X1的消費者，  
 對於Philips這次跟Armin Van Buuren合作推出的A5 Pro，說不會有所期待是假的XD  

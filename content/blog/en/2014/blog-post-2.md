@@ -2,13 +2,10 @@
 title: "The First Post on Jimmy City~"
 pubDate: 2014-05-24
 description: "Haha, XDD blogs don't feel as popular as they used to. Social networks like FB have taken over, but I still think that if you have something long to say, a blog is still the more proper place for it."
-tags:
-  - "My Jimmy City"
-  - "Announcement"
-  - "Blog"
 locale: en
 translationOf: blog-post-2
 aiTranslated: true
+tags: [Life]
 ---
 Haha, XDD blogs don't feel as popular as they used to, XDD  
 Social networks like FB have taken over instead, but I still think  

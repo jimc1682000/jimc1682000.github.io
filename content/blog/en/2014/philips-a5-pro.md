@@ -2,16 +2,10 @@
 title: "[Notes] Auditioning the Philips A5 Pro at JiaWei"
 pubDate: 2014-05-26
 description: "As someone who owns both the Philips S2 and the Philips X1, it would be a lie to say I had no expectations for the A5 Pro that Philips has released in collaboration with Armin Van Buuren, XD"
-tags:
-  - "Philips X1"
-  - "Headphones"
-  - "Philips"
-  - "Philips A5 Pro"
-  - "Audio"
-  - "Notes"
 locale: en
 translationOf: philips-a5-pro
 aiTranslated: true
+tags: [Reviews, Audio]
 ---
 As someone who owns both the Philips S2 and the Philips X1,  
 it would be a lie to say I had no expectations for the A5 Pro that Philips released in collaboration with Armin Van Buuren, XD  

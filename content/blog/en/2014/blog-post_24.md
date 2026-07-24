@@ -2,15 +2,10 @@
 title: "[I Think, Therefore I Am] On the Taipei Metro Killing"
 pubDate: 2014-05-24
 description: "The remarks below: moral crusaders, please skip."
-tags:
-  - "I Think Therefore I Am"
-  - "Metro"
-  - "My Jimmy City"
-  - "Taipei Metro Killing"
-  - "Taipei"
 locale: en
 translationOf: blog-post_24
 aiTranslated: true
+tags: [Life]
 ---
 The remarks below: moral crusaders, please skip.  
   

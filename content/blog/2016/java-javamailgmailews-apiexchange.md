@@ -2,9 +2,7 @@
 title: "[Java] 使用JavaMail從GMail寄信以及使用EWS API從Exchange寄信"
 pubDate: 2016-07-15
 description: "今天在研究如何使用Java Mail的API從GMail寄信出去，以及使用EWS API從Exchange寄信，寫了一些測試用的Code分享給大家。"
-tags:
-  - "Java"
-  - "程式"
+tags: [Java]
 ---
 今天在研究如何使用Java Mail的API從GMail寄信出去，以及使用EWS API從Exchange寄信，寫了一些測試用的Code分享給大家。  
   

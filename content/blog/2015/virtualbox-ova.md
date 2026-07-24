@@ -2,9 +2,7 @@
 title: "Virtualbox OVA匯出匯入"
 pubDate: 2015-09-13
 description: "其實很簡單，這邊只是帶大家做一遍而已。"
-tags:
-  - "Virtualbox"
-  - "OVA"
+tags: [Linux]
 ---
 其實很簡單，這邊只是帶大家做一遍而已。  
   

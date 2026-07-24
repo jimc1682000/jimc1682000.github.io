@@ -2,10 +2,7 @@
 title: "[LeetCode] Two Sum 兩兩相加 (No.1)"
 pubDate: 2016-07-13
 description: "Given an array of integers, return indices of the two numbers such that they add up to a specific target."
-tags:
-  - "Java"
-  - "程式"
-  - "LeetCode"
+tags: [演算法]
 ---
 Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 

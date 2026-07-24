@@ -2,10 +2,11 @@
 title: "Linux Basic Concepts"
 pubDate: 2015-10-03
 description: "1. The Linux Kernel: Shell/KDE/Application <- Kernel <- Hardware. Technically, Linux is just a kernel."
-tags: ["FHS", "Shell", "Linux", "File System", "ACL", "Kernel", "Mac", "Filesystem Hierachy Standard"]
+
 locale: en
 translationOf: linuxlinux-basic-concept
 aiTranslated: true
+tags: [Linux]
 ---
 ## 1. The Linux Kernel
 

@@ -5,6 +5,7 @@ description: "You are given two linked lists representing two non-negative numbe
 locale: en
 translationOf: leetcode-add-two-numbers-linkedlist-no2
 aiTranslated: true
+tags: [Algorithms]
 ---
 You are given two linked lists representing two non-negative numbers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
 

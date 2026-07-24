@@ -2,10 +2,11 @@
 title: "A Roundup of Common Programming Principles"
 pubDate: 2016-01-11
 description: "- The SOLID principles (SRP, OCP, LSP, ISP, DIP) - SRP (Single Responsibility) - Definition: a class should have only one reason to change."
-tags: ["SRP", "OO", "Rule Of Three", "DRY", "DIP", "KISS", "SOLID", "OCP"]
+
 locale: en
 translationOf: blog-post-3
 aiTranslated: true
+tags: [Software Engineering]
 ---
   
 

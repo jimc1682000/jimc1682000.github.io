@@ -2,16 +2,10 @@
 title: "[Notes] Trying Out the \"Golden Sound Concert Hall\" Tuning Pack"
 pubDate: 2014-07-02
 description: "A friendly heads-up: the tuning pack was a loaner for testing from the vendor. That said, I've tried to stay as neutral as possible in writing up my impressions, so take them for what they're worth."
-tags:
-  - "Headphones"
-  - "Introduction"
-  - "Audio Rack"
-  - "Tuning Pack"
-  - "Audio"
-  - "Notes"
 locale: en
 translationOf: blog-post
 aiTranslated: true
+tags: [Reviews, Audio]
 ---
 A friendly heads-up: the tuning pack was a loaner for testing from the vendor,  
 but I've tried to stay as neutral as possible in writing up my impressions, so take them for what they're worth.  

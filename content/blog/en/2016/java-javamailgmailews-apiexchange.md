@@ -2,10 +2,11 @@
 title: "[Java] Sending Mail from GMail with JavaMail and from Exchange with the EWS API"
 pubDate: 2016-07-15
 description: "Today I looked into how to send mail out from GMail using the Java Mail API, and from Exchange using the EWS API. I wrote some test code to share with you all."
-tags: ["Java", "Programming"]
+
 locale: en
 translationOf: java-javamailgmailews-apiexchange
 aiTranslated: true
+tags: [Java]
 ---
 Today I looked into how to send mail out from GMail using the Java Mail API, and from Exchange using the EWS API. I wrote some test code to share with you all.  
   

@@ -2,19 +2,10 @@
 title: "[Tutorial] How to Fix OpenSSL Heartbleed on the RT-N16 (Tomato by shibby)"
 pubDate: 2014-07-03
 description: "First, let me explain what OpenSSL Heartbleed is. In OpenVPN's own words: \"A vulnerability in OpenSSL, nicknamed Heartbleed, was published in April 2014.\" OpenVPN uses OpenSSL as its default crypto library, so it's affected too."
-tags:
-  - "N16"
-  - "Information Security"
-  - "Tutorial"
-  - "OpenVPN"
-  - "Tomato"
-  - "Heartbleed"
-  - "Wireless Router"
-  - "Android"
-  - "OpenSSL"
 locale: en
 translationOf: rt-n16tomato-by-shibbyopenssl-heartbleed
 aiTranslated: true
+tags: [Security]
 ---
 First, let me explain what OpenSSL Heartbleed is:  
 In OpenVPN's own words on their site:  

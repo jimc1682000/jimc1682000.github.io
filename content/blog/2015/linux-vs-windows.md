@@ -2,18 +2,7 @@
 title: "Linux vs Windows"
 pubDate: 2015-10-03
 description: "一、What is Linux?"
-tags:
-  - "RedHat"
-  - "Debian"
-  - "Linux"
-  - "Fedora"
-  - "Registry"
-  - "Windows"
-  - "CentOS"
-  - "OpenSUSE"
-  - "Security"
-  - "POSIX"
-  - "UNIX"
+tags: [Linux]
 ---
 一、What is Linux?
 

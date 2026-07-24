@@ -2,10 +2,11 @@
 title: "[LeetCode] Longest Substring Without Repeating Characters (No.3)"
 pubDate: 2016-07-19
 description: "Given a string, find the length of the longest substring without repeating characters."
-tags: ["Java", "Programming", "LeetCode"]
+
 locale: en
 translationOf: leetcode-longest-substring-without
 aiTranslated: true
+tags: [Algorithms]
 ---
 Given a string, find the length of the longest substring without repeating characters.
 
