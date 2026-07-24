@@ -1,0 +1,110 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/ui';
+import { groupByYear, slugOf, formatMonthDay, type BlogEntry } from '../lib/blog';
+
+interface Props {
+  posts: BlogEntry[];
+  lang: Lang;
+}
+
+const { posts, lang } = Astro.props;
+const t = useTranslations(lang);
+const blogBase = lang === 'en' ? '/en/blog' : '/blog';
+const groups = groupByYear(posts);
+---
+
+{
+  posts.length === 0 ? (
+    <p class="empty">{t('blog.empty')}</p>
+  ) : (
+    groups.map((group) => (
+      <>
+        <div class="year">{group.year}</div>
+        {group.posts.map((post) => (
+          <a class="post" href={`${blogBase}/${slugOf(post)}/`}>
+            <div class="pt">
+              <span>{post.data.title}</span>
+              <time datetime={post.data.pubDate.toISOString()}>
+                {formatMonthDay(post.data.pubDate, lang)}
+              </time>
+            </div>
+            <div class="pd">{post.data.description}</div>
+            {post.data.tags.length > 0 && (
+              <div class="ptags">
+                {post.data.tags.map((tag) => (
+                  <span class="ptag">{tag}</span>
+                ))}
+              </div>
+            )}
+          </a>
+        ))}
+      </>
+    ))
+  )
+}
+
+<style>
+  .empty {
+    color: var(--color-text-tertiary);
+    padding-block: var(--spacing-lg);
+  }
+
+  .year {
+    margin-top: 46px;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.16em;
+    color: var(--color-seal);
+    font-weight: 600;
+  }
+
+  .post {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+  .post:hover .pt > span {
+    color: var(--color-seal);
+  }
+
+  .pt {
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: baseline;
+  }
+  .pt time {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: var(--color-text-tertiary);
+    white-space: nowrap;
+    font-weight: 400;
+  }
+
+  .pd {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-top: 6px;
+  }
+
+  .ptags {
+    margin-top: 8px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    font-family: var(--font-sans);
+  }
+  .ptag {
+    font-size: 0.72rem;
+    color: var(--color-seal);
+    background: var(--color-seal-tint);
+    padding: 0.1rem 0.5rem;
+    border-radius: 100px;
+  }
+</style>
