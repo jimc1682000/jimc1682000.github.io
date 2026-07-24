@@ -7,7 +7,7 @@ tags:
   - "音響"
   - "心得"
 ---
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgaNLgeqfXHRE-fzmbrvg1E5-XkVWuyPdfC_BhZeBN6lB96cjIK8jZwwYlSeN0P8ToTMQxpnZsPRBLCCSwtC57i12gDkrAivIodkk8c4C2RAOkjAq3FO5QR5XKGcFc90MRrG8aba367KcpP/s1600/20140523_183504_LLS.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgaNLgeqfXHRE-fzmbrvg1E5-XkVWuyPdfC_BhZeBN6lB96cjIK8jZwwYlSeN0P8ToTMQxpnZsPRBLCCSwtC57i12gDkrAivIodkk8c4C2RAOkjAq3FO5QR5XKGcFc90MRrG8aba367KcpP/s1600/20140523_183504_LLS.jpg)
+[![](/blog/img/20140523_183504_LLS.webp)](/blog/img/20140523_183504_LLS.webp)
 
   
 這篇心得，一欠就欠了快三個月XDD  
@@ -27,7 +27,7 @@ tags:
   
 好，回到正題，今天我要寫一下，我使用二代超高音的心得。  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGrqDl6k_iScNitp-mHqNIe0K6BA8fnLcYeIMeMABnaxZUdfuHWaJYxF0dQLXyPCCvTeEiOosJhAHGVGFdZqlIAAjlYsgG37uxC3KRJNw4botHugpIzM2ZtgNdOA73e8TRD8X2AMETJz2S/s1600/20140630_203402_LLS.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGrqDl6k_iScNitp-mHqNIe0K6BA8fnLcYeIMeMABnaxZUdfuHWaJYxF0dQLXyPCCvTeEiOosJhAHGVGFdZqlIAAjlYsgG37uxC3KRJNw4botHugpIzM2ZtgNdOA73e8TRD8X2AMETJz2S/s1600/20140630_203402_LLS.jpg)
+[![](/blog/img/20140630_203402_LLS.webp)](/blog/img/20140630_203402_LLS.webp)
 
   
 先說一下我的使用環境好了：  

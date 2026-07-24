@@ -72,14 +72,14 @@ tags:
   a.準備好USB OTG線、USB DAC，如下圖，  
   下面我使用了兩台隨身DAC/耳擴來測試，分別是Dragonfly V1.0、Hippo Cricri+  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiWqyYhtZJgc9av40tNRfIl7t7CAMpENsoSfN9juzqXgNdL6F-PKnKJ8BCXSpxm2UoXSeudWc7wKvI19h2k9AuTiGIrKQkN1cXEggyCHISclSG5XCYX1KJ4Qu88dvtVYMLGlNyzE-Ty7hma/s1600/20140528_205039.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiWqyYhtZJgc9av40tNRfIl7t7CAMpENsoSfN9juzqXgNdL6F-PKnKJ8BCXSpxm2UoXSeudWc7wKvI19h2k9AuTiGIrKQkN1cXEggyCHISclSG5XCYX1KJ4Qu88dvtVYMLGlNyzE-Ty7hma/s1600/20140528_205039.jpg)
+[![](/blog/img/20140528_205039.webp)](/blog/img/20140528_205039.webp)
 
   
   b.開始裝置電源，先插入USB OTG線中(重要)，因為這樣才容易抓到該DAC。  
   c.再將USB OTG線插入手機的MicroUSB孔中，應會顯示插入USB裝置，如下圖  
   
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNgYEF3GN52jY7QmtDM_a1MlKHdoP7s6VOl9_z3E-9k4DnYyC7lm1Z4dEG3CeZRQjzUsD60qJo2HkEY1AGKfEs6R1EVY3hUMxQODnLdNWmGEIJDPIyWLluheeAZztKrI8lwAQtEIP1lqtm/s1600/Screenshot_2014-05-28-20-52-52.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNgYEF3GN52jY7QmtDM_a1MlKHdoP7s6VOl9_z3E-9k4DnYyC7lm1Z4dEG3CeZRQjzUsD60qJo2HkEY1AGKfEs6R1EVY3hUMxQODnLdNWmGEIJDPIyWLluheeAZztKrI8lwAQtEIP1lqtm/s1600/Screenshot_2014-05-28-20-52-52.png)
+[![](/blog/img/Screenshot_2014-05-28-20-52-52.webp)](/blog/img/Screenshot_2014-05-28-20-52-52.webp)
 
   d.開啟USB Audio Player PRO/USB Audio Recorder PRO軟體  
   
@@ -87,12 +87,12 @@ tags:
   a.會出現「允許應用程度USB Audio Player PRO存取USB裝置嗎？  
   請按「確認」(依需求可以勾選「依預設使用此USB裝置」)  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZUdxW0R-r-2YAPAW5rQGaxjHjTNMcUE8EbfRRK2hivEcP4GUsB1aeKTAovXafPkygF564uX5JNgtIO92rSs1kR8XyTSGloBT7hzZ9_H1XgweDVQSXaBl6IZWXpjSBSe6Nz40Mflwnd0Oq/s1600/Screenshot_2014-05-28-20-54-31.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZUdxW0R-r-2YAPAW5rQGaxjHjTNMcUE8EbfRRK2hivEcP4GUsB1aeKTAovXafPkygF564uX5JNgtIO92rSs1kR8XyTSGloBT7hzZ9_H1XgweDVQSXaBl6IZWXpjSBSe6Nz40Mflwnd0Oq/s1600/Screenshot_2014-05-28-20-54-31.png)
+[![](/blog/img/Screenshot_2014-05-28-20-54-31.webp)](/blog/img/Screenshot_2014-05-28-20-54-31.webp)
 
   
   b.進入播放畫面如下圖，下方為常見的播放、停止、循環、調整歌曲時間等功能  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCcnxqs356szoQgyblLyC84bzaq2R0VRBMPNClLRsCc0JJLVFBBgQs4vzP8Bxhz_jymGGYNnkSdmL7JajrXIXGlj3hGjJUhBoLz0YtnqoELFxHGwJyVimTQl8KL7DtUJhzfgkElDtt3s81/s1600/Screenshot_2014-05-28-20-48-05.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCcnxqs356szoQgyblLyC84bzaq2R0VRBMPNClLRsCc0JJLVFBBgQs4vzP8Bxhz_jymGGYNnkSdmL7JajrXIXGlj3hGjJUhBoLz0YtnqoELFxHGwJyVimTQl8KL7DtUJhzfgkElDtt3s81/s1600/Screenshot_2014-05-28-20-48-05.png)
+[![](/blog/img/Screenshot_2014-05-28-20-48-05.webp)](/blog/img/Screenshot_2014-05-28-20-48-05.webp)
 
   
   c.播放畫面右邊有個奇怪的銀色鈕，為音量調整，往上為大聲，往下為小聲，  
@@ -100,19 +100,19 @@ tags:
     需要進入設定(上方偏右的按鈕)，Perfs中有個Volume Control更改，  
     像是Dragonfly如果覺得軟體控制的最大聲還不夠的話，可以改成硬體控制，如下圖  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMTCApnofsn_3wwv2WmHRbJ7rp80ZtWk7N9vBtx9-ZFk6TKuy5HnGC5MsBzte77938Z57BcduLT_zMiNDyIghZAaI1ivjqLXJ_DsqR8VamAS2uhJzPM_9ic0BXQYbHFoIC3PUVgfEtOYp4/s1600/Screenshot_2014-05-28-20-55-12.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMTCApnofsn_3wwv2WmHRbJ7rp80ZtWk7N9vBtx9-ZFk6TKuy5HnGC5MsBzte77938Z57BcduLT_zMiNDyIghZAaI1ivjqLXJ_DsqR8VamAS2uhJzPM_9ic0BXQYbHFoIC3PUVgfEtOYp4/s1600/Screenshot_2014-05-28-20-55-12.png)
+[![](/blog/img/Screenshot_2014-05-28-20-55-12.webp)](/blog/img/Screenshot_2014-05-28-20-55-12.webp)
 
   
   d.於播放畫面的上方偏左按鈕，可開啟音樂，  
     我個人都是使用資料夾播放(第二個選項，如下圖)  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTHhSrM7uoGWWayof1jwt5Hw6GpJMnFUeZp6fGsq0wIdg4kHct4NSrmZDbaI8HMJPPriksYBljU49ikXQUa45ttQ7OoGT_z4j1d83nmScqJi30Xtccph0GuHyWjaJQvlED5QdPeEyANNHH/s1600/Screenshot_2014-05-28-20-57-06.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTHhSrM7uoGWWayof1jwt5Hw6GpJMnFUeZp6fGsq0wIdg4kHct4NSrmZDbaI8HMJPPriksYBljU49ikXQUa45ttQ7OoGT_z4j1d83nmScqJi30Xtccph0GuHyWjaJQvlED5QdPeEyANNHH/s1600/Screenshot_2014-05-28-20-57-06.png)
+[![](/blog/img/Screenshot_2014-05-28-20-57-06.webp)](/blog/img/Screenshot_2014-05-28-20-57-06.webp)
 
   
   e.開啟音樂試播，如果有爆音，或是奇怪的聲音，可先試著調Buffer大小，  
     一樣進入設定，Perfs中有個Buffer size，都調整看看(如下圖)，  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQQ-f8o62JUbAVLM4-SxPm0TCOCKdTheBFNoJa8K5U8BEieiHZEzwG_K9NqsfOWEFTwmbjiV1hjX4CIfGoqmdD573J37qalpA5Udi_3pclnPhzv3NesHs2pL1etmpFWWUdylXAdPVlrhbb/s1600/Screenshot_2014-05-28-20-55-37.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQQ-f8o62JUbAVLM4-SxPm0TCOCKdTheBFNoJa8K5U8BEieiHZEzwG_K9NqsfOWEFTwmbjiV1hjX4CIfGoqmdD573J37qalpA5Udi_3pclnPhzv3NesHs2pL1etmpFWWUdylXAdPVlrhbb/s1600/Screenshot_2014-05-28-20-55-37.png)
+[![](/blog/img/Screenshot_2014-05-28-20-55-37.webp)](/blog/img/Screenshot_2014-05-28-20-55-37.webp)
 
   
     如果還是不行，將Perfs中的Force 1 packet per transfer「勾選」起來，  
@@ -122,13 +122,13 @@ tags:
   
   f.在設定當中有個EQ部份，如下圖，大家有空還可以玩玩看，我個人是不玩這個的XD  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieBR-akD210lg7ofOqVBj6cCHt5bPQ24wd1pICgYdTRY86GDjk9bWw5w07Rnsz-RYFKG_kHxMksiX5MOTLvgWP-GUxSuWCBCdqa_Db9TtnGdTxrQ8xxAXDEq9LV6ukLuJt5ssP3fxrOAUM/s1600/Screenshot_2014-05-28-20-55-20.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieBR-akD210lg7ofOqVBj6cCHt5bPQ24wd1pICgYdTRY86GDjk9bWw5w07Rnsz-RYFKG_kHxMksiX5MOTLvgWP-GUxSuWCBCdqa_Db9TtnGdTxrQ8xxAXDEq9LV6ukLuJt5ssP3fxrOAUM/s1600/Screenshot_2014-05-28-20-55-20.png)
+[![](/blog/img/Screenshot_2014-05-28-20-55-20.webp)](/blog/img/Screenshot_2014-05-28-20-55-20.webp)
 
   
   e.於播放時候，會在上面功能表有顯示，可以直接點入進行調整，  
     這也是USB Audio Recorder PRO沒有的……  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiAWyrkqCJLyb6jApvKUr3rZ3zcngmGSAjSCKfTIXEq_L7ihfU_edbnAT-rKepY6Zk0OMwPr6-joLruNqivAyt7djhXI82iXMu0UUa9gl8mjV1hxft63TrB5k_1ARjxWJVJyYt3ZlyYYSw-/s1600/Screenshot_2014-05-28-20-56-48.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiAWyrkqCJLyb6jApvKUr3rZ3zcngmGSAjSCKfTIXEq_L7ihfU_edbnAT-rKepY6Zk0OMwPr6-joLruNqivAyt7djhXI82iXMu0UUa9gl8mjV1hxft63TrB5k_1ARjxWJVJyYt3ZlyYYSw-/s1600/Screenshot_2014-05-28-20-56-48.png)
+[![](/blog/img/Screenshot_2014-05-28-20-56-48.webp)](/blog/img/Screenshot_2014-05-28-20-56-48.webp)
 
   
 六、USB Audio Recorder PRO部份  
@@ -136,11 +136,11 @@ tags:
   請按「確認」(依需求可以勾選「依預設使用此USB裝置」)  
   
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh523esPDn_2221_AaXitd2JoMNO1PJwhi7aYeHexn1uuBfZh-VvZ8b4EgGxrXcI7fWfwSGpXA9rIfUGSEZ22jmTTRenpWfM73alwzxdPzgFkLG24r_nBARhWefylwqmFcZySvz4-kWBzje/s1600/Screenshot_2014-05-28-20-58-06.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh523esPDn_2221_AaXitd2JoMNO1PJwhi7aYeHexn1uuBfZh-VvZ8b4EgGxrXcI7fWfwSGpXA9rIfUGSEZ22jmTTRenpWfM73alwzxdPzgFkLG24r_nBARhWefylwqmFcZySvz4-kWBzje/s1600/Screenshot_2014-05-28-20-58-06.png)
+[![](/blog/img/Screenshot_2014-05-28-20-58-06.webp)](/blog/img/Screenshot_2014-05-28-20-58-06.webp)
 
   b.進入播放畫面(MAIN)如下圖  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwSJyP1M4NFNMbO0ivlxZsWJ__bQ7Z8J80nJzNpD6SMuk4AAcPsSydScioO-EqsoiYXRq7VGjBD9PQClRXyKMdon8I68Y2RyqfR2KWuFGAWnr0M0dwje1sV5R0706jEw2wm9M39WI4NLxi/s1600/Screenshot_2014-05-28-21-02-05.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwSJyP1M4NFNMbO0ivlxZsWJ__bQ7Z8J80nJzNpD6SMuk4AAcPsSydScioO-EqsoiYXRq7VGjBD9PQClRXyKMdon8I68Y2RyqfR2KWuFGAWnr0M0dwje1sV5R0706jEw2wm9M39WI4NLxi/s1600/Screenshot_2014-05-28-21-02-05.png)
+[![](/blog/img/Screenshot_2014-05-28-21-02-05.webp)](/blog/img/Screenshot_2014-05-28-21-02-05.webp)
 
   
   c.因為以錄音為主，所以畫面左上角有個資料夾可以開啟音效檔(WAV、AIFF、OGG等)，  
@@ -154,14 +154,14 @@ tags:
     只有Buffer部份，跟上面一樣可以調整，  
     我個人聽感是愈小的Buffer音質愈好，大家可以再試一下。  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYEl1YSbkdQvh7tHt2vIep7x7j4VaF-cPCw8C2sjm9znIE4MS65_cPBFnZgFKIHNX1ZM9_vSHfLbiqKrBbPf8LMR_mAJHCmxW4ivDO5H-W7ID_NgGYQ4nRGJhQrtCGRpUgUFzSEDBE3hab/s1600/Screenshot_2014-05-28-20-59-16.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYEl1YSbkdQvh7tHt2vIep7x7j4VaF-cPCw8C2sjm9znIE4MS65_cPBFnZgFKIHNX1ZM9_vSHfLbiqKrBbPf8LMR_mAJHCmxW4ivDO5H-W7ID_NgGYQ4nRGJhQrtCGRpUgUFzSEDBE3hab/s1600/Screenshot_2014-05-28-20-59-16.png)
+[![](/blog/img/Screenshot_2014-05-28-20-59-16.webp)](/blog/img/Screenshot_2014-05-28-20-59-16.webp)
 
   
   e.Play List部份，為簡易版本的連續播放器，  
     基本上，選好你要播放的檔案，在此頁面按播放，  
     他自動會依序播放其資料夾的其他檔案，不過，中間都會隔30秒……= =  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizzi9aU_531VKa85MxUZN6D9GrrurtN4BEc8JqjCyDStNfHm_n6XLLpz3fd5muytpwdNfp2bBGXsxIrXMyvEBZ5hZAmRXG2vkv4nuJjX5kqAKENtTZtdGAqGgewPY86ru4N7YA4lX6hyEj/s1600/Screenshot_2014-05-28-21-03-33.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizzi9aU_531VKa85MxUZN6D9GrrurtN4BEc8JqjCyDStNfHm_n6XLLpz3fd5muytpwdNfp2bBGXsxIrXMyvEBZ5hZAmRXG2vkv4nuJjX5kqAKENtTZtdGAqGgewPY86ru4N7YA4lX6hyEj/s1600/Screenshot_2014-05-28-21-03-33.png)
+[![](/blog/img/Screenshot_2014-05-28-21-03-33.webp)](/blog/img/Screenshot_2014-05-28-21-03-33.webp)
 
   
 
