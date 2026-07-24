@@ -5,6 +5,6 @@ description: "Live Demo"
 locale: en
 translationOf: claude-code
 aiTranslated: true
-tags: [AI, Software Engineering]
+tags: [AI, DevOps]
 ---
 [Live Demo](https://jimc1682000.github.io/a-day-with-my-ai-wife)
