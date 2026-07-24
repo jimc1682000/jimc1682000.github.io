@@ -40,6 +40,14 @@ jobs:
       - run: npm ci
       - name: Build Astro (brand + blog)
         run: npm run build
+        # PUBLIC_* 為公開值（會進 client HTML）；用 repo Variables 注入。
+        # 未設 → 空字串 → 元件 gating 自動略過（留言/analytics 不輸出）。
+        env:
+          PUBLIC_GISCUS_REPO: ${{ vars.PUBLIC_GISCUS_REPO }}
+          PUBLIC_GISCUS_REPO_ID: ${{ vars.PUBLIC_GISCUS_REPO_ID }}
+          PUBLIC_GISCUS_CATEGORY: ${{ vars.PUBLIC_GISCUS_CATEGORY }}
+          PUBLIC_GISCUS_CATEGORY_ID: ${{ vars.PUBLIC_GISCUS_CATEGORY_ID }}
+          PUBLIC_CF_BEACON_TOKEN: ${{ vars.PUBLIC_CF_BEACON_TOKEN }}
 
       # --- 組裝 /resume/（jimc1682000/resume，VitePress base /resume/）---
       - name: Checkout resume repo
