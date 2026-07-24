@@ -5,6 +5,7 @@ description: "Related to question Excel Sheet Column Title Given a column title 
 locale: en
 translationOf: leetcode-excel-sheet-column-number-no171
 aiTranslated: true
+tags: [Algorithms]
 ---
 Related to question [Excel Sheet Column Title](https://leetcode.com/problems/excel-sheet-column-title/)
 

@@ -2,10 +2,11 @@
 title: "Takeaways from Hsin-Chuang's First App Contest"
 pubDate: 2016-05-19
 description: "This was my first time entering an app-building contest as part of a team, and I learned a lot. Here are some takeaways to share. First: if a team has no discussion or even arguments, it may mean nobody is really thinking hard."
-tags: ["Java", "Github", "Wireless Router", "Notes", "Android"]
+
 locale: en
 translationOf: app
 aiTranslated: true
+tags: [Software Engineering]
 ---
 This was my first time entering an app-building contest as part of a team, and I learned a lot. Here are some takeaways to share:  
 **1. If a team has no discussion or even arguments, it may mean nobody is really thinking hard.**  

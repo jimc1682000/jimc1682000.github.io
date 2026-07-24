@@ -2,10 +2,11 @@
 title: "A Rundown of Some Common Cloud IDEs"
 pubDate: 2015-09-06
 description: "Today I'll introduce a few of the more common cloud IDEs. Since there are more and more of them these days, I've picked the top few based on how convenient I found them for Java development and on the ratings from Slant (What is the best cloud IDE?)."
-tags: ["Koding", "Introduction", "Codeanywhere", "Codenvy", "IDE", "Cloud IDE", "Cloud9"]
+
 locale: en
 translationOf: idecloud-ide
 aiTranslated: true
+tags: [Cloud Dev]
 ---
 Today I'll introduce a few of the more common cloud IDEs. Since there are more and more of them these days, I've picked the top few based on how convenient I found them for Java development and on the ratings from Slant ( [What is the best cloud IDE? - Slant](http://www.slant.co/topics/713/~what-is-the-best-cloud-ide) ):  
   

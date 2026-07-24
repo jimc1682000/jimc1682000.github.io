@@ -2,10 +2,11 @@
 title: "[Notes] Is TDD Dead? Wrapping Up My Recent Thoughts on Software Testing"
 pubDate: 2015-12-28
 description: "I've been digging into the testing side of software development lately, so here's a summary of where I currently stand on testing. If you think testing is nonsense, feel free to skip this post; and if you want to learn more about testing, here are some references."
-tags: ["Programming", "Code", "TDD", "Notes", "UT"]
+
 locale: en
 translationOf: tdd
 aiTranslated: true
+tags: [Software Engineering]
 ---
 I've been digging into the testing side of software development lately, so here's a summary of where I currently stand on testing.  
 If you think testing is nonsense, feel free to skip this post;  

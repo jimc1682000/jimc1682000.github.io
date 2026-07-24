@@ -2,17 +2,10 @@
 title: "[Notes] Auditioning the Cute HD Set at Firestone's Head Office"
 pubDate: 2014-05-29
 description: "This isn't an ad—just a piece written by someone who loves Firestone, so it may be a little biased. Feel free to skip if it's not your thing, and of course you're all welcome to join the discussion… @@ The older Supplier USB had a problem where it couldn't support the Raspberry Pi."
-tags:
-  - "Firestone"
-  - "Headphones"
-  - "Introduction"
-  - "Firestone Audio"
-  - "DAC"
-  - "Audio"
-  - "Notes"
 locale: en
 translationOf: cute-hd
 aiTranslated: true
+tags: [Reviews, Audio]
 ---
 This isn't an ad—just a piece written by someone who loves Firestone, so it may be a little biased.  
 Feel free to skip if it's not your thing, and of course you're all welcome to join the discussion… @@  

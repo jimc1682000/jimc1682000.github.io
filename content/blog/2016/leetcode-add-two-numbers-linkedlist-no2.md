@@ -2,6 +2,7 @@
 title: "[LeetCode] Add Two Numbers 兩LinkedList相加 (No.2)"
 pubDate: 2016-07-14
 description: "You are given two linked lists representing two non-negative numbers."
+tags: [演算法]
 ---
 You are given two linked lists representing two non-negative numbers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
 

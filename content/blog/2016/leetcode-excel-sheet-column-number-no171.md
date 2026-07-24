@@ -2,6 +2,7 @@
 title: "[LeetCode] Excel Sheet Column Number 表單數字翻譯 (No.171)"
 pubDate: 2016-07-12
 description: "Related to question Excel Sheet Column Title Given a column title as appear in a"
+tags: [演算法]
 ---
 Related to question [Excel Sheet Column Title](https://leetcode.com/problems/excel-sheet-column-title/)
 

@@ -2,10 +2,11 @@
 title: "[Notes] Takeaways from Reading 'Getting Up to Speed with TDD in 30 Days'"
 pubDate: 2016-01-11
 description: "After finishing 'Getting Up to Speed with TDD in 30 Days', here are some of the takeaways I found most important, shared with you all."
-tags: ["BDD", "TDD", "ATDD", "Refactoring", "Notes"]
+
 locale: en
 translationOf: 30tdd
 aiTranslated: true
+tags: [Software Engineering]
 ---
 After finishing 《[Getting Up to Speed with TDD in 30 Days](https://www.dotblogs.com.tw/hatelove/2013/01/11/learning-tdd-in-30-days-catalog-and-reference)》, here are some of the takeaways I found most important, shared with you all.  
   

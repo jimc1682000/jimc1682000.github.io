@@ -2,17 +2,10 @@
 title: "[Notes] Custom Cute Hands-On (Successor to the \"Love Taiwan\" DAC)"
 pubDate: 2014-05-24
 description: "The listening-impression parts come down to personal taste, so please bear with me—and discussion is very welcome. \\================================================="
-tags:
-  - "Firestone"
-  - "Headphones"
-  - "DAC"
-  - "Firestone Audio"
-  - "My Jimmy City"
-  - "Audio"
-  - "Notes"
 locale: en
 translationOf: custom-cute
 aiTranslated: true
+tags: [Reviews, Audio]
 ---
   
 

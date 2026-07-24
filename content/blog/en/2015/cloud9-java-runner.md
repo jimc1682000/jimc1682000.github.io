@@ -2,10 +2,11 @@
 title: "Setting Up a Cloud9 Java Runner"
 pubDate: 2015-09-13
 description: "Today I'll walk you through how to set up a Java Runner on Cloud9. You can also refer directly to the Cloud9 and Stack Overflow tutorials. First, let's create a new workspace."
-tags: ["Java", "Introduction", "Jimmy's City", "Cloud IDE", "Cloud9", "HelloWorld"]
+
 locale: en
 translationOf: cloud9-java-runner
 aiTranslated: true
+tags: [Cloud Dev, Java]
 ---
 Today I'll walk you through how to set up a Java Runner on Cloud9. You can also refer directly to the Cloud9 and Stack Overflow tutorials: [https://docs.c9.io/v1.0/docs/custom-runners](https://docs.c9.io/v1.0/docs/custom-runners)  
 [http://stackoverflow.com/questions/28196434/setting-up-cloud9-ide-to-compile-and-run-java](http://stackoverflow.com/questions/28196434/setting-up-cloud9-ide-to-compile-and-run-java)  

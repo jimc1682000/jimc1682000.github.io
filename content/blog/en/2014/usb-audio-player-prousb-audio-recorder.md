@@ -2,22 +2,10 @@
 title: "[Notes] A Look at USB Audio Player PRO / USB Audio Recorder PRO"
 pubDate: 2014-05-28
 description: "Today let me write up my impressions of using USB Audio Player PRO / USB Audio Recorder PRO."
-tags:
-  - "Hippo Cricri+"
-  - "Dragonfly"
-  - "USB OTG"
-  - "Headphones"
-  - "Introduction"
-  - "DAC"
-  - "My Jimmy City"
-  - "Android"
-  - "USB Audio Player PRO"
-  - "Audio"
-  - "Notes"
-  - "USB Audio Recorder PRO"
 locale: en
 translationOf: usb-audio-player-prousb-audio-recorder
 aiTranslated: true
+tags: [Reviews, Audio]
 ---
 Today let me write up my impressions of using USB Audio Player PRO / USB Audio Recorder PRO.  
   

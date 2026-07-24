@@ -2,10 +2,11 @@
 title: "[LeetCode] Execel Sheet Column Title (No.168)"
 pubDate: 2016-07-11
 description: "Given a positive integer, return its corresponding column title as appear in an Excel sheet."
-tags: ["Java", "Programming", "LeetCode"]
+
 locale: en
 translationOf: leetcode-execel-sheet-column-title-no168
 aiTranslated: true
+tags: [Algorithms]
 ---
 Given a positive integer, return its corresponding column title as appear in an Excel sheet.
 

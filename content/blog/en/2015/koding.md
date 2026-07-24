@@ -2,10 +2,11 @@
 title: "Koding Environment Setup Notes"
 pubDate: 2015-09-06
 description: "A quick note first: the Koding environment has a package manager called Koding Package Manager (kpm). In the guides below, whenever kpm is available it will be listed at the top."
-tags: ["Nginx", "AngularJS", "Tomcat", "ftp", "phpMyAdmin", "Introduction", "Koding", "Github", "VNC", "VirtualDirectory", "Apache Tomcat", "Apache", "Cloud IDE", "NodeJS", "MySQL", "PHP", "Dropbox", "vsftpd"]
+
 locale: en
 translationOf: koding
 aiTranslated: true
+tags: [Cloud Dev]
 ---
 A quick note first: the Koding environment has a package manager called Koding Package Manager (kpm). In the guides below, whenever kpm is available it will be listed at the top; if you install via kpm, you won't need to follow the step-by-step manual installation below. That said, if you want to hone your skills, feel free to install via the step-by-step method first.  
   

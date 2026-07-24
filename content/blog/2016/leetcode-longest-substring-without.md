@@ -2,10 +2,7 @@
 title: "[LeetCode] Longest Substring Without Repeating Characters 求出不重覆字母下最長的子字串長度 (No.3)"
 pubDate: 2016-07-19
 description: "Given a string, find the length of the longest substring without repeating characters."
-tags:
-  - "Java"
-  - "程式"
-  - "LeetCode"
+tags: [演算法]
 ---
 Given a string, find the length of the longest substring without repeating characters.
 

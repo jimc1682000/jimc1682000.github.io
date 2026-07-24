@@ -2,12 +2,10 @@
 title: "[Netflix] The Great Flood — My Thoughts After Watching"
 pubDate: 2026-01-10
 description: "It's been a long time since I picked up a pen to write anything — and I never expected the thing to get me writing again would be my thoughts after watching The Great Flood."
-tags:
-  - "Review"
-  - "Film"
 locale: en
 translationOf: netflix-great-flood
 aiTranslated: true
+tags: [Screen, Film]
 ---
 It's been a long time since I picked up a pen to write anything — and I never expected the thing to get me writing again would be my thoughts after watching The Great Flood.
 

@@ -2,12 +2,10 @@
 title: "Hello — the New Site Is Live"
 pubDate: 2026-07-24
 description: "The first post after migrating my personal site from VitePress to Astro 5: the architecture, the routing, and how posts get published."
-tags:
-  - meta
-  - astro
 locale: en
 translationOf: hello-site
 aiTranslated: true
+tags: [Meta]
 ---
 
 This is the first post on the new site, meant to shake out the skeleton: heading levels, code blocks, links, and tags all get a run-through here.
