@@ -8,29 +8,31 @@
 :root {
   color-scheme: dark;
 
-  /* Color */
-  --color-bg: #000000;
-  --color-bg-elevated: #111111;
-  --color-bg-surface: #1a1a1a;
-  --color-text: #ffffff;
-  --color-text-secondary: rgba(255, 255, 255, 0.65);
-  --color-text-tertiary: rgba(255, 255, 255, 0.40);
-  --color-border: rgba(255, 255, 255, 0.10);
-  --color-border-subtle: rgba(255, 255, 255, 0.05);
-  --color-border-hover: rgba(255, 255, 255, 0.20);
-  --color-header-bg: rgba(0, 0, 0, 0.72);
-  --color-accent: #ffffff;
-  --color-accent-hover: rgba(255, 255, 255, 0.85);
+  /* Color（散文集改版:墨色 + 宣紙字 + 朱砂落款） */
+  --color-bg: #17191b;
+  --color-bg-elevated: #202325;
+  --color-bg-surface: #282b2d;
+  --color-text: #ece6d9;
+  --color-text-secondary: rgba(236, 230, 217, 0.60);
+  --color-text-tertiary: rgba(236, 230, 217, 0.40);
+  --color-border: rgba(236, 230, 217, 0.12);
+  --color-border-subtle: rgba(236, 230, 217, 0.06);
+  --color-border-hover: rgba(236, 230, 217, 0.24);
+  --color-header-bg: rgba(23, 25, 27, 0.72);
+  --color-accent: #ece6d9;
+  --color-accent-hover: rgba(236, 230, 217, 0.85);
+  --color-seal: #d24a3b;
+  --color-seal-tint: rgba(210, 74, 59, 0.16);
   --color-overlay: rgba(0, 0, 0, 0.80);
   --color-focus-ring: var(--color-text);
 
-  /* Typography（DESIGN §4） */
+  /* Typography（散文集:serif 為標題與內文主字,sans 給 nav/UI/meta） */
+  --font-serif:
+    "Noto Serif TC", "Songti TC", Georgia, "PingFang TC", serif;
   --font-sans:
     -apple-system, BlinkMacSystemFont,
-    "SF Pro Text", "SF Pro Display",
-    "Segoe UI", "Helvetica Neue", Arial,
-    "PingFang TC", "Noto Sans TC", "Microsoft JhengHei",
-    sans-serif;
+    "PingFang TC", "Noto Sans TC", "Segoe UI",
+    "Helvetica Neue", Arial, sans-serif;
   --font-mono:
     ui-monospace, SFMono-Regular, "SF Mono",
     Menlo, Consolas, "Liberation Mono", monospace;
@@ -80,18 +82,20 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
-  --color-bg: #faf9f7;
-  --color-bg-elevated: #ffffff;
-  --color-bg-surface: #f0eeea;
-  --color-text: #1a1a1a;
-  --color-text-secondary: rgba(0, 0, 0, 0.64);
-  --color-text-tertiary: rgba(0, 0, 0, 0.58);
-  --color-border: rgba(0, 0, 0, 0.12);
-  --color-border-subtle: rgba(0, 0, 0, 0.07);
-  --color-border-hover: rgba(0, 0, 0, 0.22);
-  --color-header-bg: rgba(250, 249, 247, 0.72);
-  --color-accent: #1a1a1a;
-  --color-accent-hover: rgba(0, 0, 0, 0.82);
+  --color-bg: #f7f4ef;
+  --color-bg-elevated: #fffdf9;
+  --color-bg-surface: #efeae0;
+  --color-text: #1a1d20;
+  --color-text-secondary: #666059;
+  --color-text-tertiary: #9a9186;
+  --color-border: rgba(26, 29, 32, 0.13);
+  --color-border-subtle: rgba(26, 29, 32, 0.07);
+  --color-border-hover: rgba(26, 29, 32, 0.28);
+  --color-header-bg: rgba(247, 244, 239, 0.72);
+  --color-accent: #1a1d20;
+  --color-accent-hover: rgba(26, 29, 32, 0.82);
+  --color-seal: #c8392b;
+  --color-seal-tint: rgba(200, 57, 43, 0.09);
   --color-overlay: rgba(0, 0, 0, 0.50);
 }
 
@@ -113,7 +117,7 @@ html {
 
 body {
   min-height: 100vh;
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   font-size: var(--font-size-base);
   line-height: 1.6;
   color: var(--color-text);
@@ -235,6 +239,17 @@ hr {
   inset-block-start: var(--spacing-sm);
 }
 
+/* ---------- Absolute-header 淨空（header 透明貼頁頂,main 讓出頂部空間） ---------- */
+main {
+  padding-top: 7.375rem; /* 118px，對齊 mockup 的 main padding-top */
+}
+
+@media (max-width: 640px) {
+  main {
+    padding-top: 5.5rem;
+  }
+}
+
 /* ---------- Layout helpers ---------- */
 .container {
   width: 100%;
@@ -250,32 +265,33 @@ hr {
   padding-inline: var(--gutter);
 }
 
-/* ---------- Tag chip（DESIGN §3.3） ---------- */
+/* ---------- Tag chip（散文集:朱砂 pill,對齊 mockup） ---------- */
 .tag-chip {
   display: inline-block;
-  font-size: var(--font-size-sm);
-  line-height: 1.4;
-  padding: 0.2em 0.7em;
-  color: var(--color-text-secondary);
-  background-color: var(--color-bg-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  padding: 0.1rem 0.5rem;
+  color: var(--color-seal);
+  background-color: var(--color-seal-tint);
+  border-radius: 100px;
   text-decoration: none;
   transition:
-    border-color var(--transition-fast),
+    background-color var(--transition-fast),
     color var(--transition-fast);
 }
 
 .tag-chip:hover {
-  color: var(--color-text);
-  border-color: var(--color-border-hover);
+  color: var(--color-seal);
+  background-color: var(--color-seal-tint);
   text-decoration: none;
+  opacity: 0.82;
 }
 
 .tag-chip[aria-current="page"] {
-  color: var(--color-bg);
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
+  color: #fff;
+  background-color: var(--color-seal);
+  opacity: 1;
 }
 
 /* ---------- Reduced motion（DESIGN §5、§9） ---------- */
