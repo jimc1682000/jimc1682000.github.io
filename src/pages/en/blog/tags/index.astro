@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import TagCloud from '../../../../components/TagCloud.astro';
+import { getTagCounts } from '../../../../lib/blog';
+import { useTranslations } from '../../../../i18n/ui';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+const tags = await getTagCounts(lang);
+---
+
+<BaseLayout title={`${t('blog.allTags')} — Jimmy Chen`} description="Browse Jimmy Chen's posts by tag." lang={lang}>
+  <div class="container-narrow tags-page">
+    <h1>{t('blog.allTags')}</h1>
+    <TagCloud tags={tags} lang={lang} />
+  </div>
+</BaseLayout>
+
+<style>
+  .tags-page {
+    padding-block: var(--spacing-2xl);
+  }
+  .tags-page h1 {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-xl);
+  }
+</style>

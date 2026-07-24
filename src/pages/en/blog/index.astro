@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostList from '../../../components/PostList.astro';
+import { getPosts } from '../../../lib/blog';
+import { useTranslations } from '../../../i18n/ui';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+const posts = await getPosts(lang);
+---
+
+<BaseLayout title={`${t('blog.title')} — Jimmy Chen`} description="Writing by Jimmy Chen: engineering practice, DevOps / SRE, and AI workflows." lang={lang}>
+  <div class="container-narrow list-page">
+    <header class="list-header">
+      <h1>{t('blog.title')}</h1>
+      <a class="tags-link" href="/en/blog/tags/">{t('blog.allTags')}</a>
+    </header>
+    <PostList posts={posts} lang={lang} />
+  </div>
+</BaseLayout>
+
+<style>
+  .list-page {
+    padding-block: var(--spacing-2xl);
+  }
+  .list-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+  }
+  .list-header h1 {
+    font-size: var(--font-size-4xl);
+  }
+  .tags-link {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .tags-link:hover {
+    color: var(--color-text);
+  }
+</style>

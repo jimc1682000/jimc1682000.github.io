@@ -1,0 +1,57 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const rssHref = lang === 'en' ? '/en/rss.xml' : '/rss.xml';
+const switchHref = lang === 'en' ? '/' : '/en/';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-inner container">
+    <span class="copyright">© {year} Jimmy Chen · {t('footer.rights')}</span>
+    <nav class="footer-links" aria-label={lang === 'en' ? 'Footer' : '頁尾'}>
+      <a href={rssHref}>{t('footer.rss')}</a>
+      <a href={switchHref}>{t('lang.switch')}</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--spacing-3xl);
+    border-top: 1px solid var(--color-border-subtle);
+    padding-block: var(--spacing-lg);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  .footer-links a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-text);
+  }
+</style>

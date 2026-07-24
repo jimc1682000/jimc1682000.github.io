@@ -1,0 +1,166 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/ui';
+import { getPosts, slugOf, formatDate } from '../lib/blog';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// v1 薄首頁文案（DESIGN §7.2）。繁中為 source of truth，英文對應。
+const copy = {
+  zh: {
+    greeting: '你好，我是陳建豪 Jimmy',
+    tagline: 'DevOps／SRE 與 AI／agentic 工作流工程師',
+    bio: '我專注在維運可靠度、平台工程，以及把 AI agent 接進真實工作流。偏好簡單、可維護、能長期運轉的系統。這裡收我的文章、履歷與作品。',
+    recent: '最近文章',
+  },
+  en: {
+    greeting: "Hi, I'm Jimmy Chen",
+    tagline: 'DevOps / SRE and AI / agentic workflow engineer',
+    bio: 'I work on operational reliability, platform engineering, and wiring AI agents into real workflows. I favor simple, maintainable systems that run for the long haul. This is where I keep my writing, resume, and projects.',
+    recent: 'Recent posts',
+  },
+}[lang];
+
+const homeBlog = lang === 'en' ? '/en/blog/' : '/blog/';
+const links = [
+  { href: homeBlog, label: t('nav.blog') },
+  { href: '/resume/', label: t('nav.resume') },
+  { href: '/film-brain/', label: t('nav.filmBrain') },
+];
+
+const recent = (await getPosts(lang)).slice(0, 3);
+---
+
+<div class="home container-narrow">
+  <section class="hero">
+    <h1>{copy.greeting}</h1>
+    <p class="tagline">{copy.tagline}</p>
+    <p class="bio">{copy.bio}</p>
+  </section>
+
+  <nav class="primary-links" aria-label={lang === 'en' ? 'Sections' : '主要連結'}>
+    {links.map((link) => <a class="primary-link" href={link.href}>{link.label}</a>)}
+  </nav>
+
+  {
+    recent.length > 0 && (
+      <section class="recent">
+        <h2>{copy.recent}</h2>
+        <ul>
+          {recent.map((post) => (
+            <li>
+              <a href={`${homeBlog}${slugOf(post)}/`}>{post.data.title}</a>
+              <time datetime={post.data.pubDate.toISOString()}>
+                {formatDate(post.data.pubDate, lang)}
+              </time>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</div>
+
+<style>
+  .home {
+    padding-block: var(--spacing-3xl);
+  }
+
+  .hero h1 {
+    font-size: var(--font-size-6xl);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .tagline {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .bio {
+    font-size: var(--font-size-lg);
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    max-width: 60ch;
+  }
+
+  .primary-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-2xl);
+  }
+
+  .primary-link {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-weight: 500;
+    color: var(--color-text);
+    background-color: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition:
+      border-color var(--transition-fast),
+      background-color var(--transition-fast);
+  }
+
+  .primary-link:hover {
+    border-color: var(--color-border-hover);
+    background-color: var(--color-bg-surface);
+  }
+
+  .recent {
+    margin-top: var(--spacing-3xl);
+  }
+
+  .recent h2 {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .recent ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .recent li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--spacing-xs);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .recent a {
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .recent a:hover {
+    color: var(--color-text-secondary);
+  }
+
+  .recent time {
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-sm);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    .hero h1 {
+      font-size: var(--font-size-4xl);
+    }
+  }
+</style>
