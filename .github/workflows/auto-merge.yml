@@ -1,0 +1,81 @@
+name: Auto-merge content-only PRs
+
+# Agent 發文安全管線：
+# - 只有「非 draft」且「僅動 content/blog/** 或 public/blog/**」的 PR 會自動合併。
+# - 自動合併前先跑 astro build 當 gate；綠才 squash-merge。
+# - 合併後顯式觸發 deploy workflow（GITHUB_TOKEN 造成的 push 不會自動觸發 workflow，
+#   故用 workflow_dispatch 補觸發，否則新文不會部署）。
+# - 非 content-only 的 PR：不自動合併，留言說明需人工 review/merge。
+#
+# Draft PR 起頭 = 草稿（本站無 frontmatter draft 欄）；標成 Ready 才進入自動合併判斷。
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+concurrency:
+  group: auto-merge-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  auto-merge:
+    # Draft 不處理（草稿階段）
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PR: ${{ github.event.pull_request.number }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 判定 content-only
+        id: scope
+        run: |
+          files=$(gh pr view "$PR" --repo "$GITHUB_REPOSITORY" --json files -q '.files[].path')
+          echo "變更檔案："; echo "$files"
+          if [ -z "$files" ]; then
+            echo "content_only=false" >> "$GITHUB_OUTPUT"
+            echo "（無變更檔案，跳過）"; exit 0
+          fi
+          # content-only = 每個檔案都在 content/blog/ 或 public/blog/ 底下
+          non_content=$(echo "$files" | grep -vE '^(content/blog/|public/blog/)' || true)
+          if [ -z "$non_content" ]; then
+            echo "content_only=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "content_only=false" >> "$GITHUB_OUTPUT"
+            echo "非 content 檔案："; echo "$non_content"
+          fi
+
+      - name: 非 content-only → 留言並跳過
+        if: steps.scope.outputs.content_only != 'true'
+        run: |
+          gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body \
+            "⚠️ 此 PR 含 \`content/blog/**\` 以外的變更，**不會自動合併**。請人工 review 後手動合併。"
+
+      - name: 內容 PR → 安裝與 build gate
+        if: steps.scope.outputs.content_only == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Build check（content-only）
+        if: steps.scope.outputs.content_only == 'true'
+        run: |
+          npm ci
+          npm run build
+
+      - name: Squash-merge
+        if: steps.scope.outputs.content_only == 'true'
+        run: |
+          gh pr merge "$PR" --repo "$GITHUB_REPOSITORY" --squash --delete-branch
+
+      - name: 觸發部署（GITHUB_TOKEN 合併不會自動觸發 deploy）
+        if: steps.scope.outputs.content_only == 'true'
+        run: |
+          gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref master
