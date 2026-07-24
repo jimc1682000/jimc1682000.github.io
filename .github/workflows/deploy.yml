@@ -1,0 +1,76 @@
+name: Build & Deploy site (GH Pages mirror + Cloudflare Pages canonical)
+
+# 單一 build → 雙 publish（避免 CF 與 GH 各 build 一次造成設定漂移）。
+# - build：一次建置 Astro，產出兩份 artifact（Pages 專用 + 一般 dist）
+# - deploy-gh-pages：GitHub Pages（過渡期 canonical，CF 上線後為 mirror）；獨立 job，不依賴 CF
+# - deploy-cloudflare：Cloudflare Pages（目標 canonical）；僅在 CLOUDFLARE_API_TOKEN secret 存在時執行
+
+on:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build Astro
+        run: npm run build
+      # GitHub Pages 專用 artifact（供 deploy-pages 使用）
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      # 一般 artifact（供 Cloudflare 部署 job 下載，維持單一 build）
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+          retention-days: 1
+
+  deploy-gh-pages:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  deploy-cloudflare:
+    needs: build
+    runs-on: ubuntu-latest
+    # 僅當設有 Cloudflare token 時才跑（needs-human 前自動略過，不拖垮 GH mirror）
+    env:
+      HAS_CF: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+    steps:
+      - name: Skip notice
+        if: env.HAS_CF != 'true'
+        run: echo "CLOUDFLARE_API_TOKEN 未設定，略過 Cloudflare 部署（needs-human）。"
+      - uses: actions/download-artifact@v4
+        if: env.HAS_CF == 'true'
+        with:
+          name: site-dist
+          path: dist
+      - name: Deploy to Cloudflare Pages
+        if: env.HAS_CF == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=jimmychen
