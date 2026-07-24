@@ -1,6 +1,8 @@
 ---
 import type { Lang } from '../i18n/ui';
 import { useTranslations } from '../i18n/ui';
+import Seal from './Seal.astro';
+import Icon from './Icon.astro';
 import ThemeToggle from './ThemeToggle.astro';
 
 interface Props {
@@ -21,98 +23,124 @@ const switchHref =
 
 const homeHref = lang === 'en' ? '/en/' : '/';
 const blogHref = lang === 'en' ? '/en/blog/' : '/blog/';
+const worksHref = lang === 'en' ? '/en/works/' : '/works/';
 // 子站自帶導覽與語系，主站僅連進去（DESIGN §7.4）
 const resumeHref = '/resume/';
-const filmBrainHref = '/film-brain/';
+const rssHref = lang === 'en' ? '/en/rss.xml' : '/rss.xml';
+
+const isBlog = pathname === blogHref || pathname.startsWith(blogHref);
+const isWorks = pathname === worksHref || pathname.startsWith(worksHref);
+const isResume = pathname.startsWith(resumeHref);
+
+const brand = lang === 'en' ? 'Jimmy Chen' : '吉光聚斂，米粒成章';
 ---
 
 <header class="site-header">
   <div class="header-inner container">
-    <a class="brand" href={homeHref}>Jimmy Chen</a>
+    <a class="brand" href={homeHref}>
+      <Seal size={30} />
+      <span class="brand-text">{brand}</span>
+    </a>
 
     <nav class="site-nav" aria-label={lang === 'en' ? 'Primary' : '主導覽'}>
-      <a href={blogHref}>{t('nav.blog')}</a>
-      <a href={resumeHref}>{t('nav.resume')}</a>
-      <a href={filmBrainHref}>{t('nav.filmBrain')}</a>
-    </nav>
+      <a href={blogHref} class:list={['nav-link', { active: isBlog }]} aria-current={isBlog ? 'page' : undefined}>{t('nav.blog')}</a>
+      <a href={resumeHref} class:list={['nav-link', { active: isResume }]} aria-current={isResume ? 'page' : undefined}>{t('nav.resume')}</a>
+      <a href={worksHref} class:list={['nav-link', { active: isWorks }]} aria-current={isWorks ? 'page' : undefined}>{t('nav.works')}</a>
+      <a class="nav-link lang-switch" href={switchHref} hreflang={otherLang === 'en' ? 'en' : 'zh-Hant'}>{t('lang.switch')}</a>
 
-    <div class="header-actions">
-      <a class="lang-switch" href={switchHref} hreflang={otherLang === 'en' ? 'en' : 'zh-Hant'}>
-        {t('lang.switch')}
-      </a>
-      <ThemeToggle lang={lang} />
-    </div>
+      <span class="icons">
+        <a class="nav-ic" href="https://github.com/jimc1682000" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <Icon name="github" size={18} />
+        </a>
+        <a class="nav-ic" href={rssHref} aria-label="RSS">
+          <Icon name="rss" size={18} />
+        </a>
+        <ThemeToggle lang={lang} />
+      </span>
+    </nav>
   </div>
 </header>
 
 <style>
+  /* antfu 式透明:無底色、無 border、absolute 貼頁頂 */
   .site-header {
-    position: sticky;
+    position: absolute;
     top: 0;
-    z-index: 50;
-    background-color: var(--color-header-bg);
-    backdrop-filter: saturate(180%) blur(12px);
-    -webkit-backdrop-filter: saturate(180%) blur(12px);
-    border-bottom: 1px solid var(--color-border);
+    left: 0;
+    right: 0;
+    z-index: 9;
   }
 
   .header-inner {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: var(--spacing-md);
-    min-height: 3.5rem;
+    padding-top: 22px;
   }
 
   .brand {
-    font-weight: 700;
-    font-size: var(--font-size-lg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.02rem;
+    letter-spacing: 0.04em;
+    color: var(--color-text);
     text-decoration: none;
-    margin-inline-end: auto;
   }
 
   .site-nav {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
-    font-size: var(--font-size-sm);
-    font-weight: 500;
+    gap: 18px;
+    font-family: var(--font-sans);
   }
 
-  .site-nav a {
+  .nav-link {
     color: var(--color-text-secondary);
     text-decoration: none;
+    font-size: 0.9rem;
   }
 
-  .site-nav a:hover {
+  .nav-link:hover {
     color: var(--color-text);
   }
 
-  .header-actions {
+  .nav-link.active {
+    color: var(--color-text);
+    border-bottom: 2px solid var(--color-seal);
+    padding-bottom: 2px;
+  }
+
+  .icons {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: 13px;
+    margin-left: 4px;
   }
 
-  .lang-switch {
-    font-size: var(--font-size-sm);
-    font-weight: 500;
+  .nav-ic {
+    display: inline-flex;
     color: var(--color-text-secondary);
     text-decoration: none;
-    white-space: nowrap;
   }
 
-  .lang-switch:hover {
-    color: var(--color-text);
+  .nav-ic:hover {
+    color: var(--color-seal);
   }
 
   @media (max-width: 640px) {
     .header-inner {
       flex-wrap: wrap;
       gap: var(--spacing-sm);
-      padding-block: var(--spacing-xs);
     }
-    .brand {
-      margin-inline-end: 0;
+    .brand-text {
+      display: none;
+    }
+    .site-nav {
+      gap: 14px;
     }
   }
 </style>

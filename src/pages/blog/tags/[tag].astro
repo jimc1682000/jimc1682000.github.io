@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import PostList from '../../../components/PostList.astro';
+import PostListGrouped from '../../../components/PostListGrouped.astro';
 import { getTags, getPostsByTag } from '../../../lib/blog';
 import { useTranslations } from '../../../i18n/ui';
 
@@ -21,25 +21,28 @@ const t = useTranslations(lang);
 ---
 
 <BaseLayout title={`${t('blog.taggedWith')}：${tag} — 陳建豪 Jimmy Chen`} description={`標籤「${tag}」的文章。`} lang={lang}>
-  <div class="container-narrow tag-page">
+  <div class="tag-page">
     <header class="tag-header">
-      <p class="crumb"><a href="/blog/tags/">{t('blog.allTags')}</a></p>
-      <h1>#{tag}</h1>
+      <p class="crumb"><a href="/blog/tags/">← {t('blog.allTags')}</a></p>
+      <h1 class="page-h">#{tag}</h1>
       <p class="count">{posts.length} {t('blog.postCount')}</p>
     </header>
-    <PostList posts={posts} lang={lang} />
+    <PostListGrouped posts={posts} lang={lang} />
   </div>
 </BaseLayout>
 
 <style>
   .tag-page {
-    padding-block: var(--spacing-2xl);
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 28px var(--spacing-2xl);
   }
   .tag-header {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
   }
   .crumb {
-    font-size: var(--font-size-sm);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
     margin-bottom: var(--spacing-xs);
   }
   .crumb a {
@@ -47,14 +50,17 @@ const t = useTranslations(lang);
     text-decoration: none;
   }
   .crumb a:hover {
-    color: var(--color-text);
+    color: var(--color-seal);
   }
-  .tag-header h1 {
-    font-size: var(--font-size-4xl);
+  .page-h {
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
   }
   .count {
     color: var(--color-text-tertiary);
-    font-size: var(--font-size-sm);
+    font-size: 0.85rem;
+    font-family: var(--font-sans);
     margin-top: var(--spacing-xs);
   }
 </style>

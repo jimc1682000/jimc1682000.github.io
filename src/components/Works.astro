@@ -1,0 +1,136 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/ui';
+import { works, workCategories } from '../data/works';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const isExternal = (href: string) => /^https?:\/\//.test(href);
+---
+
+<div class="works">
+  <h1 class="page-h">{t('works.title')}</h1>
+  <p class="page-sub">{t('works.subtitle')}</p>
+
+  {
+    workCategories.map((cat) => (
+      <section class="group">
+        <h2>{t(cat.titleKey)}</h2>
+        {works[cat.id].map((item) => (
+          <div class="item">
+            <div class="t">{item.title}</div>
+            <div class="d">{item.desc[lang]}</div>
+            <div class="meta">
+              {item.tags.length > 0 && (
+                <span class="tags">
+                  {item.tags.map((tag) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </span>
+              )}
+              <span class="links">
+                {item.links.map((l) => (
+                  <a
+                    href={l.href}
+                    {...(isExternal(l.href)
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
+                  >
+                    {l.label[lang]}
+                  </a>
+                ))}
+              </span>
+            </div>
+          </div>
+        ))}
+      </section>
+    ))
+  }
+</div>
+
+<style>
+  .works {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 28px var(--spacing-2xl);
+  }
+
+  .page-h {
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .page-sub {
+    color: var(--color-text-secondary);
+    margin-top: 10px;
+    font-size: 1.05rem;
+  }
+
+  .group {
+    margin-top: 48px;
+  }
+  .group > h2 {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    letter-spacing: 0.14em;
+    color: var(--color-seal);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+  .item .t {
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .item .d {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-top: 5px;
+  }
+  .item .meta {
+    margin-top: 9px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-family: var(--font-sans);
+  }
+  .item .tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .item .tag {
+    font-size: 0.72rem;
+    color: var(--color-seal);
+    background: var(--color-seal-tint);
+    padding: 0.1rem 0.5rem;
+    border-radius: 100px;
+  }
+  .item .links {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .item .links a {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+  .item .links a:hover {
+    color: var(--color-seal);
+  }
+</style>

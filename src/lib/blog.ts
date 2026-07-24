@@ -44,6 +44,37 @@ export function formatDate(date: Date, locale: Locale): string {
   }).format(date);
 }
 
+/** 只格式化月日（年份由分組標題提供,給 blog 年份列表用）。 */
+export function formatMonthDay(date: Date, locale: Locale): string {
+  const bcp47 = locale === 'en' ? 'en-US' : 'zh-Hant';
+  return new Intl.DateTimeFormat(bcp47, {
+    month: locale === 'en' ? 'short' : 'long',
+    day: 'numeric',
+  }).format(date);
+}
+
+/** 緊湊的年.月（給首頁近作）。例：2026.01。 */
+export function formatYearMonth(date: Date): string {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  return `${y}.${m}`;
+}
+
+/** 依年份分組（新→舊,組內沿用傳入排序）。 */
+export function groupByYear(
+  posts: BlogEntry[],
+): { year: number; posts: BlogEntry[] }[] {
+  const map = new Map<number, BlogEntry[]>();
+  for (const post of posts) {
+    const y = post.data.pubDate.getFullYear();
+    if (!map.has(y)) map.set(y, []);
+    map.get(y)!.push(post);
+  }
+  return [...map.entries()]
+    .map(([year, posts]) => ({ year, posts }))
+    .sort((a, b) => b.year - a.year);
+}
+
 /** 取某語系全部 tag（去重、依名稱排序）。 */
 export async function getTags(locale: Locale): Promise<string[]> {
   const posts = await getPosts(locale);
