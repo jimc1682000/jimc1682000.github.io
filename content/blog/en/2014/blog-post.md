@@ -17,7 +17,7 @@ A friendly heads-up: the tuning pack was a loaner for testing from the vendor,
 but I've tried to stay as neutral as possible in writing up my impressions, so take them for what they're worth.  
   
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQY7UvzXHgZZGnf-gwBjW_Y0jmfhc4TRpKN_Ccu1TaskfE901oZC_uRgfz7QzdabWd-JLjM-ylhadgKxDe1dtcxvcMhwaGwq1O4PM8QVxjyCo_BmCLVZE984gL87YuI3s8CuCrftfAm4GM/s1600/20140630_155047_LLS.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQY7UvzXHgZZGnf-gwBjW_Y0jmfhc4TRpKN_Ccu1TaskfE901oZC_uRgfz7QzdabWd-JLjM-ylhadgKxDe1dtcxvcMhwaGwq1O4PM8QVxjyCo_BmCLVZE984gL87YuI3s8CuCrftfAm4GM/s1600/20140630_155047_LLS.jpg)
+[![](/blog/img/20140630_155047_LLS.webp)](/blog/img/20140630_155047_LLS.webp)
 
   
   
@@ -61,7 +61,7 @@ Mr. Chen really is a wonderful guy!!
 So everyone, if you can, consider meeting up with Mr. Chen in person. You can talk audio and swap notes!  
   
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxJaOGnNLnu3hVfCAseAQzwom7EG3REMCDesx1Trgod_tQuQFTvTF4AAirq1kPIpmDlKdDkBbMz4zE5xF9wWmNW4AQkzvT8AzOGOagDUJs3jpNI-RWNtKyqa_TrHu2jXxC_PtlY1DRUUv7/s1600/20140630_162621_LLS.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxJaOGnNLnu3hVfCAseAQzwom7EG3REMCDesx1Trgod_tQuQFTvTF4AAirq1kPIpmDlKdDkBbMz4zE5xF9wWmNW4AQkzvT8AzOGOagDUJs3jpNI-RWNtKyqa_TrHu2jXxC_PtlY1DRUUv7/s1600/20140630_162621_LLS.jpg)
+[![](/blog/img/20140630_162621_LLS.webp)](/blog/img/20140630_162621_LLS.webp)
 
   
 First, let me explain how to use the tuning pack:  
@@ -85,7 +85,7 @@ As the saying goes, "It takes three to make it proper" (misused), so to make sur
   
 TEST 1  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3YIP2V9ljCXqAO62yAgUoNcnjUBEt3C4tNvjI1YrLMBShw3NxbXCrq_ya-oWSAMJZepEhvZ6jW8z0KXc_BRSl1voKPx33Ur4LwUmrPgxYF-WwKJCbJ8mMxWH02qDtvwMPmJBFj7ELgngS/s1600/20140530_210221.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3YIP2V9ljCXqAO62yAgUoNcnjUBEt3C4tNvjI1YrLMBShw3NxbXCrq_ya-oWSAMJZepEhvZ6jW8z0KXc_BRSl1voKPx33Ur4LwUmrPgxYF-WwKJCbJ8mMxWH02qDtvwMPmJBFj7ELgngS/s1600/20140530_210221.jpg)
+[![](/blog/img/20140530_210221.webp)](/blog/img/20140530_210221.webp)
 
   
 The picture above is my original layout.  
@@ -135,7 +135,7 @@ I'll just have to keep wedging them in…
 After finishing, I waited a while and tested again, and it was about the same as TEST 1's sound quality—about 80–90% of the original—very satisfying, XD  
 The picture below is the final version~  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQY7UvzXHgZZGnf-gwBjW_Y0jmfhc4TRpKN_Ccu1TaskfE901oZC_uRgfz7QzdabWd-JLjM-ylhadgKxDe1dtcxvcMhwaGwq1O4PM8QVxjyCo_BmCLVZE984gL87YuI3s8CuCrftfAm4GM/s1600/20140630_155047_LLS.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQY7UvzXHgZZGnf-gwBjW_Y0jmfhc4TRpKN_Ccu1TaskfE901oZC_uRgfz7QzdabWd-JLjM-ylhadgKxDe1dtcxvcMhwaGwq1O4PM8QVxjyCo_BmCLVZE984gL87YuI3s8CuCrftfAm4GM/s1600/20140630_155047_LLS.jpg)
+[![](/blog/img/20140630_155047_LLS.webp)](/blog/img/20140630_155047_LLS.webp)
 
   
   

@@ -10,7 +10,7 @@ locale: en
 translationOf: blog-post_30
 aiTranslated: true
 ---
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgaNLgeqfXHRE-fzmbrvg1E5-XkVWuyPdfC_BhZeBN6lB96cjIK8jZwwYlSeN0P8ToTMQxpnZsPRBLCCSwtC57i12gDkrAivIodkk8c4C2RAOkjAq3FO5QR5XKGcFc90MRrG8aba367KcpP/s1600/20140523_183504_LLS.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgaNLgeqfXHRE-fzmbrvg1E5-XkVWuyPdfC_BhZeBN6lB96cjIK8jZwwYlSeN0P8ToTMQxpnZsPRBLCCSwtC57i12gDkrAivIodkk8c4C2RAOkjAq3FO5QR5XKGcFc90MRrG8aba367KcpP/s1600/20140523_183504_LLS.jpg)
+[![](/blog/img/20140523_183504_LLS.webp)](/blog/img/20140523_183504_LLS.webp)
 
   
 This write-up is nearly three months overdue, XDD  
@@ -30,7 +30,7 @@ I've said all this just to tell everyone that this is a company working really h
   
 Alright, back to the point. Today I want to write about my impressions of the second-generation super tweeter.  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGrqDl6k_iScNitp-mHqNIe0K6BA8fnLcYeIMeMABnaxZUdfuHWaJYxF0dQLXyPCCvTeEiOosJhAHGVGFdZqlIAAjlYsgG37uxC3KRJNw4botHugpIzM2ZtgNdOA73e8TRD8X2AMETJz2S/s1600/20140630_203402_LLS.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGrqDl6k_iScNitp-mHqNIe0K6BA8fnLcYeIMeMABnaxZUdfuHWaJYxF0dQLXyPCCvTeEiOosJhAHGVGFdZqlIAAjlYsgG37uxC3KRJNw4botHugpIzM2ZtgNdOA73e8TRD8X2AMETJz2S/s1600/20140630_203402_LLS.jpg)
+[![](/blog/img/20140630_203402_LLS.webp)](/blog/img/20140630_203402_LLS.webp)
 
   
 First, let me lay out my setup:  

@@ -14,7 +14,7 @@ tags:
 但個人儘量保持中立的立場寫出心得，大家可自行參酌。  
   
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQY7UvzXHgZZGnf-gwBjW_Y0jmfhc4TRpKN_Ccu1TaskfE901oZC_uRgfz7QzdabWd-JLjM-ylhadgKxDe1dtcxvcMhwaGwq1O4PM8QVxjyCo_BmCLVZE984gL87YuI3s8CuCrftfAm4GM/s1600/20140630_155047_LLS.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQY7UvzXHgZZGnf-gwBjW_Y0jmfhc4TRpKN_Ccu1TaskfE901oZC_uRgfz7QzdabWd-JLjM-ylhadgKxDe1dtcxvcMhwaGwq1O4PM8QVxjyCo_BmCLVZE984gL87YuI3s8CuCrftfAm4GM/s1600/20140630_155047_LLS.jpg)
+[![](/blog/img/20140630_155047_LLS.webp)](/blog/img/20140630_155047_LLS.webp)
 
   
   
@@ -58,7 +58,7 @@ tags:
 因此各位，如果可以的話，可以選擇跟陳先生面交，大家可以聊聊音響經，交流一下！  
   
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxJaOGnNLnu3hVfCAseAQzwom7EG3REMCDesx1Trgod_tQuQFTvTF4AAirq1kPIpmDlKdDkBbMz4zE5xF9wWmNW4AQkzvT8AzOGOagDUJs3jpNI-RWNtKyqa_TrHu2jXxC_PtlY1DRUUv7/s1600/20140630_162621_LLS.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxJaOGnNLnu3hVfCAseAQzwom7EG3REMCDesx1Trgod_tQuQFTvTF4AAirq1kPIpmDlKdDkBbMz4zE5xF9wWmNW4AQkzvT8AzOGOagDUJs3jpNI-RWNtKyqa_TrHu2jXxC_PtlY1DRUUv7/s1600/20140630_162621_LLS.jpg)
+[![](/blog/img/20140630_162621_LLS.webp)](/blog/img/20140630_162621_LLS.webp)
 
   
 先來跟大家說明一下調音包的使用方式：  
@@ -83,7 +83,7 @@ Spitfire HD(新歡，含Supplier HD，在此使用光纖做測試) + Beyond HD(�
   
 TEST 1  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3YIP2V9ljCXqAO62yAgUoNcnjUBEt3C4tNvjI1YrLMBShw3NxbXCrq_ya-oWSAMJZepEhvZ6jW8z0KXc_BRSl1voKPx33Ur4LwUmrPgxYF-WwKJCbJ8mMxWH02qDtvwMPmJBFj7ELgngS/s1600/20140530_210221.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3YIP2V9ljCXqAO62yAgUoNcnjUBEt3C4tNvjI1YrLMBShw3NxbXCrq_ya-oWSAMJZepEhvZ6jW8z0KXc_BRSl1voKPx33Ur4LwUmrPgxYF-WwKJCbJ8mMxWH02qDtvwMPmJBFj7ELgngS/s1600/20140530_210221.jpg)
+[![](/blog/img/20140530_210221.webp)](/blog/img/20140530_210221.webp)
 
   
 上圖為我最原本的擺放。  
@@ -133,7 +133,7 @@ TEST 3
 塞完後，再等了一陣子，測試一下，就跟TEST 1的音質差不多了，有原本的八、九成這樣，非常滿意XD  
 下面圖就是最終版本了~  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQY7UvzXHgZZGnf-gwBjW_Y0jmfhc4TRpKN_Ccu1TaskfE901oZC_uRgfz7QzdabWd-JLjM-ylhadgKxDe1dtcxvcMhwaGwq1O4PM8QVxjyCo_BmCLVZE984gL87YuI3s8CuCrftfAm4GM/s1600/20140630_155047_LLS.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQY7UvzXHgZZGnf-gwBjW_Y0jmfhc4TRpKN_Ccu1TaskfE901oZC_uRgfz7QzdabWd-JLjM-ylhadgKxDe1dtcxvcMhwaGwq1O4PM8QVxjyCo_BmCLVZE984gL87YuI3s8CuCrftfAm4GM/s1600/20140630_155047_LLS.jpg)
+[![](/blog/img/20140630_155047_LLS.webp)](/blog/img/20140630_155047_LLS.webp)
 
   
   

@@ -14,17 +14,17 @@ A quick note: buying an HHKB had always been a life goal of mine, but I never th
 
 But a coworker complained that my red-switch typing was too loud, and in a fit of pique I went and researched how to order the HHKB Type-S and the HHKB BT. Then, during the National Day long weekend last year (2016), I took a trip to Japan and brought them home along the way. So sometimes plans can't keep up with change — and change can't keep up with one snarky remark from a coworker.
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ-v1iltDkXtrVFgdqZChWQMqyhCPuhBcCnx8fpWX5d50DuOkU8UrFVzDsmf4A6ysgjEHmp2RFW-lTCYmdl73DazZV130xR16kyqf3jXW465_I_tUD0dTKseUl2tinJDmfD3Gj4slLBS4n/s320/P_20170425_154358_vHDR_Auto.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ-v1iltDkXtrVFgdqZChWQMqyhCPuhBcCnx8fpWX5d50DuOkU8UrFVzDsmf4A6ysgjEHmp2RFW-lTCYmdl73DazZV130xR16kyqf3jXW465_I_tUD0dTKseUl2tinJDmfD3Gj4slLBS4n/s1600/P_20170425_154358_vHDR_Auto.jpg)
+[![](/blog/img/P_20170425_154358_vHDR_Auto.webp)](/blog/img/P_20170425_154358_vHDR_Auto.webp)
 
 (The HHKB Type-S, overall)
 
   
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDr0tRhCchT10Pkzq8EEItAj66r_ac0QNLKnu_5WURbtVmciK1-18S_SKgXMMhY7ylop0ZaUJ2Or8fVp72yrPuHvL8Hpv75dYrJMGx8Y4JJTCiRojVdKK629OLkoWs0EqqBg6HBj_Q20Ht/s320/P_20170425_154421_vHDR_Auto.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDr0tRhCchT10Pkzq8EEItAj66r_ac0QNLKnu_5WURbtVmciK1-18S_SKgXMMhY7ylop0ZaUJ2Or8fVp72yrPuHvL8Hpv75dYrJMGx8Y4JJTCiRojVdKK629OLkoWs0EqqBg6HBj_Q20Ht/s1600/P_20170425_154421_vHDR_Auto.jpg)
+[![](/blog/img/P_20170425_154421_vHDR_Auto.webp)](/blog/img/P_20170425_154421_vHDR_Auto.webp)
 
 (The HHKB mark)
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhvobxJ8JR5PPNnqbq4hhw-Dfn8t6OIEbaypHrnUAU9OAm3YPXtYUymm4M8Yj4XidxUcJ4Tr5_O96BPgSfmdDMW0OEcsaxpUUqgUQ5SN2y_0RIsdqn590tCZ-Abi-rq3drNCzTZuAaIWdm/s320/P_20170425_154452_vHDR_Auto.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhvobxJ8JR5PPNnqbq4hhw-Dfn8t6OIEbaypHrnUAU9OAm3YPXtYUymm4M8Yj4XidxUcJ4Tr5_O96BPgSfmdDMW0OEcsaxpUUqgUQ5SN2y_0RIsdqn590tCZ-Abi-rq3drNCzTZuAaIWdm/s1600/P_20170425_154452_vHDR_Auto.jpg)
+[![](/blog/img/P_20170425_154452_vHDR_Auto.webp)](/blog/img/P_20170425_154452_vHDR_Auto.webp)
 
 (The Type-S mark)
 
