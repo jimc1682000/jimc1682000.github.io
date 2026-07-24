@@ -22,6 +22,8 @@ const { Content } = await render(entry);
   lang="en"
   pubDate={entry.data.pubDate}
   tags={entry.data.tags}
+  aiTranslated={entry.data.aiTranslated}
+  translationOf={entry.data.translationOf}
 >
   <Content />
 </BlogPost>
