@@ -1,0 +1,106 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/ui';
+import { formatDate, slugOf, type BlogEntry } from '../lib/blog';
+
+interface Props {
+  posts: BlogEntry[];
+  lang: Lang;
+}
+
+const { posts, lang } = Astro.props;
+const t = useTranslations(lang);
+const blogBase = lang === 'en' ? '/en/blog' : '/blog';
+const tagsBase = `${blogBase}/tags`;
+---
+
+{
+  posts.length === 0 ? (
+    <p class="empty">{t('blog.empty')}</p>
+  ) : (
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li class="post-item">
+          <a class="post-link" href={`${blogBase}/${slugOf(post)}/`}>
+            <h2 class="post-title">{post.data.title}</h2>
+          </a>
+          <p class="post-date">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {formatDate(post.data.pubDate, lang)}
+            </time>
+          </p>
+          <p class="post-desc">{post.data.description}</p>
+          {post.data.tags.length > 0 && (
+            <ul class="post-tags" aria-label={t('blog.tags')}>
+              {post.data.tags.map((tag) => (
+                <li>
+                  <a class="tag-chip" href={`${tagsBase}/${tag}/`}>
+                    #{tag}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .empty {
+    color: var(--color-text-tertiary);
+    padding-block: var(--spacing-lg);
+  }
+
+  .post-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  .post-item {
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .post-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .post-link {
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .post-title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .post-link:hover .post-title {
+    color: var(--color-text-secondary);
+  }
+
+  .post-date {
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .post-desc {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .post-tags {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+</style>

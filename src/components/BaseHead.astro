@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+}
+
+const { title, description, lang } = Astro.props;
+
+// canonical：以 site 為基準的絕對 URL（DESIGN §9）
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// RSS：繁中 /rss.xml、英文 /en/rss.xml（A1 路由）
+const rssHref = lang === 'en' ? '/en/rss.xml' : '/rss.xml';
+const rssTitle = lang === 'en' ? 'Jimmy Chen — Blog (EN)' : 'Jimmy Chen — Blog';
+---
+
+{/* no-flash theme：務必放 <head> 最前，於任何樣式套用前設定 data-theme（DESIGN §6） */}
+<script is:inline>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      var theme =
+        stored ||
+        (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" title={rssTitle} href={rssHref} />
+
+{/* Open Graph（薄，v1） */}
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL} />
+<meta name="twitter:card" content="summary" />

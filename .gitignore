@@ -54,3 +54,8 @@ docs/.vitepress/dist/
 docs/.vitepress/cache/
 resume/.tmp/
 .DS_Store
+
+# Astro
+node_modules/
+dist/
+.astro/
