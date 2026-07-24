@@ -12,11 +12,16 @@ interface Props {
   lang: Lang;
   pubDate: Date;
   tags: string[];
+  aiTranslated?: boolean;
+  translationOf?: string;
 }
 
-const { title, description, lang, pubDate, tags } = Astro.props;
+const { title, description, lang, pubDate, tags, aiTranslated, translationOf } = Astro.props;
 const t = useTranslations(lang);
 const blogHref = lang === 'en' ? '/en/blog/' : '/blog/';
+// AI 翻譯提示：僅英文版且標記 aiTranslated 時顯示；連回中文原文 /blog/<translationOf>。
+const showAiNotice = lang === 'en' && aiTranslated;
+const originalHref = translationOf ? `/blog/${translationOf}/` : '/blog/';
 // Giscus 留言語系(P2-09):繁中 zh-TW、英文 en。
 const giscusLang = lang === 'en' ? 'en' : 'zh-TW';
 const signoffYear = pubDate.getFullYear();
@@ -32,6 +37,18 @@ const signoffYear = pubDate.getFullYear();
       </time>
       {tags.map((tag) => <span class="ptag">{tag}</span>)}
     </div>
+
+    {
+      showAiNotice && (
+        <aside class="ai-notice">
+          <span class="ai-ico">✦</span>
+          <span>
+            {t('post.aiTranslatedNotice')}{' '}
+            <a href={originalHref}>{t('post.readOriginal')} →</a>
+          </span>
+        </aside>
+      )
+    }
 
     <div class="body">
       <slot />
@@ -132,6 +149,33 @@ const signoffYear = pubDate.getFullYear();
     padding: 0.1rem 0.5rem;
     border-radius: 100px;
     font-size: 0.72rem;
+  }
+
+  .ai-notice {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 12px 16px;
+    background: var(--color-seal-tint);
+    border-left: 3px solid var(--color-seal);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+  .ai-notice .ai-ico {
+    color: var(--color-seal);
+    flex: none;
+  }
+  .ai-notice a {
+    color: var(--color-seal);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .ai-notice a:hover {
+    text-decoration: underline;
   }
 
   /* 正文:窄欄 serif、行高 2.05（對齊 mockup） */
