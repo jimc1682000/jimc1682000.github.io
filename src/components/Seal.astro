@@ -1,0 +1,44 @@
+---
+// 落款印章:朱砂方塊、白字、雙層 inset box-shadow（內圈 seal 色、外圈 bg 色形成邊框感）。
+// 用於 Header 左側與首頁／單篇文末落款。
+interface Props {
+  char?: string;
+  size?: number;
+  class?: string;
+}
+
+const { char = '吉', size = 30, class: className } = Astro.props;
+
+// 依尺寸等比推算字級、圓角與雙層邊框寬度（大印章邊框較粗）。
+const fontSize = Math.round(size * 0.63);
+const radius = size >= 48 ? 7 : 5;
+const inner = size >= 48 ? 2 : 1.5;
+const outer = size >= 48 ? 4 : 3;
+---
+
+<span
+  class:list={['seal', className]}
+  style={`--seal-size:${size}px;--seal-font:${fontSize}px;--seal-radius:${radius}px;--seal-inner:${inner}px;--seal-outer:${outer}px;`}
+  aria-hidden="true">{char}</span>
+
+<style>
+  .seal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: var(--seal-size);
+    height: var(--seal-size);
+    background: var(--color-seal);
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    line-height: 1;
+    font-size: var(--seal-font);
+    border-radius: var(--seal-radius);
+    box-shadow:
+      0 0 0 var(--seal-inner) var(--color-seal) inset,
+      0 0 0 var(--seal-outer) var(--color-bg) inset;
+    user-select: none;
+  }
+</style>

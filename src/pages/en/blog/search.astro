@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../../i18n/ui';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+
+// Pagefind UI translations (DESIGN §7.5).
+const pf = {
+  placeholder: t('search.placeholder'),
+  clear_search: t('search.clear'),
+  zero_results: t('search.zeroResults'),
+};
+---
+
+<BaseLayout title={`${t('search.title')} — Jimmy Chen`} description={t('search.description')} lang={lang}>
+  {/* Pagefind is a self-hosted static asset (/pagefind/ in this site's dist), not an external CDN */}
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+
+  <div class="search-page">
+    <h1 class="page-h">{t('search.title')}</h1>
+    <div id="search"></div>
+  </div>
+
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline define:vars={{ pf }}>
+    window.addEventListener('DOMContentLoaded', () => {
+      new PagefindUI({
+        element: '#search',
+        showSubResults: true,
+        showImages: false,
+        translations: pf,
+      });
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .search-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 28px var(--spacing-2xl);
+  }
+
+  .page-h {
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  /* Override Pagefind UI defaults with site tokens (light + dark) */
+  #search {
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: var(--color-seal);
+    --pagefind-ui-text: var(--color-text);
+    --pagefind-ui-background: var(--color-bg-elevated);
+    --pagefind-ui-border: var(--color-border);
+    --pagefind-ui-tag: var(--color-bg-surface);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: var(--radius-sm);
+    --pagefind-ui-font: var(--font-sans);
+  }
+</style>
