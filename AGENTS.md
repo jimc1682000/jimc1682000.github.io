@@ -52,9 +52,16 @@ description: 一句話描述  # string，用於列表與 RSS/SEO
 
 ## 圖片規則
 
-- **封面**：新文用 `astro:assets`（`cover` frontmatter），交給 Astro 最佳化。
-- **正文圖**：放 `public/blog/YYYY/<slug>/…`，以 `/blog/YYYY/<slug>/檔名` 引用。
-- **舊 Blogger 圖**：暫時外鏈，之後 phase 再落地。
+**壓縮標準：WebP quality 92**（見 DESIGN.md §8）。所有正文圖固化為本地 WebP q92，不外鏈。
+
+- **正文圖（標準流程）**：把原圖丟一個資料夾，跑
+  `node scripts/optimize-images.mjs <srcDir>`
+  → 產出 WebP q92 到 `public/blog/img/`，在 md 以 `/blog/img/<name>.webp` 引用。
+  這是**唯一保證 q92 一致**的路（agent 發新文一律走此工具,勿自行選別的 quality/格式）。
+- **封面**：新文可用 `astro:assets`（`cover` frontmatter，Astro build 時最佳化）。
+- **外部/大量匯入圖**（如 Blogger 遷移）：`node scripts/optimize-images.mjs --internalize`
+  會掃 `content/blog/**` 外部圖 URL、優先用本地原檔（感知雜湊比對）、轉 WebP q92、改寫 zh+en md。
+- **不要**在正文留外部圖 URL（googleusercontent 等）；一律先過上面的工具固化。
 - 圖片必有有意義 `alt`；純裝飾圖用空 `alt=""`。
 
 ## 語調

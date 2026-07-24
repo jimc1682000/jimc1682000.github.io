@@ -13,17 +13,17 @@ tags:
 但因為被同事說我用紅軸打字的聲音太吵，我一怒之下就上網研究了HHKB Type-S跟HHKB BT要怎麼訂購，然後在去年(2016)國慶連假去日本玩的時候就順便一起帶回來了。  
 所以有的時候計畫趕不上變化，變化比不上同事一句G8話。  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ-v1iltDkXtrVFgdqZChWQMqyhCPuhBcCnx8fpWX5d50DuOkU8UrFVzDsmf4A6ysgjEHmp2RFW-lTCYmdl73DazZV130xR16kyqf3jXW465_I_tUD0dTKseUl2tinJDmfD3Gj4slLBS4n/s320/P_20170425_154358_vHDR_Auto.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ-v1iltDkXtrVFgdqZChWQMqyhCPuhBcCnx8fpWX5d50DuOkU8UrFVzDsmf4A6ysgjEHmp2RFW-lTCYmdl73DazZV130xR16kyqf3jXW465_I_tUD0dTKseUl2tinJDmfD3Gj4slLBS4n/s1600/P_20170425_154358_vHDR_Auto.jpg)
+[![](/blog/img/P_20170425_154358_vHDR_Auto.webp)](/blog/img/P_20170425_154358_vHDR_Auto.webp)
 
 (HHKB Type-S整體)
 
   
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDr0tRhCchT10Pkzq8EEItAj66r_ac0QNLKnu_5WURbtVmciK1-18S_SKgXMMhY7ylop0ZaUJ2Or8fVp72yrPuHvL8Hpv75dYrJMGx8Y4JJTCiRojVdKK629OLkoWs0EqqBg6HBj_Q20Ht/s320/P_20170425_154421_vHDR_Auto.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDr0tRhCchT10Pkzq8EEItAj66r_ac0QNLKnu_5WURbtVmciK1-18S_SKgXMMhY7ylop0ZaUJ2Or8fVp72yrPuHvL8Hpv75dYrJMGx8Y4JJTCiRojVdKK629OLkoWs0EqqBg6HBj_Q20Ht/s1600/P_20170425_154421_vHDR_Auto.jpg)
+[![](/blog/img/P_20170425_154421_vHDR_Auto.webp)](/blog/img/P_20170425_154421_vHDR_Auto.webp)
 
 (HHKB MARK)
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhvobxJ8JR5PPNnqbq4hhw-Dfn8t6OIEbaypHrnUAU9OAm3YPXtYUymm4M8Yj4XidxUcJ4Tr5_O96BPgSfmdDMW0OEcsaxpUUqgUQ5SN2y_0RIsdqn590tCZ-Abi-rq3drNCzTZuAaIWdm/s320/P_20170425_154452_vHDR_Auto.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhvobxJ8JR5PPNnqbq4hhw-Dfn8t6OIEbaypHrnUAU9OAm3YPXtYUymm4M8Yj4XidxUcJ4Tr5_O96BPgSfmdDMW0OEcsaxpUUqgUQ5SN2y_0RIsdqn590tCZ-Abi-rq3drNCzTZuAaIWdm/s1600/P_20170425_154452_vHDR_Auto.jpg)
+[![](/blog/img/P_20170425_154452_vHDR_Auto.webp)](/blog/img/P_20170425_154452_vHDR_Auto.webp)
 
 (Type-S MARK)
 

@@ -191,7 +191,9 @@
 | 項目 | 規則 |
 |------|------|
 | 文章路徑 | `content/blog/YYYY/<slug>.md` → `/blog/<slug>`；英文 `content/blog/en/...` |
-| 封面 | 新文 `astro:assets`；正文圖 `public/blog/...`；舊 Blogger 圖暫外鏈 |
+| 正文圖 | **一律固化為本地 WebP quality 92**（不外鏈）；用 `scripts/optimize-images.mjs` 產出至 `public/blog/img/`，以 `/blog/img/<name>.webp` 引用 |
+| 封面 | 新文可用 `astro:assets`（`cover` frontmatter） |
+| 圖片標準 | **WebP q92**：來源多為已壓過的圖，q92 兼顧文字截圖銳利與 ~25% 瘦身；q95 以上對此類來源幾乎不省(見 Decisions Log) |
 | 草稿 | 無 frontmatter draft；用 GitHub Draft PR |
 | 語調 | 繁中為主、技術準確；長文可走 humanizer 去 AI 味 |
 
@@ -234,6 +236,8 @@
 | 2026-07-25 | **新增作品集 `/works/`；Film-brain 由 nav 收進作品集** | film-brain 為作品之一，集中呈現 |
 | 2026-07-25 | **加搜尋（Pagefind）、留言（Giscus）** | v1 延後項，P2 補上；皆 gating |
 | 2026-07-25 | **Analytics 由「v1 不做」改為 Cloudflare Web Analytics（無 cookie）** | 使用者要基本流量數據，選隱私友善方案不破壞原則 |
+| 2026-07-25 | **全站文章英譯 37 篇 + AI 翻譯提示 banner** | 服務英文讀者；GEMBA-MQM 評估 0 Critical/0 Major |
+| 2026-07-25 | **舊 Blogger 外鏈圖全數固化為本地 WebP q92**（`public/blog/img/`，工具 `scripts/optimize-images.mjs`） | 來源已壓過，q92 兼顧文字銳利與 ~25% 瘦身、q95+ 幾乎不省；優先用 Takeout Albums 全畫質原檔（dHash 比對）、無死連結 |
 
 ---
 

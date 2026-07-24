@@ -75,14 +75,14 @@ Okay, so if your phone can't directly connect a USB DAC via USB OTG, don't lose 
   a. Prepare a USB OTG cable and a USB DAC, as shown below.  
   Below I used two portable DAC/amps to test: the Dragonfly V1.0 and the Hippo Cricri+.  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiWqyYhtZJgc9av40tNRfIl7t7CAMpENsoSfN9juzqXgNdL6F-PKnKJ8BCXSpxm2UoXSeudWc7wKvI19h2k9AuTiGIrKQkN1cXEggyCHISclSG5XCYX1KJ4Qu88dvtVYMLGlNyzE-Ty7hma/s1600/20140528_205039.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiWqyYhtZJgc9av40tNRfIl7t7CAMpENsoSfN9juzqXgNdL6F-PKnKJ8BCXSpxm2UoXSeudWc7wKvI19h2k9AuTiGIrKQkN1cXEggyCHISclSG5XCYX1KJ4Qu88dvtVYMLGlNyzE-Ty7hma/s1600/20140528_205039.jpg)
+[![](/blog/img/20140528_205039.webp)](/blog/img/20140528_205039.webp)
 
   
   b. Power on the device and plug it into the USB OTG cable first (important), because this makes it easier to detect the DAC.  
   c. Then plug the USB OTG cable into the phone's MicroUSB port; it should show a USB device inserted, as below.  
   
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNgYEF3GN52jY7QmtDM_a1MlKHdoP7s6VOl9_z3E-9k4DnYyC7lm1Z4dEG3CeZRQjzUsD60qJo2HkEY1AGKfEs6R1EVY3hUMxQODnLdNWmGEIJDPIyWLluheeAZztKrI8lwAQtEIP1lqtm/s1600/Screenshot_2014-05-28-20-52-52.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNgYEF3GN52jY7QmtDM_a1MlKHdoP7s6VOl9_z3E-9k4DnYyC7lm1Z4dEG3CeZRQjzUsD60qJo2HkEY1AGKfEs6R1EVY3hUMxQODnLdNWmGEIJDPIyWLluheeAZztKrI8lwAQtEIP1lqtm/s1600/Screenshot_2014-05-28-20-52-52.png)
+[![](/blog/img/Screenshot_2014-05-28-20-52-52.webp)](/blog/img/Screenshot_2014-05-28-20-52-52.webp)
 
   d. Open the USB Audio Player PRO / USB Audio Recorder PRO software.  
   
@@ -90,12 +90,12 @@ Okay, so if your phone can't directly connect a USB DAC via USB OTG, don't lose 
   a. A prompt will appear: "Allow the app USB Audio Player PRO to access the USB device?"  
   Press "OK" (you can check "Use by default for this USB device" if you like).  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZUdxW0R-r-2YAPAW5rQGaxjHjTNMcUE8EbfRRK2hivEcP4GUsB1aeKTAovXafPkygF564uX5JNgtIO92rSs1kR8XyTSGloBT7hzZ9_H1XgweDVQSXaBl6IZWXpjSBSe6Nz40Mflwnd0Oq/s1600/Screenshot_2014-05-28-20-54-31.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZUdxW0R-r-2YAPAW5rQGaxjHjTNMcUE8EbfRRK2hivEcP4GUsB1aeKTAovXafPkygF564uX5JNgtIO92rSs1kR8XyTSGloBT7hzZ9_H1XgweDVQSXaBl6IZWXpjSBSe6Nz40Mflwnd0Oq/s1600/Screenshot_2014-05-28-20-54-31.png)
+[![](/blog/img/Screenshot_2014-05-28-20-54-31.webp)](/blog/img/Screenshot_2014-05-28-20-54-31.webp)
 
   
   b. The playback screen appears as below; at the bottom are the common functions—play, stop, loop, seek, and so on.  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCcnxqs356szoQgyblLyC84bzaq2R0VRBMPNClLRsCc0JJLVFBBgQs4vzP8Bxhz_jymGGYNnkSdmL7JajrXIXGlj3hGjJUhBoLz0YtnqoELFxHGwJyVimTQl8KL7DtUJhzfgkElDtt3s81/s1600/Screenshot_2014-05-28-20-48-05.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCcnxqs356szoQgyblLyC84bzaq2R0VRBMPNClLRsCc0JJLVFBBgQs4vzP8Bxhz_jymGGYNnkSdmL7JajrXIXGlj3hGjJUhBoLz0YtnqoELFxHGwJyVimTQl8KL7DtUJhzfgkElDtt3s81/s1600/Screenshot_2014-05-28-20-48-05.png)
+[![](/blog/img/Screenshot_2014-05-28-20-48-05.webp)](/blog/img/Screenshot_2014-05-28-20-48-05.webp)
 
   
   c. On the right of the playback screen there's a strange silver knob for volume—up for louder, down for quieter.  
@@ -103,19 +103,19 @@ Okay, so if your phone can't directly connect a USB DAC via USB OTG, don't lose 
     by going into Settings (the button toward the upper right), where Prefs has a Volume Control option to change.  
     For the Dragonfly, for instance, if the maximum via software control isn't loud enough, you can switch to hardware control, as below.  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMTCApnofsn_3wwv2WmHRbJ7rp80ZtWk7N9vBtx9-ZFk6TKuy5HnGC5MsBzte77938Z57BcduLT_zMiNDyIghZAaI1ivjqLXJ_DsqR8VamAS2uhJzPM_9ic0BXQYbHFoIC3PUVgfEtOYp4/s1600/Screenshot_2014-05-28-20-55-12.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMTCApnofsn_3wwv2WmHRbJ7rp80ZtWk7N9vBtx9-ZFk6TKuy5HnGC5MsBzte77938Z57BcduLT_zMiNDyIghZAaI1ivjqLXJ_DsqR8VamAS2uhJzPM_9ic0BXQYbHFoIC3PUVgfEtOYp4/s1600/Screenshot_2014-05-28-20-55-12.png)
+[![](/blog/img/Screenshot_2014-05-28-20-55-12.webp)](/blog/img/Screenshot_2014-05-28-20-55-12.webp)
 
   
   d. The button toward the upper left of the playback screen opens music;  
     personally I always use folder playback (the second option, as below).  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTHhSrM7uoGWWayof1jwt5Hw6GpJMnFUeZp6fGsq0wIdg4kHct4NSrmZDbaI8HMJPPriksYBljU49ikXQUa45ttQ7OoGT_z4j1d83nmScqJi30Xtccph0GuHyWjaJQvlED5QdPeEyANNHH/s1600/Screenshot_2014-05-28-20-57-06.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTHhSrM7uoGWWayof1jwt5Hw6GpJMnFUeZp6fGsq0wIdg4kHct4NSrmZDbaI8HMJPPriksYBljU49ikXQUa45ttQ7OoGT_z4j1d83nmScqJi30Xtccph0GuHyWjaJQvlED5QdPeEyANNHH/s1600/Screenshot_2014-05-28-20-57-06.png)
+[![](/blog/img/Screenshot_2014-05-28-20-57-06.webp)](/blog/img/Screenshot_2014-05-28-20-57-06.webp)
 
   
   e. Play some music as a test. If there's crackling or strange sounds, first try adjusting the Buffer size—  
     again go into Settings, where Prefs has a Buffer size option; try adjusting it (as below).  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQQ-f8o62JUbAVLM4-SxPm0TCOCKdTheBFNoJa8K5U8BEieiHZEzwG_K9NqsfOWEFTwmbjiV1hjX4CIfGoqmdD573J37qalpA5Udi_3pclnPhzv3NesHs2pL1etmpFWWUdylXAdPVlrhbb/s1600/Screenshot_2014-05-28-20-55-37.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQQ-f8o62JUbAVLM4-SxPm0TCOCKdTheBFNoJa8K5U8BEieiHZEzwG_K9NqsfOWEFTwmbjiV1hjX4CIfGoqmdD573J37qalpA5Udi_3pclnPhzv3NesHs2pL1etmpFWWUdylXAdPVlrhbb/s1600/Screenshot_2014-05-28-20-55-37.png)
+[![](/blog/img/Screenshot_2014-05-28-20-55-37.webp)](/blog/img/Screenshot_2014-05-28-20-55-37.webp)
 
   
     If it still doesn't work, "check" Force 1 packet per transfer in Prefs;  
@@ -125,13 +125,13 @@ Okay, so if your phone can't directly connect a USB DAC via USB OTG, don't lose 
   
   f. In Settings there's an EQ section, as below; feel free to play with it when you have time—personally I don't use it, XD  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieBR-akD210lg7ofOqVBj6cCHt5bPQ24wd1pICgYdTRY86GDjk9bWw5w07Rnsz-RYFKG_kHxMksiX5MOTLvgWP-GUxSuWCBCdqa_Db9TtnGdTxrQ8xxAXDEq9LV6ukLuJt5ssP3fxrOAUM/s1600/Screenshot_2014-05-28-20-55-20.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieBR-akD210lg7ofOqVBj6cCHt5bPQ24wd1pICgYdTRY86GDjk9bWw5w07Rnsz-RYFKG_kHxMksiX5MOTLvgWP-GUxSuWCBCdqa_Db9TtnGdTxrQ8xxAXDEq9LV6ukLuJt5ssP3fxrOAUM/s1600/Screenshot_2014-05-28-20-55-20.png)
+[![](/blog/img/Screenshot_2014-05-28-20-55-20.webp)](/blog/img/Screenshot_2014-05-28-20-55-20.webp)
 
   
   e. During playback, there's an indicator up in the menu bar you can tap directly to make adjustments—  
     this is something USB Audio Recorder PRO doesn't have…  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiAWyrkqCJLyb6jApvKUr3rZ3zcngmGSAjSCKfTIXEq_L7ihfU_edbnAT-rKepY6Zk0OMwPr6-joLruNqivAyt7djhXI82iXMu0UUa9gl8mjV1hxft63TrB5k_1ARjxWJVJyYt3ZlyYYSw-/s1600/Screenshot_2014-05-28-20-56-48.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiAWyrkqCJLyb6jApvKUr3rZ3zcngmGSAjSCKfTIXEq_L7ihfU_edbnAT-rKepY6Zk0OMwPr6-joLruNqivAyt7djhXI82iXMu0UUa9gl8mjV1hxft63TrB5k_1ARjxWJVJyYt3ZlyYYSw-/s1600/Screenshot_2014-05-28-20-56-48.png)
+[![](/blog/img/Screenshot_2014-05-28-20-56-48.webp)](/blog/img/Screenshot_2014-05-28-20-56-48.webp)
 
   
 6. The USB Audio Recorder PRO part  
@@ -139,11 +139,11 @@ Okay, so if your phone can't directly connect a USB DAC via USB OTG, don't lose 
   Press "OK" (you can check "Use by default for this USB device" if you like).  
   
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh523esPDn_2221_AaXitd2JoMNO1PJwhi7aYeHexn1uuBfZh-VvZ8b4EgGxrXcI7fWfwSGpXA9rIfUGSEZ22jmTTRenpWfM73alwzxdPzgFkLG24r_nBARhWefylwqmFcZySvz4-kWBzje/s1600/Screenshot_2014-05-28-20-58-06.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh523esPDn_2221_AaXitd2JoMNO1PJwhi7aYeHexn1uuBfZh-VvZ8b4EgGxrXcI7fWfwSGpXA9rIfUGSEZ22jmTTRenpWfM73alwzxdPzgFkLG24r_nBARhWefylwqmFcZySvz4-kWBzje/s1600/Screenshot_2014-05-28-20-58-06.png)
+[![](/blog/img/Screenshot_2014-05-28-20-58-06.webp)](/blog/img/Screenshot_2014-05-28-20-58-06.webp)
 
   b. The playback screen (MAIN) appears as below.  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwSJyP1M4NFNMbO0ivlxZsWJ__bQ7Z8J80nJzNpD6SMuk4AAcPsSydScioO-EqsoiYXRq7VGjBD9PQClRXyKMdon8I68Y2RyqfR2KWuFGAWnr0M0dwje1sV5R0706jEw2wm9M39WI4NLxi/s1600/Screenshot_2014-05-28-21-02-05.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwSJyP1M4NFNMbO0ivlxZsWJ__bQ7Z8J80nJzNpD6SMuk4AAcPsSydScioO-EqsoiYXRq7VGjBD9PQClRXyKMdon8I68Y2RyqfR2KWuFGAWnr0M0dwje1sV5R0706jEw2wm9M39WI4NLxi/s1600/Screenshot_2014-05-28-21-02-05.png)
+[![](/blog/img/Screenshot_2014-05-28-21-02-05.webp)](/blog/img/Screenshot_2014-05-28-21-02-05.webp)
 
   
   c. Since it's recording-focused, there's a folder in the top-left corner to open an audio file (WAV, AIFF, OGG, etc.),  
@@ -157,14 +157,14 @@ Okay, so if your phone can't directly connect a USB DAC via USB OTG, don't lose 
     Only the Buffer part can be adjusted, same as above.  
     In my listening, the smaller the Buffer the better the sound quality; give it a try.  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYEl1YSbkdQvh7tHt2vIep7x7j4VaF-cPCw8C2sjm9znIE4MS65_cPBFnZgFKIHNX1ZM9_vSHfLbiqKrBbPf8LMR_mAJHCmxW4ivDO5H-W7ID_NgGYQ4nRGJhQrtCGRpUgUFzSEDBE3hab/s1600/Screenshot_2014-05-28-20-59-16.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYEl1YSbkdQvh7tHt2vIep7x7j4VaF-cPCw8C2sjm9znIE4MS65_cPBFnZgFKIHNX1ZM9_vSHfLbiqKrBbPf8LMR_mAJHCmxW4ivDO5H-W7ID_NgGYQ4nRGJhQrtCGRpUgUFzSEDBE3hab/s1600/Screenshot_2014-05-28-20-59-16.png)
+[![](/blog/img/Screenshot_2014-05-28-20-59-16.webp)](/blog/img/Screenshot_2014-05-28-20-59-16.webp)
 
   
   e. The Play List part is a simplified continuous player.  
     Basically, pick the file you want to play, hit play on this page,  
     and it'll automatically play the other files in that folder in order—but with a 30-second gap between each, =_=  
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizzi9aU_531VKa85MxUZN6D9GrrurtN4BEc8JqjCyDStNfHm_n6XLLpz3fd5muytpwdNfp2bBGXsxIrXMyvEBZ5hZAmRXG2vkv4nuJjX5kqAKENtTZtdGAqGgewPY86ru4N7YA4lX6hyEj/s1600/Screenshot_2014-05-28-21-03-33.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizzi9aU_531VKa85MxUZN6D9GrrurtN4BEc8JqjCyDStNfHm_n6XLLpz3fd5muytpwdNfp2bBGXsxIrXMyvEBZ5hZAmRXG2vkv4nuJjX5kqAKENtTZtdGAqGgewPY86ru4N7YA4lX6hyEj/s1600/Screenshot_2014-05-28-21-03-33.png)
+[![](/blog/img/Screenshot_2014-05-28-21-03-33.webp)](/blog/img/Screenshot_2014-05-28-21-03-33.webp)
 
   
 
