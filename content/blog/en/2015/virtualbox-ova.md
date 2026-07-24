@@ -2,10 +2,11 @@
 title: "Exporting and Importing OVA in VirtualBox"
 pubDate: 2015-09-13
 description: "It's actually quite simple—here I'm just walking you through it once."
-tags: ["Virtualbox", "OVA"]
+
 locale: en
 translationOf: virtualbox-ova
 aiTranslated: true
+tags: [Linux]
 ---
 It's actually quite simple—here I'm just walking you through it once.  
   

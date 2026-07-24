@@ -2,19 +2,7 @@
 title: "[心得] USB Audio Player PRO/USB Audio Recorder PRO介紹"
 pubDate: 2014-05-28
 description: "今天來寫一下，使用USB Audio Player PRO/USB Audio Recorder PRO的心得。"
-tags:
-  - "Hippo Cricri+"
-  - "Dragonfly"
-  - "USB OTG"
-  - "耳機"
-  - "介紹"
-  - "DAC"
-  - "我的吉米城"
-  - "Android"
-  - "USB Audio Player PRO"
-  - "音響"
-  - "心得"
-  - "USB Audio Recorder PRO"
+tags: [評測, 音響]
 ---
 今天來寫一下，使用USB Audio Player PRO/USB Audio Recorder PRO的心得。  
   

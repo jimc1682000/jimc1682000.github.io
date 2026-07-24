@@ -2,16 +2,7 @@
 title: "[教學] RT-N16(Tomato by shibby)如何解決OpenSSL Heartbleed"
 pubDate: 2014-07-03
 description: "先說明一下，什麼是OpenSSL Heartbleed好了： 就OpenVPN官網的解釋： 「A vulnerability in OpenSSL, nickn"
-tags:
-  - "N16"
-  - "資訊安全"
-  - "教學"
-  - "OpenVPN"
-  - "Tomato"
-  - "Heartbleed"
-  - "無線分享器"
-  - "Android"
-  - "OpenSSL"
+tags: [資訊安全]
 ---
 先說明一下，什麼是OpenSSL Heartbleed好了：  
 就OpenVPN官網的解釋：  

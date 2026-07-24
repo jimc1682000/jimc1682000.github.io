@@ -2,18 +2,10 @@
 title: "[Notes] Supplier USB vs. Metal-Cased USB 3.0 Hub Showdown"
 pubDate: 2014-05-24
 description: "By popular request, I ran this showdown, XDD. It was done with a Custom Cute + Supplier HD + Xiaomin 3 + Supplier AC + Philips X1 as the fixed setup, comparing the different combinations below."
-tags:
-  - "Showdown"
-  - "Firestone"
-  - "Headphones"
-  - "Firestone Audio"
-  - "My Jimmy City"
-  - "USB HUB"
-  - "Audio"
-  - "Notes"
 locale: en
 translationOf: supplier-usbusb-hub30
 aiTranslated: true
+tags: [Reviews, Audio]
 ---
 By popular request, I ran this showdown, XDD  
   

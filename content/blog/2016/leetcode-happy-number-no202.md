@@ -2,6 +2,7 @@
 title: "[LeetCode] Happy Number 快樂數字 (No.202)"
 pubDate: 2016-07-22
 description: "Write an algorithm to determine if a number is \"happy\"."
+tags: [演算法]
 ---
 Write an algorithm to determine if a number is "happy".
 

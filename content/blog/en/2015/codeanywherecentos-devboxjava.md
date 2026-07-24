@@ -2,10 +2,11 @@
 title: "Installing Java on a Codeanywhere CentOS DevBox"
 pubDate: 2015-09-06
 description: "1. First sign up for a Codeanywhere account (obviously). 2. Spin up a CentOS DevBox (VM). 2.1 Right-click on DevBox and choose Add DevBox, as shown."
-tags: ["Java", "Tutorial", "Linux", "Codeanywhere", "DevBox", "CentOS", "Cloud IDE"]
+
 locale: en
 translationOf: codeanywherecentos-devboxjava
 aiTranslated: true
+tags: [Cloud Dev, Java]
 ---
 **1. First sign up for a Codeanywhere account (obviously)**  
   

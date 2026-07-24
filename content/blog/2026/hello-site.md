@@ -2,10 +2,8 @@
 title: 你好，新站上線
 pubDate: 2026-07-24
 description: 個人站從 VitePress 遷到 Astro 5 的第一篇：說明架構、路由與發文方式。
-tags:
-  - meta
-  - astro
 locale: zh
+tags: [網站]
 ---
 
 這是新站的第一篇文章，用來驗證骨架：排版層級、程式碼區塊、連結與標籤都在這裡示範一遍。

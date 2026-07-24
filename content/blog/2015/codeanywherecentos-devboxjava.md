@@ -2,14 +2,7 @@
 title: "在Codeanywhere的CentOS DevBox上安裝Java"
 pubDate: 2015-09-06
 description: "1.先申請Codeanywhere帳號(廢話 2.開啟一個CentOS的DevBox(VM) 2.1在DevBox上面按右鍵點選Add DevBox，如圖 2."
-tags:
-  - "Java"
-  - "教學"
-  - "Linux"
-  - "Codeanywhere"
-  - "DevBox"
-  - "CentOS"
-  - "Cloud IDE"
+tags: [雲端開發, Java]
 ---
 **1.先申請Codeanywhere帳號(廢話**  
   

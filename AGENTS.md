@@ -45,10 +45,40 @@ description: 一句話描述  # string，用於列表與 RSS/SEO
 
 選填：
 
-- `tags`: string 陣列（省略視為 `[]`）。
+- `tags`: string 陣列（見下「Tag 受控詞彙」）。
 - `locale`: `zh` | `en`。省略時由路徑推導（`content/blog/en/...` → `en`，其餘 → `zh`），一般不必手填。
-- `translationOf`: 對應另一語系文章的 slug（供日後 hreflang 互指）。
+- `translationOf`: 對應另一語系文章的 slug（hreflang 與語系切換用）。
+- `aiTranslated`: `true` 時英文版顯示「AI 翻譯」提示 banner（連回中文原文）。
 - `cover`: 封面圖，用 `astro:assets` 的 `image()`；放相對於該 md 的路徑。
+
+## Tag 受控詞彙（controlled vocabulary）
+
+**只用下列 tag，勿自創同義詞；每篇 ≤ 3 個、寧少勿多。** zh 文章用中文名、en 文章用英文名。
+
+| 主題 | zh | en |
+|------|----|----|
+| 開箱/評測（umbrella） | 評測 | Reviews |
+| 影視/看的內容（umbrella） | 影視 | Screen |
+| 音響耳機 | 音響 | Audio |
+| 機械鍵盤 | 鍵盤 | Keyboards |
+| 電影 | 電影 | Film |
+| 動畫 | 動畫 | Anime |
+| 讀書 | 閱讀 | Reading |
+| 生活隨筆 | 生活 | Life |
+| Linux/系統 | Linux | Linux |
+| 雲端開發環境 | 雲端開發 | Cloud Dev |
+| Java | Java | Java |
+| 演算法 | 演算法 | Algorithms |
+| 測試/重構/設計 | 軟體工程 | Software Engineering |
+| 網路/資安 | 資訊安全 | Security |
+| AI/agentic | AI | AI |
+| DevOps/SRE | 維運 | DevOps |
+| 站務/公告 | 網站 | Meta |
+
+**規則**：
+- **評測類**：`評測` + 品類（音響/鍵盤/…）。品類是新產品類型（如 `3C`、`遊戲`）時可新增一個品類 tag。
+- **看的內容**：`影視` + 品類（電影/動畫/…）；YouTube 影片等也歸 `影視`。
+- **擴充**：新 tag 只在「某主題重複出現」時才加入本表（同時更新此表）；不要一次性冷門 tag。
 
 ## 圖片規則
 

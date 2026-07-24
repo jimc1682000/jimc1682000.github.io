@@ -2,15 +2,7 @@
 title: "Linux基礎概念(Linux Basic Concept)"
 pubDate: 2015-10-03
 description: "一、Linux 核心(Kernel) Shell/KDE/Application <- Kernel <- Hardware 從技術上說Linux只是一個內核。"
-tags:
-  - "FHS"
-  - "Shell"
-  - "Linux"
-  - "File System"
-  - "ACL"
-  - "Kernel"
-  - "Mac"
-  - "Filesystem Hierachy Standard"
+tags: [Linux]
 ---
 一、Linux 核心(Kernel)
 

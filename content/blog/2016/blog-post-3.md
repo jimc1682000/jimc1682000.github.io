@@ -2,15 +2,7 @@
 title: "程式設計常見的幾個原則整理"
 pubDate: 2016-01-11
 description: "- SOLID原則(SRP, OCP, LSP, ISP, DIP) - SRP(Single responsibility，單一職責) - 定義：一個class應該只有一個需要改變的原因。"
-tags:
-  - "SRP"
-  - "OO"
-  - "Rule Of Three"
-  - "DRY"
-  - "DIP"
-  - "KISS"
-  - "SOLID"
-  - "OCP"
+tags: [軟體工程]
 ---
   
 

@@ -2,13 +2,10 @@
 title: "[Notes] Impressions of the SG Acoustic Super Tweeter and Carbon-Fiber Speaker Pads"
 pubDate: 2014-06-30
 description: "This write-up is nearly three months overdue, XDD. Let's just call that stretch the burn-in time my new super tweeter needed, XDD. First, let me introduce the company SG Acoustic. Although the brand itself is only about three years old…"
-tags:
-  - "SG Acoustic"
-  - "Audio"
-  - "Notes"
 locale: en
 translationOf: blog-post_30
 aiTranslated: true
+tags: [Reviews, Audio]
 ---
 [![](/blog/img/20140523_183504_LLS.webp)](/blog/img/20140523_183504_LLS.webp)
 

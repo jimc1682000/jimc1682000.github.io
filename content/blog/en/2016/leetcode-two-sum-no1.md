@@ -2,10 +2,11 @@
 title: "[LeetCode] Two Sum (No.1)"
 pubDate: 2016-07-13
 description: "Given an array of integers, return indices of the two numbers such that they add up to a specific target."
-tags: ["Java", "Programming", "LeetCode"]
+
 locale: en
 translationOf: leetcode-two-sum-no1
 aiTranslated: true
+tags: [Algorithms]
 ---
 Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 

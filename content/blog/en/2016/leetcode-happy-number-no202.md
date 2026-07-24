@@ -5,6 +5,7 @@ description: "Write an algorithm to determine if a number is \"happy\"."
 locale: en
 translationOf: leetcode-happy-number-no202
 aiTranslated: true
+tags: [Algorithms]
 ---
 Write an algorithm to determine if a number is "happy".
 

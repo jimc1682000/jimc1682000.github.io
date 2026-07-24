@@ -2,10 +2,7 @@
 title: "[LeetCode] Execel Sheet Column Title 表單標題翻譯 (No.168)"
 pubDate: 2016-07-11
 description: "Given a positive integer, return its corresponding column title as appear in an Excel sheet."
-tags:
-  - "Java"
-  - "程式"
-  - "LeetCode"
+tags: [演算法]
 ---
 Given a positive integer, return its corresponding column title as appear in an Excel sheet.
 

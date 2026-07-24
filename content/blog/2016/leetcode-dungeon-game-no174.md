@@ -2,10 +2,7 @@
 title: "[LeetCode] Dungeon Game 地牢遊戲 (No.174)"
 pubDate: 2016-07-08
 description: "The demons had captured the princess (P) and imprisoned her in the bottom-right corner of a dungeon."
-tags:
-  - "Java"
-  - "程式"
-  - "LeetCode"
+tags: [演算法]
 ---
 The demons had captured the princess (P) and imprisoned her in the bottom-right corner of a dungeon. The dungeon consists of M x N rooms laid out in a 2D grid. Our valiant knight (K) was initially positioned in the top-left room and must fight his way through the dungeon to rescue the princess.
 

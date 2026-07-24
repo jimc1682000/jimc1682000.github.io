@@ -2,13 +2,10 @@
 title: "HHKB Type-S: Long-Term Impressions and a Buying Guide"
 pubDate: 2017-04-25
 description: "A quick note: buying an HHKB had always been a life goal of mine, but I never thought I'd pull the trigger this soon. The layout really does take relearning, and then there's the price — 24,840 yen for a single keyboard."
-tags:
-  - "Keyboard"
-  - "HHKB"
-  - "Review"
 locale: en
 translationOf: hhkb-type-s
 aiTranslated: true
+tags: [Reviews, Keyboards]
 ---
 A quick note: buying an HHKB had always been a life goal of mine, but I never thought I'd pull the trigger this soon. The layout really does take relearning, and then there's the price — 24,840 yen for a single keyboard. At the exchange rate back then (roughly 0.3), that's nearly NT$7,500 for one keyboard.
 

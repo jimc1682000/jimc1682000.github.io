@@ -2,10 +2,11 @@
 title: "Notes on Network Configuration in VirtualBox After a CentOS 7 Minimal Install"
 pubDate: 2015-09-13
 description: "As the title says. You can also refer to these blog posts for the configuration. First, a quick note: if all you want is for the VM to reach the external network without connecting to the physical host, VirtualBox's default NAT already does the job."
-tags: ["CentOS", "Virtualbox", "VM", "IP"]
+
 locale: en
 translationOf: centos-7-virtualbox
 aiTranslated: true
+tags: [Linux]
 ---
 As the title says. You can also refer to these blog posts for the configuration:  
 [http://www.unixarena.com/2015/04/rhel-7-network-management-nmcli-or-nmtui.html](http://blog.miniasp.com/post/2012/07/30/CentOS-63-Minimal-Installation-and-Configuration-Notes.aspx)  

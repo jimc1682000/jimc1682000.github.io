@@ -5,6 +5,7 @@ description: "Elders often warn: don't wolf down your food."
 locale: en
 translationOf: blog-post_14
 aiTranslated: true
+tags: [Life]
 ---
 Elders often warn: don't wolf down your food.  
 Others say that to lose weight, you must chew each bite 30 times before swallowing…  

@@ -2,13 +2,7 @@
 title: "Cloud9 Java Runner建立"
 pubDate: 2015-09-13
 description: "今天來跟大家介紹一下Cloud9的Java Runner要如何建立，大家也可以直接參考Cloud9還有Stackoverflow的教學： 首先，我們要先來建立一"
-tags:
-  - "Java"
-  - "介紹"
-  - "我的吉米城"
-  - "Cloud IDE"
-  - "Cloud9"
-  - "HelloWorld"
+tags: [雲端開發, Java]
 ---
 今天來跟大家介紹一下Cloud9的Java Runner要如何建立，大家也可以直接參考Cloud9還有Stackoverflow的教學：[https://docs.c9.io/v1.0/docs/custom-runners](https://docs.c9.io/v1.0/docs/custom-runners)  
 [http://stackoverflow.com/questions/28196434/setting-up-cloud9-ide-to-compile-and-run-java](http://stackoverflow.com/questions/28196434/setting-up-cloud9-ide-to-compile-and-run-java)  

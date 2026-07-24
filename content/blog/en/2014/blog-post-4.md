@@ -2,14 +2,10 @@
 title: "[I Think, Therefore I Am] The Strange Magic of Fate and Pricing"
 pubDate: 2014-06-10
 description: "I used to not really believe in fate. Lately, though, I've started to feel that fate really is a magical thing. Maybe a lot of things really do come down to fate. Buying and selling a bunch of stuff recently has made me feel this even more strongly."
-tags:
-  - "I Think Therefore I Am"
-  - "My Jimmy City"
-  - "Blog"
-  - "Fate"
 locale: en
 translationOf: blog-post-4
 aiTranslated: true
+tags: [Life]
 ---
 I used to not really believe in fate, but lately I've started to feel that fate really is a magical thing~  
 Maybe a lot of things really do come down to fate…  

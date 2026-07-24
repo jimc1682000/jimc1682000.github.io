@@ -2,15 +2,7 @@
 title: "[心得] Supplier USB跟鐵殼USB HUB3.0大亂鬥"
 pubDate: 2014-05-24
 description: "應網友要求，特地進行了此項大亂鬥XDD 此大亂鬥為使用Custom Cute+Supplier HD+小民3+Supplier AC+Philips X1的前提"
-tags:
-  - "大亂鬥"
-  - "Firestone"
-  - "耳機"
-  - "電光石火"
-  - "我的吉米城"
-  - "USB HUB"
-  - "音響"
-  - "心得"
+tags: [評測, 音響]
 ---
 應網友要求，特地進行了此項大亂鬥XDD  
   

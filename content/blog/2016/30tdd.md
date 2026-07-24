@@ -2,12 +2,7 @@
 title: "[心得]30天快速上手TDD讀後心得"
 pubDate: 2016-01-11
 description: "看完了《30快速上手TDD》，整理一些我認為蠻重要的心得跟大家分享。"
-tags:
-  - "BDD"
-  - "TDD"
-  - "ATDD"
-  - "Refactoring"
-  - "心得"
+tags: [軟體工程]
 ---
 看完了《[30快速上手TDD](https://www.dotblogs.com.tw/hatelove/2013/01/11/learning-tdd-in-30-days-catalog-and-reference)》，整理一些我認為蠻重要的心得跟大家分享。  
   

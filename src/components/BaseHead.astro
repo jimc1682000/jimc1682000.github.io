@@ -16,6 +16,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // RSS：繁中 /rss.xml、英文 /en/rss.xml（A1 路由）
 const rssHref = lang === 'en' ? '/en/rss.xml' : '/rss.xml';
 const rssTitle = lang === 'en' ? 'Jimmy Chen — Blog (EN)' : 'Jimmy Chen — Blog';
+
+// hreflang：zh↔en 路徑對換（A1）。tag/search 頁跳過（各語系 tag 名不對稱，
+// 對換路徑可能不存在）。x-default 指繁中。
+const p = Astro.url.pathname;
+const isEn = p === '/en' || p.startsWith('/en/');
+const zhPath = isEn ? p.slice(3) || '/' : p;
+const enPath = isEn ? p : p === '/' ? '/en/' : '/en' + p;
+const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
 ---
 
 {/* no-flash theme：務必放 <head> 最前，於任何樣式套用前設定 data-theme（DESIGN §6） */}
@@ -40,6 +48,15 @@ const rssTitle = lang === 'en' ? 'Jimmy Chen — Blog (EN)' : 'Jimmy Chen — Bl
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
+{
+  !skipHreflang && (
+    <>
+      <link rel="alternate" hreflang="zh-Hant" href={new URL(zhPath, Astro.site)} />
+      <link rel="alternate" hreflang="en" href={new URL(enPath, Astro.site)} />
+      <link rel="alternate" hreflang="x-default" href={new URL(zhPath, Astro.site)} />
+    </>
+  )
+}
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="sitemap" href="/sitemap-index.xml" />

@@ -2,11 +2,7 @@
 title: "CentOS 7 最小安裝後在VirtualBox的網路設定筆記"
 pubDate: 2015-09-13
 description: "如題，大家也可以參考這些網誌的內容來進行設定： 首先，先說明一下Virtualbox如果只是要讓VM可以連到外部網路，而不需要連線到實體本機的話，那麼直接用他預"
-tags:
-  - "CentOS"
-  - "Virtualbox"
-  - "VM"
-  - "IP"
+tags: [Linux]
 ---
 如題，大家也可以參考這些網誌的內容來進行設定：  
 [http://www.unixarena.com/2015/04/rhel-7-network-management-nmcli-or-nmtui.html](http://blog.miniasp.com/post/2012/07/30/CentOS-63-Minimal-Installation-and-Configuration-Notes.aspx)  
