@@ -33,15 +33,17 @@ ProFTPd
 **6. Set up a virtual directory in Tomcat**  
 Method 1: Edit server.xml directly  
 
+```xml
 <Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="true">
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-               prefix="localhost\_access\_log." suffix=".txt"
+               prefix="localhost_access_log." suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
-        <Context workDir="/home/youraccount/Web/java/tomcat\_work"
+        <Context workDir="/home/youraccount/Web/java/tomcat_work"
         docBase="/home/youraccount/Web/java/ROOT" reloadable="true" path="">
         </Context>
 </Host>
+```
 
 Method 2: Add an xml file under the tomcat folder's conf\\catalina\\localhost  
 [http://www.coolsun.idv.tw/modules/xhnewbb/viewtopic.php?topic\_id=1278](http://www.coolsun.idv.tw/modules/xhnewbb/viewtopic.php?topic_id=1278)  

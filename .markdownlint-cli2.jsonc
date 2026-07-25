@@ -1,0 +1,21 @@
+{
+  // 只檢查我自己寫的文件，不檢查匯入內容。
+  // content/ 是 Blogger 匯入的 36 篇舊文，含大量手寫 HTML 與刻意保留的排版，
+  // 用 linter 去修只會產生無法/不值得處理的告警並改變呈現。
+  "globs": ["*.md", "docs/**/*.md"],
+  "ignores": ["node_modules/**", "dist/**", "content/**", "migrations/**"],
+  "config": {
+    // 行寬不限：DESIGN.md 有長表格
+    "MD013": false,
+    // 允許 inline HTML：文件裡有 <details>、<br> 等
+    "MD033": false,
+    // 允許重複標題（各 Decisions Log 區塊有相同小節名）
+    "MD024": { "siblings_only": true },
+    // 第一行不強制是 h1
+    "MD041": false,
+    // 允許 emphasis 當標題用（少數地方刻意）
+    "MD036": false,
+    // 表格 pipe 空格屬排版，交給 formatter 不是 linter（且 md 刻意不套 prettier）
+    "MD060": false,
+  },
+}

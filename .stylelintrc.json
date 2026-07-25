@@ -1,0 +1,25 @@
+{
+  "extends": ["stylelint-config-recommended"],
+  "overrides": [
+    {
+      "files": ["**/*.astro"],
+      "customSyntax": "postcss-html"
+    }
+  ],
+  "rules": {
+    "declaration-property-value-no-unknown": true,
+    "property-no-unknown": true,
+    "function-no-unknown": true,
+    "media-feature-name-no-unknown": true,
+    "unit-no-unknown": true,
+    "no-invalid-double-slash-comments": true,
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ],
+    "no-descending-specificity": null
+  },
+  "ignoreFiles": ["dist/**", "node_modules/**", "public/**"]
+}

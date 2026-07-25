@@ -45,7 +45,7 @@
 
 文章以 Astro Content Layer 的 glob loader 從 repo 根的 `content/` 載入：
 
-```
+```text
 content/blog/YYYY/<slug>.md      # 繁中，route /blog/<slug>
 content/blog/en/YYYY/<slug>.md   # 英文，route /en/blog/<slug>
 ```
@@ -57,7 +57,7 @@ Collection schema 定義在 `src/content.config.ts`：`title`、`pubDate`、`des
 
 ## 專案結構
 
-```
+```text
 content/blog/          # 文章來源（版本化，非 src/ 內）
 migrations/blogger/    # 舊 Blogger 匯入暫存
 public/                # 靜態資產（favicon 等）
