@@ -1,0 +1,99 @@
+name: Quality gates
+
+# 與 deploy.yml 分開：這裡只做「檢查」，不部署。PR 上就能看到結果，
+# 不必等合併後才發現 microformats 被改壞。
+#
+# 三個 gate 的定位刻意不同：
+#   - microformats：**硬性**。mf2 是語意 class，刪掉不會有錯誤、版面也不變，只會
+#     安靜地讓 webmention／Bridgy Fed／IndieWeb reader 解析不到。本次開發已實際發生
+#     一次同類 regression，故失敗即擋。
+#   - 連結檢查：**advisory**。站上有近 200 個 2014–2017 舊文外部連結，很多主機已倒
+#     （如 koding.com）。硬擋會第一天就紅，然後你開始忽略它 —— 那比沒有更糟。
+#   - npm audit：**advisory**，且 --omit=dev。本站是靜態輸出，qrcode／sharp／pagefind
+#     都只在 build 時跑、不進 client bundle，devDependency 的告警沒有 runtime 曝險。
+#     真正有價值的是 dependabot（會開 PR），見 .github/dependabot.yml。
+
+on:
+  pull_request:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  microformats:
+    name: microformats2（硬性）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build
+        run: npm run build
+        env:
+          # 與 deploy.yml 一致：有設才會輸出 rel=webmention，驗證腳本才會斷言該項
+          PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
+          PUBLIC_GISCUS_REPO: ${{ vars.PUBLIC_GISCUS_REPO }}
+          PUBLIC_GISCUS_REPO_ID: ${{ vars.PUBLIC_GISCUS_REPO_ID }}
+          PUBLIC_GISCUS_CATEGORY: ${{ vars.PUBLIC_GISCUS_CATEGORY }}
+          PUBLIC_GISCUS_CATEGORY_ID: ${{ vars.PUBLIC_GISCUS_CATEGORY_ID }}
+      - name: Validate microformats2
+        env:
+          PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
+        run: node scripts/validate-microformats.mjs
+
+  links:
+    name: 連結檢查（advisory）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: lychee
+        continue-on-error: true
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # 只檢查站內產出的 HTML；--exclude 掉會擋機器人或需登入的站，
+          # 以及本機/範例網域。舊文的死連結會列出來但不擋。
+          args: >-
+            --no-progress
+            --max-concurrency 8
+            --timeout 20
+            --accept 200,206,301,302,403,999
+            --exclude '^https?://(localhost|127\.0\.0\.1|example\.(com|org))'
+            --exclude '^https?://(www\.)?linkedin\.com'
+            --exclude '^https?://webmention\.io'
+            'dist/**/*.html'
+          fail: false
+          output: lychee-report.md
+      - name: Upload link report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lychee-report
+          path: lychee-report.md
+          if-no-files-found: ignore
+
+  audit:
+    name: npm audit（advisory）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # 只看會進 production 的依賴；devDependency 在靜態站沒有 runtime 曝險
+      - name: npm audit（prod only）
+        continue-on-error: true
+        run: npm audit --omit=dev --audit-level=high
