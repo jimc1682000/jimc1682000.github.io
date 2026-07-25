@@ -244,6 +244,7 @@
 | 2026-07-25 | **加 microformats2 + webmention endpoint + 站外迴響區（P2-11）** | 讓自站成為 IndieWeb 節點：Bridgy Fed 只需 mf2 + 可發現 feed，即可讓 fediverse／Bluesky 使用者直接追蹤本站、回覆以 webmention 回流，**不需經營社群帳號**。標記無視覺副作用故不 gating；endpoint 與抓取由 `PUBLIC_WEBMENTION_DOMAIN` gating |
 | 2026-07-25 | **迴響用排程重建（每 6 小時）而非 webhook 即時** | webmention.io webhook 無法帶 `Authorization` header，接不上需 PAT 的 `repository_dispatch`；即時需多一層 CF Worker 代理，個人站延遲半天可接受。已保留 `webmention` dispatch type 供日後升級 |
 | 2026-07-25 | **自寫 `Webmentions.astro`，不用現成套件** | npm 上不存在 `astro-webmention`（當日直查 registry 為 Not found）；自寫約 80 行並包 try/catch 降級，避免 webmention.io 故障導致 CI 紅 |
+| 2026-07-25 | **`jimmychen.pages.dev` 301 → `jimmychen.me`（`public/_worker.js`）；GitHub Pages mirror 不轉址** | pages.dev 與 canonical 同屬 Cloudflare，一起壞、無備援價值 → 收成單一入口。GH Pages 是唯一非 Cloudflare 副本，轉址會讓備援指向故障中的網域，故保留 serve 內容（SEO 已由 canonical 收斂）。用 `_worker.js` 而非 `functions/`：CI deploy job 只下載 dist、不 checkout repo |
 
 ---
 
