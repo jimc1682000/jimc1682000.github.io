@@ -17,12 +17,13 @@ on:
   workflow_dispatch:
   repository_dispatch:
     types: [assemble-site, webmention]
-  # Webmention 排程重建(P2-11):站外迴響是 build 時抓的,不重建就不會出現。
-  # 每 6 小時重建一次,讓新的回覆/喜歡最遲半天內上站。
+  # Webmention 排程檢查(P2-11):站外迴響是 build 時抓的,不重建就不會出現。
+  # 每 6 小時「先查再決定」——由 gate job 比對 webmention.io 的最新 wm-id 與上次快取,
+  # 沒有新迴響就直接結束(約 10 秒,不 build 也不 deploy),避免每天 4 次白 build。
   # 為何不用 webhook 即時:webmention.io 的 webhook 只能 POST 一個 URL、無法帶
-  # Authorization header,而 GitHub 的 repository_dispatch 需要 PAT 認證,兩者接不上。
-  # 要即時就得加一層代理(如 Cloudflare Worker 持有 PAT → 呼叫 repository_dispatch,
-  # 對應上方的 webmention dispatch type);個人站的迴響延遲半天可接受,故先用排程。
+  # Authorization header,而 GitHub 的 repository_dispatch 需要 PAT 認證,兩者接不上;
+  # 要即時就得多一層 Cloudflare Worker 持有 PAT(對應上方 webmention dispatch type)。
+  # 「排程 + 先查」用一個唯讀 token 就換到同樣的低浪費,不必引入可寫 repo 的 PAT。
   schedule:
     - cron: '0 */6 * * *'
 
@@ -36,7 +37,66 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # 排程觸發時先查有沒有新迴響，沒有就不 build（省掉每天 4 次白 build）。
+  # 非排程觸發（push / 手動 / 子站 dispatch）一律直接 build，不受此 gate 影響。
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      build: ${{ steps.decide.outputs.build }}
+      latest: ${{ steps.decide.outputs.latest }}
+    steps:
+      - name: Restore last seen webmention id
+        if: github.event_name == 'schedule'
+        uses: actions/cache/restore@v4
+        with:
+          path: wm-state
+          key: webmention-state-
+          restore-keys: webmention-state-
+
+      - name: Decide whether to build
+        id: decide
+        env:
+          WM_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
+          WM_TOKEN: ${{ secrets.WEBMENTION_IO_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "非排程觸發（${{ github.event_name }}）→ 直接 build。"
+            echo "build=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          # 排程觸發：只為刷新站外迴響而跑。查不到就跳過，下次 cron 再試。
+          if [ -z "${WM_DOMAIN:-}" ] || [ -z "${WM_TOKEN:-}" ]; then
+            echo "PUBLIC_WEBMENTION_DOMAIN 或 WEBMENTION_IO_TOKEN 未設 → 無迴響可刷新，跳過。"
+            echo "build=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          # 變更訊號取「全網域最大 wm-id」：wm-id 單調遞增，且用 max 就不必依賴
+          # 排序參數是否被支援（比取第 1 筆穩）。刪除迴響不會改變 max，可接受。
+          body=$(curl -sS --max-time 20 -G 'https://webmention.io/api/mentions.jf2' \
+            --data-urlencode "domain=${WM_DOMAIN}" \
+            --data-urlencode "token=${WM_TOKEN}" \
+            --data-urlencode 'per-page=200') || {
+              echo "查詢 webmention.io 失敗 → 跳過本次，下個 cron 再試。"
+              echo "build=false" >> "$GITHUB_OUTPUT"; exit 0
+            }
+          latest=$(printf '%s' "$body" | jq -r '[.children[]?["wm-id"]] | max // 0' 2>/dev/null || echo '')
+          if [ -z "$latest" ] || [ "$latest" = "null" ]; then
+            echo "回應無法解析（可能 token 無效或格式變動）→ 跳過本次，下個 cron 再試。"
+            echo "build=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          prev=$(cat wm-state 2>/dev/null || echo 'init')
+          echo "最新 wm-id=$latest；上次記錄=$prev"
+          if [ "$latest" = "$prev" ]; then
+            echo "無新迴響 → 不 build。"
+            echo "build=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "有新迴響 → build。"
+            echo "latest=$latest" >> "$GITHUB_OUTPUT"
+            echo "build=true" >> "$GITHUB_OUTPUT"
+          fi
+
   build:
+    needs: gate
+    if: needs.gate.outputs.build == 'true'
     runs-on: ubuntu-latest
     steps:
       # --- 主站 Astro brand+blog ---
@@ -141,3 +201,17 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=jimmychen
+
+  # 只有排程觸發、且真的因新迴響而重建並部署成功後，才把 wm-id 記進快取。
+  # 刻意放在 deploy 之後：若 build/deploy 失敗，訊號不被消耗，下個 cron 會重試。
+  record-webmention-state:
+    needs: [gate, deploy-gh-pages]
+    if: github.event_name == 'schedule' && needs.gate.outputs.build == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write last seen webmention id
+        run: echo '${{ needs.gate.outputs.latest }}' > wm-state
+      - uses: actions/cache/save@v4
+        with:
+          path: wm-state
+          key: webmention-state-${{ github.run_id }}
