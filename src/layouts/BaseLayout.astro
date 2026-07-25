@@ -9,16 +9,25 @@ interface Props {
   title: string;
   description: string;
   lang: Lang;
+  /** 文章頁透傳給 BaseHead：決定 og:type=article 與 BlogPosting 結構化資料 */
+  pubDate?: Date;
+  tags?: string[];
 }
 
-const { title, description, lang } = Astro.props;
+const { title, description, lang, pubDate, tags } = Astro.props;
 const t = useTranslations(lang);
 ---
 
 <!doctype html>
 <html lang={htmlLang[lang]}>
   <head>
-    <BaseHead title={title} description={description} lang={lang} />
+    <BaseHead
+      title={title}
+      description={description}
+      lang={lang}
+      pubDate={pubDate}
+      tags={tags}
+    />
   </head>
   <body>
     <a class="skip-link" href="#main">{t('nav.skip')}</a>
