@@ -14,33 +14,39 @@ const blogBase = lang === 'en' ? '/en/blog' : '/blog';
 const groups = groupByYear(posts);
 ---
 
+{/* h-feed（P2-13）：讓 IndieWeb reader 與解析器能把本頁當 microformats feed 消費
+    （RSS 之外的另一條路）。每則是 h-entry；因根元素是 <a href>，mf2 的 implied-url
+    規則會把 href 當成 u-url，故不需額外標記。與 h-entry 的 class 一樣是語意標記，
+    改版時請保留。 */}
 {
   posts.length === 0 ? (
     <p class="empty">{t('blog.empty')}</p>
   ) : (
-    groups.map((group) => (
-      <>
-        <div class="year">{group.year}</div>
-        {group.posts.map((post) => (
-          <a class="post" href={`${blogBase}/${slugOf(post)}/`}>
-            <div class="pt">
-              <span>{post.data.title}</span>
-              <time datetime={post.data.pubDate.toISOString()}>
-                {formatMonthDay(post.data.pubDate, lang)}
-              </time>
-            </div>
-            <div class="pd">{post.data.description}</div>
-            {post.data.tags.length > 0 && (
-              <div class="ptags">
-                {post.data.tags.map((tag) => (
-                  <span class="ptag">{tag}</span>
-                ))}
+    <div class="h-feed">
+      {groups.map((group) => (
+        <>
+          <div class="year">{group.year}</div>
+          {group.posts.map((post) => (
+            <a class="post h-entry" href={`${blogBase}/${slugOf(post)}/`}>
+              <div class="pt">
+                <span class="p-name">{post.data.title}</span>
+                <time class="dt-published" datetime={post.data.pubDate.toISOString()}>
+                  {formatMonthDay(post.data.pubDate, lang)}
+                </time>
               </div>
-            )}
-          </a>
-        ))}
-      </>
-    ))
+              <div class="pd p-summary">{post.data.description}</div>
+              {post.data.tags.length > 0 && (
+                <div class="ptags">
+                  {post.data.tags.map((tag) => (
+                    <span class="ptag p-category">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </a>
+          ))}
+        </>
+      ))}
+    </div>
   )
 }
 

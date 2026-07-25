@@ -101,10 +101,16 @@ description: 一句話描述  # string，用於列表與 RSS/SEO
 | 位置 | class |
 |---|---|
 | `src/layouts/BlogPost.astro` `<article>` | `h-entry`（內含 `p-name`／`dt-published`／`e-content`／`p-category`，及隱藏的 `u-url`、`p-author h-card`） |
-| `src/components/Home.astro` `<aside>` | `h-card`（內含 `p-name` 與隱藏 `u-url`） |
+| `src/components/Home.astro` `<aside>` | `h-card`（內含 `p-name`、隱藏 `u-url` 與 `u-photo`） |
+| `src/components/PostListGrouped.astro` | `h-feed` 包住列表，每則 `h-entry`（`p-name`／`dt-published`／`p-summary`／`p-category`） |
+| `src/components/Contact.astro` | `h-card`（名片頁，另含 `p-job-title`／`u-email`／`p-locality`／`u-photo`） |
 | `src/components/SocialLinks.astro` | `rel="me noopener noreferrer"` |
 
 `e-content` 與 Pagefind 的 `data-pagefind-body` 共存於同一元素，兩者互不干擾，改動時別誤刪任一。
+
+**判定「是否為單篇文章」請用 `e-content` 而非 `dt-published`** —— 列表頁與 tag 頁加了 h-feed 後也有 `dt-published`（`scripts/send-webmentions.mjs` 曾因此誤判）。
+
+文章的 `u-bridgy-fed` 標記**只在繁中版輸出**：它會觸發 Bridgy Fed 立即聯邦，英文版也放會讓同一篇聯邦兩次。
 
 ## 語調
 

@@ -78,11 +78,29 @@ function isOwn(u) {
 }
 
 function extractTargets(html) {
+  const urls = [];
+
   // 只取正文：e-content 起、落款止（落款之後是留言與迴響區，非作者引用）
   const body = html.match(/class="body e-content"(.*?)<div class="signoff"/s);
-  if (!body) return [];
-  const urls = [...body[1].matchAll(/<a[^>]+href="(https?:\/\/[^"]+)"/g)].map((m) => m[1]);
+  if (body) {
+    urls.push(...[...body[1].matchAll(/<a[^>]+href="(https?:\/\/[^"]+)"/g)].map((m) => m[1]));
+  }
+
+  // u-bridgy-fed 刻意放在正文之外（版面上不該出現），所以單獨挑出來：
+  // 通知 fed.brid.gy 可讓新文章立刻聯邦，不必等它輪詢 RSS。
+  const bf = html.match(/<a[^>]+class="[^"]*u-bridgy-fed[^"]*"[^>]+href="([^"]+)"/);
+  if (bf) urls.push(bf[1]);
+
   return [...new Set(urls.filter((u) => !isOwn(u)))];
+}
+
+/**
+ * 是否為單篇文章。**不能只看 dt-published** —— 自從列表頁加了 h-feed，
+ * 每則摘要也有 dt-published，列表頁與 tag 頁會被誤判為文章。
+ * e-content（正文）只有單篇文章的版型才有，用它判定才精確。
+ */
+function isPost(html) {
+  return html.includes('class="body e-content"');
 }
 
 function publishedAt(html) {
@@ -144,8 +162,9 @@ let skippedOld = 0;
 let posts = 0;
 for (const f of files) {
   const html = await readFile(f, 'utf8');
+  // 列表頁與 tag 頁同樣是 index.html，且加了 h-feed 後也有 dt-published，故以 e-content 判定
+  if (!isPost(html)) continue;
   const pub = publishedAt(html);
-  // 沒有 dt-published 的不是文章（blog 列表頁、tag 頁也是 index.html）
   if (!pub) continue;
   posts++;
   if (pub < SINCE) {
