@@ -8,8 +8,8 @@
 
 | 角色 | 位置 |
 |------|------|
-| **Canonical（主）** | Cloudflare Pages — `https://jimmychen.pages.dev`（之後接自有 domain） |
-| **Mirror** | GitHub Pages（`jimc1682000.github.io`）— 不主推 |
+| **Canonical（主）** | 自有 domain — `https://jimmychen.me`（掛在 Cloudflare Pages） |
+| **Mirror** | `jimmychen.pages.dev` 與 GitHub Pages（`jimc1682000.github.io`）— 不主推 |
 
 `astro.config.mjs` 的 `site` 設為 canonical URL，canonical link 與 sitemap 皆以此為基準。
 

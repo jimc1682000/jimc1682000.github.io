@@ -17,7 +17,7 @@
 | **給誰看** | 繁中為主的技術／DevOps／SRE／AI 工程同溫層；次要英文讀者 |
 | **產品類型** | 個人 brand 樞紐 + 編輯型（散文型）blog；非 SaaS、非電商 |
 | **內容範疇** | DevOps／SRE 維運、AI／agentic 工作流、電影觀後、生活雜記 |
-| **託管** | canonical：**Cloudflare Pages**（`jimmychen.pages.dev`）；**GitHub Pages** 為 mirror |
+| **託管** | canonical：自有 domain **`jimmychen.me`**（掛在 Cloudflare Pages）；`*.pages.dev` 與 **GitHub Pages** 為 mirror |
 | **多語** | UI 雙語（`src/i18n/ui.ts`）；正文繁中為 source of truth；URL **A1**（裸根繁中，`/en/...` 英文） |
 | **路徑地圖** | `/` 散文首頁 · `/blog/*` · `/blog/tags/[tag]` · `/blog/search` · `/works/` 作品集 · `/resume/` · `/film-brain/` · `/en/...` |
 

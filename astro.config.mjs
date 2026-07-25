@@ -4,8 +4,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // canonical = Cloudflare Pages（CF 已上線，四路徑綠）。
-  // GitHub Pages 為 mirror。若之後綁自有 domain，改此處並更新 DESIGN.md。
-  site: 'https://jimmychen.pages.dev',
+  // canonical = 自有 domain jimmychen.me（掛在 Cloudflare Pages 上）。
+  // GitHub Pages 與 *.pages.dev 為 mirror；canonical/hreflang/RSS/sitemap 皆以此為準。
+  site: 'https://jimmychen.me',
   integrations: [sitemap()],
 });
