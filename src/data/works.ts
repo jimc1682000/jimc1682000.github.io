@@ -3,7 +3,7 @@ import type { Lang, UIKey } from '../i18n/ui';
 
 export type WorkCategory = 'platform' | 'ai' | 'automation' | 'showcase';
 
-export interface WorkLink {
+interface WorkLink {
   /** 連結顯示文字（zh / en） */
   label: Record<Lang, string>;
   href: string;

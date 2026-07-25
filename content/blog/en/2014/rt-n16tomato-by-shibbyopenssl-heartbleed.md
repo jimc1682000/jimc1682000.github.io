@@ -123,7 +123,7 @@ The update is complete; click Continue.
 [![](/blog/img/25E8-259E-25A2-25E5-25B9-2595-25E6-2588-25AA-25E5-259C-2596-2014-07-04-00.29.28.webp)](/blog/img/25E8-259E-25A2-25E5-25B9-2595-25E6-2588-25AA-25E5-259C-2596-2014-07-04-00.29.28.webp)
 
   
-After Continue, all settings basically revert to factory defaults. Please set your NIC to 192.168.1.10/24, the GATEWAY to 192.168.1.1, then open a browser to configure. The connection address is http://192.168.1.1, with both username and password being admin.  
+After Continue, all settings basically revert to factory defaults. Please set your NIC to 192.168.1.10/24, the GATEWAY to 192.168.1.1, then open a browser to configure. The connection address is `http://192.168.1.1,` with both username and password being admin.  
 
 [![](/blog/img/25E8-259E-25A2-25E5-25B9-2595-25E6-2588-25AA-25E5-259C-2596-2014-07-04-00.34.10.webp)](/blog/img/25E8-259E-25A2-25E5-25B9-2595-25E6-2588-25AA-25E5-259C-2596-2014-07-04-00.34.10.webp)
 

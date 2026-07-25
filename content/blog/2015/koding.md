@@ -8,20 +8,20 @@ tags: [雲端開發]
   
   
 **1.裝MySQL**  
-[http://learn.koding.com/guides/installing-mysql/](http://learn.koding.com/guides/installing-mysql/)  
+`http://learn.koding.com/guides/installing-mysql/`  
 **2.裝phpMyAdmin**  
-[http://learn.koding.com/guides/install-phpmyadmin/](http://learn.koding.com/guides/install-phpmyadmin/)  
+`http://learn.koding.com/guides/install-phpmyadmin/`  
 **3.裝Apache Tomcat**  
 官方安裝方式：  
-[http://learn.koding.com/guides/apache-tomcat-on-koding/](http://learn.koding.com/guides/apache-tomcat-on-koding/)  
+`http://learn.koding.com/guides/apache-tomcat-on-koding/`  
 非官方安裝方式(分解步驟，另外有多了設定.bashrc的部份)：  
 [https://www.digitalocean.com/community/tutorials/how-to-install-apache-tomcat-on-ubuntu-12-04](https://www.digitalocean.com/community/tutorials/how-to-install-apache-tomcat-on-ubuntu-12-04)  
   
 **4.裝ftp(****建議安裝vsftpd****，畢竟是****V**ery-**S**ecure-**FTP**\-**D**aemon**)**  
 vsftpd  
-[http://learn.koding.com/guides/setting-up-ftp-with-vsftpd/](http://learn.koding.com/guides/setting-up-ftp-with-vsftpd/)  
+`http://learn.koding.com/guides/setting-up-ftp-with-vsftpd/`  
 ProFTPd  
-[http://learn.koding.com/guides/setting-up-ftp-on-koding/](http://learn.koding.com/guides/setting-up-ftp-on-koding/)  
+`http://learn.koding.com/guides/setting-up-ftp-on-koding/`  
   
 **5.在本機端安裝FileZilla或是其他FTP客戶端軟體進行測試**  
 [http://www.azofreeware.com/2006/11/filezilla-2229.html](http://www.azofreeware.com/2006/11/filezilla-2229.html)  
@@ -56,23 +56,23 @@ sudo chmod 777 /home/youraccount/Web/java/tomcat\_work
 sudo chmod 777 /home/youraccount/Web/java/ROOT  
   
 **8.安裝Ungit方便使用Git**  
-[http://learn.koding.com/guides/using-github/](http://learn.koding.com/guides/using-github/)  
+`http://learn.koding.com/guides/using-github/`  
   
 **9.視需求安裝其他套件**  
 **NodeJS**  
-**[http://learn.koding.com/guides/getting-started-nodejs/](http://learn.koding.com/guides/getting-started-nodejs/)**  
+**`http://learn.koding.com/guides/getting-started-nodejs/`**  
 **Using Dropbox with Koding**  
-**[http://learn.koding.com/guides/dropbox-for-file-sync/](http://learn.koding.com/guides/dropbox-for-file-sync/)**  
+**`http://learn.koding.com/guides/dropbox-for-file-sync/`**  
 **VNC Startup Guide**  
-**[http://learn.koding.com/guides/vnc-startup-guide/](http://learn.koding.com/guides/vnc-startup-guide/)**  
+**`http://learn.koding.com/guides/vnc-startup-guide/`**  
 **Installing PHP**  
-**[http://learn.koding.com/guides/installing-php/](http://learn.koding.com/guides/installing-php/)**  
+**`http://learn.koding.com/guides/installing-php/`**  
 **Installing Nginx**  
-**[http://learn.koding.com/guides/nginx/](http://learn.koding.com/guides/nginx/)**  
+**`http://learn.koding.com/guides/nginx/`**  
 **Getting Started with JSP and Maven**  
-**[http://learn.koding.com/guides/getting-started-jsp-maven/](http://learn.koding.com/guides/getting-started-jsp-maven/)**  
+**`http://learn.koding.com/guides/getting-started-jsp-maven/`**  
 **AngularJS Step-by-Step Setup**  
-**[http://learn.koding.com/guides/angularjs-step-by-step/](http://learn.koding.com/guides/angularjs-step-by-step/)**  
+**`http://learn.koding.com/guides/angularjs-step-by-step/`**  
 **Reference:**  
-**[http://learn.koding.com/](http://learn.koding.com/)**
+**`http://learn.koding.com/`**
 
