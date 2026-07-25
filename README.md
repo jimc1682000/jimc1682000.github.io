@@ -13,6 +13,7 @@
 | ~~`jimmychen.pages.dev`~~ | **301 → `jimmychen.me`**（`public/_worker.js`）。與 canonical 同屬 Cloudflare，無備援價值，故收為單一入口；預覽網址 `<hash>.jimmychen.pages.dev` 不受影響 |
 | ~~`www.jimmychen.me`~~ | **301 → `jimmychen.me`**（zone Redirect Rule）。註：www 也必須加為 Pages custom domain 才有憑證，否則 TLS 握手先失敗、走不到規則 |
 | ~~`jimc1682000.github.io`~~ | **301 → `mirror.jimmychen.me`**（GitHub 依 `public/CNAME` 自動轉址） |
+| `jimmychen.me/.well-known/{host-meta*,webfinger*,atproto-did}` | **302 → `fed.brid.gy`**（`public/_worker.js`）。讓 fediverse／Bluesky 使用者能直接以 `@jimmychen.me` 追蹤本站，而非 `@jimmychen.me@web.brid.gy`。須為 302 且保留 query |
 
 `astro.config.mjs` 的 `site` 設為 canonical URL，canonical link 與 sitemap 皆以此為基準。
 

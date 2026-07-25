@@ -62,13 +62,12 @@ const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="alternate" type="application/rss+xml" title={rssTitle} href={rssHref} />
 
-{/* Webmention endpoint（P2-11）：webmention.io 代收。未設 domain 則不輸出。 */}
+{/* Webmention endpoint（P2-11）：webmention.io 代收。未設 domain 則不輸出。
+    刻意不輸出 rel="pingback"：pingback 是 XML-RPC 舊協定、垃圾訊息重災區，
+    已在 webmention.io 停用；宣告一個停用的端點只會引來嘗試。 */}
 {
   webmentionEnabled && (
-    <>
-      <link rel="webmention" href={`https://webmention.io/${webmentionDomain}/webmention`} />
-      <link rel="pingback" href={`https://webmention.io/${webmentionDomain}/xmlrpc`} />
-    </>
+    <link rel="webmention" href={`https://webmention.io/${webmentionDomain}/webmention`} />
   )
 }
 
