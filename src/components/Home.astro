@@ -93,6 +93,10 @@ const recent = (await getPosts(lang)).slice(0, 3);
   {/* h-card：代表本人的 microformats2 profile（P2-11，供 webmention/Bridgy Fed 解析）。 */}
   <aside class="scroll h-card">
     <a class="u-url" href={new URL('/', Astro.site)} hidden>{name}</a>
+    {/* acct: 形式的 u-url 決定 fediverse handle 的 local part。
+        沒有這行 → @jimmychen.me@jimmychen.me（網域重複）；有這行 → @jimmy@jimmychen.me。
+        定了不該改：改掉等於換 handle，既有 mention 與追蹤會斷。 */}
+    <a class="u-url" href="acct:jimmy@jimmychen.me" hidden>@jimmy@jimmychen.me</a>
     <div class="nm p-name">{name}</div>
     <div class="slogan">{slogan}</div>
     <div class="stamp"><Seal size={56} /></div>
