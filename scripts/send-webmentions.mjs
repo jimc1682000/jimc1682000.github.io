@@ -27,7 +27,7 @@ const arg = (name, fallback) => {
   return i >= 0 && args[i + 1] && !args[i + 1].startsWith('--') ? args[i + 1] : fallback;
 };
 const DIST = arg('dist', 'dist');
-const SITE = (arg('site', 'https://jimmychen.me')).replace(/\/$/, '');
+const SITE = arg('site', 'https://jimmychen.me').replace(/\/$/, '');
 const STATE = arg('state', '.webmention-sent.json');
 const SINCE = new Date(arg('since', '2026-01-01'));
 const DRY = args.includes('--dry-run');
@@ -55,7 +55,10 @@ async function postFiles(dir) {
 
 /** dist/blog/foo/index.html → https://site/blog/foo/ */
 function sourceUrl(file) {
-  const rel = path.relative(DIST, file).replace(/index\.html$/, '').replace(/\\/g, '/');
+  const rel = path
+    .relative(DIST, file)
+    .replace(/index\.html$/, '')
+    .replace(/\\/g, '/');
   return `${SITE}/${rel}`;
 }
 
@@ -178,7 +181,9 @@ for (const f of files) {
   }
 }
 
-console.log(`文章 ${posts} 篇（掃過 ${files.length} 個 index.html）；早於 ${SINCE.toISOString().slice(0, 10)} 而跳過 ${skippedOld} 篇`);
+console.log(
+  `文章 ${posts} 篇（掃過 ${files.length} 個 index.html）；早於 ${SINCE.toISOString().slice(0, 10)} 而跳過 ${skippedOld} 篇`,
+);
 console.log(`待處理的 (source, target) 配對：${pairs.length}${DRY ? '（dry-run）' : ''}`);
 
 let ok = 0;

@@ -61,9 +61,7 @@ export function formatYearMonth(date: Date): string {
 }
 
 /** 依年份分組（新→舊,組內沿用傳入排序）。 */
-export function groupByYear(
-  posts: BlogEntry[],
-): { year: number; posts: BlogEntry[] }[] {
+export function groupByYear(posts: BlogEntry[]): { year: number; posts: BlogEntry[] }[] {
   const map = new Map<number, BlogEntry[]>();
   for (const post of posts) {
     const y = post.data.pubDate.getFullYear();
@@ -86,9 +84,7 @@ export async function getTags(locale: Locale): Promise<string[]> {
 }
 
 /** 取某語系 tag 與其文章數，依文章數多→少、同數依名稱排序。 */
-export async function getTagCounts(
-  locale: Locale,
-): Promise<{ tag: string; count: number }[]> {
+export async function getTagCounts(locale: Locale): Promise<{ tag: string; count: number }[]> {
   const posts = await getPosts(locale);
   const counts = new Map<string, number>();
   for (const post of posts) {
@@ -102,10 +98,7 @@ export async function getTagCounts(
 }
 
 /** 取某語系、含指定 tag 的文章（已排序）。 */
-export async function getPostsByTag(
-  locale: Locale,
-  tag: string,
-): Promise<BlogEntry[]> {
+export async function getPostsByTag(locale: Locale, tag: string): Promise<BlogEntry[]> {
   const posts = await getPosts(locale);
   return posts.filter((post) => post.data.tags.includes(tag));
 }

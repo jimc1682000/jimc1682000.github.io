@@ -57,6 +57,10 @@ export const contact = {
     // Bluesky handle 就是網域本身（見 DESIGN.md：atproto 無 local part 概念）
     { label: '@jimmychen.me', url: 'https://bsky.app/profile/jimmychen.me', vcardType: 'bluesky' },
     // fediverse handle 由 h-card 的 acct: u-url 決定
-    { label: '@jimmy@jimmychen.me', url: 'https://fed.brid.gy/web/jimmychen.me', vcardType: 'mastodon' },
+    {
+      label: '@jimmy@jimmychen.me',
+      url: 'https://fed.brid.gy/web/jimmychen.me',
+      vcardType: 'mastodon',
+    },
   ] satisfies ContactSocial[],
 } as const;

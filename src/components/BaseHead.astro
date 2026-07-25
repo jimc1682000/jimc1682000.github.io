@@ -36,8 +36,7 @@ const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
     try {
       var stored = localStorage.getItem('theme');
       var theme =
-        stored ||
-        (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
       document.documentElement.setAttribute('data-theme', theme);
     } catch (e) {
       document.documentElement.setAttribute('data-theme', 'dark');
@@ -66,25 +65,31 @@ const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="alternate" type="application/rss+xml" title={rssTitle} href={rssHref} />
 
-{/* IndieAuth / Web Sign-In（P2-13）：讓「用 jimmychen.me 登入第三方服務」被更多服務認得。
+{
+  /* IndieAuth / Web Sign-In（P2-13）：讓「用 jimmychen.me 登入第三方服務」被更多服務認得。
     委派給 indieauth.com —— 靜態站沒有後端可自行簽發，這是 IndieWeb 社群的標準做法
     （tantek.com、adactio.com 皆如此委派）。身分驗證仍是靠首頁的 rel="me"。
     刻意不宣告 token_endpoint：那是給 Micropub 發 token 用的，本站沒有 Micropub，
-    宣告了也沒有用途；日後真要加 Micropub 時再一起補。 */}
+    宣告了也沒有用途；日後真要加 Micropub 時再一起補。 */
+}
 <link rel="authorization_endpoint" href="https://indieauth.com/auth" />
 
-{/* Webmention endpoint（P2-11）：webmention.io 代收。未設 domain 則不輸出。
+{
+  /* Webmention endpoint（P2-11）：webmention.io 代收。未設 domain 則不輸出。
     刻意不輸出 rel="pingback"：pingback 是 XML-RPC 舊協定、垃圾訊息重災區，
-    已在 webmention.io 停用；宣告一個停用的端點只會引來嘗試。 */}
+    已在 webmention.io 停用；宣告一個停用的端點只會引來嘗試。 */
+}
 {
   webmentionEnabled && (
     <link rel="webmention" href={`https://webmention.io/${webmentionDomain}/webmention`} />
   )
 }
 
-{/* Open Graph。og:image 用站台通用卡（見 public/og.svg 的說明：CI 無中文字型，
+{
+  /* Open Graph。og:image 用站台通用卡（見 public/og.svg 的說明：CI 無中文字型，
     故不做每篇動態生成；每篇差異由 og:title / og:description 表達）。
-    絕對 URL 是必要的 —— 各平台的爬蟲不會解析相對路徑。 */}
+    絕對 URL 是必要的 —— 各平台的爬蟲不會解析相對路徑。 */
+}
 <meta property="og:type" content={isArticle ? 'article' : 'website'} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -103,8 +108,10 @@ const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL('/og.png', Astro.site)} />
 
-{/* JSON-LD 結構化資料：文章頁 BlogPosting、其餘頁 Person（首頁的 h-card 已有 mf2，
-    這裡是給搜尋引擎的另一套表述，兩者並存不衝突）。 */}
+{
+  /* JSON-LD 結構化資料：文章頁 BlogPosting、其餘頁 Person（首頁的 h-card 已有 mf2，
+    這裡是給搜尋引擎的另一套表述，兩者並存不衝突）。 */
+}
 <script
   type="application/ld+json"
   is:inline

@@ -1,0 +1,17 @@
+dist/
+node_modules/
+package-lock.json
+# 內容檔不套 formatter：Blogger 匯入的 markdown 有刻意保留的排版與 HTML 片段，
+# 重排會產生大量無意義 diff 並可能改變呈現。
+content/
+# 產物與歷史資料
+public/blog/img/
+migrations/
+docs/
+# 文件類不套 formatter：DESIGN.md 等有長表格，重排會產生大量無意義 diff
+*.md
+# prettier-plugin-astro 無法解析 is:inline + define:vars 的 script 區塊
+# （SyntaxError at `var pick = ...`）。只有本檔用到該組合（giscus 載入器需要把
+# 伺服器端變數帶進 inline script）。為了讓 formatter 能跑而改動這段在 paint 前
+# 執行的關鍵腳本，風險大於收益，故排除本檔。eslint 仍會檢查它。
+src/layouts/BlogPost.astro

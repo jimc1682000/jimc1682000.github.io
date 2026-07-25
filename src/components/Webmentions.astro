@@ -73,7 +73,13 @@ const show = likes.length > 0 || reposts.length > 0 || replies.length > 0;
               title={`${m.author?.name ?? ''}${isRepost(m) ? ` · ${t('webmention.reposts')}` : ''}`}
             >
               {m.author?.photo ? (
-                <img src={m.author.photo} alt={m.author?.name ?? ''} loading="lazy" width="32" height="32" />
+                <img
+                  src={m.author.photo}
+                  alt={m.author?.name ?? ''}
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
               ) : (
                 <span class="noface">{(m.author?.name ?? '?').slice(0, 1)}</span>
               )}

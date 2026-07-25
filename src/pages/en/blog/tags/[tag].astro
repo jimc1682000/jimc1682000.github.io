@@ -20,7 +20,11 @@ const { tag, posts } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title={`${t('blog.taggedWith')}: ${tag} — Jimmy Chen`} description={`Posts tagged "${tag}".`} lang={lang}>
+<BaseLayout
+  title={`${t('blog.taggedWith')}: ${tag} — Jimmy Chen`}
+  description={`Posts tagged "${tag}".`}
+  lang={lang}
+>
   <div class="tag-page">
     <header class="tag-header">
       <p class="crumb"><a href="/en/blog/tags/">← {t('blog.allTags')}</a></p>

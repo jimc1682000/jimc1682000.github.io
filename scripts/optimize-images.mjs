@@ -24,8 +24,7 @@ const OUT_DIR = 'public/blog/img';
 const PUBLIC_PREFIX = '/blog/img';
 const args = process.argv.slice(2);
 const albumsArg = valOf('--albums');
-const ALBUMS =
-  albumsArg ?? `${process.env.HOME}/workdir/blogger/Takeout/Blogger/Albums`;
+const ALBUMS = albumsArg ?? `${process.env.HOME}/workdir/blogger/Takeout/Blogger/Albums`;
 
 function valOf(flag) {
   const i = args.indexOf(flag);
@@ -34,18 +33,31 @@ function valOf(flag) {
 
 // --- dHash（8x8 diff hash，感知比對）---
 async function dhash(buf) {
-  const { data } = await sharp(buf).greyscale().resize(9, 8, { fit: 'fill' })
-    .raw().toBuffer({ resolveWithObject: true });
-  let bits = 0n, i = 0n;
+  const { data } = await sharp(buf)
+    .greyscale()
+    .resize(9, 8, { fit: 'fill' })
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  let bits = 0n,
+    i = 0n;
   for (let r = 0; r < 8; r++)
     for (let c = 0; c < 8; c++) {
-      const l = data[r * 9 + c], rr = data[r * 9 + c + 1];
+      const l = data[r * 9 + c],
+        rr = data[r * 9 + c + 1];
       if (l > rr) bits |= 1n << i;
       i++;
     }
   return bits;
 }
-const ham = (a, b) => { let x = a ^ b, n = 0; while (x) { n += Number(x & 1n); x >>= 1n; } return n; };
+const ham = (a, b) => {
+  let x = a ^ b,
+    n = 0;
+  while (x) {
+    n += Number(x & 1n);
+    x >>= 1n;
+  }
+  return n;
+};
 
 function walk(dir, exts) {
   const out = [];
@@ -66,9 +78,14 @@ async function toWebp(buf, name) {
 }
 
 function safeName(fromUrlOrPath, used) {
-  let n = basename(fromUrlOrPath.split('?')[0]).replace(/\.[^.]+$/, '')
-    .replace(/[^a-zA-Z0-9._-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') || 'img';
-  let cand = n, k = 2;
+  let n =
+    basename(fromUrlOrPath.split('?')[0])
+      .replace(/\.[^.]+$/, '')
+      .replace(/[^a-zA-Z0-9._-]/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '') || 'img';
+  let cand = n,
+    k = 2;
   while (used.has(cand)) cand = `${n}-${k++}`;
   used.add(cand);
   return cand;
@@ -77,7 +94,8 @@ function safeName(fromUrlOrPath, used) {
 async function internalize() {
   // 1) 收集 md 內的外部圖 URL
   const mds = walk('content/blog', ['.md']);
-  const urlRe = /(https?:\/\/[^)\s"']+\.(?:jpg|jpeg|png|gif|webp)(?:\?[^)\s"']*)?|https?:\/\/blogger\.googleusercontent\.com\/[^)\s"']+)/gi;
+  const urlRe =
+    /(https?:\/\/[^)\s"']+\.(?:jpg|jpeg|png|gif|webp)(?:\?[^)\s"']*)?|https?:\/\/blogger\.googleusercontent\.com\/[^)\s"']+)/gi;
   const urls = new Set();
   for (const f of mds) for (const m of readFileSync(f, 'utf8').matchAll(urlRe)) urls.add(m[1]);
   console.log(`外部圖 URL：${urls.size}`);
@@ -86,44 +104,76 @@ async function internalize() {
   let album = [];
   if (existsSync(ALBUMS)) {
     for (const f of walk(ALBUMS, ['.jpg', '.jpeg', '.png', '.gif'])) {
-      try { album.push({ f, h: await dhash(readFileSync(f)) }); } catch {}
+      try {
+        album.push({ f, h: await dhash(readFileSync(f)) });
+      } catch {}
     }
   }
   console.log(`Albums 原檔：${album.length}`);
 
   // 3) 每個 URL → 來源（本地原檔優先，否則下載）→ WebP q92
   const used = new Set();
-  const urlToRef = new Map();      // url → /blog/img/x.webp
-  const srcKeyToRef = new Map();   // 同圖去重（本地檔路徑 或 內容 hash）
-  let fromLocal = 0, fromDl = 0, failed = [];
+  const urlToRef = new Map(); // url → /blog/img/x.webp
+  const srcKeyToRef = new Map(); // 同圖去重（本地檔路徑 或 內容 hash）
+  let fromLocal = 0,
+    fromDl = 0,
+    failed = [];
   for (const u of urls) {
     try {
       const resp = await fetch(u);
-      if (!resp.ok) { failed.push([u, resp.status]); continue; }
+      if (!resp.ok) {
+        failed.push([u, resp.status]);
+        continue;
+      }
       const buf = Buffer.from(await resp.arrayBuffer());
       const h = await dhash(buf);
-      let best = null, bd = 99;
-      for (const a of album) { const d = ham(h, a.h); if (d < bd) { bd = d; best = a; } }
+      let best = null,
+        bd = 99;
+      for (const a of album) {
+        const d = ham(h, a.h);
+        if (d < bd) {
+          bd = d;
+          best = a;
+        }
+      }
       const local = bd <= 10 ? best.f : null;
       const srcBuf = local ? readFileSync(local) : buf;
       const srcKey = local ?? createHash('md5').update(buf).digest('hex');
-      if (srcKeyToRef.has(srcKey)) { urlToRef.set(u, srcKeyToRef.get(srcKey)); continue; }
+      if (srcKeyToRef.has(srcKey)) {
+        urlToRef.set(u, srcKeyToRef.get(srcKey));
+        continue;
+      }
       const name = safeName(local ?? u, used);
       const { ref } = await toWebp(srcBuf, name);
-      srcKeyToRef.set(srcKey, ref); urlToRef.set(u, ref);
+      srcKeyToRef.set(srcKey, ref);
+      urlToRef.set(u, ref);
       local ? fromLocal++ : fromDl++;
-    } catch (e) { failed.push([u, e.message]); }
+    } catch (e) {
+      failed.push([u, e.message]);
+    }
   }
   console.log(`WebP 產出：本地原檔 ${fromLocal} / 下載 ${fromDl} / 去重後檔數 ${srcKeyToRef.size}`);
-  if (failed.length) { console.log(`失敗 ${failed.length}：`); failed.forEach(([u, s]) => console.log(`  [${s}] ${u.slice(-60)}`)); }
+  if (failed.length) {
+    console.log(`失敗 ${failed.length}：`);
+    failed.forEach(([u, s]) => console.log(`  [${s}] ${u.slice(-60)}`));
+  }
 
   // 4) 改寫 md（長 URL 優先，避免部分覆蓋）
   const pairs = [...urlToRef.entries()].sort((a, b) => b[0].length - a[0].length);
-  let changed = 0, repl = 0;
+  let changed = 0,
+    repl = 0;
   for (const f of mds) {
-    let s = readFileSync(f, 'utf8'), before = s;
-    for (const [u, ref] of pairs) if (s.includes(u)) { s = s.split(u).join(ref); repl++; }
-    if (s !== before) { writeFileSync(f, s); changed++; }
+    let s = readFileSync(f, 'utf8'),
+      before = s;
+    for (const [u, ref] of pairs)
+      if (s.includes(u)) {
+        s = s.split(u).join(ref);
+        repl++;
+      }
+    if (s !== before) {
+      writeFileSync(f, s);
+      changed++;
+    }
   }
   console.log(`改寫 md：${changed} 檔、${repl} 處替換`);
 
@@ -144,4 +194,7 @@ async function optimizeDir(srcDir) {
 
 if (args.includes('--internalize')) await internalize();
 else if (args[0] && !args[0].startsWith('--')) await optimizeDir(args[0]);
-else { console.error('用法：--internalize | <srcDir>'); process.exit(1); }
+else {
+  console.error('用法：--internalize | <srcDir>');
+  process.exit(1);
+}

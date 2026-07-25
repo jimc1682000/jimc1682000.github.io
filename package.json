@@ -11,7 +11,10 @@
     "check": "astro check",
     "astro": "astro",
     "validate:mf2": "node scripts/validate-microformats.mjs",
-    "validate": "npm run check && npm run build && npm run validate:mf2"
+    "validate": "npm run check && npm run lint && npm run format:check && npm run build && npm run validate:mf2",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
@@ -20,11 +23,17 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@eslint/js": "^10.0.1",
     "@types/qrcode": "^1.5.6",
+    "eslint": "^10.8.0",
+    "eslint-plugin-astro": "^1.7.0",
     "microformats-parser": "^2.0.6",
     "pagefind": "^1.4.0",
+    "prettier": "^3.9.6",
+    "prettier-plugin-astro": "^0.14.1",
     "qrcode": "^1.5.4",
     "sharp": "^0.35.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.65.0"
   }
 }
