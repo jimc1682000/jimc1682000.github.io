@@ -12,20 +12,20 @@ A quick note first: the Koding environment has a package manager called Koding P
   
   
 **1. Install MySQL**  
-[http://learn.koding.com/guides/installing-mysql/](http://learn.koding.com/guides/installing-mysql/)  
+`http://learn.koding.com/guides/installing-mysql/`  
 **2. Install phpMyAdmin**  
-[http://learn.koding.com/guides/install-phpmyadmin/](http://learn.koding.com/guides/install-phpmyadmin/)  
+`http://learn.koding.com/guides/install-phpmyadmin/`  
 **3. Install Apache Tomcat**  
 Official installation method:  
-[http://learn.koding.com/guides/apache-tomcat-on-koding/](http://learn.koding.com/guides/apache-tomcat-on-koding/)  
+`http://learn.koding.com/guides/apache-tomcat-on-koding/`  
 Unofficial installation method (step-by-step, with an extra part for configuring .bashrc):  
 [https://www.digitalocean.com/community/tutorials/how-to-install-apache-tomcat-on-ubuntu-12-04](https://www.digitalocean.com/community/tutorials/how-to-install-apache-tomcat-on-ubuntu-12-04)  
   
 **4. Install ftp (****I recommend vsftpd****, since it's ****V**ery-**S**ecure-**FTP**\-**D**aemon**)**  
 vsftpd  
-[http://learn.koding.com/guides/setting-up-ftp-with-vsftpd/](http://learn.koding.com/guides/setting-up-ftp-with-vsftpd/)  
+`http://learn.koding.com/guides/setting-up-ftp-with-vsftpd/`  
 ProFTPd  
-[http://learn.koding.com/guides/setting-up-ftp-on-koding/](http://learn.koding.com/guides/setting-up-ftp-on-koding/)  
+`http://learn.koding.com/guides/setting-up-ftp-on-koding/`  
   
 **5. Install FileZilla or another FTP client locally to test**  
 [http://www.azofreeware.com/2006/11/filezilla-2229.html](http://www.azofreeware.com/2006/11/filezilla-2229.html)  
@@ -60,22 +60,22 @@ sudo chmod 777 /home/youraccount/Web/java/tomcat\_work
 sudo chmod 777 /home/youraccount/Web/java/ROOT  
   
 **8. Install Ungit for easier Git usage**  
-[http://learn.koding.com/guides/using-github/](http://learn.koding.com/guides/using-github/)  
+`http://learn.koding.com/guides/using-github/`  
   
 **9. Install other packages as needed**  
 **NodeJS**  
-**[http://learn.koding.com/guides/getting-started-nodejs/](http://learn.koding.com/guides/getting-started-nodejs/)**  
+**`http://learn.koding.com/guides/getting-started-nodejs/`**  
 **Using Dropbox with Koding**  
-**[http://learn.koding.com/guides/dropbox-for-file-sync/](http://learn.koding.com/guides/dropbox-for-file-sync/)**  
+**`http://learn.koding.com/guides/dropbox-for-file-sync/`**  
 **VNC Startup Guide**  
-**[http://learn.koding.com/guides/vnc-startup-guide/](http://learn.koding.com/guides/vnc-startup-guide/)**  
+**`http://learn.koding.com/guides/vnc-startup-guide/`**  
 **Installing PHP**  
-**[http://learn.koding.com/guides/installing-php/](http://learn.koding.com/guides/installing-php/)**  
+**`http://learn.koding.com/guides/installing-php/`**  
 **Installing Nginx**  
-**[http://learn.koding.com/guides/nginx/](http://learn.koding.com/guides/nginx/)**  
+**`http://learn.koding.com/guides/nginx/`**  
 **Getting Started with JSP and Maven**  
-**[http://learn.koding.com/guides/getting-started-jsp-maven/](http://learn.koding.com/guides/getting-started-jsp-maven/)**  
+**`http://learn.koding.com/guides/getting-started-jsp-maven/`**  
 **AngularJS Step-by-Step Setup**  
-**[http://learn.koding.com/guides/angularjs-step-by-step/](http://learn.koding.com/guides/angularjs-step-by-step/)**  
+**`http://learn.koding.com/guides/angularjs-step-by-step/`**  
 **Reference:**  
-**[http://learn.koding.com/](http://learn.koding.com/)**
+**`http://learn.koding.com/`**

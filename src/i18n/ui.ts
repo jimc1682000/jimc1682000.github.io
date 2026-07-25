@@ -9,7 +9,7 @@ export const htmlLang: Record<Lang, string> = {
   en: 'en',
 };
 
-export const ui = {
+const ui = {
   zh: {
     'nav.blog': 'Blog',
     'nav.resume': '履歷',

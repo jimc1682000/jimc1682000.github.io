@@ -18,7 +18,6 @@ export const giscusEnabled = Boolean(
 // ---- Cloudflare Web Analytics（P2-10，無 cookie、隱私友善） ----
 // token 從 Cloudflare dashboard 取得。為空 → 不輸出 beacon。
 export const cfBeaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
-export const analyticsEnabled = Boolean(cfBeaconToken);
 
 // ---- Webmention / IndieWeb（P2-11） ----
 // 在 webmention.io 註冊的網域（如 jimmychen.me）。為空 → 不輸出 endpoint、不抓留言。

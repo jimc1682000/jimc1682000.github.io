@@ -7,7 +7,10 @@ name: Quality gates
 #   - microformats：**硬性**。mf2 是語意 class，刪掉不會有錯誤、版面也不變，只會
 #     安靜地讓 webmention／Bridgy Fed／IndieWeb reader 解析不到。本次開發已實際發生
 #     一次同類 regression，故失敗即擋。
-#   - 連結檢查：**advisory**。站上有近 200 個 2014–2017 舊文外部連結，很多主機已倒
+#   - 連結檢查：**advisory**。排除項的理由：indieauth.com 是我們宣告的
+#     authorization_endpoint，裸 GET 會回 400（正常），但每頁都有一個 → 首次執行
+#     時貢獻 117 筆假錯誤；內網 IP 出現在舊文的路由設定教學裡，本來就不該對外解析。
+#     站上有近 200 個 2014–2017 舊文外部連結，很多主機已倒
 #     （如 koding.com）。硬擋會第一天就紅，然後你開始忽略它 —— 那比沒有更糟。
 #   - lint + format：**硬性**。eslint 只抓真正的錯誤（未定義／未使用變數、bug pattern），
 #     風格全交給 prettier，兩者規則不重疊才不會互相打架。設定刻意配合既有的刻意寫法
@@ -97,14 +100,21 @@ jobs:
         with:
           # 只檢查站內產出的 HTML；--exclude 掉會擋機器人或需登入的站，
           # 以及本機/範例網域。舊文的死連結會列出來但不擋。
+          # --base dist 是必要的：少了它，每頁的 /favicon.svg、/_astro/*.css 這類
+          # root-relative 連結全部被判為「Cannot resolve root-relative link」。
+          # 首次執行時 3425 個檢查中有 2279 個是這類假警報，真死連結只有 31 筆——
+          # 綠燈因此毫無意義。
           args: >-
             --no-progress
+            --base dist
             --max-concurrency 8
             --timeout 20
             --accept 200,206,301,302,403,999
             --exclude '^https?://(localhost|127\.0\.0\.1|example\.(com|org))'
+            --exclude '^https?://(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)'
             --exclude '^https?://(www\.)?linkedin\.com'
             --exclude '^https?://webmention\.io'
+            --exclude '^https?://indieauth\.com'
             'dist/**/*.html'
           fail: false
           output: lychee-report.md
