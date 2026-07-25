@@ -97,6 +97,9 @@ const recent = (await getPosts(lang)).slice(0, 3);
         沒有這行 → @jimmychen.me@jimmychen.me（網域重複）；有這行 → @jimmy@jimmychen.me。
         定了不該改：改掉等於換 handle，既有 mention 與追蹤會斷。 */}
     <a class="u-url" href="acct:jimmy@jimmychen.me" hidden>@jimmy@jimmychen.me</a>
+    {/* u-photo：fediverse／Bluesky 的頭像來源。沒有它時只能退而用 favicon。
+        路徑固定，換圖只換 public/avatar.png 的內容。 */}
+    <img class="u-photo" src="/avatar.png" alt="" width="1" height="1" hidden />
     <div class="nm p-name">{name}</div>
     <div class="slogan">{slogan}</div>
     <div class="stamp"><Seal size={56} /></div>

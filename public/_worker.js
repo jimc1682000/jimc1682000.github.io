@@ -46,6 +46,17 @@ export default {
       );
     }
 
+    // 電子名片的 vCard：手機要認得出「可加入通訊錄」就得靠正確的 Content-Type。
+    // 靜態輸出下 Astro endpoint 的 header 不會被保留，且 advanced mode 停用 _headers，
+    // 所以在這裡補。同理處理 QR 的 SVG。
+    if (path === '/contact.vcf') {
+      const res = await env.ASSETS.fetch(request);
+      const headers = new Headers(res.headers);
+      headers.set('Content-Type', 'text/vcard; charset=utf-8');
+      headers.set('Content-Disposition', 'attachment; filename="jimmy-chen.vcf"');
+      return new Response(res.body, { status: res.status, headers });
+    }
+
     return env.ASSETS.fetch(request);
   },
 };
