@@ -19,3 +19,10 @@ export const giscusEnabled = Boolean(
 // token 從 Cloudflare dashboard 取得。為空 → 不輸出 beacon。
 export const cfBeaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
 export const analyticsEnabled = Boolean(cfBeaconToken);
+
+// ---- Webmention / IndieWeb（P2-11） ----
+// 在 webmention.io 註冊的網域（如 jimmychen.me）。為空 → 不輸出 endpoint、不抓留言。
+// microformats2 標記（h-entry / h-card / rel=me）不受此 gating，永遠輸出：它們無副作用，
+// 且 Bridgy Fed 只靠標記 + feed 就能橋接。
+export const webmentionDomain = import.meta.env.PUBLIC_WEBMENTION_DOMAIN;
+export const webmentionEnabled = Boolean(webmentionDomain);

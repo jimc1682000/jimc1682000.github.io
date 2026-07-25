@@ -1,0 +1,196 @@
+---
+// Webmention 顯示（P2-11）：build 時向 webmention.io 取本頁的跨站互動並編成靜態 HTML。
+// npm 上沒有現成的 Astro webmention integration（2026-07-25 查 registry 為 Not found），故自寫。
+// 失敗（API 掛掉、超時、格式變動）一律降級為「不顯示」，不讓 CI 紅掉。
+// 新留言要出現需重新 build —— 由 deploy.yml 的排程重建負責（見該檔註解）。
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/ui';
+import { webmentionEnabled } from '../consts';
+
+interface Props {
+  /** 本頁的絕對 URL（h-entry 的 u-url，同時是 webmention 的 target） */
+  target: URL;
+  lang: Lang;
+}
+
+interface Mention {
+  'wm-property': string;
+  url?: string;
+  published?: string | null;
+  author?: { name?: string; photo?: string; url?: string };
+  content?: { text?: string };
+}
+
+const { target, lang } = Astro.props;
+const t = useTranslations(lang);
+
+// target 尾斜線兩種寫法都查：社群貼文可能帶或不帶，webmention.io 視為不同 key。
+const withSlash = target.href.endsWith('/') ? target.href : `${target.href}/`;
+const withoutSlash = withSlash.slice(0, -1);
+
+let mentions: Mention[] = [];
+if (webmentionEnabled) {
+  const api = new URL('https://webmention.io/api/mentions.jf2');
+  api.searchParams.append('target[]', withSlash);
+  api.searchParams.append('target[]', withoutSlash);
+  api.searchParams.set('per-page', '100');
+  try {
+    const res = await fetch(api, { signal: AbortSignal.timeout(10_000) });
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data?.children)) mentions = data.children;
+    }
+  } catch {
+    // 靜默降級：不顯示互動區，build 照常完成。
+  }
+}
+
+const isLike = (m: Mention) => m['wm-property'] === 'like-of';
+const isRepost = (m: Mention) => m['wm-property'] === 'repost-of';
+const hasText = (m: Mention) => Boolean(m.content?.text?.trim());
+
+const likes = mentions.filter(isLike);
+const reposts = mentions.filter(isRepost);
+// 回覆與提及：只留真的有內容的，避免空殼條目。
+const replies = mentions.filter((m) => !isLike(m) && !isRepost(m) && hasText(m));
+
+const show = likes.length > 0 || reposts.length > 0 || replies.length > 0;
+---
+
+{
+  show && (
+    <section class="wm" aria-label={t('webmention.title')}>
+      <h2 class="wm-h">{t('webmention.title')}</h2>
+
+      {(likes.length > 0 || reposts.length > 0) && (
+        <div class="faces">
+          {[...reposts, ...likes].map((m) => (
+            <a
+              class="face"
+              href={m.author?.url || m.url}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              title={`${m.author?.name ?? ''}${isRepost(m) ? ` · ${t('webmention.reposts')}` : ''}`}
+            >
+              {m.author?.photo ? (
+                <img src={m.author.photo} alt={m.author?.name ?? ''} loading="lazy" width="32" height="32" />
+              ) : (
+                <span class="noface">{(m.author?.name ?? '?').slice(0, 1)}</span>
+              )}
+            </a>
+          ))}
+          <span class="count">
+            {likes.length > 0 && `${likes.length} ${t('webmention.likes')}`}
+            {likes.length > 0 && reposts.length > 0 && ' · '}
+            {reposts.length > 0 && `${reposts.length} ${t('webmention.reposts')}`}
+          </span>
+        </div>
+      )}
+
+      {replies.length > 0 && (
+        <ul class="replies">
+          {replies.map((m) => (
+            <li class="reply">
+              <a
+                class="who"
+                href={m.author?.url || m.url}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+              >
+                {m.author?.name ?? t('webmention.someone')}
+              </a>
+              {/* 只取純文字：外站內容不注入 HTML。 */}
+              <p class="what">{m.content?.text}</p>
+              {m.url && (
+                <a class="src" href={m.url} target="_blank" rel="noopener noreferrer nofollow">
+                  {t('webmention.source')} →
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  )
+}
+
+<style>
+  .wm {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .wm-h {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .faces {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .face img,
+  .noface {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    background: var(--color-bg-surface);
+    color: var(--color-text-tertiary);
+    font-size: 0.8rem;
+  }
+
+  .count {
+    color: var(--color-text-tertiary);
+    font-size: 0.85rem;
+    margin-left: 4px;
+  }
+
+  .replies {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .reply {
+    padding-left: var(--spacing-md);
+    border-left: 3px solid var(--color-border-subtle);
+  }
+
+  .who {
+    color: var(--color-text);
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--color-seal);
+  }
+
+  .what {
+    margin: 6px 0 4px;
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    white-space: pre-wrap;
+  }
+
+  .src {
+    color: var(--color-text-tertiary);
+    font-size: 0.8rem;
+    text-decoration: none;
+  }
+
+  .src:hover {
+    color: var(--color-seal);
+  }
+</style>

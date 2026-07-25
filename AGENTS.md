@@ -94,6 +94,18 @@ description: 一句話描述  # string，用於列表與 RSS/SEO
 - **不要**在正文留外部圖 URL（googleusercontent 等）；一律先過上面的工具固化。
 - 圖片必有有意義 `alt`；純裝飾圖用空 `alt=""`。
 
+## microformats2（改版時勿刪）
+
+本站是 IndieWeb 節點：Bridgy Fed 靠 microformats2 標記 + 可發現的 RSS 讓 fediverse／Bluesky 追蹤本站，回覆以 webmention 回流。**以下 class 是語意標記、對版面無影響，改 UI 時必須保留**：
+
+| 位置 | class |
+|---|---|
+| `src/layouts/BlogPost.astro` `<article>` | `h-entry`（內含 `p-name`／`dt-published`／`e-content`／`p-category`，及隱藏的 `u-url`、`p-author h-card`） |
+| `src/components/Home.astro` `<aside>` | `h-card`（內含 `p-name` 與隱藏 `u-url`） |
+| `src/components/SocialLinks.astro` | `rel="me noopener noreferrer"` |
+
+`e-content` 與 Pagefind 的 `data-pagefind-body` 共存於同一元素，兩者互不干擾，改動時別誤刪任一。
+
 ## 語調
 
 繁中為 source of truth，技術內容力求準確。避免 AI 空話；長文可另走 humanizer 流程再交付。

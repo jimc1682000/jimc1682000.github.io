@@ -5,6 +5,7 @@ import { useTranslations } from '../i18n/ui';
 import { formatDate } from '../lib/blog';
 import { giscus, giscusEnabled } from '../consts';
 import Seal from '../components/Seal.astro';
+import Webmentions from '../components/Webmentions.astro';
 
 interface Props {
   title: string;
@@ -25,18 +26,25 @@ const originalHref = translationOf ? `/blog/${translationOf}/` : '/blog/';
 // Giscus 留言語系(P2-09):繁中 zh-TW、英文 en。
 const giscusLang = lang === 'en' ? 'en' : 'zh-TW';
 const signoffYear = pubDate.getFullYear();
+// microformats2（P2-11）：h-entry 的 u-url 與 p-author h-card 需絕對 URL。
+const postURL = new URL(Astro.url.pathname, Astro.site);
+const authorName = lang === 'en' ? 'Jimmy Chen' : '陳建豪';
 ---
 
 <BaseLayout title={title} description={description} lang={lang}>
-  <article class="post" data-pagefind-body>
+  <article class="post h-entry" data-pagefind-body>
     <a class="crumb" href={blogHref}>← {t('blog.backToList')}</a>
-    <h1>{title}</h1>
+    <h1 class="p-name">{title}</h1>
     <div class="metar">
-      <time datetime={pubDate.toISOString()}>
+      <time class="dt-published" datetime={pubDate.toISOString()}>
         {t('blog.publishedOn')} {formatDate(pubDate, lang)}
       </time>
-      {tags.map((tag) => <span class="ptag">{tag}</span>)}
+      {tags.map((tag) => <span class="ptag p-category">{tag}</span>)}
     </div>
+
+    {/* mf2 的 u-url / p-author：解析器需要但版面不需要，故隱藏（DOM 中仍可解析）。 */}
+    <a class="u-url" href={postURL} hidden>{title}</a>
+    <a class="p-author h-card" href={new URL('/', Astro.site)} rel="author" hidden>{authorName}</a>
 
     {
       showAiNotice && (
@@ -50,7 +58,7 @@ const signoffYear = pubDate.getFullYear();
       )
     }
 
-    <div class="body">
+    <div class="body e-content">
       <slot />
     </div>
 
@@ -58,6 +66,9 @@ const signoffYear = pubDate.getFullYear();
       <Seal size={52} />
       <span>{t('post.signoff')} · {signoffYear}</span>
     </div>
+
+    {/* 站外迴響（webmention）在站內留言（Giscus）之前：兩者互補，前者是跨站、後者是站內。 */}
+    <Webmentions target={postURL} lang={lang} />
 
     {
       giscusEnabled && (
