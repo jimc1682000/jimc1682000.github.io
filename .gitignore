@@ -64,3 +64,6 @@ dist/
 .env
 .env.*
 !.env.example
+
+# wrangler 本機快取（`wrangler pages dev` 產生的 miniflare 狀態）
+.wrangler/
