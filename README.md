@@ -9,8 +9,10 @@
 | 角色 | 位置 |
 |------|------|
 | **Canonical（主）** | 自有 domain — `https://jimmychen.me`（掛在 Cloudflare Pages） |
-| **Mirror** | GitHub Pages（`jimc1682000.github.io`）— 不主推，**刻意保留為 Cloudflare 故障時的備援**（故不轉址） |
+| **Mirror** | `https://mirror.jimmychen.me`（GitHub Pages）— 不主推，**刻意保留 serve 內容作為 Cloudflare Pages 故障時的備援**；canonical 仍指裸網域 |
 | ~~`jimmychen.pages.dev`~~ | **301 → `jimmychen.me`**（`public/_worker.js`）。與 canonical 同屬 Cloudflare，無備援價值，故收為單一入口；預覽網址 `<hash>.jimmychen.pages.dev` 不受影響 |
+| ~~`www.jimmychen.me`~~ | **301 → `jimmychen.me`**（zone Redirect Rule）。註：www 也必須加為 Pages custom domain 才有憑證，否則 TLS 握手先失敗、走不到規則 |
+| ~~`jimc1682000.github.io`~~ | **301 → `mirror.jimmychen.me`**（GitHub 依 `public/CNAME` 自動轉址） |
 
 `astro.config.mjs` 的 `site` 設為 canonical URL，canonical link 與 sitemap 皆以此為基準。
 
