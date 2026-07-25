@@ -204,6 +204,8 @@
 - 可見 focus ring；對比 AA；一頁一 h1；`<html lang>` 隨語系。
 - 圖片有意義 `alt`；裝飾圖空 alt。
 - Analytics：採 **Cloudflare Web Analytics（無 cookie、隱私友善）**，token 存在才載入（見 Decisions Log）。
+- **microformats2（P2-11）**：文章 `article.post.h-entry`（`p-name` 標題、`dt-published` 時間、`e-content` 正文、`p-category` 標籤、隱藏 `u-url` 與 `p-author h-card`）；首頁 `aside.scroll.h-card`（`p-name` + 隱藏 `u-url`）；社群連結帶 `rel="me"`。**這些是語意標記，不影響版面** —— 改版時務必保留 class，否則 webmention／Bridgy Fed 解析不到。
+- 站外迴響（webmention）與站內留言（Giscus）分區並存：前者在上、後者在下，各自 `border-top` 分隔。
 
 ---
 
@@ -238,6 +240,10 @@
 | 2026-07-25 | **Analytics 由「v1 不做」改為 Cloudflare Web Analytics（無 cookie）** | 使用者要基本流量數據，選隱私友善方案不破壞原則 |
 | 2026-07-25 | **全站文章英譯 37 篇 + AI 翻譯提示 banner** | 服務英文讀者；GEMBA-MQM 評估 0 Critical/0 Major |
 | 2026-07-25 | **舊 Blogger 外鏈圖全數固化為本地 WebP q92**（`public/blog/img/`，工具 `scripts/optimize-images.mjs`） | 來源已壓過，q92 兼顧文字銳利與 ~25% 瘦身、q95+ 幾乎不省；優先用 Takeout Albums 全畫質原檔（dHash 比對）、無死連結 |
+| 2026-07-25 | **canonical 改為自有 domain `jimmychen.me`** | 逃離主機綁定（`*.pages.dev` 與平台帳號一樣不屬於自己）；`site` 一處改，canonical／hreflang／og／RSS／sitemap 全跟著換 |
+| 2026-07-25 | **加 microformats2 + webmention endpoint + 站外迴響區（P2-11）** | 讓自站成為 IndieWeb 節點：Bridgy Fed 只需 mf2 + 可發現 feed，即可讓 fediverse／Bluesky 使用者直接追蹤本站、回覆以 webmention 回流，**不需經營社群帳號**。標記無視覺副作用故不 gating；endpoint 與抓取由 `PUBLIC_WEBMENTION_DOMAIN` gating |
+| 2026-07-25 | **迴響用排程重建（每 6 小時）而非 webhook 即時** | webmention.io webhook 無法帶 `Authorization` header，接不上需 PAT 的 `repository_dispatch`；即時需多一層 CF Worker 代理，個人站延遲半天可接受。已保留 `webmention` dispatch type 供日後升級 |
+| 2026-07-25 | **自寫 `Webmentions.astro`，不用現成套件** | npm 上不存在 `astro-webmention`（當日直查 registry 為 Not found）；自寫約 80 行並包 try/catch 降級，避免 webmention.io 故障導致 CI 紅 |
 
 ---
 

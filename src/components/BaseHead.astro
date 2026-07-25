@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import type { Lang } from '../i18n/ui';
-import { cfBeaconToken } from '../consts';
+import { cfBeaconToken, webmentionDomain, webmentionEnabled } from '../consts';
 
 interface Props {
   title: string;
@@ -61,6 +61,16 @@ const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="alternate" type="application/rss+xml" title={rssTitle} href={rssHref} />
+
+{/* Webmention endpoint（P2-11）：webmention.io 代收。未設 domain 則不輸出。 */}
+{
+  webmentionEnabled && (
+    <>
+      <link rel="webmention" href={`https://webmention.io/${webmentionDomain}/webmention`} />
+      <link rel="pingback" href={`https://webmention.io/${webmentionDomain}/xmlrpc`} />
+    </>
+  )
+}
 
 {/* Open Graph（薄，v1） */}
 <meta property="og:type" content="website" />

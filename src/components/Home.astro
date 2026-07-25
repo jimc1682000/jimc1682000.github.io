@@ -90,8 +90,10 @@ const recent = (await getPosts(lang)).slice(0, 3);
     </div>
   </article>
 
-  <aside class="scroll">
-    <div class="nm">{name}</div>
+  {/* h-card：代表本人的 microformats2 profile（P2-11，供 webmention/Bridgy Fed 解析）。 */}
+  <aside class="scroll h-card">
+    <a class="u-url" href={new URL('/', Astro.site)} hidden>{name}</a>
+    <div class="nm p-name">{name}</div>
     <div class="slogan">{slogan}</div>
     <div class="stamp"><Seal size={56} /></div>
   </aside>

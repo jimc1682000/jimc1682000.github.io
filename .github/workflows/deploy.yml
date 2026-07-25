@@ -16,7 +16,15 @@ on:
     branches: [master, main]
   workflow_dispatch:
   repository_dispatch:
-    types: [assemble-site]
+    types: [assemble-site, webmention]
+  # Webmention 排程重建(P2-11):站外迴響是 build 時抓的,不重建就不會出現。
+  # 每 6 小時重建一次,讓新的回覆/喜歡最遲半天內上站。
+  # 為何不用 webhook 即時:webmention.io 的 webhook 只能 POST 一個 URL、無法帶
+  # Authorization header,而 GitHub 的 repository_dispatch 需要 PAT 認證,兩者接不上。
+  # 要即時就得加一層代理(如 Cloudflare Worker 持有 PAT → 呼叫 repository_dispatch,
+  # 對應上方的 webmention dispatch type);個人站的迴響延遲半天可接受,故先用排程。
+  schedule:
+    - cron: '0 */6 * * *'
 
 permissions:
   contents: read
@@ -48,6 +56,7 @@ jobs:
           PUBLIC_GISCUS_CATEGORY: ${{ vars.PUBLIC_GISCUS_CATEGORY }}
           PUBLIC_GISCUS_CATEGORY_ID: ${{ vars.PUBLIC_GISCUS_CATEGORY_ID }}
           PUBLIC_CF_BEACON_TOKEN: ${{ vars.PUBLIC_CF_BEACON_TOKEN }}
+          PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
 
       # --- 組裝 /resume/（jimc1682000/resume，VitePress base /resume/）---
       - name: Checkout resume repo
