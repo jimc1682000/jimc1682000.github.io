@@ -7,7 +7,7 @@ export type BlogEntry = CollectionEntry<'blog'>;
  * locale 判定：優先 frontmatter locale，其次由 entry id 前綴推導
  * （id 以 "en/" 開頭 → en，否則 zh）。
  */
-export function localeOf(entry: BlogEntry): Locale {
+function localeOf(entry: BlogEntry): Locale {
   if (entry.data.locale) return entry.data.locale;
   return entry.id.startsWith('en/') ? 'en' : 'zh';
 }
@@ -21,10 +21,6 @@ export function slugOf(entry: BlogEntry): string {
 }
 
 /** 該篇文章在對應語系下的路徑（A1 路由）。 */
-export function urlOf(entry: BlogEntry): string {
-  const slug = slugOf(entry);
-  return localeOf(entry) === 'en' ? `/en/blog/${slug}/` : `/blog/${slug}/`;
-}
 
 /** 取某語系的全部文章，時間新→舊排序。 */
 export async function getPosts(locale: Locale): Promise<BlogEntry[]> {
