@@ -89,7 +89,7 @@
 | `--color-text-tertiary` | `rgba(236,230,217,0.40)` | 細標 |
 | `--color-border` | `rgba(236,230,217,0.12)` | 主邊框 |
 | `--color-border-subtle` | `rgba(236,230,217,0.06)` | 分隔 |
-| `--color-seal` | `#d24a3b` | 朱砂（墨底稍亮） |
+| `--color-seal` | `#d6594c` | 朱砂（墨底稍亮） |
 | `--color-seal-tint` | `rgba(210,74,59,0.16)` | tag chip 底 |
 
 ### 3.3 語意規則
@@ -229,7 +229,7 @@
 |------|------|------|
 | 2026-07-24 | 建立 Astro 殼、A1 URL、UI 雙語、light/dark + no-flash | 遷移骨架；繁中 source of truth |
 | 2026-07-25 | **改版為「東方水墨散文集」方向**（取代原 Blake-like true-minimal 純黑白） | 使用者偏好 antfu 散文式 + 中文散文集氣質、更有個人溫度 |
-| 2026-07-25 | **主色改朱砂 `#c8392b`／`#d24a3b`**（原無彩色 accent） | 呼應落款印章與職涯紅；與 film-brain 橘區隔 |
+| 2026-07-25 | **主色改朱砂 `#c8392b`／`#d6594c`**（原無彩色 accent） | 呼應落款印章與職涯紅；與 film-brain 橘區隔 |
 | 2026-07-25 | **主字改宋體（Noto Serif TC）**，UI 用 sans | 散文集人文質感 |
 | 2026-07-25 | **底色改宣紙米白／墨色**（棄純黑白） | 暖、可長讀、貼水墨裝幀 |
 | 2026-07-25 | **落款印章「吉」為 logo**（取代手繪簽名） | 好做、文化貼合、天然提供朱砂 |
@@ -245,6 +245,7 @@
 | 2026-07-25 | **迴響用「排程 + 先查」（每 6 小時查，有新迴響才 build）** | webmention.io webhook 無法帶 `Authorization` header，接不上需 PAT 的 `repository_dispatch`；即時需多一層 CF Worker 持有可寫 repo 的 PAT。改為 gate job 比對全網域最大 `wm-id` 與 `actions/cache` 上次值，無變化就 ~10 秒結束不 build——用一個**唯讀** token 換到同樣的低浪費。額度不是考量（public repo 的 Actions 分鐘免費、`wrangler pages deploy` direct upload 不計入 CF 的 500 builds/月），純粹是避免無意義的重建與 deploy 雜訊。已保留 `webmention` dispatch type 供日後升級 |
 | 2026-07-25 | **自寫 `Webmentions.astro`，不用現成套件** | npm 上不存在 `astro-webmention`（當日直查 registry 為 Not found）；自寫約 80 行並包 try/catch 降級，避免 webmention.io 故障導致 CI 紅 |
 | 2026-07-25 | **加 `og:image`（站台通用卡 `public/og.png`）、`og:type=article`、`twitter:card=summary_large_image`、JSON-LD** | 原本分享出去是**沒有預覽圖的裸連結**，文章頁的 `og:type` 也錯寫成 `website`。**刻意用單一張站台通用圖，不做每篇動態生成**：`ubuntu-latest` 沒有中文字型，在 CI 產圖會**靜默**產出方框或空白（本檔 PNG 於本機產出並 commit，並以像素斷言驗過「吉」與站名真的畫出來——同 `avatar.png` 的做法）。每篇差異由 `og:title`／`og:description` 表達。JSON-LD：文章頁 `BlogPosting`、其餘 `Person`；與首頁既有的 mf2 h-card 並存不衝突（前者給搜尋引擎、後者給 IndieWeb 解析器） |
+| 2026-07-25 | **暗色版朱砂 `#d24a3b` → `#d6594c`（WCAG AA）** | 原值對墨底 `#17191b` 只有 **4.01:1**，未達 AA 的 4.5 —— 而 §9 明訂「對比 AA」是硬規則，屬自我矛盾。新值只把 HSL 亮度 53% → **57%**，**色相 6° 與飽和 63% 不動**，是達標所需的**最小改動** → **4.53:1**。亮色版 `#c8392b` 為 4.70:1、次要文字 `#666059` 為 5.66:1、墨 `#17191b` 為 16.07:1，本來就合格，皆不動 |
 | 2026-07-25 | **安全性 header 全面補上（`public/_worker.js`，單一出口）** | 原本只有 Cloudflare 預設給的 `x-content-type-options` 與 `referrer-policy`。新增 **CSP**、**HSTS**、`X-Frame-Options`、`Permissions-Policy`、`Cross-Origin-Opener-Policy`。**架構刻意重構為單一出口**（`route()` 決定回應、`fetch()` 統一套 header）：這裡有六種回應（兩種 301、兩類 302、`.vcf`、ASSETS 直通含 404），把 header 灑在各分支很容易變成「首頁有、404 與轉址沒有」，而只 curl `/` 的驗證抓不到。**CSP 的誠實限制**：`script-src` 含 `'unsafe-inline'`（no-flash 主題與 giscus 載入器是 `is:inline`，靜態輸出無法加 nonce）→ **拿不到真正的 XSS 防護**；價值在於限制 `frame-src`／`frame-ancestors`／`connect-src`／`object-src`／`base-uri`。必含 `'wasm-unsafe-eval'`（Pagefind 用 WebAssembly，漏了 `/blog/search` 會壞）；`img-src` 用 `https:` 而非白名單（webmention 頭像來自任意網域）。HSTS **刻意不加 `preload`**（單向門）與 **`includeSubDomains`**（會綁住不由我們控制的 `mirror.jimmychen.me`） |
 | 2026-07-25 | **新增 404 頁（`src/pages/404.astro`）** | 缺這一頁時 Cloudflare Pages 用 SPA fallback 拿 index.html 頂上 → **任何打錯的網址都回 200 + 首頁內容（soft-404）**，Google 會把無限多垃圾網址當有效頁面索引、使用者也不知走錯。實測修復後亂打路徑回真 404。靜態站無法在伺服器端判斷語言，故單頁雙語（繁中為主、英文一行） |
 | 2026-07-25 | **`/blog/` 加 h-feed** | 讓 IndieWeb reader 與 mf2 解析器能把列表頁當 microformats feed 消費（RSS 之外的另一條路）。每則為 h-entry，根元素是 `<a href>` 故 mf2 implied-url 規則自動提供 `u-url`。**副作用**：列表頁與 tag 頁從此也有 `dt-published`，webmention 發送器原本用它判定「是否為文章」會誤判（74 → 106），已改以 `e-content` 判定 |

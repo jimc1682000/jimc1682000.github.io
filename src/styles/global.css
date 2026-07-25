@@ -21,8 +21,12 @@
   --color-header-bg: rgba(23, 25, 27, 0.72);
   --color-accent: #ece6d9;
   --color-accent-hover: rgba(236, 230, 217, 0.85);
-  --color-seal: #d24a3b;
-  --color-seal-tint: rgba(210, 74, 59, 0.16);
+  /* 暗色版朱砂：原值 #d24a3b 對墨底 #17191b 只有 4.01:1，未達 WCAG AA 的 4.5
+     （DESIGN §9 明訂「對比 AA」是硬規則）。本值只把 HSL 亮度 53% → 57%，
+     色相 6° 與飽和 63% 不動，是達標所需的最小改動 → 4.53:1。
+     亮色版的 #c8392b 為 4.70:1，本來就合格，不動。 */
+  --color-seal: #d6594c;
+  --color-seal-tint: rgba(214, 89, 76, 0.16);
   --color-overlay: rgba(0, 0, 0, 0.8);
   --color-focus-ring: var(--color-text);
 
