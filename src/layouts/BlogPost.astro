@@ -54,9 +54,12 @@ const authorName = lang === 'en' ? 'Jimmy Chen' : '陳建豪';
         對追蹤者是噪音。
         ⚠️ 取捨：Bridgy Fed 文件明載「送過一次 webmention 後，它會停止讀你的 Atom/RSS
         feed，改為期待所有未來貼文都用 webmention」。也就是說發送器若壞掉，新文章會
-        安靜地不再聯邦。要退回輪詢模式就移除本行（並留意該切換可能不會立即回復）。 */}
+        安靜地不再聯邦。要退回輪詢模式就移除本行（並留意該切換可能不會立即回復）。
+        註：Bridgy Fed 文件範例寫 hidden="from-humans"，但 hidden 是列舉屬性
+        （""/hidden/until-found），該值不合法（html-validate 會抓）。Bridgy Fed 只認
+        class 與 href，故用純 hidden。 */}
     {lang !== 'en' && (
-      <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans" aria-hidden="true" />
+      <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden aria-hidden="true" />
     )}
 
     {/* mf2 的 u-url / p-author：解析器需要但版面不需要，故隱藏（DOM 中仍可解析）。 */}

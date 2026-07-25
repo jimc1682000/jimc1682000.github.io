@@ -43,6 +43,18 @@ jobs:
         run: npm run lint
       - name: prettier
         run: npm run format:check
+      - name: stylelint
+        run: npm run lint:css
+      - name: markdownlint
+        run: npm run lint:md
+      - name: build（html-validate 需要產出）
+        run: npm run build
+      - name: html-validate
+        run: npm run lint:html
+      # knip 是「清理機會」而非正確性 gate：既有的未使用匯出不該擋住新功能
+      - name: knip（advisory）
+        continue-on-error: true
+        run: npm run lint:deps
 
   microformats:
     name: microformats2（硬性）
@@ -118,3 +130,52 @@ jobs:
       - name: npm audit（prod only）
         continue-on-error: true
         run: npm audit --omit=dev --audit-level=high
+
+  web-audits:
+    name: Lighthouse + a11y（advisory）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
+          PUBLIC_GISCUS_REPO: ${{ vars.PUBLIC_GISCUS_REPO }}
+          PUBLIC_GISCUS_REPO_ID: ${{ vars.PUBLIC_GISCUS_REPO_ID }}
+          PUBLIC_GISCUS_CATEGORY: ${{ vars.PUBLIC_GISCUS_CATEGORY }}
+          PUBLIC_GISCUS_CATEGORY_ID: ${{ vars.PUBLIC_GISCUS_CATEGORY_ID }}
+
+      # 兩個 audit 都需要一個真的 HTTP server（file:// 量不到快取與 header）
+      - name: Serve dist
+        run: |
+          npx --yes http-server dist -p 4321 --silent &
+          npx --yes wait-on http://localhost:4321 -t 30000
+
+      # advisory：先建立基線再談門檻。Lighthouse 的 best-practices 會扣 CSP 的分
+      #（我們刻意含 'unsafe-inline'，見 DESIGN.md）；一開始就設門檻只會逼人放寬 CSP。
+      # 只跑四個代表頁：首頁、列表、單篇、名片（全站 117 頁跑 Lighthouse 太慢）。
+      - name: Lighthouse CI
+        continue-on-error: true
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            http://localhost:4321/
+            http://localhost:4321/blog/
+            http://localhost:4321/blog/claude-code/
+            http://localhost:4321/contact
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          runs: 1
+
+      # pa11y 抓 Lighthouse a11y 子集之外的細項（色彩對比、ARIA、標題層級、landmark）。
+      # 排除 tags/search：前者上百頁且結構相同，後者需互動才有內容。
+      - name: pa11y-ci（advisory）
+        continue-on-error: true
+        run: |
+          npx --yes pa11y-ci \
+            --sitemap http://localhost:4321/sitemap-0.xml \
+            --sitemap-exclude '(tags|search)' || true
