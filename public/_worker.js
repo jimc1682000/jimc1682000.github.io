@@ -22,6 +22,18 @@ const PAGES_DEV_HOST = 'jimmychen.pages.dev';
 const BRIDGY_FED = 'https://fed.brid.gy';
 const DOMAIN = 'jimmychen.me';
 
+// 舊 Blogger 路徑 301（migrations/blogger/url-map.json 的 36 筆映射）。
+// 33/36 是純機械規則 /YYYY/MM/<slug>.html → /blog/<slug>，故用 regex 而非搬 36 筆進來。
+// 例外只有 3 筆：Blogger 的 blog-post 這個 slug 跨年重複，匯入時被加了數字後綴。
+// 註：不存在的 /YYYY/MM/*.html 會被導到一個 404 的 /blog/<slug>——該路徑型態幾乎
+// 只可能來自舊 Blogger，導向後由 404 頁承接，仍優於直接吐 404。
+const BLOGGER_PATH = /^\/\d{4}\/\d{2}\/(.+)\.html$/;
+const BLOGGER_OVERRIDES = {
+  '/2014/05/blog-post.html': '/blog/blog-post-2',
+  '/2016/01/blog-post.html': '/blog/blog-post-3',
+  '/2014/06/blog-post.html': '/blog/blog-post-4',
+};
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -31,6 +43,14 @@ export default {
     }
 
     const path = url.pathname;
+
+    // 舊 Blogger 路徑 → 新文章（cool URIs don't change）
+    const bloggerTarget = BLOGGER_OVERRIDES[path] ?? (BLOGGER_PATH.test(path)
+      ? `/blog/${path.match(BLOGGER_PATH)[1]}`
+      : null);
+    if (bloggerTarget) {
+      return Response.redirect(`${CANONICAL}${bloggerTarget}/${url.search}`, 301);
+    }
 
     // fediverse 自訂 handle：host-meta 與 webfinger 連同 query 一起轉給 Bridgy Fed。
     // 用 startsWith 因為規格為 host-meta* / webfinger*（會有 .json、.xrd 等變體）。

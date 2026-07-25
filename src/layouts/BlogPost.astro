@@ -42,6 +42,17 @@ const authorName = lang === 'en' ? 'Jimmy Chen' : '陳建豪';
       {tags.map((tag) => <span class="ptag p-category">{tag}</span>)}
     </div>
 
+    {/* Bridgy Fed 即時聯邦（P2-13）：有這個連結時，我們的 webmention 發送器會在部署後
+        通知 fed.brid.gy，新文章立刻聯邦到 fediverse／Bluesky，不必等它輪詢 RSS。
+        **只在繁中版輸出**：中文版是內容的真相源；英文版也放的話同一篇會聯邦兩次，
+        對追蹤者是噪音。
+        ⚠️ 取捨：Bridgy Fed 文件明載「送過一次 webmention 後，它會停止讀你的 Atom/RSS
+        feed，改為期待所有未來貼文都用 webmention」。也就是說發送器若壞掉，新文章會
+        安靜地不再聯邦。要退回輪詢模式就移除本行（並留意該切換可能不會立即回復）。 */}
+    {lang !== 'en' && (
+      <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans" aria-hidden="true" />
+    )}
+
     {/* mf2 的 u-url / p-author：解析器需要但版面不需要，故隱藏（DOM 中仍可解析）。 */}
     <a class="u-url" href={postURL} hidden>{title}</a>
     <a class="p-author h-card" href={new URL('/', Astro.site)} rel="author" hidden>{authorName}</a>
