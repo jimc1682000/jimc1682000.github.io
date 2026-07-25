@@ -76,6 +76,7 @@ description: 一句話描述  # string，用於列表與 RSS/SEO
 | 站務/公告 | 網站 | Meta |
 
 **規則**：
+
 - **評測類**：`評測` + 品類（音響/鍵盤/…）。品類是新產品類型（如 `3C`、`遊戲`）時可新增一個品類 tag。
 - **看的內容**：`影視` + 品類（電影/動畫/…）；YouTube 影片等也歸 `影視`。
 - **擴充**：新 tag 只在「某主題重複出現」時才加入本表（同時更新此表）；不要一次性冷門 tag。
@@ -121,12 +122,18 @@ description: 一句話描述  # string，用於列表與 RSS/SEO
 送 PR 前本機至少跑：
 
 ```bash
-npm run validate   # = astro check + eslint + prettier + build + microformats2 驗證
+npm run validate   # 全部：astro check → eslint → stylelint → markdownlint
+                   #      → prettier → build → microformats2 → html-validate
 ```
+
+個別可跑：`lint`（eslint）、`lint:css`、`lint:md`、`lint:html`、`lint:deps`（knip）、`validate:mf2`、`format`／`format:check`。
+
+**分工原則:linter 抓錯誤、formatter 管風格,兩者不重疊。** 所以 stylelint 用 `config-recommended`（非 `standard`）、markdownlint 關掉 `MD060`（表格 pipe 空格）—— 那些是排版,不是錯誤。
 
 個別可跑：`npm run lint`、`npm run format`（寫入）／`format:check`、`npm run validate:mf2`。
 
 **兩個刻意的例外**（改動前先讀理由）：
+
 - `src/layouts/BlogPost.astro` 不套 prettier —— `prettier-plugin-astro` 無法解析 `is:inline` + `define:vars` 的 script 區塊。eslint 仍會檢查它。
 - `.astro` 內的 `is:inline` script 不套 `no-var` —— no-flash 主題腳本必須在 paint 前執行，`var` 是刻意的相容選擇。
 

@@ -88,7 +88,7 @@ const more = [
 
   <div class="foot">
     <div class="stamp"><Seal size={44} /></div>
-    <nav class="more">
+    <nav class="more" aria-label={isEn ? 'More from this site' : '站內其他頁'}>
       {more.map((m) => <a href={m.href}>{m.label}</a>)}
     </nav>
   </div>
