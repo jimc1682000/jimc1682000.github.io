@@ -215,3 +215,38 @@ jobs:
         with:
           path: wm-state
           key: webmention-state-${{ github.run_id }}
+
+  # 發送 webmention（P2-13）：對文章正文裡的外部連結通知對方。
+  # 必須在 deploy 之後跑：接收端會回頭抓 source URL 驗證連結是否真的存在，
+  # 部署前送出會驗證失敗。
+  # 只在 push（內容變更）時跑；排程與子站 dispatch 不需要重送。
+  send-webmentions:
+    needs: [build, deploy-cloudflare]
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+      # 已送過的 (source, target) 記在快取，避免每次部署都重送
+      - uses: actions/cache/restore@v4
+        with:
+          path: .webmention-sent.json
+          key: webmention-sent-
+          restore-keys: webmention-sent-
+      - name: Send webmentions
+        # 探索不到端點／對方掛掉都不該讓部署變紅
+        continue-on-error: true
+        run: node scripts/send-webmentions.mjs --dist dist --site https://jimmychen.me
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .webmention-sent.json
+          key: webmention-sent-${{ github.run_id }}
