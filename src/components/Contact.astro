@@ -27,8 +27,7 @@ const qrSvg = await QRCode.toString(contact.cardUrl, {
   errorCorrectionLevel: 'M',
 });
 
-const iconFor = (type: string) =>
-  type === 'github' || type === 'linkedin' ? type : 'link';
+const iconFor = (type: string) => (type === 'github' || type === 'linkedin' ? type : 'link');
 
 const prefix = isEn ? '/en' : '';
 const more = [

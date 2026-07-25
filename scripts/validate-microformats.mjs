@@ -95,10 +95,7 @@ const has = (obj, ...keys) => keys.every((k) => Array.isArray(obj?.[k]) && obj[k
   const zh = await readFile(`${DIST}/blog/claude-code/index.html`, 'utf8');
   const en = await readFile(`${DIST}/en/blog/claude-code/index.html`, 'utf8');
   expect('繁中文章有 u-bridgy-fed（觸發即時聯邦）', zh.includes('u-bridgy-fed'));
-  expect(
-    '英文文章沒有 u-bridgy-fed（否則同一篇會聯邦兩次）',
-    !en.includes('u-bridgy-fed'),
-  );
+  expect('英文文章沒有 u-bridgy-fed（否則同一篇會聯邦兩次）', !en.includes('u-bridgy-fed'));
 }
 
 // ---- 4. blog 列表的 h-feed ----
@@ -125,7 +122,8 @@ const has = (obj, ...keys) => keys.every((k) => Array.isArray(obj?.[k]) && obj[k
 }
 
 // ---- 輸出 ----
-for (const c of checks) console.log(`  ${c.ok ? '✓' : '✗'} ${c.label}${c.detail ? `  (${c.detail})` : ''}`);
+for (const c of checks)
+  console.log(`  ${c.ok ? '✓' : '✗'} ${c.label}${c.detail ? `  (${c.detail})` : ''}`);
 console.log(`\nmicroformats 驗證：${checks.length - failures.length}/${checks.length} 通過`);
 if (failures.length) {
   console.error('\n失敗項目：');

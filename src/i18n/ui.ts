@@ -88,7 +88,8 @@ export const ui = {
     'works.cat.automation': 'Automation · Tools',
     'works.cat.showcase': 'Competitions · Talks',
     'post.signoff': 'Signed in Taiwan',
-    'post.aiTranslatedNotice': 'This is an AI-generated translation of the original Chinese post and may contain inaccuracies.',
+    'post.aiTranslatedNotice':
+      'This is an AI-generated translation of the original Chinese post and may contain inaccuracies.',
     'post.readOriginal': 'Read the original (中文)',
     'webmention.title': 'Responses from around the web',
     'webmention.likes': 'likes',

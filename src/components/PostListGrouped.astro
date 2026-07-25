@@ -14,10 +14,12 @@ const blogBase = lang === 'en' ? '/en/blog' : '/blog';
 const groups = groupByYear(posts);
 ---
 
-{/* h-feed（P2-13）：讓 IndieWeb reader 與解析器能把本頁當 microformats feed 消費
+{
+  /* h-feed（P2-13）：讓 IndieWeb reader 與解析器能把本頁當 microformats feed 消費
     （RSS 之外的另一條路）。每則是 h-entry；因根元素是 <a href>，mf2 的 implied-url
     規則會把 href 當成 u-url，故不需額外標記。與 h-entry 的 class 一樣是語意標記，
-    改版時請保留。 */}
+    改版時請保留。 */
+}
 {
   posts.length === 0 ? (
     <p class="empty">{t('blog.empty')}</p>

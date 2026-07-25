@@ -9,7 +9,11 @@ const t = useTranslations(lang);
 const tags = await getTagCounts(lang);
 ---
 
-<BaseLayout title={`${t('blog.allTags')} — 陳建豪 Jimmy Chen`} description="依標籤瀏覽陳建豪 Jimmy Chen 的文章。" lang={lang}>
+<BaseLayout
+  title={`${t('blog.allTags')} — 陳建豪 Jimmy Chen`}
+  description="依標籤瀏覽陳建豪 Jimmy Chen 的文章。"
+  lang={lang}
+>
   <div class="tags-page">
     <p class="crumb"><a href="/blog/">← {t('blog.backToList')}</a></p>
     <h1 class="page-h">{t('blog.allTags')}</h1>

@@ -9,7 +9,11 @@ const t = useTranslations(lang);
 const posts = await getPosts(lang);
 ---
 
-<BaseLayout title={`${t('blog.title')} — 陳建豪 Jimmy Chen`} description="陳建豪 Jimmy Chen 的文章：工程實踐、DevOps／SRE 與 AI 工作流。" lang={lang}>
+<BaseLayout
+  title={`${t('blog.title')} — 陳建豪 Jimmy Chen`}
+  description="陳建豪 Jimmy Chen 的文章：工程實踐、DevOps／SRE 與 AI 工作流。"
+  lang={lang}
+>
   <div class="list-page">
     <div class="top-row">
       <h1 class="page-h">{t('blog.title')}</h1>
