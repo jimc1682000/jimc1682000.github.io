@@ -43,13 +43,35 @@ const brand = lang === 'en' ? 'Jimmy Chen' : '吉光聚斂，米粒成章';
     </a>
 
     <nav class="site-nav" aria-label={lang === 'en' ? 'Primary' : '主導覽'}>
-      <a href={blogHref} class:list={['nav-link', { active: isBlog }]} aria-current={isBlog ? 'page' : undefined}>{t('nav.blog')}</a>
-      <a href={resumeHref} class:list={['nav-link', { active: isResume }]} aria-current={isResume ? 'page' : undefined}>{t('nav.resume')}</a>
-      <a href={worksHref} class:list={['nav-link', { active: isWorks }]} aria-current={isWorks ? 'page' : undefined}>{t('nav.works')}</a>
-      <a class="nav-link lang-switch" href={switchHref} hreflang={otherLang === 'en' ? 'en' : 'zh-Hant'}>{t('lang.switch')}</a>
+      <a
+        href={blogHref}
+        class:list={['nav-link', { active: isBlog }]}
+        aria-current={isBlog ? 'page' : undefined}>{t('nav.blog')}</a
+      >
+      <a
+        href={resumeHref}
+        class:list={['nav-link', { active: isResume }]}
+        aria-current={isResume ? 'page' : undefined}>{t('nav.resume')}</a
+      >
+      <a
+        href={worksHref}
+        class:list={['nav-link', { active: isWorks }]}
+        aria-current={isWorks ? 'page' : undefined}>{t('nav.works')}</a
+      >
+      <a
+        class="nav-link lang-switch"
+        href={switchHref}
+        hreflang={otherLang === 'en' ? 'en' : 'zh-Hant'}>{t('lang.switch')}</a
+      >
 
       <span class="icons">
-        <a class="nav-ic" href="https://github.com/jimc1682000" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <a
+          class="nav-ic"
+          href="https://github.com/jimc1682000"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+        >
           <Icon name="github" size={18} />
         </a>
         <a class="nav-ic" href={rssHref} aria-label="RSS">

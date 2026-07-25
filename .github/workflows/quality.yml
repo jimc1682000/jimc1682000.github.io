@@ -9,6 +9,10 @@ name: Quality gates
 #     一次同類 regression，故失敗即擋。
 #   - 連結檢查：**advisory**。站上有近 200 個 2014–2017 舊文外部連結，很多主機已倒
 #     （如 koding.com）。硬擋會第一天就紅，然後你開始忽略它 —— 那比沒有更糟。
+#   - lint + format：**硬性**。eslint 只抓真正的錯誤（未定義／未使用變數、bug pattern），
+#     風格全交給 prettier，兩者規則不重疊才不會互相打架。設定刻意配合既有的刻意寫法
+#     （inline script 用 var、catch {} 靜默降級、_ 當丟棄變數），不為討好 linter 改動
+#     能跑的關鍵腳本。
 #   - npm audit：**advisory**，且 --omit=dev。本站是靜態輸出，qrcode／sharp／pagefind
 #     都只在 build 時跑、不進 client bundle，devDependency 的告警沒有 runtime 曝險。
 #     真正有價值的是 dependabot（會開 PR），見 .github/dependabot.yml。
@@ -23,6 +27,23 @@ permissions:
   contents: read
 
 jobs:
+  lint:
+    name: lint + format（硬性）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: astro check
+        run: npm run check
+      - name: eslint
+        run: npm run lint
+      - name: prettier
+        run: npm run format:check
+
   microformats:
     name: microformats2（硬性）
     runs-on: ubuntu-latest

@@ -121,7 +121,15 @@ description: 一句話描述  # string，用於列表與 RSS/SEO
 送 PR 前本機至少跑：
 
 ```bash
-npm run validate   # = check + build + microformats2 驗證
+npm run validate   # = astro check + eslint + prettier + build + microformats2 驗證
 ```
+
+個別可跑：`npm run lint`、`npm run format`（寫入）／`format:check`、`npm run validate:mf2`。
+
+**兩個刻意的例外**（改動前先讀理由）：
+- `src/layouts/BlogPost.astro` 不套 prettier —— `prettier-plugin-astro` 無法解析 `is:inline` + `define:vars` 的 script 區塊。eslint 仍會檢查它。
+- `.astro` 內的 `is:inline` script 不套 `no-var` —— no-flash 主題腳本必須在 paint 前執行，`var` 是刻意的相容選擇。
+
+`content/`、`*.md`、`migrations/` 不套 formatter：匯入的內容有刻意保留的排版，重排只會產生噪音。
 
 `npm run validate:mf2` 可單獨跑 microformats 驗證。**CI 會硬性擋 microformats** （`.github/workflows/quality.yml`）——mf2 是語意 class，刪掉不會有錯誤、版面也不變，只會安靜地讓 webmention／Bridgy Fed／IndieWeb reader 解析不到。連結檢查與 `npm audit` 為 advisory（不擋），依賴更新交給 Dependabot。
