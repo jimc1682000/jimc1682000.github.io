@@ -31,7 +31,13 @@ const postURL = new URL(Astro.url.pathname, Astro.site);
 const authorName = lang === 'en' ? 'Jimmy Chen' : '陳建豪';
 ---
 
-<BaseLayout title={title} description={description} lang={lang}>
+<BaseLayout
+  title={title}
+  description={description}
+  lang={lang}
+  pubDate={pubDate}
+  tags={tags}
+>
   <article class="post h-entry" data-pagefind-body>
     <a class="crumb" href={blogHref}>← {t('blog.backToList')}</a>
     <h1 class="p-name">{title}</h1>

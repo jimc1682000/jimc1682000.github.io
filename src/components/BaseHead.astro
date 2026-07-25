@@ -7,9 +7,13 @@ interface Props {
   title: string;
   description: string;
   lang: Lang;
+  /** 文章頁傳入這兩個 → og:type 改 article、並輸出 BlogPosting 結構化資料 */
+  pubDate?: Date;
+  tags?: string[];
 }
 
-const { title, description, lang } = Astro.props;
+const { title, description, lang, pubDate, tags } = Astro.props;
+const isArticle = Boolean(pubDate);
 
 // canonical：以 site 為基準的絕對 URL（DESIGN §9）
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -78,12 +82,67 @@ const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
   )
 }
 
-{/* Open Graph（薄，v1） */}
-<meta property="og:type" content="website" />
+{/* Open Graph。og:image 用站台通用卡（見 public/og.svg 的說明：CI 無中文字型，
+    故不做每篇動態生成；每篇差異由 og:title / og:description 表達）。
+    絕對 URL 是必要的 —— 各平台的爬蟲不會解析相對路徑。 */}
+<meta property="og:type" content={isArticle ? 'article' : 'website'} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalURL} />
-<meta name="twitter:card" content="summary" />
+<meta property="og:site_name" content="吉光聚斂，米粒成章" />
+<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'zh_TW'} />
+<meta property="og:image" content={new URL('/og.png', Astro.site)} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="吉光聚斂，米粒成章 — 陳建豪 Jimmy Chen" />
+{isArticle && <meta property="article:published_time" content={pubDate!.toISOString()} />}
+{isArticle && tags?.map((tag) => <meta property="article:tag" content={tag} />)}
+{/* summary_large_image：有 1200×630 的圖才值得用大圖卡 */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={new URL('/og.png', Astro.site)} />
+
+{/* JSON-LD 結構化資料：文章頁 BlogPosting、其餘頁 Person（首頁的 h-card 已有 mf2，
+    這裡是給搜尋引擎的另一套表述，兩者並存不衝突）。 */}
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(
+    isArticle
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: title,
+          description,
+          datePublished: pubDate!.toISOString(),
+          keywords: tags,
+          inLanguage: lang === 'en' ? 'en' : 'zh-Hant',
+          mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL.href },
+          image: new URL('/og.png', Astro.site).href,
+          author: {
+            '@type': 'Person',
+            name: lang === 'en' ? 'Jimmy Chen' : '陳建豪',
+            url: new URL('/', Astro.site).href,
+          },
+        }
+      : {
+          '@context': 'https://schema.org',
+          '@type': 'Person',
+          name: lang === 'en' ? 'Jimmy Chen' : '陳建豪',
+          alternateName: lang === 'en' ? '陳建豪' : 'Jimmy Chen',
+          jobTitle: 'AI Engineer · DevOps / SRE',
+          url: new URL('/', Astro.site).href,
+          image: new URL('/avatar.png', Astro.site).href,
+          email: 'mailto:hi@jimmychen.me',
+          sameAs: [
+            'https://github.com/jimc1682000',
+            'https://www.linkedin.com/in/594jimmychen',
+            'https://bsky.app/profile/jimmychen.me',
+          ],
+        },
+  )}
+/>
 
 {/* Cloudflare Web Analytics(P2-10,無 cookie、隱私友善)。token 為空則不輸出(gating)。 */}
 {
