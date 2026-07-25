@@ -14,7 +14,9 @@
   --color-bg-surface: #282b2d;
   --color-text: #ece6d9;
   --color-text-secondary: rgba(236, 230, 217, 0.6);
-  --color-text-tertiary: rgba(236, 230, 217, 0.4);
+  /* tertiary 用於 meta／時間／標籤等小字（13–14px，屬 WCAG「一般文字」需 4.5:1）。
+     原 α 0.4 等效 #6c6b67 僅 3.31:1；α 0.55 等效 #8c8a84 → 5.09:1。 */
+  --color-text-tertiary: rgba(236, 230, 217, 0.55);
   --color-border: rgba(236, 230, 217, 0.12);
   --color-border-subtle: rgba(236, 230, 217, 0.06);
   --color-border-hover: rgba(236, 230, 217, 0.24);
@@ -88,7 +90,9 @@
   --color-bg-surface: #efeae0;
   --color-text: #1a1d20;
   --color-text-secondary: #666059;
-  --color-text-tertiary: #9a9186;
+  /* 原 #9a9186 對米白底只有 2.83:1，遠低於 AA 的 4.5（Lighthouse 於 .sub／.lbl／
+     <time> 等處實測抓到）。本值維持色相 33°、飽和 9%，只把亮度 56% → 42% → 4.63:1。 */
+  --color-text-tertiary: #766d63;
   --color-border: rgba(26, 29, 32, 0.13);
   --color-border-subtle: rgba(26, 29, 32, 0.07);
   --color-border-hover: rgba(26, 29, 32, 0.28);
