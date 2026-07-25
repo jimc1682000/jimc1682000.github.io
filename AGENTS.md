@@ -121,6 +121,7 @@ description: 一句話描述  # string，用於列表與 RSS/SEO
 送 PR 前本機至少跑：
 
 ```bash
-npm run check     # 0 error
-npm run build     # 綠
+npm run validate   # = check + build + microformats2 驗證
 ```
+
+`npm run validate:mf2` 可單獨跑 microformats 驗證。**CI 會硬性擋 microformats** （`.github/workflows/quality.yml`）——mf2 是語意 class，刪掉不會有錯誤、版面也不變，只會安靜地讓 webmention／Bridgy Fed／IndieWeb reader 解析不到。連結檢查與 `npm audit` 為 advisory（不擋），依賴更新交給 Dependabot。
