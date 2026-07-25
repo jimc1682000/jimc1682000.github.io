@@ -29,6 +29,15 @@
 | 標籤總覽 | `/blog/tags/` | `/en/blog/tags/` |
 | 單一標籤 | `/blog/tags/<tag>` | `/en/blog/tags/<tag>` |
 | RSS | `/rss.xml` | `/en/rss.xml` |
+| 電子名片 | `/contact` | `/en/contact` |
+
+名片相關產物（皆由 `src/data/contact.ts` 這個單一資料源產生）：
+
+| 路徑 | 用途 |
+|------|------|
+| `/contact.vcf` | vCard **3.0** + UTF-8，供手機一鍵存入通訊錄。Content-Type 由 `public/_worker.js` 補上 |
+| `/contact-qr.svg` | 名片 QR 的可下載 SVG（供印刷／NFC 卡面）。指向 `/contact` 而非 `.vcf`，換內容不必重印卡片 |
+| `/avatar.png`、`/avatar.svg` | h-card `u-photo` 與 vCard `PHOTO`。**路徑固定，換圖只換檔案內容** —— 路徑一變 fediverse 頭像會斷到下次重新解析 |
 
 子站 `/resume/`、`/film-brain/` 為靜態組裝的真實子樹，自帶導覽與語系，主站只連進去（見 `DESIGN.md` §7.4）。
 

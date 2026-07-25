@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="陳建豪 Jimmy Chen">
+  <!-- 落款印章「吉」的圖檔版本，供 h-card u-photo 與 vCard PHOTO 使用。
+       樣式對齊 src/components/Seal.astro：朱砂方塊（亮色主題 #c8392b）、白字、
+       雙層內縮邊框（內圈朱砂、外圈宣紙米白 #f7f4ef 形成留白邊）。
+       路徑刻意固定為 /avatar.svg 與 /avatar.png：換圖只換檔案內容，不動路徑，
+       否則 fediverse 頭像會斷到下次重新解析。 -->
+  <rect width="512" height="512" fill="#f7f4ef"/>
+  <rect x="34" y="34" width="444" height="444" rx="60" fill="#c8392b"/>
+  <rect x="52" y="52" width="408" height="408" rx="46" fill="none" stroke="#f7f4ef" stroke-width="10"/>
+  <text x="256" y="256" fill="#ffffff" font-family="Noto Serif TC, Songti TC, serif" font-weight="700" font-size="300" text-anchor="middle" dominant-baseline="central">吉</text>
+</svg>
