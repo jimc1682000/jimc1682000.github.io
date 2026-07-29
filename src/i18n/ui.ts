@@ -59,6 +59,14 @@ const ui = {
     'search.placeholder': '搜尋文章…',
     'search.clear': '清除',
     'search.zeroResults': '找不到符合的結果',
+    'resume.kicker': '公開摘要',
+    'resume.focusTitle': '關注領域',
+    'resume.highlightsTitle': '重點（去識別）',
+    'resume.fullTitle': '完整履歷',
+    'resume.fullNote':
+      '完整經歷、專案細節與 PDF 不公開掛網。請用公司 Email 說明用途，核准後以身分驗證方式提供限時存取。',
+    'resume.request': '申請查看完整履歷',
+    'resume.contact': '電子名片',
   },
   en: {
     'nav.blog': 'Blog',
@@ -110,6 +118,14 @@ const ui = {
     'search.placeholder': 'Search posts…',
     'search.clear': 'Clear',
     'search.zeroResults': 'No results found',
+    'resume.kicker': 'Public summary',
+    'resume.focusTitle': 'Focus areas',
+    'resume.highlightsTitle': 'Highlights (redacted)',
+    'resume.fullTitle': 'Full resume',
+    'resume.fullNote':
+      'Full history, project detail, and PDFs are not public. Request access with a work email and purpose; after approval, access is identity-bound and time-limited.',
+    'resume.request': 'Request full resume',
+    'resume.contact': 'Contact card',
   },
 } as const;
 
