@@ -1,0 +1,184 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/ui';
+import { contact } from '../data/contact';
+import SocialLinks from './SocialLinks.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const name = lang === 'en' ? contact.nameEn : contact.nameZh;
+const requestHref = `mailto:${contact.email}?subject=${encodeURIComponent(
+  lang === 'en' ? 'Request full resume' : '申請查看完整履歷',
+)}`;
+---
+
+<div class="resume-profile">
+  <p class="kicker">{t('resume.kicker')}</p>
+  <h1 class="page-h">{name}</h1>
+  <p class="role">{contact.title}</p>
+  <p class="lede">{lang === 'en' ? contact.noteEn : contact.noteZh}</p>
+
+  <section class="block" aria-labelledby="resume-focus">
+    <h2 id="resume-focus">{t('resume.focusTitle')}</h2>
+    <ul>
+      {
+        lang === 'en' ? (
+          <>
+            <li>AI / agentic workflows on top of production ops experience</li>
+            <li>Cloud platform, SRE, cost and reliability work</li>
+            <li>Automation, CI/CD, and developer tooling</li>
+          </>
+        ) : (
+          <>
+            <li>以生產維運底子做 AI／agentic 工作流</li>
+            <li>雲端平台、SRE、成本與可靠度</li>
+            <li>自動化、CI/CD 與開發者工具鏈</li>
+          </>
+        )
+      }
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="resume-highlights">
+    <h2 id="resume-highlights">{t('resume.highlightsTitle')}</h2>
+    <ul>
+      {
+        lang === 'en' ? (
+          <>
+            <li>13+ years across cloud, DevOps, and SRE roles</li>
+            <li>Hands-on with platform migrations, monitoring, and cost work</li>
+            <li>Recent focus: coding-agent tooling and knowledge workflows</li>
+          </>
+        ) : (
+          <>
+            <li>雲端／DevOps／SRE 相關經驗 13 年以上</li>
+            <li>平台遷移、監控與成本優化實務</li>
+            <li>近期聚焦 coding agent 工具鏈與知識庫工作流</li>
+          </>
+        )
+      }
+    </ul>
+  </section>
+
+  <section class="block cta" aria-labelledby="resume-full">
+    <h2 id="resume-full">{t('resume.fullTitle')}</h2>
+    <p class="note">{t('resume.fullNote')}</p>
+    <p class="actions">
+      <a class="btn" href={requestHref}>{t('resume.request')}</a>
+      <a class="btn ghost" href={lang === 'en' ? '/en/contact' : '/contact'}>{t('resume.contact')}</a>
+    </p>
+  </section>
+
+  <section class="block" aria-labelledby="resume-elsewhere">
+    <h2 id="resume-elsewhere">{t('home.findMe')}</h2>
+    <SocialLinks />
+  </section>
+</div>
+
+<style>
+  .resume-profile {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 28px var(--spacing-2xl);
+  }
+
+  .kicker {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.12em;
+    color: var(--color-seal);
+    margin: 0 0 12px;
+  }
+
+  .page-h {
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin: 0;
+  }
+
+  .role {
+    margin: 10px 0 0;
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+  }
+
+  .lede {
+    margin-top: 18px;
+    line-height: 1.8;
+    color: var(--color-text);
+    max-width: 40rem;
+  }
+
+  .block {
+    margin-top: 40px;
+  }
+
+  .block h2 {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    letter-spacing: 0.14em;
+    color: var(--color-seal);
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+
+  .block ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--color-text-secondary);
+    line-height: 1.85;
+  }
+
+  .block li + li {
+    margin-top: 0.35rem;
+  }
+
+  .note {
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+    max-width: 40rem;
+    margin: 0;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 1.1rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-seal);
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: background var(--transition-fast);
+  }
+
+  .btn:hover {
+    background: color-mix(in srgb, var(--color-seal) 88%, #000);
+  }
+
+  .btn.ghost {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .btn.ghost:hover {
+    border-color: var(--color-border-hover);
+    background: var(--color-bg-elevated);
+  }
+</style>

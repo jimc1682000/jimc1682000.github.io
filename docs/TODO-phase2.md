@@ -51,3 +51,12 @@
 | P2-23 | CF Deploy Preview |
 | P2-24 | content-only 規則再收緊 |
 | P2-25 | 譯文 stale 偵測 |
+
+## hidden-resume（見 `docs/hidden-resume.md`）
+
+| ID | 項目 |
+|----|------|
+| HR-0 | 公開 `/resume/` 降為 L0；完整內容與 PDF 離開公開 dist／公開 git |
+| HR-1 | `cv.jimmychen.me` + Access + Worker/D1 grant MVP（申請／核准／撤銷／浮水印 HTML） |
+| HR-2 | R2 私有 PDF + 15 分鐘 signed URL + per-grant 浮水印 |
+| HR-3 | Appendix 分層、異常自動 suspended、可選 self-hosted Authentik+Pomerium |
