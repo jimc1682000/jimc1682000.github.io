@@ -1,0 +1,314 @@
+/*
+ * global.css — runtime source of truth for DESIGN.md §3–§5 tokens.
+ * Dark 為預設（:root），Light 以 [data-theme="light"] 覆寫。
+ * 改 token 時：先改此檔，再回寫 DESIGN.md 表格。
+ */
+
+/* ---------- Dark（:root 預設，DESIGN §3.1） ---------- */
+:root {
+  color-scheme: dark;
+
+  /* Color（散文集改版:墨色 + 宣紙字 + 朱砂落款） */
+  --color-bg: #17191b;
+  --color-bg-elevated: #202325;
+  --color-bg-surface: #282b2d;
+  --color-text: #ece6d9;
+  --color-text-secondary: rgba(236, 230, 217, 0.6);
+  /* tertiary 用於 meta／時間／標籤等小字（13–14px，屬 WCAG「一般文字」需 4.5:1）。
+     原 α 0.4 等效 #6c6b67 僅 3.31:1；α 0.55 等效 #8c8a84 → 5.09:1。 */
+  --color-text-tertiary: rgba(236, 230, 217, 0.55);
+  --color-border: rgba(236, 230, 217, 0.12);
+  --color-border-subtle: rgba(236, 230, 217, 0.06);
+  --color-border-hover: rgba(236, 230, 217, 0.24);
+  --color-header-bg: rgba(23, 25, 27, 0.72);
+  --color-accent: #ece6d9;
+  --color-accent-hover: rgba(236, 230, 217, 0.85);
+  /* 暗色版朱砂：原值 #d24a3b 對墨底 #17191b 只有 4.01:1，未達 WCAG AA 的 4.5
+     （DESIGN §9 明訂「對比 AA」是硬規則）。本值只把 HSL 亮度 53% → 57%，
+     色相 6° 與飽和 63% 不動，是達標所需的最小改動 → 4.53:1。
+     亮色版的 #c8392b 為 4.70:1，本來就合格，不動。 */
+  --color-seal: #d6594c;
+  --color-seal-tint: rgba(214, 89, 76, 0.16);
+  --color-overlay: rgba(0, 0, 0, 0.8);
+  --color-focus-ring: var(--color-text);
+
+  /* Typography（散文集:serif 為標題與內文主字,sans 給 nav/UI/meta） */
+  --font-serif: 'Noto Serif TC', 'Songti TC', Georgia, 'PingFang TC', serif;
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Noto Sans TC', 'Segoe UI', 'Helvetica Neue',
+    Arial, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.3125rem;
+  --font-size-2xl: 1.5625rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 2.7rem;
+  --font-size-6xl: 3.25rem;
+  --font-size-7xl: 3.875rem;
+  --font-size-display: 5rem;
+
+  /* Spacing（DESIGN §5，8pt grid） */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+  --spacing-3xl: 6rem;
+  --spacing-4xl: 8rem;
+
+  /* Layout */
+  --max-width: 1400px;
+  --max-width-narrow: 800px;
+  --max-width-wide: 1600px;
+  --gutter: clamp(1rem, 4vw, 3rem);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 32px;
+  --radius-xl: 48px;
+
+  /* Motion */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Light（[data-theme="light"]，DESIGN §3.2） ---------- */
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --color-bg: #f7f4ef;
+  --color-bg-elevated: #fffdf9;
+  --color-bg-surface: #efeae0;
+  --color-text: #1a1d20;
+  --color-text-secondary: #666059;
+  /* 原 #9a9186 對米白底只有 2.83:1，遠低於 AA 的 4.5（Lighthouse 於 .sub／.lbl／
+     <time> 等處實測抓到）。本值維持色相 33°、飽和 9%，只把亮度 56% → 42% → 4.63:1。 */
+  --color-text-tertiary: #766d63;
+  --color-border: rgba(26, 29, 32, 0.13);
+  --color-border-subtle: rgba(26, 29, 32, 0.07);
+  --color-border-hover: rgba(26, 29, 32, 0.28);
+  --color-header-bg: rgba(247, 244, 239, 0.72);
+  --color-accent: #1a1d20;
+  --color-accent-hover: rgba(26, 29, 32, 0.82);
+  --color-seal: #c8392b;
+  --color-seal-tint: rgba(200, 57, 43, 0.09);
+  --color-overlay: rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- Reset（極簡） ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-serif);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base);
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+ul,
+ol {
+  padding-inline-start: 1.4em;
+}
+
+/* ---------- 連結（DESIGN §3.3：沿用 text 色 + underline） ---------- */
+a {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--color-border-hover);
+  transition:
+    color var(--transition-fast),
+    text-decoration-color var(--transition-fast);
+}
+
+a:hover {
+  text-decoration-color: var(--color-text);
+}
+
+/* ---------- Code ---------- */
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+:not(pre) > code {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.15em 0.4em;
+}
+
+pre {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+blockquote {
+  border-inline-start: 3px solid var(--color-border-hover);
+  padding-inline-start: var(--spacing-md);
+  color: var(--color-text-secondary);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border-subtle);
+  margin-block: var(--spacing-xl);
+}
+
+/* ---------- Focus ring（DESIGN §9） ---------- */
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---------- Skip link ---------- */
+.skip-link {
+  position: absolute;
+  inset-inline-start: var(--spacing-sm);
+  inset-block-start: -100%;
+  z-index: 100;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  inset-block-start: var(--spacing-sm);
+}
+
+/* ---------- Absolute-header 淨空（header 透明貼頁頂,main 讓出頂部空間） ---------- */
+main {
+  padding-top: 7.375rem; /* 118px，對齊 mockup 的 main padding-top */
+}
+
+@media (max-width: 640px) {
+  main {
+    padding-top: 5.5rem;
+  }
+}
+
+/* ---------- Layout helpers ---------- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: var(--max-width-narrow);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- Tag chip（散文集:朱砂 pill,對齊 mockup） ---------- */
+.tag-chip {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  padding: 0.1rem 0.5rem;
+  color: var(--color-seal);
+  background-color: var(--color-seal-tint);
+  border-radius: 100px;
+  text-decoration: none;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.tag-chip:hover {
+  color: var(--color-seal);
+  background-color: var(--color-seal-tint);
+  text-decoration: none;
+  opacity: 0.82;
+}
+
+.tag-chip[aria-current='page'] {
+  color: #fff;
+  background-color: var(--color-seal);
+  opacity: 1;
+}
+
+/* ---------- Reduced motion（DESIGN §5、§9） ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

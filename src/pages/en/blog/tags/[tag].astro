@@ -1,0 +1,70 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import PostListGrouped from '../../../../components/PostListGrouped.astro';
+import { getTags, getPostsByTag } from '../../../../lib/blog';
+import { useTranslations } from '../../../../i18n/ui';
+
+const lang = 'en' as const;
+
+export const getStaticPaths = (async () => {
+  const tags = await getTags('en');
+  const paths = [];
+  for (const tag of tags) {
+    paths.push({ params: { tag }, props: { tag, posts: await getPostsByTag('en', tag) } });
+  }
+  return paths;
+}) satisfies GetStaticPaths;
+
+const { tag, posts } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title={`${t('blog.taggedWith')}: ${tag} — Jimmy Chen`}
+  description={`Posts tagged "${tag}".`}
+  lang={lang}
+>
+  <div class="tag-page">
+    <header class="tag-header">
+      <p class="crumb"><a href="/en/blog/tags/">← {t('blog.allTags')}</a></p>
+      <h1 class="page-h">#{tag}</h1>
+      <p class="count">{posts.length} {t('blog.postCount')}</p>
+    </header>
+    <PostListGrouped posts={posts} lang={lang} />
+  </div>
+</BaseLayout>
+
+<style>
+  .tag-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 28px var(--spacing-2xl);
+  }
+  .tag-header {
+    margin-bottom: var(--spacing-md);
+  }
+  .crumb {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    margin-bottom: var(--spacing-xs);
+  }
+  .crumb a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+  .crumb a:hover {
+    color: var(--color-seal);
+  }
+  .page-h {
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .count {
+    color: var(--color-text-tertiary);
+    font-size: 0.85rem;
+    font-family: var(--font-sans);
+    margin-top: var(--spacing-xs);
+  }
+</style>

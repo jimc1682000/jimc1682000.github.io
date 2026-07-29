@@ -1,21 +1,49 @@
 {
-  "name": "jimmychen-resume",
-  "version": "1.0.0",
-  "description": "Jimmy Chen — résumé site (VitePress) with Typst-generated 2-page A4 PDFs",
-  "private": true,
+  "name": "jimc-personal-site",
   "type": "module",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "projects": "node resume/fetch-projects.mjs",
-    "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
-    "preview": "vitepress preview docs",
-    "pdf": "node resume/build.mjs",
-    "generate": "npm run projects && npm run pdf",
-    "validate": "node resume/validate.mjs",
-    "review": "bash resume/llm-review.sh"
+    "dev": "astro dev",
+    "build": "astro build",
+    "postbuild": "pagefind --site dist",
+    "preview": "astro preview",
+    "check": "astro check",
+    "astro": "astro",
+    "validate:mf2": "node scripts/validate-microformats.mjs",
+    "validate": "npm run check && npm run lint && npm run lint:css && npm run lint:md && npm run format:check && npm run build && npm run validate:mf2 && npm run lint:html",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint:css": "stylelint \"src/**/*.{css,astro}\"",
+    "lint:md": "markdownlint-cli2",
+    "lint:html": "html-validate \"dist/**/*.html\"",
+    "lint:deps": "knip"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.1.3"
   },
   "devDependencies": {
-    "vitepress": "^1.6.3",
-    "vue": "^3.5.13"
+    "@astrojs/check": "^0.9.9",
+    "@eslint/js": "^10.0.1",
+    "@types/qrcode": "^1.5.6",
+    "eslint": "^10.8.0",
+    "eslint-plugin-astro": "^1.7.0",
+    "html-validate": "^11.5.6",
+    "knip": "^6.29.0",
+    "markdownlint-cli2": "^0.23.1",
+    "microformats-parser": "^2.0.6",
+    "pagefind": "^1.4.0",
+    "postcss-html": "^1.8.1",
+    "prettier": "^3.9.6",
+    "prettier-plugin-astro": "^0.14.1",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.35.3",
+    "stylelint": "^17.14.1",
+    "stylelint-config-recommended": "^18.0.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.65.0"
   }
 }

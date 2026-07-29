@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TagCloud from '../../../components/TagCloud.astro';
+import { getTagCounts } from '../../../lib/blog';
+import { useTranslations } from '../../../i18n/ui';
+
+const lang = 'zh' as const;
+const t = useTranslations(lang);
+const tags = await getTagCounts(lang);
+---
+
+<BaseLayout
+  title={`${t('blog.allTags')} — 陳建豪 Jimmy Chen`}
+  description="依標籤瀏覽陳建豪 Jimmy Chen 的文章。"
+  lang={lang}
+>
+  <div class="tags-page">
+    <p class="crumb"><a href="/blog/">← {t('blog.backToList')}</a></p>
+    <h1 class="page-h">{t('blog.allTags')}</h1>
+    <TagCloud tags={tags} lang={lang} />
+  </div>
+</BaseLayout>
+
+<style>
+  .tags-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 28px var(--spacing-2xl);
+  }
+  .crumb {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    margin-bottom: var(--spacing-xs);
+  }
+  .crumb a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+  .crumb a:hover {
+    color: var(--color-seal);
+  }
+  .page-h {
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: var(--spacing-xl);
+  }
+</style>

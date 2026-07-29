@@ -1,0 +1,41 @@
+---
+import { activeSocials } from '../data/socials';
+import Icon from './Icon.astro';
+---
+
+<div class="srow">
+  {
+    activeSocials.map((s) => (
+      <a
+        class="s"
+        href={s.url}
+        target="_blank"
+        rel="me noopener noreferrer"
+        aria-label={s.label}
+        title={s.label}
+      >
+        <Icon name={s.icon} size={20} />
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .srow {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .s {
+    display: inline-flex;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .s:hover {
+    color: var(--color-seal);
+  }
+</style>

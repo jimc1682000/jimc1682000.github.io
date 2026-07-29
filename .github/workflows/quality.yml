@@ -1,0 +1,191 @@
+name: Quality gates
+
+# 與 deploy.yml 分開：這裡只做「檢查」，不部署。PR 上就能看到結果，
+# 不必等合併後才發現 microformats 被改壞。
+#
+# 三個 gate 的定位刻意不同：
+#   - microformats：**硬性**。mf2 是語意 class，刪掉不會有錯誤、版面也不變，只會
+#     安靜地讓 webmention／Bridgy Fed／IndieWeb reader 解析不到。本次開發已實際發生
+#     一次同類 regression，故失敗即擋。
+#   - 連結檢查：**advisory**。排除項的理由：indieauth.com 是我們宣告的
+#     authorization_endpoint，裸 GET 會回 400（正常），但每頁都有一個 → 首次執行
+#     時貢獻 117 筆假錯誤；內網 IP 出現在舊文的路由設定教學裡，本來就不該對外解析。
+#     站上有近 200 個 2014–2017 舊文外部連結，很多主機已倒
+#     （如 koding.com）。硬擋會第一天就紅，然後你開始忽略它 —— 那比沒有更糟。
+#   - lint + format：**硬性**。eslint 只抓真正的錯誤（未定義／未使用變數、bug pattern），
+#     風格全交給 prettier，兩者規則不重疊才不會互相打架。設定刻意配合既有的刻意寫法
+#     （inline script 用 var、catch {} 靜默降級、_ 當丟棄變數），不為討好 linter 改動
+#     能跑的關鍵腳本。
+#   - npm audit：**advisory**，且 --omit=dev。本站是靜態輸出，qrcode／sharp／pagefind
+#     都只在 build 時跑、不進 client bundle，devDependency 的告警沒有 runtime 曝險。
+#     真正有價值的是 dependabot（會開 PR），見 .github/dependabot.yml。
+
+on:
+  pull_request:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: lint + format（硬性）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: astro check
+        run: npm run check
+      - name: eslint
+        run: npm run lint
+      - name: prettier
+        run: npm run format:check
+      - name: stylelint
+        run: npm run lint:css
+      - name: markdownlint
+        run: npm run lint:md
+      - name: build（html-validate 需要產出）
+        run: npm run build
+      - name: html-validate
+        run: npm run lint:html
+      # knip 是「清理機會」而非正確性 gate：既有的未使用匯出不該擋住新功能
+      - name: knip（advisory）
+        continue-on-error: true
+        run: npm run lint:deps
+
+  microformats:
+    name: microformats2（硬性）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build
+        run: npm run build
+        env:
+          # 與 deploy.yml 一致：有設才會輸出 rel=webmention，驗證腳本才會斷言該項
+          PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
+          PUBLIC_GISCUS_REPO: ${{ vars.PUBLIC_GISCUS_REPO }}
+          PUBLIC_GISCUS_REPO_ID: ${{ vars.PUBLIC_GISCUS_REPO_ID }}
+          PUBLIC_GISCUS_CATEGORY: ${{ vars.PUBLIC_GISCUS_CATEGORY }}
+          PUBLIC_GISCUS_CATEGORY_ID: ${{ vars.PUBLIC_GISCUS_CATEGORY_ID }}
+      - name: Validate microformats2
+        env:
+          PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
+        run: node scripts/validate-microformats.mjs
+
+  links:
+    name: 連結檢查（advisory）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: lychee
+        continue-on-error: true
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # 只檢查站內產出的 HTML；--exclude 掉會擋機器人或需登入的站，
+          # 以及本機/範例網域。舊文的死連結會列出來但不擋。
+          # --base dist 是必要的：少了它，每頁的 /favicon.svg、/_astro/*.css 這類
+          # root-relative 連結全部被判為「Cannot resolve root-relative link」。
+          # 首次執行時 3425 個檢查中有 2279 個是這類假警報，真死連結只有 31 筆——
+          # 綠燈因此毫無意義。
+          args: >-
+            --no-progress
+            --base dist
+            --max-concurrency 8
+            --timeout 20
+            --accept 200,206,301,302,403,999
+            --exclude '^https?://(localhost|127\.0\.0\.1|example\.(com|org))'
+            --exclude '^https?://(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)'
+            --exclude '^https?://(www\.)?linkedin\.com'
+            --exclude '^https?://webmention\.io'
+            --exclude '^https?://indieauth\.com'
+            'dist/**/*.html'
+          fail: false
+          output: lychee-report.md
+      - name: Upload link report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lychee-report
+          path: lychee-report.md
+          if-no-files-found: ignore
+
+  audit:
+    name: npm audit（advisory）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # 只看會進 production 的依賴；devDependency 在靜態站沒有 runtime 曝險
+      - name: npm audit（prod only）
+        continue-on-error: true
+        run: npm audit --omit=dev --audit-level=high
+
+  web-audits:
+    name: Lighthouse + a11y（advisory）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
+          PUBLIC_GISCUS_REPO: ${{ vars.PUBLIC_GISCUS_REPO }}
+          PUBLIC_GISCUS_REPO_ID: ${{ vars.PUBLIC_GISCUS_REPO_ID }}
+          PUBLIC_GISCUS_CATEGORY: ${{ vars.PUBLIC_GISCUS_CATEGORY }}
+          PUBLIC_GISCUS_CATEGORY_ID: ${{ vars.PUBLIC_GISCUS_CATEGORY_ID }}
+
+      # 兩個 audit 都需要一個真的 HTTP server（file:// 量不到快取與 header）
+      - name: Serve dist
+        run: |
+          npx --yes http-server dist -p 4321 --silent &
+          npx --yes wait-on http://localhost:4321 -t 30000
+
+      # advisory：先建立基線再談門檻。Lighthouse 的 best-practices 會扣 CSP 的分
+      #（我們刻意含 'unsafe-inline'，見 DESIGN.md）；一開始就設門檻只會逼人放寬 CSP。
+      # 只跑四個代表頁：首頁、列表、單篇、名片（全站 117 頁跑 Lighthouse 太慢）。
+      - name: Lighthouse CI
+        continue-on-error: true
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            http://localhost:4321/
+            http://localhost:4321/blog/
+            http://localhost:4321/blog/claude-code/
+            http://localhost:4321/contact
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          runs: 1
+
+      # pa11y 抓 Lighthouse a11y 子集之外的細項（色彩對比、ARIA、標題層級、landmark）。
+      # 排除 tags/search：前者上百頁且結構相同，後者需互動才有內容。
+      - name: pa11y-ci（advisory）
+        continue-on-error: true
+        run: |
+          npx --yes pa11y-ci \
+            --sitemap http://localhost:4321/sitemap-0.xml \
+            --sitemap-exclude '(tags|search)' || true

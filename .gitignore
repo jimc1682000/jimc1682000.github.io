@@ -54,3 +54,16 @@ docs/.vitepress/dist/
 docs/.vitepress/cache/
 resume/.tmp/
 .DS_Store
+
+# Astro
+node_modules/
+dist/
+.astro/
+
+# Env（本機第三方整合設定;範例檔 .env.example 仍追蹤）
+.env
+.env.*
+!.env.example
+
+# wrangler 本機快取（`wrangler pages dev` 產生的 miniflare 狀態）
+.wrangler/

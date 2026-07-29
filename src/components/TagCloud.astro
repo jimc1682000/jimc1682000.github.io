@@ -1,0 +1,45 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  tags: { tag: string; count: number }[];
+  lang: Lang;
+}
+
+const { tags, lang } = Astro.props;
+const t = useTranslations(lang);
+const tagsBase = lang === 'en' ? '/en/blog/tags' : '/blog/tags';
+---
+
+{
+  tags.length === 0 ? (
+    <p class="empty">{t('blog.empty')}</p>
+  ) : (
+    <ul class="tag-cloud">
+      {tags.map(({ tag, count }) => (
+        <li>
+          <a class="tag-chip" href={`${tagsBase}/${tag}/`}>
+            #{tag} <span class="count">{count}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .empty {
+    color: var(--color-text-tertiary);
+  }
+  .tag-cloud {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+  .count {
+    color: var(--color-text-tertiary);
+  }
+</style>

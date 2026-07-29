@@ -1,0 +1,265 @@
+---
+// 電子名片頁（P2-12）。內容全部來自 src/data/contact.ts，不在此硬寫聯絡資訊。
+// h-card 標記讓解析器（webmention／Bridgy Fed／indiewebify）讀得到；vCard 供手機存通訊錄。
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/ui';
+import { contact } from '../data/contact';
+import Seal from './Seal.astro';
+import Icon from './Icon.astro';
+import QRCode from 'qrcode';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const isEn = lang === 'en';
+
+const name = isEn ? contact.nameEn : contact.nameZh;
+const latin = isEn ? contact.nameZh : contact.nameEn;
+const note = isEn ? contact.noteEn : contact.noteZh;
+
+// QR 在 build 時產生為 inline SVG：不打外部服務、不需額外請求。
+const qrSvg = await QRCode.toString(contact.cardUrl, {
+  type: 'svg',
+  margin: 0,
+  errorCorrectionLevel: 'M',
+});
+
+const iconFor = (type: string) => (type === 'github' || type === 'linkedin' ? type : 'link');
+
+const prefix = isEn ? '/en' : '';
+const more = [
+  { href: `${prefix}/blog/`, label: t('nav.blog') },
+  { href: `${prefix}/works/`, label: t('nav.works') },
+  { href: '/resume/', label: t('nav.resume') },
+];
+---
+
+<article class="card h-card">
+  {/* mf2：解析器需要但版面不需要 */}
+  <a class="u-url" href={contact.url} hidden>{name}</a>
+  <a class="u-url" href="acct:jimmy@jimmychen.me" hidden>@jimmy@jimmychen.me</a>
+  <img class="u-photo" src={contact.photo} alt="" width="1" height="1" hidden />
+
+  <header class="head">
+    <h1 class="p-name">{name}</h1>
+    <p class="latin">{latin}</p>
+    <p class="role p-job-title">{contact.title}</p>
+  </header>
+
+  <p class="note p-note">{note}</p>
+
+  <dl class="rows">
+    <dt>{t('contact.email')}</dt>
+    <dd><a class="u-email" href={`mailto:${contact.email}`}>{contact.email}</a></dd>
+
+    <dt>{t('contact.web')}</dt>
+    <dd><a class="u-url" href={contact.url}>jimmychen.me</a></dd>
+
+    <dt>{t('contact.location')}</dt>
+    <dd><span class="p-locality">{contact.locality}</span></dd>
+
+    <dt>{t('contact.social')}</dt>
+    <dd class="socials">
+      {
+        contact.socials.map((s) => (
+          <a class="u-url" href={s.url} rel="me noopener noreferrer" target="_blank">
+            <Icon name={iconFor(s.vcardType)} size={16} />
+            <span>{s.label}</span>
+          </a>
+        ))
+      }
+    </dd>
+  </dl>
+
+  <div class="actions">
+    <a class="save" href="/contact.vcf" download>{t('contact.save')}</a>
+  </div>
+
+  <div class="qrbox">
+    <div class="qr" aria-hidden="true" set:html={qrSvg} />
+    <div class="qrmeta">
+      <p>{t('contact.qrHint')}</p>
+      <a href="/contact-qr.svg" download>{t('contact.qrDownload')} →</a>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="stamp"><Seal size={44} /></div>
+    <nav class="more" aria-label={isEn ? 'More from this site' : '站內其他頁'}>
+      {more.map((m) => <a href={m.href}>{m.label}</a>)}
+    </nav>
+  </div>
+</article>
+
+<style>
+  .card {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) 0;
+  }
+
+  .head {
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding-bottom: var(--spacing-md);
+  }
+
+  .head h1 {
+    font-size: 2rem;
+    letter-spacing: 0.06em;
+    margin: 0;
+  }
+
+  .latin {
+    margin: 2px 0 0;
+    color: var(--color-text-tertiary);
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+  }
+
+  .role {
+    margin: 10px 0 0;
+    color: var(--color-seal);
+    font-size: 0.95rem;
+  }
+
+  .note {
+    margin: var(--spacing-md) 0 var(--spacing-lg);
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.9;
+  }
+
+  .rows {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px var(--spacing-md);
+    margin: 0;
+    font-size: 0.92rem;
+  }
+
+  .rows dt {
+    color: var(--color-text-tertiary);
+    white-space: nowrap;
+  }
+
+  .rows dd {
+    margin: 0;
+  }
+
+  .rows a {
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--color-seal);
+  }
+
+  .socials {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .socials a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border-bottom: none;
+    color: var(--color-text-secondary);
+  }
+
+  .socials a:hover {
+    color: var(--color-seal);
+  }
+
+  .actions {
+    margin: var(--spacing-lg) 0;
+  }
+
+  .save {
+    display: inline-block;
+    padding: 11px 22px;
+    background: var(--color-seal);
+    color: var(--color-bg);
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    border-radius: 2px;
+  }
+
+  .save:hover {
+    opacity: 0.88;
+  }
+
+  .qrbox {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) 0;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .qr {
+    width: 104px;
+    height: 104px;
+    flex: none;
+  }
+
+  .qr :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .qrmeta p {
+    margin: 0 0 6px;
+    color: var(--color-text-tertiary);
+    font-size: 0.85rem;
+  }
+
+  .qrmeta a {
+    color: var(--color-text-tertiary);
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .qrmeta a:hover {
+    color: var(--color-seal);
+  }
+
+  .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .more {
+    display: flex;
+    gap: var(--spacing-md);
+    font-size: 0.88rem;
+  }
+
+  .more a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .more a:hover {
+    color: var(--color-seal);
+  }
+
+  @media (max-width: 520px) {
+    .rows {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+
+    .rows dt {
+      margin-top: 10px;
+    }
+  }
+</style>

@@ -1,0 +1,25 @@
+# 依賴弱點與版本更新。比 npm audit 更有價值的那一半：
+# audit 只報告，dependabot 直接開 PR 並附 changelog。
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      # 小版本合成一個 PR，避免每週一堆瑣碎 PR
+      minor-and-patch:
+        patterns: ['*']
+        update-types: [minor, patch]
+    commit-message:
+      prefix: build
+      include: scope
+
+  # Actions 也要跟（安全性更新常在這）
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: ci

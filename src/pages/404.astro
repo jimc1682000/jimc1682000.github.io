@@ -1,0 +1,80 @@
+---
+// 404 頁（P2-13）。缺這一頁時 Cloudflare Pages 會用 SPA fallback 拿 index.html 頂上，
+// 於是任何打錯的網址都回 200 + 首頁內容（soft-404）——Google 會把無限多垃圾網址
+// 當成有效頁面索引，使用者也不知道自己走錯。有這頁才會回真正的 404。
+//
+// 靜態站無法在伺服器端判斷語言，故單頁雙語呈現（繁中為主、英文一行）。
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+---
+
+<BaseLayout
+  title="找不到這一頁 — 陳建豪 Jimmy Chen"
+  description="這個網址沒有對應的內容。"
+  lang="zh"
+>
+  <section class="nf">
+    <div class="stamp"><Seal size={56} /></div>
+    <h1>紙上無此一頁</h1>
+    <p class="zh">這個網址沒有對應的內容。也許是連結變了，或是我把它挪走了。</p>
+    <p class="en">This page doesn’t exist. The link may have changed, or it moved.</p>
+    <nav class="ways" aria-label="其他去處 · Other places">
+      <a href="/">首頁 · Home</a>
+      <a href="/blog/">文章 · Posts</a>
+      <a href="/blog/search/">搜尋 · Search</a>
+      <a href="/works/">作品集 · Works</a>
+    </nav>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: var(--spacing-2xl) 28px;
+    text-align: center;
+  }
+
+  .stamp {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .nf h1 {
+    font-size: 1.9rem;
+    letter-spacing: 0.08em;
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .zh {
+    color: var(--color-text-secondary);
+    line-height: 1.9;
+  }
+
+  .en {
+    color: var(--color-text-tertiary);
+    font-size: 0.9rem;
+    margin-top: 6px;
+  }
+
+  .ways {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 0.92rem;
+  }
+
+  .ways a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .ways a:hover {
+    color: var(--color-seal);
+  }
+</style>

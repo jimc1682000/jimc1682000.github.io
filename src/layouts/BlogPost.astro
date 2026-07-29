@@ -1,0 +1,293 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/ui';
+import { formatDate } from '../lib/blog';
+import { giscus, giscusEnabled } from '../consts';
+import Seal from '../components/Seal.astro';
+import Webmentions from '../components/Webmentions.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  pubDate: Date;
+  tags: string[];
+  aiTranslated?: boolean;
+  translationOf?: string;
+}
+
+const { title, description, lang, pubDate, tags, aiTranslated, translationOf } = Astro.props;
+const t = useTranslations(lang);
+const blogHref = lang === 'en' ? '/en/blog/' : '/blog/';
+// AI 翻譯提示：僅英文版且標記 aiTranslated 時顯示；連回中文原文 /blog/<translationOf>。
+const showAiNotice = lang === 'en' && aiTranslated;
+const originalHref = translationOf ? `/blog/${translationOf}/` : '/blog/';
+// Giscus 留言語系(P2-09):繁中 zh-TW、英文 en。
+const giscusLang = lang === 'en' ? 'en' : 'zh-TW';
+const signoffYear = pubDate.getFullYear();
+// microformats2（P2-11）：h-entry 的 u-url 與 p-author h-card 需絕對 URL。
+const postURL = new URL(Astro.url.pathname, Astro.site);
+const authorName = lang === 'en' ? 'Jimmy Chen' : '陳建豪';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  lang={lang}
+  pubDate={pubDate}
+  tags={tags}
+>
+  <article class="post h-entry" data-pagefind-body>
+    <a class="crumb" href={blogHref}>← {t('blog.backToList')}</a>
+    <h1 class="p-name">{title}</h1>
+    <div class="metar">
+      <time class="dt-published" datetime={pubDate.toISOString()}>
+        {t('blog.publishedOn')} {formatDate(pubDate, lang)}
+      </time>
+      {tags.map((tag) => <span class="ptag p-category">{tag}</span>)}
+    </div>
+
+    {/* Bridgy Fed 即時聯邦（P2-13）：有這個連結時，我們的 webmention 發送器會在部署後
+        通知 fed.brid.gy，新文章立刻聯邦到 fediverse／Bluesky，不必等它輪詢 RSS。
+        **只在繁中版輸出**：中文版是內容的真相源；英文版也放的話同一篇會聯邦兩次，
+        對追蹤者是噪音。
+        ⚠️ 取捨：Bridgy Fed 文件明載「送過一次 webmention 後，它會停止讀你的 Atom/RSS
+        feed，改為期待所有未來貼文都用 webmention」。也就是說發送器若壞掉，新文章會
+        安靜地不再聯邦。要退回輪詢模式就移除本行（並留意該切換可能不會立即回復）。
+        註：Bridgy Fed 文件範例寫 hidden="from-humans"，但 hidden 是列舉屬性
+        （""/hidden/until-found），該值不合法（html-validate 會抓）。Bridgy Fed 只認
+        class 與 href，故用純 hidden。 */}
+    {lang !== 'en' && (
+      <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden aria-hidden="true" />
+    )}
+
+    {/* mf2 的 u-url / p-author：解析器需要但版面不需要，故隱藏（DOM 中仍可解析）。 */}
+    <a class="u-url" href={postURL} hidden>{title}</a>
+    <a class="p-author h-card" href={new URL('/', Astro.site)} rel="author" hidden>{authorName}</a>
+
+    {
+      showAiNotice && (
+        <aside class="ai-notice">
+          <span class="ai-ico">✦</span>
+          <span>
+            {t('post.aiTranslatedNotice')}{' '}
+            <a href={originalHref}>{t('post.readOriginal')} →</a>
+          </span>
+        </aside>
+      )
+    }
+
+    <div class="body e-content">
+      <slot />
+    </div>
+
+    <div class="signoff">
+      <Seal size={52} />
+      <span>{t('post.signoff')} · {signoffYear}</span>
+    </div>
+
+    {/* 站外迴響（webmention）在站內留言（Giscus）之前：兩者互補，前者是跨站、後者是站內。 */}
+    <Webmentions target={postURL} lang={lang} />
+
+    {
+      giscusEnabled && (
+        <section class="comments" aria-label={lang === 'en' ? 'Comments' : '留言'}>
+          <div class="giscus" />
+          {/* giscus.app client.js 為唯一允許的外部 script(P2-09)。
+              依站台 data-theme 設初始主題,並用 MutationObserver 跟隨切換。 */}
+          <script is:inline define:vars={{ giscus, giscusLang }}>
+            (function () {
+              var pick = function () {
+                return document.documentElement.getAttribute('data-theme') === 'light'
+                  ? 'light'
+                  : 'dark';
+              };
+              var s = document.createElement('script');
+              s.src = 'https://giscus.app/client.js';
+              s.setAttribute('data-repo', giscus.repo);
+              s.setAttribute('data-repo-id', giscus.repoId);
+              s.setAttribute('data-category', giscus.category);
+              s.setAttribute('data-category-id', giscus.categoryId);
+              s.setAttribute('data-mapping', 'pathname');
+              s.setAttribute('data-strict', '1');
+              s.setAttribute('data-reactions-enabled', '1');
+              s.setAttribute('data-emit-metadata', '0');
+              s.setAttribute('data-input-position', 'bottom');
+              s.setAttribute('data-theme', pick());
+              s.setAttribute('data-lang', giscusLang);
+              s.setAttribute('data-loading', 'lazy');
+              s.crossOrigin = 'anonymous';
+              s.async = true;
+              document.currentScript.parentElement.querySelector('.giscus').appendChild(s);
+
+              var observer = new MutationObserver(function () {
+                var iframe = document.querySelector('iframe.giscus-frame');
+                if (!iframe) return;
+                iframe.contentWindow.postMessage(
+                  { giscus: { setConfig: { theme: pick() } } },
+                  'https://giscus.app',
+                );
+              });
+              observer.observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ['data-theme'],
+              });
+            })();
+          </script>
+        </section>
+      )
+    }
+  </article>
+</BaseLayout>
+
+<style>
+  .post {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 28px var(--spacing-lg);
+  }
+
+  .crumb {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+  .crumb:hover {
+    color: var(--color-seal);
+  }
+
+  .post h1 {
+    font-size: 2.4rem;
+    line-height: 1.3;
+    font-weight: 700;
+    margin: 14px 0 12px;
+  }
+
+  .metar {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--color-text-tertiary);
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .metar .ptag {
+    color: var(--color-seal);
+    background: var(--color-seal-tint);
+    padding: 0.1rem 0.5rem;
+    border-radius: 100px;
+    font-size: 0.72rem;
+  }
+
+  .ai-notice {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 12px 16px;
+    background: var(--color-seal-tint);
+    border-left: 3px solid var(--color-seal);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+  .ai-notice .ai-ico {
+    color: var(--color-seal);
+    flex: none;
+  }
+  .ai-notice a {
+    color: var(--color-seal);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .ai-notice a:hover {
+    text-decoration: underline;
+  }
+
+  /* 正文:窄欄 serif、行高 2.05（對齊 mockup） */
+  .body {
+    margin-top: 32px;
+    font-size: 1.1rem;
+    line-height: 2.05;
+  }
+  .body :global(p) {
+    margin: 0 0 1.3rem;
+  }
+  .body :global(h2) {
+    font-size: 1.5rem;
+    margin: 2.2rem 0 1rem;
+    padding-left: 14px;
+    border-left: 4px solid var(--color-seal);
+  }
+  .body :global(h3) {
+    font-size: 1.25rem;
+    margin: 1.6rem 0 0.8rem;
+  }
+  .body :global(a) {
+    color: var(--color-text);
+    border-bottom: 1.5px solid var(--color-seal);
+    text-decoration: none;
+    padding-bottom: 1px;
+  }
+  .body :global(ul),
+  .body :global(ol) {
+    margin: 0 0 1.3rem;
+  }
+  .body :global(li) {
+    margin-bottom: 0.4rem;
+  }
+  .body :global(blockquote) {
+    margin: 1.4rem 0;
+    padding: 2px 0 2px 18px;
+    border-left: 3px solid var(--color-seal);
+    color: var(--color-text-secondary);
+  }
+  .body :global(pre) {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 10px;
+    padding: 16px 18px;
+    overflow: auto;
+    margin: 1.4rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+  .body :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--color-bg-surface);
+    padding: 0.1em 0.4em;
+    border-radius: 4px;
+  }
+  .body :global(pre code) {
+    background: none;
+    padding: 0;
+  }
+  .body :global(img) {
+    border-radius: var(--radius-md);
+    margin-block: var(--spacing-md);
+  }
+
+  .signoff {
+    margin: 44px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-text-tertiary);
+    font-size: 0.9rem;
+    font-family: var(--font-sans);
+  }
+
+  .comments {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+</style>

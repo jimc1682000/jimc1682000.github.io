@@ -1,11 +1,31 @@
-name: Deploy résumé site to GitHub Pages
+name: Build & Deploy site (GH Pages mirror + Cloudflare Pages canonical)
+
+# 單一 build → 組裝四路徑 → 雙 publish（避免 CF 與 GH 各 build 一次造成設定漂移）。
+# - build：建 Astro brand+blog，並組裝 /resume/（resume repo）與 /film-brain/（film-brain repo site/）
+#          兩子站皆為 VitePress、base 已對（/resume/、/film-brain/），直接 copy 進 dist 子目錄。
+# - deploy-gh-pages：GitHub Pages（過渡期 canonical，CF 上線後為 mirror）；獨立 job，不依賴 CF
+# - deploy-cloudflare：Cloudflare Pages（目標 canonical）；僅在 CLOUDFLARE_API_TOKEN secret 存在時執行
+#
+# 組裝為自足式（main CI 直接 checkout+build 公開子 repo，免跨 repo artifact auth）。
+# resume 的 PDF/projects 資料已 commit 進 repo，故 resume 只需 npm build（免 Typst）。
+# 子站更新自動重組：resume/film-brain 的 CI 成功後可 repository_dispatch(type: assemble-site)
+# 觸發本 workflow（需在該子 repo 設 PAT；未設時用 workflow_dispatch 手動重組）。
 
 on:
   push:
     branches: [master, main]
-  schedule:
-    - cron: "0 0 * * 1" # weekly (Mon 00:00 UTC) — refresh auto-detected projects
   workflow_dispatch:
+  repository_dispatch:
+    types: [assemble-site, webmention]
+  # Webmention 排程檢查(P2-11):站外迴響是 build 時抓的,不重建就不會出現。
+  # 每 6 小時「先查再決定」——由 gate job 比對 webmention.io 的最新 wm-id 與上次快取,
+  # 沒有新迴響就直接結束(約 10 秒,不 build 也不 deploy),避免每天 4 次白 build。
+  # 為何不用 webhook 即時:webmention.io 的 webhook 只能 POST 一個 URL、無法帶
+  # Authorization header,而 GitHub 的 repository_dispatch 需要 PAT 認證,兩者接不上;
+  # 要即時就得多一層 Cloudflare Worker 持有 PAT(對應上方 webmention dispatch type)。
+  # 「排程 + 先查」用一個唯讀 token 就換到同樣的低浪費,不必引入可寫 repo 的 PAT。
+  schedule:
+    - cron: '0 */6 * * *'
 
 permissions:
   contents: read
@@ -16,56 +36,140 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
-env:
-  TYPST_VERSION: "0.14.2"
-
 jobs:
+  # 排程觸發時先查有沒有新迴響，沒有就不 build（省掉每天 4 次白 build）。
+  # 非排程觸發（push / 手動 / 子站 dispatch）一律直接 build，不受此 gate 影響。
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      build: ${{ steps.decide.outputs.build }}
+      latest: ${{ steps.decide.outputs.latest }}
+    steps:
+      - name: Restore last seen webmention id
+        if: github.event_name == 'schedule'
+        uses: actions/cache/restore@v4
+        with:
+          path: wm-state
+          key: webmention-state-
+          restore-keys: webmention-state-
+
+      - name: Decide whether to build
+        id: decide
+        env:
+          WM_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
+          WM_TOKEN: ${{ secrets.WEBMENTION_IO_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "非排程觸發（${{ github.event_name }}）→ 直接 build。"
+            echo "build=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          # 排程觸發：只為刷新站外迴響而跑。查不到就跳過，下次 cron 再試。
+          if [ -z "${WM_DOMAIN:-}" ] || [ -z "${WM_TOKEN:-}" ]; then
+            echo "PUBLIC_WEBMENTION_DOMAIN 或 WEBMENTION_IO_TOKEN 未設 → 無迴響可刷新，跳過。"
+            echo "build=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          # 變更訊號取「全網域最大 wm-id」：wm-id 單調遞增，且用 max 就不必依賴
+          # 排序參數是否被支援（比取第 1 筆穩）。刪除迴響不會改變 max，可接受。
+          body=$(curl -sS --max-time 20 -G 'https://webmention.io/api/mentions.jf2' \
+            --data-urlencode "domain=${WM_DOMAIN}" \
+            --data-urlencode "token=${WM_TOKEN}" \
+            --data-urlencode 'per-page=200') || {
+              echo "查詢 webmention.io 失敗 → 跳過本次，下個 cron 再試。"
+              echo "build=false" >> "$GITHUB_OUTPUT"; exit 0
+            }
+          latest=$(printf '%s' "$body" | jq -r '[.children[]?["wm-id"]] | max // 0' 2>/dev/null || echo '')
+          if [ -z "$latest" ] || [ "$latest" = "null" ]; then
+            echo "回應無法解析（可能 token 無效或格式變動）→ 跳過本次，下個 cron 再試。"
+            echo "build=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          prev=$(cat wm-state 2>/dev/null || echo 'init')
+          echo "最新 wm-id=$latest；上次記錄=$prev"
+          if [ "$latest" = "$prev" ]; then
+            echo "無新迴響 → 不 build。"
+            echo "build=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "有新迴響 → build。"
+            echo "latest=$latest" >> "$GITHUB_OUTPUT"
+            echo "build=true" >> "$GITHUB_OUTPUT"
+          fi
+
   build:
+    needs: gate
+    if: needs.gate.outputs.build == 'true'
     runs-on: ubuntu-latest
     steps:
+      # --- 主站 Astro brand+blog ---
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: npm
       - run: npm ci
-
-      - name: Install CJK fonts
-        run: sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
-
-      - name: Install pandoc (latest release — needs a modern Typst writer)
-        run: |
-          url=$(curl -fsSL https://api.github.com/repos/jgm/pandoc/releases/latest \
-            | grep browser_download_url | grep -- '-amd64.deb' | head -1 | cut -d '"' -f4)
-          echo "pandoc deb: $url"
-          curl -fsSL "$url" -o /tmp/pandoc.deb
-          sudo dpkg -i /tmp/pandoc.deb
-          pandoc --version | head -1
-
-      - name: Install Typst ${{ env.TYPST_VERSION }}
-        run: |
-          curl -fsSL "https://github.com/typst/typst/releases/download/v${TYPST_VERSION}/typst-x86_64-unknown-linux-musl.tar.xz" | tar -xJ
-          sudo mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
-          typst --version
-
-      - name: Auto-detect GitHub Pages projects
-        run: npm run projects
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate 2-page A4 PDFs
-        run: npm run pdf
-
-      - name: Build site
+      - name: Build Astro (brand + blog)
         run: npm run build
+        # PUBLIC_* 為公開值（會進 client HTML）；用 repo Variables 注入。
+        # 未設 → 空字串 → 元件 gating 自動略過（留言/analytics 不輸出）。
+        env:
+          PUBLIC_GISCUS_REPO: ${{ vars.PUBLIC_GISCUS_REPO }}
+          PUBLIC_GISCUS_REPO_ID: ${{ vars.PUBLIC_GISCUS_REPO_ID }}
+          PUBLIC_GISCUS_CATEGORY: ${{ vars.PUBLIC_GISCUS_CATEGORY }}
+          PUBLIC_GISCUS_CATEGORY_ID: ${{ vars.PUBLIC_GISCUS_CATEGORY_ID }}
+          PUBLIC_CF_BEACON_TOKEN: ${{ vars.PUBLIC_CF_BEACON_TOKEN }}
+          PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
 
-      - uses: actions/configure-pages@v5
+      # --- 組裝 /resume/（jimc1682000/resume，VitePress base /resume/）---
+      - name: Checkout resume repo
+        uses: actions/checkout@v4
+        with:
+          repository: jimc1682000/resume
+          path: _src/resume
+      - name: Build resume (PDF/projects 資料已 commit，免 Typst)
+        working-directory: _src/resume
+        run: |
+          npm ci
+          npm run build
+      - name: Assemble resume → dist/resume
+        run: |
+          mkdir -p dist/resume
+          cp -R _src/resume/docs/.vitepress/dist/. dist/resume/
+
+      # --- 組裝 /film-brain/（jimc1682000/film-brain，site/ 下 VitePress base /film-brain/）---
+      - name: Checkout film-brain repo
+        uses: actions/checkout@v4
+        with:
+          repository: jimc1682000/film-brain
+          path: _src/film-brain
+      - name: Build film-brain (site/ VitePress)
+        working-directory: _src/film-brain/site
+        run: |
+          npm ci
+          npx vitepress build docs
+      - name: Assemble film-brain → dist/film-brain
+        run: |
+          mkdir -p dist/film-brain
+          cp -R _src/film-brain/site/docs/.vitepress/dist/. dist/film-brain/
+
+      # --- 產出 artifact（去掉子 repo checkout 目錄，避免混入）---
+      - name: Verify assembled paths
+        run: |
+          test -f dist/index.html
+          test -f dist/blog/index.html
+          test -f dist/resume/index.html
+          test -f dist/film-brain/index.html
+          echo "assembled OK: / /blog/ /resume/ /film-brain/"
+      # GitHub Pages 專用 artifact（供 deploy-pages 使用）
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/.vitepress/dist
+          path: dist
+      # 一般 artifact（供 Cloudflare 部署 job 下載，維持單一 build）
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+          retention-days: 1
 
-  deploy:
+  deploy-gh-pages:
     needs: build
     runs-on: ubuntu-latest
     environment:
@@ -74,3 +178,75 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  deploy-cloudflare:
+    needs: build
+    runs-on: ubuntu-latest
+    # 僅當設有 Cloudflare token 時才跑（needs-human 前自動略過，不拖垮 GH mirror）
+    env:
+      HAS_CF: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+    steps:
+      - name: Skip notice
+        if: env.HAS_CF != 'true'
+        run: echo "CLOUDFLARE_API_TOKEN 未設定，略過 Cloudflare 部署（needs-human）。"
+      - uses: actions/download-artifact@v4
+        if: env.HAS_CF == 'true'
+        with:
+          name: site-dist
+          path: dist
+      - name: Deploy to Cloudflare Pages
+        if: env.HAS_CF == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=jimmychen
+
+  # 只有排程觸發、且真的因新迴響而重建並部署成功後，才把 wm-id 記進快取。
+  # 刻意放在 deploy 之後：若 build/deploy 失敗，訊號不被消耗，下個 cron 會重試。
+  record-webmention-state:
+    needs: [gate, deploy-gh-pages]
+    if: github.event_name == 'schedule' && needs.gate.outputs.build == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write last seen webmention id
+        run: echo '${{ needs.gate.outputs.latest }}' > wm-state
+      - uses: actions/cache/save@v4
+        with:
+          path: wm-state
+          key: webmention-state-${{ github.run_id }}
+
+  # 發送 webmention（P2-13）：對文章正文裡的外部連結通知對方。
+  # 必須在 deploy 之後跑：接收端會回頭抓 source URL 驗證連結是否真的存在，
+  # 部署前送出會驗證失敗。
+  # 只在 push（內容變更）時跑；排程與子站 dispatch 不需要重送。
+  send-webmentions:
+    needs: [build, deploy-cloudflare]
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+      # 已送過的 (source, target) 記在快取，避免每次部署都重送
+      - uses: actions/cache/restore@v4
+        with:
+          path: .webmention-sent.json
+          key: webmention-sent-
+          restore-keys: webmention-sent-
+      - name: Send webmentions
+        # 探索不到端點／對方掛掉都不該讓部署變紅
+        continue-on-error: true
+        run: node scripts/send-webmentions.mjs --dist dist --site https://jimmychen.me
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .webmention-sent.json
+          key: webmention-sent-${{ github.run_id }}
