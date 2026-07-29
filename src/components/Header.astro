@@ -24,13 +24,17 @@ const switchHref =
 const homeHref = lang === 'en' ? '/en/' : '/';
 const blogHref = lang === 'en' ? '/en/blog/' : '/blog/';
 const worksHref = lang === 'en' ? '/en/works/' : '/works/';
-// 子站自帶導覽與語系，主站僅連進去（DESIGN §7.4）
-const resumeHref = '/resume/';
+// 公開面只放 L0 摘要（完整履歷見 docs/hidden-resume.md）
+const resumeHref = lang === 'en' ? '/en/resume/' : '/resume/';
 const rssHref = lang === 'en' ? '/en/rss.xml' : '/rss.xml';
 
 const isBlog = pathname === blogHref || pathname.startsWith(blogHref);
 const isWorks = pathname === worksHref || pathname.startsWith(worksHref);
-const isResume = pathname.startsWith(resumeHref);
+const isResume =
+  pathname === '/resume' ||
+  pathname.startsWith('/resume/') ||
+  pathname === '/en/resume' ||
+  pathname.startsWith('/en/resume/');
 
 const brand = lang === 'en' ? 'Jimmy Chen' : '吉光聚斂，米粒成章';
 ---
