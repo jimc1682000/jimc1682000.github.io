@@ -1,15 +1,13 @@
 name: Build & Deploy site (GH Pages mirror + Cloudflare Pages canonical)
 
-# 單一 build → 組裝四路徑 → 雙 publish（避免 CF 與 GH 各 build 一次造成設定漂移）。
-# - build：建 Astro brand+blog，並組裝 /resume/（resume repo）與 /film-brain/（film-brain repo site/）
-#          兩子站皆為 VitePress、base 已對（/resume/、/film-brain/），直接 copy 進 dist 子目錄。
-# - deploy-gh-pages：GitHub Pages（過渡期 canonical，CF 上線後為 mirror）；獨立 job，不依賴 CF
-# - deploy-cloudflare：Cloudflare Pages（目標 canonical）；僅在 CLOUDFLARE_API_TOKEN secret 存在時執行
+# 單一 build → 組裝 → 雙 publish（避免 CF 與 GH 各 build 一次造成設定漂移）。
+# - build：建 Astro brand+blog+L0 /resume/，並組裝 /film-brain/（film-brain repo site/）
+# - 完整履歷不再從 jimc1682000/resume 組進公開 dist（見 docs/hidden-resume.md）
+# - deploy-gh-pages：GitHub Pages mirror；獨立 job，不依賴 CF
+# - deploy-cloudflare：Cloudflare Pages canonical；僅在 CLOUDFLARE_API_TOKEN secret 存在時執行
 #
-# 組裝為自足式（main CI 直接 checkout+build 公開子 repo，免跨 repo artifact auth）。
-# resume 的 PDF/projects 資料已 commit 進 repo，故 resume 只需 npm build（免 Typst）。
-# 子站更新自動重組：resume/film-brain 的 CI 成功後可 repository_dispatch(type: assemble-site)
-# 觸發本 workflow（需在該子 repo 設 PAT；未設時用 workflow_dispatch 手動重組）。
+# film-brain 組裝為自足式（checkout 公開子 repo）。
+# 子站更新可 repository_dispatch(type: assemble-site) 觸發重組。
 
 on:
   push:
@@ -118,21 +116,7 @@ jobs:
           PUBLIC_CF_BEACON_TOKEN: ${{ vars.PUBLIC_CF_BEACON_TOKEN }}
           PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
 
-      # --- 組裝 /resume/（jimc1682000/resume，VitePress base /resume/）---
-      - name: Checkout resume repo
-        uses: actions/checkout@v4
-        with:
-          repository: jimc1682000/resume
-          path: _src/resume
-      - name: Build resume (PDF/projects 資料已 commit，免 Typst)
-        working-directory: _src/resume
-        run: |
-          npm ci
-          npm run build
-      - name: Assemble resume → dist/resume
-        run: |
-          mkdir -p dist/resume
-          cp -R _src/resume/docs/.vitepress/dist/. dist/resume/
+      # --- /resume/ 由主站 Astro 產出 L0（不再 checkout 完整履歷 repo）---
 
       # --- 組裝 /film-brain/（jimc1682000/film-brain，site/ 下 VitePress base /film-brain/）---
       - name: Checkout film-brain repo
@@ -156,8 +140,15 @@ jobs:
           test -f dist/index.html
           test -f dist/blog/index.html
           test -f dist/resume/index.html
+          test -f dist/en/resume/index.html
           test -f dist/film-brain/index.html
-          echo "assembled OK: / /blog/ /resume/ /film-brain/"
+          # 完整履歷 PDF 不得再進公開 dist
+          if find dist -type f -name 'resume-*.pdf' | grep -q .; then
+            echo 'ERROR: resume PDF found in public dist' >&2
+            find dist -type f -name 'resume-*.pdf' >&2
+            exit 1
+          fi
+          echo "assembled OK: / /blog/ /resume/(L0) /en/resume/(L0) /film-brain/"
       # GitHub Pages 專用 artifact（供 deploy-pages 使用）
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -11,7 +11,7 @@
 
 | 項目 | 內容 |
 |------|------|
-| **是什麼** | 陳建豪 Jimmy Chen 的個人官方站：散文式 brand 首頁 + blog + 作品集 + 組裝進來的履歷 |
+| **是什麼** | 陳建豪 Jimmy Chen 的個人官方站：散文式 brand 首頁 + blog + 作品集 + 公開履歷摘要（L0） |
 | **站名** | **吉光聚斂，米粒成章**（「吉米」拆入兩句；短牌用「吉光聚斂，米粒成章」，長標語見下） |
 | **標語** | 微光聚斂處，粒粒皆文章 —— Jimmy 的技術與生活隨筆 |
 | **給誰看** | 繁中為主的技術／DevOps／SRE／AI 工程同溫層；次要英文讀者 |
@@ -19,7 +19,7 @@
 | **內容範疇** | DevOps／SRE 維運、AI／agentic 工作流、電影觀後、生活雜記 |
 | **託管** | canonical：自有 domain **`jimmychen.me`**（掛在 Cloudflare Pages）；`*.pages.dev` 與 **GitHub Pages** 為 mirror |
 | **多語** | UI 雙語（`src/i18n/ui.ts`）；正文繁中為 source of truth；URL **A1**（裸根繁中，`/en/...` 英文） |
-| **路徑地圖** | `/` 散文首頁 · `/blog/*` · `/blog/tags/[tag]` · `/blog/search` · `/works/` 作品集 · `/resume/` · `/film-brain/` · `/en/...` |
+| **路徑地圖** | `/` 散文首頁 · `/blog/*` · `/blog/tags/[tag]` · `/blog/search` · `/works/` 作品集 · `/resume/`（L0 公開摘要） · `/film-brain/` · `/en/...` |
 
 ---
 
@@ -262,6 +262,7 @@
 | 2026-07-25 | **Bridgy Fed 自訂 handle：`/.well-known/{host-meta*,webfinger*,atproto-did}` 302 → `fed.brid.gy`（`public/_worker.js`）** | 讓別人直接用 `@jimmychen.me` 追蹤本站。規格要求 302（對方端點可能變動）且 host-meta／webfinger 須保留 query（webfinger 靠 `?resource=`）；atproto-did 反之用固定 query 標明本站身分。與 pages.dev 轉址共用同一個 worker，不另加 dashboard 規則 |
 | 2026-07-25 | **不輸出 `rel="pingback"`** | pingback 是 XML-RPC 舊協定、垃圾訊息重災區（webmention.io 自身也警告），已在該服務停用；宣告一個停用端點只會引來嘗試。僅保留 `rel="webmention"` |
 | 2026-07-25 | **`jimmychen.pages.dev` 301 → `jimmychen.me`（`public/_worker.js`）；GitHub Pages mirror 不轉址** | pages.dev 與 canonical 同屬 Cloudflare，一起壞、無備援價值 → 收成單一入口。GH Pages 是唯一非 Cloudflare 副本，轉址會讓備援指向故障中的網域，故保留 serve 內容（SEO 已由 canonical 收斂）。用 `_worker.js` 而非 `functions/`：CI deploy job 只下載 dist、不 checkout repo |
+| 2026-07-29 | **公開 `/resume/` 降為 L0；完整履歷不再組進公開 dist** | 完整 HTML／PDF 已長期公開，與 hidden-resume（身分授權、可撤銷、短效）矛盾。主站自建 L0 摘要頁（`/resume/`、`/en/resume/`）；CI 停止 checkout `jimc1682000/resume`；deploy 硬擋 `resume-*.pdf`。完整內容改 private 源 + 後續 git 歷史清洗（見 `docs/hidden-resume.md`） |
 
 ---
 
