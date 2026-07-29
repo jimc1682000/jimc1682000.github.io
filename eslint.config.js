@@ -34,9 +34,28 @@ export default [
     // .astro 的 is:inline script 刻意用 var：no-flash 主題切換必須在 hydration 與任何
     // 樣式套用之前執行（DESIGN §6），那段是原始 script、不經打包，var 是刻意的相容選擇。
     // 為了討好 linter 去改動這種在 paint 前執行的關鍵腳本，風險大於收益。
+    files: ['**/*.astro'],
+    languageOptions: {
+      parserOptions: {
+        parser: ts.parser,
+      },
+    },
+    rules: { 'no-var': 'off' },
+  },
+  {
     // 註：eslint-plugin-astro 把 <script> 區塊當成虛擬檔案處理（*.astro/*.js），
-    // 只寫 **/*.astro 不會套到那些區塊，故三個 pattern 都要列。
-    files: ['**/*.astro', '**/*.astro/*.js', '**/*.astro/*.ts'],
+    // 只寫 **/*.astro 不會套到那些區塊。inline script 中有少量 TS 語法與
+    // Astro define:vars 注入值，需明確指定 parser 與 globals。
+    files: ['**/*.astro/*.js', '**/*.astro/*.ts'],
+    languageOptions: {
+      parser: ts.parser,
+      globals: {
+        giscus: 'readonly',
+        giscusLang: 'readonly',
+        PagefindUI: 'readonly',
+        pf: 'readonly',
+      },
+    },
     rules: { 'no-var': 'off' },
   },
   {

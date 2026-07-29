@@ -78,7 +78,7 @@ const t = useTranslations(lang);
 </style>
 
 <script>
-  document.querySelectorAll<HTMLButtonElement>('.theme-toggle').forEach((el) => {
+  document.querySelectorAll('.theme-toggle').forEach((el) => {
     el.addEventListener('click', () => {
       const current = document.documentElement.getAttribute('data-theme');
       const next = current === 'light' ? 'dark' : 'light';
