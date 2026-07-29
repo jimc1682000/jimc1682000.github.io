@@ -1,10 +1,12 @@
 # 清洗公開 git 歷史中的完整履歷（方案 3）
 
 > **破壞性操作。** 執行前必須：  
+>
 > 1. 線上已改 L0、主站不再組裝完整 resume（方案 2 前半）  
 > 2. `jimc1682000/resume` 已改 private、Pages 已關  
 > 3. 使用者明確回覆同意 force push 的 repo 清單  
 > 4. 所有相關 worktree／本機 clone 準備重抓
+>
 
 **做不到的事**：Wayback、別人已 clone／下載的複本、搜尋引擎快取 —— 改寫歷史無法收回。
 

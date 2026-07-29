@@ -69,7 +69,9 @@ const requestHref = `mailto:${contact.email}?subject=${encodeURIComponent(
     <p class="note">{t('resume.fullNote')}</p>
     <p class="actions">
       <a class="btn" href={requestHref}>{t('resume.request')}</a>
-      <a class="btn ghost" href={lang === 'en' ? '/en/contact' : '/contact'}>{t('resume.contact')}</a>
+      <a class="btn ghost" href={lang === 'en' ? '/en/contact' : '/contact'}
+        >{t('resume.contact')}</a
+      >
     </p>
   </section>
 

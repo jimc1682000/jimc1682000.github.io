@@ -114,7 +114,7 @@
 
 ### 4.1 對方主動申請
 
-```
+```text
 公開 L0（/resume/ 或首頁入口）
   → 填申請表（name / company / work email / LinkedIn / purpose）
   → status=pending（不授權）
@@ -128,7 +128,7 @@
 
 ### 4.2 你主動投遞
 
-```
+```text
 管理介面直接建立 grant（email + 期限 + 資源）
   → 寄出同一組入口 URL（無共用密碼）
   → 對方必須控制該 Email 才能進
@@ -136,7 +136,7 @@
 
 ### 4.3 下載 PDF
 
-```
+```text
 已通過 L1
   → 若 grant 含 action=download
   → POST /api/pdf-token（server 再 authorize 一次）
@@ -147,7 +147,7 @@
 
 ### 4.4 撤銷／到期
 
-```
+```text
 status=revoked 或 now >= expires_at
   → 後續任何 request Deny
   → 既有 IdP session 下次打到 PEP/app 即失效（app 為最終裁決）
@@ -162,7 +162,7 @@ status=revoked 或 now >= expires_at
 
 沿用既有 Pages／zone，避免為履歷再養一組 Docker host。
 
-```
+```text
 Internet
    │
    ├─ jimmychen.me              Cloudflare Pages（主站 + L0 /resume/）
@@ -198,7 +198,7 @@ Internet
 
 若要以作品展示 identity-aware proxy 全鏈：
 
-```
+```text
 Caddy
   ├─ resume.jimmychen.me → L0 static
   ├─ cv.jimmychen.me     → Pomerium → resume-app
