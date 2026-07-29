@@ -105,6 +105,20 @@ async function route(request, env) {
 
   const path = url.pathname;
 
+  // 完整履歷 PDF 已下架：硬擋路徑，避免 CDN 舊產物或誤組裝再被讀到。
+  // 公開面只留 L0 HTML（見 docs/hidden-resume.md）。
+  if (
+    path.startsWith('/resume/pdf/') ||
+    path.startsWith('/en/resume/pdf/') ||
+    /^\/resume\/.*\.pdf$/i.test(path) ||
+    /^\/en\/resume\/.*\.pdf$/i.test(path)
+  ) {
+    return new Response('Not Found', {
+      status: 404,
+      headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' },
+    });
+  }
+
   // 舊 Blogger 路徑 → 新文章（cool URIs don't change）
   const bloggerTarget =
     BLOGGER_OVERRIDES[path] ??
