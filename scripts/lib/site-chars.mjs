@@ -70,6 +70,42 @@ const printable = (s) => [...s].filter((c) => c.trim() !== '');
  *   core = 非 CJK 全部 + 英文頁面會出現的 CJK（站名、人名、標題裡的中文）
  *   rest = 只有中文頁面才會用到的 CJK
  */
+/** dist 路徑 → 網站路由（/blog/spam/index.html → /blog/spam/） */
+export function routeOf(file, distDir = 'dist') {
+  const rel = file.slice(distDir.length).replace(/index\.html$/, '').replace(/\.html$/, '/');
+  return rel.startsWith('/') ? rel : `/${rel}`;
+}
+
+/**
+ * 方案 B 的字集切法：core（全站共用）+ 每頁 delta。
+ * core = 所有頁面都出現的字（站台外殼：nav／footer／站名／日期）+ 全部拉丁與符號。
+ * delta = 該頁獨有的中文，只有進到那一頁才會下載。
+ * 這跟「按字頻共用分片」不同 —— 那種每頁都會碰到最後一片、等於全下載。
+ */
+export function perPageChars(distDir = 'dist') {
+  const files = htmlFiles(distDir);
+  if (files.length === 0) throw new Error(`${distDir}/ 沒有 HTML —— 請先跑 npm run build`);
+
+  const per = new Map();
+  for (const f of files) per.set(f, new Set(printable(visibleText(readFileSync(f, 'utf8')))));
+
+  const sets = [...per.values()];
+  let shell = new Set(sets[0]);
+  for (const s of sets.slice(1)) shell = new Set([...shell].filter((c) => s.has(c)));
+
+  const core = new Set(shell);
+  for (let cp = 0x21; cp < 0x7f; cp++) core.add(String.fromCodePoint(cp));
+  for (const c of '０１２３４５６７８９年月日') core.add(c);
+  for (const s of sets) for (const c of s) if (!isCJK(c)) core.add(c);
+
+  const deltas = new Map();
+  for (const [f, s] of per) {
+    const d = new Set([...s].filter((c) => !core.has(c)));
+    deltas.set(routeOf(f, distDir), d);
+  }
+  return { core, deltas, per };
+}
+
 export function siteChars(distDir = 'dist') {
   const files = htmlFiles(distDir);
   if (files.length === 0) throw new Error(`${distDir}/ 沒有 HTML —— 請先跑 npm run build`);

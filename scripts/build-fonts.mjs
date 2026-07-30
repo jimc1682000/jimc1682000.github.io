@@ -19,7 +19,7 @@ import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync, rmSync
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { siteChars } from './lib/site-chars.mjs';
+import { perPageChars } from './lib/site-chars.mjs';
 
 const SRC_DIR = 'fonts-src';
 const OUT_DIR = 'public/fonts';
@@ -129,44 +129,53 @@ for (const old of existsSync(OUT_DIR) ? readdirSync(OUT_DIR) : []) {
   if (old.endsWith('.woff2') || old.startsWith('LICENSE-')) rmSync(join(OUT_DIR, old));
 }
 
-// 從 dist/ 抽字元 —— 必須先 npm run build。這是刻意的兩段式：
-// 產物 HTML 才含 i18n 字串、日期、tag 名稱等 runtime 文字，從 content/ 掃會漏。
-// 改完字集後要再 build 一次，讓新的檔名 hash 進到頁面。
-const { all, core, rest } = siteChars();
-console.log(`字元集：全部 ${all.size}／core ${core.size}／rest ${rest.size}`);
+// 方案 B：core（全站共用）+ 每頁 delta。core 抓一次進快取，delta 只有該頁會抓。
+// 對照方案 C（全站共用單檔）：C 等於把所有頁的 delta 全塞進 core，訪客第一頁就付全站的帳。
+const { core, deltas } = perPageChars();
+const totalCJK = new Set([...deltas.values()].flatMap((s) => [...s]));
+console.log(`core ${core.size} 字（全站共用）／各頁 delta 合計 ${totalCJK.size} 個不同中文字，共 ${deltas.size} 頁`);
 
-const coreRange = `U+0-2E7F,${toRanges([...core].filter((c) => c.codePointAt(0) >= 0x2e80))}`;
-const faces = [];
+const CORE_RANGE = `U+0-2E7F,${toRanges([...core].filter((c) => c.codePointAt(0) >= 0x2e80))}`;
+const SPLIT_FACES = FACES.filter((f) => f.split);
+const coreFaces = [];
+const pageFaces = {};
+let deltaBytes = 0;
 
-for (const face of FACES) {
-  const src = join(SRC_DIR, face.src);
-  const parts = face.split
-    ? [
-        // 宣告順序有意義：rest 先、core 後。見 CJK_BLOCKS 註解。
-        { tier: 'rest', chars: rest, range: CJK_BLOCKS },
-        { tier: 'core', chars: core, range: coreRange },
-      ]
-    : [
-        {
-          tier: 'core',
-          chars: new Set([...all].filter((c) => c.codePointAt(0) < 0x2e80)),
-          range: 'U+0-2E7F',
-        },
-      ];
-
-  for (const part of parts) {
-    const tmp = join(OUT_DIR, 'tmp.woff2');
-    pyftsubset(src, part.chars, tmp);
-    const buf = readFileSync(tmp);
-    const hash = createHash('sha256').update(buf).digest('hex').slice(0, 8);
-    const slug = `${face.family.toLowerCase().replace(/ /g, '-')}-${face.weight}-${part.tier}`;
-    const file = `${slug}.${hash}.woff2`;
-    writeFileSync(join(OUT_DIR, file), buf);
-    rmSync(tmp);
-    faces.push({ family: face.family, weight: face.weight, file, unicodeRange: part.range });
-    console.log(`  ${file}  ${(buf.length / 1024).toFixed(1)} KB`);
-  }
+function emit(face, chars, tier, range) {
+  const tmp = join(OUT_DIR, 'tmp.woff2');
+  pyftsubset(join(SRC_DIR, face.src), chars, tmp);
+  const buf = readFileSync(tmp);
+  const hash = createHash('sha256').update(buf).digest('hex').slice(0, 8);
+  const slug = `${face.family.toLowerCase().replace(/ /g, '-')}-${face.weight}-${tier}`;
+  const file = `${slug}.${hash}.woff2`;
+  writeFileSync(join(OUT_DIR, file), buf);
+  rmSync(tmp);
+  return { entry: { family: face.family, weight: face.weight, file, unicodeRange: range }, size: buf.length };
 }
+
+// core：含 mono（mono 只有拉丁，不分頁）
+for (const face of FACES) {
+  const chars = face.split ? core : new Set([...core].filter((c) => c.codePointAt(0) < 0x2e80));
+  const range = face.split ? CORE_RANGE : 'U+0-2E7F';
+  const { entry, size } = emit(face, chars, 'core', range);
+  coreFaces.push(entry);
+  console.log(`  core  ${entry.file}  ${(size / 1024).toFixed(1)} KB`);
+}
+
+// 每頁 delta。空 delta 的頁面（純英文頁、列表頁）不產檔。
+for (const [route, chars] of deltas) {
+  if (chars.size === 0) continue;
+  const list = [];
+  for (const face of SPLIT_FACES) {
+    // delta 用寬 CJK 範圍宣告在前、core 用精確範圍在後 —— 兩者都涵蓋某字時後宣告者贏
+    // 且前者不下載（已實測 document.fonts status）。
+    const { entry, size } = emit(face, chars, `d${createHash('sha1').update(route).digest('hex').slice(0, 6)}`, CJK_BLOCKS);
+    list.push(entry);
+    deltaBytes += size;
+  }
+  pageFaces[route] = list;
+}
+console.log(`\n每頁 delta：${Object.keys(pageFaces).length} 頁有檔，合計 ${(deltaBytes / 1024 / 1024).toFixed(2)} MB`);
 
 for (const lic of Object.keys(SOURCES).filter((f) => f.startsWith('LICENSE-'))) {
   writeFileSync(join(OUT_DIR, lic), readFileSync(join(SRC_DIR, lic)));
@@ -175,8 +184,8 @@ for (const lic of Object.keys(SOURCES).filter((f) => f.startsWith('LICENSE-'))) 
 // charset 一起寫出來給 scripts/check-fonts.mjs 對帳（純文字比對，CI 不需要 Python）。
 writeFileSync(
   GEN_FILE,
-  `${JSON.stringify({ faces, charset: { core: [...core].sort().join(''), rest: [...rest].sort().join('') } }, null, 2)}\n`,
+  `${JSON.stringify({ coreFaces, pageFaces, charset: { core: [...core].sort().join('') }, deltaCharsByRoute: Object.fromEntries([...deltas].filter(([, s]) => s.size).map(([r, s]) => [r, [...s].sort().join('')])) }, null, 2)}\n`,
   'utf8',
 );
 execFileSync('npx', ['prettier', '--write', GEN_FILE], { stdio: 'ignore' });
-console.log(`\n已寫入 ${GEN_FILE}（${faces.length} 個 face）與三份 OFL 授權`);
+console.log(`已寫入 ${GEN_FILE}（core ${coreFaces.length} 個 face + ${Object.keys(pageFaces).length} 頁 delta）與三份 OFL 授權`);
