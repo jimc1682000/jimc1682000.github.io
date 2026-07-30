@@ -21,11 +21,46 @@ export function htmlFiles(dir = 'dist', out = []) {
   return out;
 }
 
+const NAMED_ENTITIES = {
+  amp: '&',
+  lt: '<',
+  gt: '>',
+  quot: '"',
+  apos: "'",
+  nbsp: ' ',
+  hellip: '…',
+  mdash: '—',
+  ndash: '–',
+  lsquo: '‘',
+  rsquo: '’',
+  ldquo: '“',
+  rdquo: '”',
+  copy: '©',
+  reg: '®',
+  deg: '°',
+};
+
+// entity 必須「解碼」而不是刪掉：`&lt;` 在畫面上是 `<`，那個字形需要進 subset。
+// 早期版本直接把 entity 換成空白，導致 code 區塊的 < > & 缺字而 gate 照樣放行
+// —— 那正是這支 gate 該抓到的靜默失敗（Codex review 抓到，PR #44）。
+function decodeEntities(s) {
+  return s.replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (m, body) => {
+    if (body[0] === '#') {
+      const cp =
+        body[1] === 'x' || body[1] === 'X'
+          ? parseInt(body.slice(2), 16)
+          : parseInt(body.slice(1), 10);
+      return Number.isFinite(cp) ? String.fromCodePoint(cp) : ' ';
+    }
+    return NAMED_ENTITIES[body.toLowerCase()] ?? ' ';
+  });
+}
+
 function visibleText(html) {
-  return html
+  const stripped = html
     .replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/gi, ' ')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/&[a-z]+;|&#x?[0-9a-f]+;/gi, ' ');
+    .replace(/<[^>]+>/g, ' ');
+  return decodeEntities(stripped);
 }
 
 const printable = (s) => [...s].filter((c) => c.trim() !== '');
@@ -47,9 +82,15 @@ export function siteChars(distDir = 'dist') {
     if (f.includes(`${distDir}/en/`)) for (const c of chars) onEnPages.add(c);
   }
 
-  // Astro 會依 locale 產生日期字串，某些月份/數字組合當下的產物可能沒出現，
-  // 補進基線避免下個月換月就缺字。
-  for (const c of '0123456789０１２３４５６７８９年月日') {
+  // 基線：可見 ASCII 全收 + 日期用字。
+  // ASCII 全收是**第二道防線** —— 拉丁字形極小（core 檔才 22 KB），寧可多收，
+  // 也不要因為抽取邏輯漏了某個標點就在畫面上掉字。
+  // 日期字串由 Astro 依 locale 在 runtime 產生，當下產物沒出現的月份下個月會出現。
+  for (let cp = 0x21; cp < 0x7f; cp++) {
+    all.add(String.fromCodePoint(cp));
+    onEnPages.add(String.fromCodePoint(cp));
+  }
+  for (const c of '０１２３４５６７８９年月日') {
     all.add(c);
     onEnPages.add(c);
   }
