@@ -19,7 +19,7 @@ tags: [生活, 資訊安全]
 
 而其命名的由來，是在1937年7月5日荷美爾食品舉辦的品牌命名比賽中，由荷美爾食品一位副總裁的弟弟肯・戴格諾（Ken Daigneau），提出「SPAM®」這個名稱而獲勝，並獲得 100 美元獎金。
 
-但至今沒有人能完全確認SPAM到底是什麼的縮寫，官方 FAQ 只說：「`SPAM` 的真正含義，只有少數前 Hormel 高階主管知道。」也因此有的人說是[**S**houlder of **P**ork **a**nd **H**am](https://blog.trendmicro.com.tw/?p=149)，也有人說就是**Sp**iced H**am**、更有人說是"**S**pecially **P**rocessed **A**merican **M**eat" 或 "**S**pecially **P**rocessed **A**rmy **M**eat”，至於什麼是真相，在美味的SPAM面前，可能也並不是那麼的重要了。
+但至今沒有人能完全確認SPAM到底是什麼的縮寫，官方 FAQ 只說：「`SPAM` 的真正含義，只有少數前 Hormel 高階主管知道。」也因此有的人說是[**S**houlder of **P**ork **a**nd **H**am](https://blog.trendmicro.com.tw/?p=149)，也有人說就是**Sp**iced H**am**、更有人說是&quot;**S**pecially **P**rocessed **A**merican **M**eat&quot; 或 &quot;**S**pecially **P**rocessed **A**rmy **M**eat&quot;，至於什麼是真相，在美味的SPAM面前，可能也並不是那麼的重要了。
 
 至於，為什麼中文會把這類食品稱為「[午餐肉](https://zh.wikipedia.org/zh-tw/午餐肉)」呢？
 
