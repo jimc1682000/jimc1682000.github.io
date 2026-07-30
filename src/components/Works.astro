@@ -78,7 +78,8 @@ const isExternal = (href: string) => /^https?:\/\//.test(href);
     font-size: 0.9rem;
     letter-spacing: 0.14em;
     color: var(--color-seal);
-    font-weight: 600;
+    /* 思源黑體沒有 600 字重（只有 …/400/500/700/…），寫 600 會變成合成假粗體 */
+    font-weight: 500;
     margin-bottom: 4px;
   }
 

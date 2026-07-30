@@ -67,3 +67,7 @@ dist/
 
 # wrangler 本機快取（`wrangler pages dev` 產生的 miniflare 狀態）
 .wrangler/
+
+# webfont 原檔（約 84 MB）：刻意不進 git，用 scripts/build-fonts.mjs 產出 subset。
+# 缺檔時該腳本會印出每個檔的下載網址。
+fonts-src/
