@@ -8,11 +8,12 @@ aiTranslated: true
 tags: [Life, Security]
 ---
 
-> This is my submission for the "[BlogBlog Party — July 2026](https://shuaixin.cc/Fun-Fact/)". This month's theme is "interesting trivia or obscure concepts," hosted by [劉昕](https://shuaixin.cc/). If you have your own blog, come join in!
+> This is my submission for the "[BlogBlog Party — July 2026](https://blogblog.club/party/)". This month's theme is "[interesting trivia or obscure concepts](https://shuaixin.cc/Fun-Fact/)," hosted by [劉昕](https://shuaixin.cc). If you have your own blog, come join in!
 
-![A red triangular warning sign reading SPAM surrounded by flying envelopes on the left, a can of SPAM luncheon meat in the middle, and a mailbox with a raised yellow flag and an @ symbol on the right](/blog/img/spam-hero.webp)
-
-This image was created with AI assistance. Inspiration: [https://www.spam.com](https://www.spam.com/what-is-spam-brand) and [https://emailchef.com](https://emailchef.com/emailchef-academy/email-marketing-and-spam-reputation-is-almost-everything/)
+<figure>
+  <img src="/blog/img/spam-hero.webp" alt="A red triangular warning sign reading SPAM surrounded by flying envelopes on the left, a can of SPAM luncheon meat in the middle, and a mailbox with a raised yellow flag and an @ symbol on the right">
+  <figcaption>This image was created with AI assistance. Inspiration: <a href="https://www.spam.com/what-is-spam-brand">https://www.spam.com</a> and <a href="https://emailchef.com/emailchef-academy/email-marketing-and-spam-reputation-is-almost-everything/">https://emailchef.com</a></figcaption>
+</figure>
 
 When you hear the word "SPAM," does your mind jump to the tasty "luncheon meat"? Or to that damned "junk email"?
 
