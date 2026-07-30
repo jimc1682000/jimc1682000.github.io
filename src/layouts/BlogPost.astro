@@ -228,11 +228,19 @@ const authorName = lang === 'en' ? 'Jimmy Chen' : '陳建豪';
     font-size: 1.25rem;
     margin: 1.6rem 0 0.8rem;
   }
+  /* 正文連結：朱砂虛點底線。用 text-decoration 而非 border-bottom，
+     斷行時底線會跟著字走、不會拉出整行的框線 */
   .body :global(a) {
     color: var(--color-text);
-    border-bottom: 1.5px solid var(--color-seal);
-    text-decoration: none;
-    padding-bottom: 1px;
+    text-decoration: underline dotted var(--color-seal);
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1.5px;
+  }
+  /* 明確宣告 hover，否則會吃到 global.css 的 a:hover
+     （那條把底線轉成 --color-text，會蓋掉朱砂） */
+  .body :global(a:hover) {
+    color: var(--color-seal);
+    text-decoration-color: var(--color-seal);
   }
   .body :global(ul),
   .body :global(ol) {
