@@ -8,7 +8,7 @@ aiTranslated: true
 tags: [Life, Security]
 ---
 
-> This is my submission for [BlogBlog Party — July 2026](https://shuaixin.cc/Fun-Fact/). This month's theme is "interesting trivia or obscure concepts," hosted by [Liu Xin](https://shuaixin.cc/). If you have your own blog, come join in!
+> This is my submission for [BlogBlog Party — July 2026](https://shuaixin.cc/Fun-Fact/). This month's theme is "interesting trivia or obscure concepts," hosted by [劉昕](https://shuaixin.cc/). If you have your own blog, come join in!
 
 ![A red triangular warning sign reading SPAM with envelopes flying around it on the left, a can of SPAM luncheon meat in the middle, and a mailbox with a yellow flag and an @ symbol on the right](/blog/img/spam-hero.webp)
 
