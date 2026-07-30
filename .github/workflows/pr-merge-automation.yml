@@ -5,13 +5,13 @@ on:
     types: [opened, reopened, synchronize, ready_for_review]
     branches: [master]
   schedule:
-    - cron: "17,47 * * * *"
+    - cron: '17,47 * * * *'
   workflow_dispatch:
     inputs:
       pr_number:
         description: Optional PR number (empty = all open PRs)
         required: false
-        default: ""
+        default: ''
       dry_run:
         description: Classify only; do not label/comment/merge
         type: boolean
