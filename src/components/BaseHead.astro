@@ -34,11 +34,16 @@ const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
 // 刻意 inline 在 <head> 而非放進 global.css：瀏覽器要先下載 stylesheet 才會發現
 // 外部檔裡的 @font-face，inline 可以早一輪開始抓字型（web.dev font best practices）。
 //
-// 宣告順序有意義：同一 family 有兩個 face 都涵蓋某字時，**後宣告的贏且前者完全不下載**
-// （已實測 document.fonts status）。所以 rest 大檔用短的寬 CJK 範圍先宣告、core 小檔用
-// 精確範圍後宣告 —— 英文頁只抓 core（約 108 KB），中文頁才會抓 rest。
-// 若改成逐一列出 rest 的 1400 個碼位，unicode-range 字串本身就要 9.3 KB／face。
-const fontFaceCss = fontData.faces
+// 方案 B：core（全站共用、抓一次進快取）+ **當前頁面專屬的 delta**。
+// core 是「每一頁都會出現的字」（站台外殼）加上全部拉丁；delta 只含這一頁多出來的中文。
+// 對照全站共用單檔的做法：那等於把所有頁的 delta 全塞進 core，訪客第一頁就付全站的帳。
+//
+// 宣告順序有意義：delta 用寬 CJK 範圍**先**宣告、core 用精確範圍**後**宣告。實測
+// （document.fonts status）同一 family 兩個 face 都涵蓋某字時後宣告者贏且前者不下載，
+// 所以 core 的字不會誤抓 delta，而 delta 獨有的字只有 delta 匹配得到。
+const route = p.endsWith('/') ? p : `${p}/`;
+const pageFaces = (fontData.pageFaces as Record<string, typeof fontData.coreFaces>)[route] ?? [];
+const fontFaceCss = [...pageFaces, ...fontData.coreFaces]
   .map(
     (f) =>
       `@font-face{font-family:'${f.family}';font-style:normal;font-weight:${f.weight};` +
@@ -46,12 +51,6 @@ const fontFaceCss = fontData.faces
   )
   .join('');
 
-// 備援字型的度量覆寫：讓 font-display:swap 交換字型時版面不跳（CLS）。
-// 數字取自思源宋體本身（unitsPerEm 1000／hheaAscender 1151／hheaDescender -286），
-// 讓備援字佔用同樣的垂直空間。這裡必須用 local() —— ascent-override 這類描述符只能
-// 掛在 @font-face 上。用 local() 當**主要**字型是錯的（系統版本不同會偷改設計），
-// 但這個 face 的職責就是描述我們正在 fallback 的那個系統字，屬於正確用法。
-// 侷限：Songti 只有 macOS 有，Windows／Android 落到別的字型，覆寫值只能算近似。
 const fallbackCss =
   `@font-face{font-family:'Songti metrics';src:local('Songti TC'),local('Songti SC');` +
   `ascent-override:115.1%;descent-override:28.6%;line-gap-override:0%}` +

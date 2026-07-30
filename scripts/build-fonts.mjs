@@ -133,7 +133,9 @@ for (const old of existsSync(OUT_DIR) ? readdirSync(OUT_DIR) : []) {
 // 對照方案 C（全站共用單檔）：C 等於把所有頁的 delta 全塞進 core，訪客第一頁就付全站的帳。
 const { core, deltas } = perPageChars();
 const totalCJK = new Set([...deltas.values()].flatMap((s) => [...s]));
-console.log(`core ${core.size} 字（全站共用）／各頁 delta 合計 ${totalCJK.size} 個不同中文字，共 ${deltas.size} 頁`);
+console.log(
+  `core ${core.size} 字（全站共用）／各頁 delta 合計 ${totalCJK.size} 個不同中文字，共 ${deltas.size} 頁`,
+);
 
 const CORE_RANGE = `U+0-2E7F,${toRanges([...core].filter((c) => c.codePointAt(0) >= 0x2e80))}`;
 const SPLIT_FACES = FACES.filter((f) => f.split);
@@ -150,7 +152,10 @@ function emit(face, chars, tier, range) {
   const file = `${slug}.${hash}.woff2`;
   writeFileSync(join(OUT_DIR, file), buf);
   rmSync(tmp);
-  return { entry: { family: face.family, weight: face.weight, file, unicodeRange: range }, size: buf.length };
+  return {
+    entry: { family: face.family, weight: face.weight, file, unicodeRange: range },
+    size: buf.length,
+  };
 }
 
 // core：含 mono（mono 只有拉丁，不分頁）
@@ -169,13 +174,20 @@ for (const [route, chars] of deltas) {
   for (const face of SPLIT_FACES) {
     // delta 用寬 CJK 範圍宣告在前、core 用精確範圍在後 —— 兩者都涵蓋某字時後宣告者贏
     // 且前者不下載（已實測 document.fonts status）。
-    const { entry, size } = emit(face, chars, `d${createHash('sha1').update(route).digest('hex').slice(0, 6)}`, CJK_BLOCKS);
+    const { entry, size } = emit(
+      face,
+      chars,
+      `d${createHash('sha1').update(route).digest('hex').slice(0, 6)}`,
+      CJK_BLOCKS,
+    );
     list.push(entry);
     deltaBytes += size;
   }
   pageFaces[route] = list;
 }
-console.log(`\n每頁 delta：${Object.keys(pageFaces).length} 頁有檔，合計 ${(deltaBytes / 1024 / 1024).toFixed(2)} MB`);
+console.log(
+  `\n每頁 delta：${Object.keys(pageFaces).length} 頁有檔，合計 ${(deltaBytes / 1024 / 1024).toFixed(2)} MB`,
+);
 
 for (const lic of Object.keys(SOURCES).filter((f) => f.startsWith('LICENSE-'))) {
   writeFileSync(join(OUT_DIR, lic), readFileSync(join(SRC_DIR, lic)));
@@ -188,4 +200,6 @@ writeFileSync(
   'utf8',
 );
 execFileSync('npx', ['prettier', '--write', GEN_FILE], { stdio: 'ignore' });
-console.log(`已寫入 ${GEN_FILE}（core ${coreFaces.length} 個 face + ${Object.keys(pageFaces).length} 頁 delta）與三份 OFL 授權`);
+console.log(
+  `已寫入 ${GEN_FILE}（core ${coreFaces.length} 個 face + ${Object.keys(pageFaces).length} 頁 delta）與三份 OFL 授權`,
+);

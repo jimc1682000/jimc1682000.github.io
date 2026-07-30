@@ -10,7 +10,7 @@
 // 失敗時的修法：把字型原檔放回 fonts-src/，跑 node scripts/build-fonts.mjs，再 build 一次。
 
 import { readFileSync, existsSync } from 'node:fs';
-import { siteChars, isCJK } from './lib/site-chars.mjs';
+import { perPageChars } from './lib/site-chars.mjs';
 
 const GEN = 'src/generated/fonts.json';
 
@@ -19,37 +19,33 @@ if (!existsSync(GEN)) {
   process.exit(1);
 }
 
-const { faces, charset } = JSON.parse(readFileSync(GEN, 'utf8'));
-const covered = new Set([...charset.core, ...charset.rest]);
-const coreSet = new Set(charset.core);
+const gen = JSON.parse(readFileSync(GEN, 'utf8'));
+const coreSet = new Set(gen.charset.core);
 
-const { all, core } = siteChars();
+// 逐頁檢查：每一頁顯示的字，必須落在 core 或「該頁自己的 delta」裡。
+// 這比全站聯集檢查嚴格 —— 每頁一個子集的做法下，字在別頁的 delta 裡不算覆蓋到。
+const { core, deltas } = perPageChars();
+const problems = [];
+for (const [route, chars] of deltas) {
+  const declared = new Set(gen.deltaCharsByRoute?.[route] ?? '');
+  const missing = [...chars].filter((c) => !coreSet.has(c) && !declared.has(c));
+  if (missing.length) problems.push([route, missing]);
+}
+const coreMissing = [...core].filter((c) => !coreSet.has(c));
 
-const missing = [...all].filter((c) => !covered.has(c));
-// core 是「英文頁面也會用到的字」。少收不會缺字（只是英文頁多抓 rest 大檔），
-// 所以只當警告，不擋 build。
-const notInCore = [...core].filter((c) => isCJK(c) && !coreSet.has(c));
-
-const fileList = faces.map((f) => `${f.file}`).join('\n  ');
-
-if (missing.length) {
-  console.error(`\n✗ 字型 subset 缺 ${missing.length} 個字，它們會掉到系統字型：\n`);
-  console.error(`  ${missing.join(' ')}\n`);
-  console.error('修法：');
-  console.error('  1. 把原檔放回 fonts-src/（缺檔時 build-fonts.mjs 會印下載網址）');
-  console.error('  2. node scripts/build-fonts.mjs');
-  console.error('  3. npm run build（讓新的檔名 hash 進到頁面）');
-  console.error('  4. 把 public/fonts/ 與 src/generated/fonts.json 一起 commit\n');
+if (coreMissing.length || problems.length) {
+  console.error('\n✗ 字型 subset 沒覆蓋到以下字，它們會掉到系統字型：\n');
+  if (coreMissing.length)
+    console.error(`  core 缺 ${coreMissing.length} 個：${coreMissing.join(' ')}`);
+  for (const [route, m] of problems.slice(0, 10))
+    console.error(`  ${route} 缺 ${m.length} 個：${m.join('')}`);
+  if (problems.length > 10) console.error(`  …另有 ${problems.length - 10} 頁`);
+  console.error(
+    '\n修法：node scripts/build-fonts.mjs → npm run build → commit public/fonts 與 src/generated/fonts.json\n',
+  );
   process.exit(1);
 }
 
-if (notInCore.length) {
-  console.warn(
-    `⚠ 有 ${notInCore.length} 個中文字出現在英文頁面但不在 core：${notInCore.join('')}\n` +
-      '  英文頁會因此多抓 rest 大檔（只影響速度，不缺字）。重跑 build-fonts.mjs 可修正。',
-  );
-}
-
 console.log(
-  `✓ 字型 subset 覆蓋 dist/ 的 ${all.size} 個字元（${faces.length} 個 face）\n  ${fileList}`,
+  `✓ 每頁子集覆蓋完整：core ${coreSet.size} 字（${gen.coreFaces.length} 個 face）+ ${Object.keys(gen.pageFaces).length} 頁 delta`,
 );

@@ -72,7 +72,10 @@ const printable = (s) => [...s].filter((c) => c.trim() !== '');
  */
 /** dist 路徑 → 網站路由（/blog/spam/index.html → /blog/spam/） */
 export function routeOf(file, distDir = 'dist') {
-  const rel = file.slice(distDir.length).replace(/index\.html$/, '').replace(/\.html$/, '/');
+  const rel = file
+    .slice(distDir.length)
+    .replace(/index\.html$/, '')
+    .replace(/\.html$/, '/');
   return rel.startsWith('/') ? rel : `/${rel}`;
 }
 
