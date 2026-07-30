@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import type { Lang } from '../i18n/ui';
 import { cfBeaconToken, webmentionDomain, webmentionEnabled } from '../consts';
+import fontData from '../generated/fonts.json';
 
 interface Props {
   title: string;
@@ -28,6 +29,34 @@ const isEn = p === '/en' || p.startsWith('/en/');
 const zhPath = isEn ? p.slice(3) || '/' : p;
 const enPath = isEn ? p : p === '/' ? '/en/' : '/en' + p;
 const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
+
+// 自 host webfont（src/generated/fonts.json 由 scripts/build-fonts.mjs 產生）。
+// 刻意 inline 在 <head> 而非放進 global.css：瀏覽器要先下載 stylesheet 才會發現
+// 外部檔裡的 @font-face，inline 可以早一輪開始抓字型（web.dev font best practices）。
+//
+// 宣告順序有意義：同一 family 有兩個 face 都涵蓋某字時，**後宣告的贏且前者完全不下載**
+// （已實測 document.fonts status）。所以 rest 大檔用短的寬 CJK 範圍先宣告、core 小檔用
+// 精確範圍後宣告 —— 英文頁只抓 core（約 108 KB），中文頁才會抓 rest。
+// 若改成逐一列出 rest 的 1400 個碼位，unicode-range 字串本身就要 9.3 KB／face。
+const fontFaceCss = fontData.faces
+  .map(
+    (f) =>
+      `@font-face{font-family:'${f.family}';font-style:normal;font-weight:${f.weight};` +
+      `font-display:swap;src:url('/fonts/${f.file}') format('woff2');unicode-range:${f.unicodeRange}}`,
+  )
+  .join('');
+
+// 備援字型的度量覆寫：讓 font-display:swap 交換字型時版面不跳（CLS）。
+// 數字取自思源宋體本身（unitsPerEm 1000／hheaAscender 1151／hheaDescender -286），
+// 讓備援字佔用同樣的垂直空間。這裡必須用 local() —— ascent-override 這類描述符只能
+// 掛在 @font-face 上。用 local() 當**主要**字型是錯的（系統版本不同會偷改設計），
+// 但這個 face 的職責就是描述我們正在 fallback 的那個系統字，屬於正確用法。
+// 侷限：Songti 只有 macOS 有，Windows／Android 落到別的字型，覆寫值只能算近似。
+const fallbackCss =
+  `@font-face{font-family:'Songti metrics';src:local('Songti TC'),local('Songti SC');` +
+  `ascent-override:115.1%;descent-override:28.6%;line-gap-override:0%}` +
+  `@font-face{font-family:'PingFang metrics';src:local('PingFang TC');` +
+  `ascent-override:115.1%;descent-override:28.6%;line-gap-override:0%}`;
 ---
 
 {/* no-flash theme：務必放 <head> 最前，於任何樣式套用前設定 data-theme（DESIGN §6） */}
@@ -47,6 +76,9 @@ const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
+
+{/* 自 host webfont：inline 宣告讓瀏覽器盡早發現（不放 global.css） */}
+<style is:inline set:html={fallbackCss + fontFaceCss}></style>
 
 <title>{title}</title>
 <meta name="description" content={description} />

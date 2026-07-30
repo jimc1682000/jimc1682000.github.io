@@ -52,7 +52,8 @@ const BLOGGER_OVERRIDES = {
 //
 // img-src 用 https: 而非白名單：webmention 頭像來自任意第三方網域，無法預先列舉。
 //
-// 字型不必放行外部來源：本站只用系統字型（見 global.css 的 --font-serif）。
+// font-src 維持 'self' 就夠：字型是自 host 的（public/fonts/，由 scripts/build-fonts.mjs
+// 產出的 subset），刻意不引入第三方字型 CDN。
 const CSP = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -84,10 +85,16 @@ const SECURITY_HEADERS = {
   'Cross-Origin-Opener-Policy': 'same-origin',
 };
 
+// 字型檔名帶內容 hash（noto-serif-tc-400-core.<hash>.woff2），內容一變檔名就變，
+// 所以可以 immutable 永久快取 —— 回訪者完全不必再發請求確認。
+const IMMUTABLE_CACHE = 'public, max-age=31536000, immutable';
+const isHashedFont = (path) => /^\/fonts\/[a-z0-9-]+\.[0-9a-f]{8}\.woff2$/.test(path);
+
 /** 在既有回應上疊加安全性 header（回應可能不可變，故重建） */
-function withSecurityHeaders(res) {
+function withSecurityHeaders(res, path) {
   const headers = new Headers(res.headers);
   for (const [k, v] of Object.entries(SECURITY_HEADERS)) headers.set(k, v);
+  if (path && isHashedFont(path)) headers.set('Cache-Control', IMMUTABLE_CACHE);
   return new Response(res.body, { status: res.status, statusText: res.statusText, headers });
 }
 
@@ -154,6 +161,6 @@ async function route(request, env) {
 
 export default {
   async fetch(request, env) {
-    return withSecurityHeaders(await route(request, env));
+    return withSecurityHeaders(await route(request, env), new URL(request.url).pathname);
   },
 };

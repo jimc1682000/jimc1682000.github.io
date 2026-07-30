@@ -33,12 +33,15 @@
   --color-focus-ring: var(--color-text);
 
   /* Typography（散文集:serif 為標題與內文主字,sans 給 nav/UI/meta） */
-  --font-serif: 'Noto Serif TC', 'Songti TC', Georgia, 'PingFang TC', serif;
+  /* 'Songti metrics' 是 BaseHead 宣告的度量覆寫 face（指向系統 Songti），
+     讓 font-display:swap 交換字型時版面不跳。順序：webfont → 度量覆寫備援 → 原生備援。 */
+  --font-serif: 'Noto Serif TC', 'Songti metrics', 'Songti TC', Georgia, 'PingFang TC', serif;
   --font-sans:
-    -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Noto Sans TC', 'Segoe UI', 'Helvetica Neue',
-    Arial, sans-serif;
+    'Noto Sans TC', 'PingFang metrics', -apple-system, BlinkMacSystemFont, 'PingFang TC',
+    'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   --font-mono:
-    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    'Noto Sans Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
+    monospace;
 
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;

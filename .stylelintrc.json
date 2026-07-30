@@ -4,6 +4,13 @@
     {
       "files": ["**/*.astro"],
       "customSyntax": "postcss-html"
+    },
+    {
+      "_why": "BaseHead 的 <style is:inline set:html={...}> 內容是 runtime 組出來的（自 host webfont 的 @font-face），source 端必然是空的",
+      "files": ["src/components/BaseHead.astro"],
+      "rules": {
+        "no-empty-source": null
+      }
     }
   ],
   "rules": {

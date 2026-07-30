@@ -64,7 +64,8 @@ const groups = groupByYear(posts);
     font-size: 0.85rem;
     letter-spacing: 0.16em;
     color: var(--color-seal);
-    font-weight: 600;
+    /* 思源黑體沒有 600 字重（只有 …/400/500/700/…），寫 600 會變成合成假粗體 */
+    font-weight: 500;
   }
 
   .post {
