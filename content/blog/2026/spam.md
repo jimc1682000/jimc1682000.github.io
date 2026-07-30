@@ -5,11 +5,12 @@ description: '說到 “SPAM” 這個詞，你腦海中會浮現出好吃的”
 tags: [生活, 資訊安全]
 ---
 
-> 這是我的「[BlogBlog 同樂會 - 2026 年 7 月](https://shuaixin.cc/Fun-Fact/)」的投稿文章。本月主題是「有趣的小知識或冷門概念」，由[劉昕](https://shuaixin.cc/)主持。如果你有自己的部落格，歡迎一起來參加！
+> 這是我的「[BlogBlog 同樂會 - 2026 年 7 月](https://blogblog.club/party/)」的投稿文章。本月主題是「[有趣的小知識或冷門概念](https://shuaixin.cc/Fun-Fact/)」，由[劉昕](https://shuaixin.cc)主持。如果你有自己的部落格，歡迎一起來參加！
 
-![左邊是印著 SPAM 的紅色三角警示牌與飛舞的信封，中間是一罐 SPAM 午餐肉，右邊是一個插著黃旗、標著 @ 符號的信箱](/blog/img/spam-hero.webp)
-
-這個圖片是使用AI協助創作，靈感來源：[https://www.spam.com](https://www.spam.com/what-is-spam-brand) 、[https://emailchef.com](https://emailchef.com/emailchef-academy/email-marketing-and-spam-reputation-is-almost-everything/)
+<figure>
+  <img src="/blog/img/spam-hero.webp" alt="左邊是印著 SPAM 的紅色三角警示牌與飛舞的信封，中間是一罐 SPAM 午餐肉，右邊是一個插著黃旗、標著 @ 符號的信箱">
+  <figcaption>這個圖片是使用AI協助創作，靈感來源：<a href="https://www.spam.com/what-is-spam-brand">https://www.spam.com</a> 、<a href="https://emailchef.com/emailchef-academy/email-marketing-and-spam-reputation-is-almost-everything/">https://emailchef.com</a></figcaption>
+</figure>
 
 說到 “SPAM” 這個詞，你腦海中會浮現出好吃的”午餐肉”？還是那該死的”垃圾郵件”呢？
 

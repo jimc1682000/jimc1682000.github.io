@@ -274,6 +274,21 @@ const authorName = lang === 'en' ? 'Jimmy Chen' : '陳建豪';
     border-radius: var(--radius-md);
     margin-block: var(--spacing-md);
   }
+  /* 圖說：用 <figure>／<figcaption> 標語意，樣式沿用 .signoff 那套次要小字 */
+  .body :global(figure) {
+    margin-block: var(--spacing-md);
+  }
+  /* figure 自己已有 margin，圖片不再重複撐開，圖說才貼得住圖 */
+  .body :global(figure img) {
+    margin-block: 0;
+  }
+  .body :global(figcaption) {
+    margin-top: 8px;
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    text-align: center;
+  }
 
   .signoff {
     margin: 44px 0;
