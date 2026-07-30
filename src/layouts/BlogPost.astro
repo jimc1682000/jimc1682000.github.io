@@ -210,13 +210,24 @@ const authorName = lang === 'en' ? 'Jimmy Chen' : '陳建豪';
   }
 
   /* 正文:窄欄 serif、行高 2.05（對齊 mockup） */
+  /* 正文用系統黑體，不用宋體 —— 思源宋體不是任何主流系統的內建字型（macOS 只有
+     Songti、Windows 只有新細明體、Android 通常沒有 serif），而 Songti 的粗體天生輕，
+     行內強調看不出來。身分識別交給標題宋體、朱砂與落款印章，正文交給各平台可靠的黑體。
+     參數是為黑體重調的，不能沿用宋體那套：黑體筆畫均勻、同字級視覺重量更大。 */
   .body {
     margin-top: 32px;
-    font-size: 1.1rem;
-    line-height: 2.05;
+    font-family: var(--font-sans);
+    font-size: 1.02rem;
+    line-height: 2.1;
+    letter-spacing: 0.015em;
+    /* 用 token 而非寫死顏色：亮色模式的墨色不同。黑體比宋體搶眼，收一點回到「墨」。 */
+    opacity: 0.94;
   }
+  /* 首行縮排是中文散文慣例，也是換掉宋體之後把「文氣」找回來的關鍵；
+     段距因此收小，靠縮排而非空白分段。引文與清單不套（縮排會打亂它們的層次）。 */
   .body :global(p) {
-    margin: 0 0 1.3rem;
+    text-indent: 2em;
+    margin: 0 0 0.5rem;
   }
   .body :global(h2) {
     font-size: 1.5rem;
