@@ -44,7 +44,7 @@
 
 ### hidden-resume
 
-完整履歷改走 **Zero Trust–inspired** 分享：公開只留 L0；完整內容經身分驗證 + 可撤銷 grant 後提供（目標 `cv.jimmychen.me`）。內容源 `jimc1682000/resume` 改 private，並規劃清洗 public git 歷史。見 [`docs/hidden-resume.md`](./docs/hidden-resume.md)。
+完整履歷改走 **Zero Trust–inspired** 分享：公開只留 L0；HR 來信使用 Email OTP grant，主動 invite 使用 7 天 bearer link；PDF 由 Worker 授權後從 private R2 串流。完整架構與隱私決策見 [`ADR-0001`](./docs/adr/0001-private-resume-delivery-and-site-privacy.md)；舊版設計保留於 [`docs/hidden-resume.md`](./docs/hidden-resume.md) 供追溯。
 
 ## 內容結構
 

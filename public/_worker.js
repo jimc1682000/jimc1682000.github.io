@@ -50,7 +50,7 @@ const BLOGGER_OVERRIDES = {
 // 'wasm-unsafe-eval'：Pagefind 搜尋用 WebAssembly（/pagefind/wasm.unknown.pagefind），
 // 少了它 /blog/search 會壞掉。這是最容易漏的一項。
 //
-// img-src 用 https: 而非白名單：webmention 頭像來自任意第三方網域，無法預先列舉。
+// Webmention 頭像在 build time 下載、重編碼並變成本地 WebP，visitor 不需連外取圖。
 //
 // font-src 只放行 'self' 就夠：標題的思源黑體 subset 自 host（public/fonts/），
 // 其餘位置用系統字型，沒有任何外部字型來源。
@@ -60,11 +60,11 @@ const CSP = [
   "object-src 'none'",
   "form-action 'self'",
   "frame-ancestors 'self'",
-  "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://giscus.app https://static.cloudflareinsights.com",
+  "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://giscus.app",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https:",
+  "img-src 'self' data:",
   "font-src 'self'",
-  "connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com",
+  "connect-src 'self'",
   'frame-src https://giscus.app',
   "manifest-src 'self'",
   'upgrade-insecure-requests',

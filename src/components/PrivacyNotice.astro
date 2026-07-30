@@ -1,0 +1,258 @@
+---
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<article class="privacy">
+  {
+    lang === 'en' ? (
+      <>
+        <p class="kicker">Privacy</p>
+        <h1>Privacy notice</h1>
+        <p class="updated">Last updated: 30 July 2026</p>
+        <p class="lede">
+          This is a personal website. It does not use advertising trackers or client-side analytics.
+          The site stores only the information needed to deliver a requested resume, display public
+          responses, and handle abuse or privacy requests.
+        </p>
+
+        <h2>When you browse this site</h2>
+        <p>
+          Pages are delivered through Cloudflare and mirrored on GitHub Pages. Those providers may
+          process connection data such as your IP address as part of delivering and securing the
+          service. I do not send raw request logs to another database or retain IP addresses and
+          User-Agent strings myself. Traffic measurement is limited to aggregate, server-side or
+          edge data.
+        </p>
+        <p>
+          No non-essential cookie is set on the public site. The theme preference is stored in your
+          browser. The protected resume service uses authentication cookies that are necessary to
+          keep an authenticated session.
+        </p>
+
+        <h2>Comments and responses</h2>
+        <p>
+          Public replies received through Webmention may be shown with the author's name, source
+          link, reply text, and a locally cached copy of the public avatar. Avatars are downloaded
+          during the site build, converted to a static WebP file, and are not requested from the
+          author's server by your browser.
+        </p>
+        <p>
+          Reply text may be sent to OpenAI's moderation endpoint. No avatar, author name, email, IP
+          address, or browser data is included in that request. A flagged reply is hidden; a service
+          outage does not block the rest of the build. Individual Webmention identifiers and source
+          URLs may appear in private build logs for moderation and troubleshooting.
+        </p>
+        <p>
+          Giscus is not loaded until you select the GitHub tab below an article. At that point your
+          browser connects to GitHub and Giscus, and their privacy terms apply. This choice is not
+          remembered by this site.
+        </p>
+
+        <h2>Resume requests and invite links</h2>
+        <p>
+          An incoming resume request is processed only when the sending domain passes DMARC. The
+          original email is forwarded to my mailbox and is not copied into the resume database or
+          object storage. The service records the sender address, requested variant and language,
+          grant state, document identifier, expiry, and download events. It does not infer or verify
+          your name, employer, role, or recruiting status.
+        </p>
+        <p>
+          Email-bound grants expire after 30 days. Owner-created invite links expire after 7 days.
+          Token hashes and generated PDFs are deleted on expiry or revocation. Identifiable grant,
+          invite, and download records are retained for up to 365 additional days, then deleted or
+          anonymised. Anonymous totals may be retained without a link to an individual.
+        </p>
+
+        <h2>Your requests</h2>
+        <p>
+          You may ask what identifiable resume-delivery data is held about your email address, ask
+          for a correction, or request early deletion. Send the request to{' '}
+          <a href="mailto:privacy@jimmychen.me">privacy@jimmychen.me</a>. Control of the relevant
+          mailbox may be verified with an email one-time code; identity documents are not requested.
+          I aim to respond within one month. Data needed for an active security incident, abuse
+          investigation, or legal claim may be restricted and retained for that purpose.
+        </p>
+
+        <h2>Services used</h2>
+        <ul>
+          <li>
+            <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a> for delivery,
+            security, email routing, access control, and storage.
+          </li>
+          <li>
+            <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">
+              GitHub
+            </a>{' '}
+            for source hosting, builds, the mirror site, and optional Giscus comments.
+          </li>
+          <li>
+            <a href="https://openai.com/policies/privacy-policy/">OpenAI</a> for text-only
+            Webmention moderation.
+          </li>
+          <li>
+            <a href="https://webmention.io/privacy/">webmention.io</a> for receiving public
+            Webmentions.
+          </li>
+        </ul>
+
+        <p class="scope">
+          This notice follows GDPR data-minimisation and transparency principles as a practical
+          baseline. It is not a claim of certification or a guarantee that every jurisdiction's law
+          applies in the same way.
+        </p>
+      </>
+    ) : (
+      <>
+        <p class="kicker">隱私</p>
+        <h1>隱私告知</h1>
+        <p class="updated">最後更新：2026 年 7 月 30 日</p>
+        <p class="lede">
+          這是個人網站，不放廣告追蹤碼，也不使用 client-side
+          analytics。本站只保存交付履歷、顯示公開回覆，以及處理濫用或隱私請求所需的資料。
+        </p>
+
+        <h2>瀏覽網站時</h2>
+        <p>
+          網頁主要由 Cloudflare 傳送，GitHub Pages 提供鏡像。這些服務在傳送及保護網站時，可能處理 IP
+          address 等連線資料；本站不把 raw request log 匯出到其他 database，也不自行保存 IP address
+          或 User-Agent。流量統計只使用 edge／server-side aggregate。
+        </p>
+        <p>
+          公開網站不設定非必要 cookie。深淺色偏好只存在你的
+          browser；受保護履歷服務則會使用維持登入狀態所必要的 authentication cookie。
+        </p>
+
+        <h2>留言與站外回覆</h2>
+        <p>
+          透過 Webmention
+          收到的公開回覆，可能連同作者名稱、來源連結、回覆文字與公開頭像顯示於文章下方。頭像只在
+          build 時下載並轉成本站的靜態 WebP；訪客的 browser 不會再向原始頭像主機發出請求。
+        </p>
+        <p>
+          回覆文字可能送到 OpenAI moderation endpoint 檢查；請求不含頭像、作者名稱、email、IP
+          address 或 browser 資料。被標記的單則回覆會隱藏，服務中斷不會擋住其他文章或留言的
+          build。為了審核及排錯，private build log 可能記錄 Webmention ID、來源 URL
+          與判定類別，但不記完整回覆文字。
+        </p>
+        <p>
+          Giscus 不會隨文章頁一起載入。只有你點選 GitHub 分頁後，browser 才會連線到
+          GitHub／Giscus，後續資料處理由其隱私條款規範。本站不記住這項分頁選擇。
+        </p>
+
+        <h2>履歷申請與 invite link</h2>
+        <p>
+          履歷申請只在寄件網域通過 DMARC 時處理。原始 email 會轉寄到我的 mailbox，不會複製進履歷
+          database 或 object storage。系統會記錄寄件地址、指定版本與語系、grant 狀態、document
+          ID、期限及下載事件；不推測或驗證姓名、公司、職稱或 HR 身分。
+        </p>
+        <p>
+          綁定 email 的 grant 在 30 天後到期；由我建立的 invite link 在 7 天後到期。Token hash
+          與產製的 PDF 會在到期或撤銷時刪除。可識別的 grant、invite 與個別下載紀錄最多再保留 365
+          天，之後刪除或匿名化；無法連回個人的彙總數字可以繼續保留。
+        </p>
+
+        <h2>查詢、更正與刪除</h2>
+        <p>
+          你可以查詢本站保存了哪些與該 email 有關的履歷交付資料，也可以要求更正或提前刪除。請寄到{' '}
+          <a href="mailto:privacy@jimmychen.me">privacy@jimmychen.me</a>。系統可能用 email OTP
+          確認你能控制該
+          mailbox，不要求提供身分證件；原則上會在一個月內回覆。若資料正用於安全事件、濫用調查或法律請求，會限制用途並只保留處理該事件所需的部分。
+        </p>
+
+        <h2>使用的外部服務</h2>
+        <ul>
+          <li>
+            <a href="https://www.cloudflare.com/zh-tw/privacypolicy/">Cloudflare</a>
+            ：網站傳送、安全防護、email routing、access control 與 storage。
+          </li>
+          <li>
+            <a href="https://docs.github.com/zh/site-policy/privacy-policies/github-general-privacy-statement">
+              GitHub
+            </a>
+            ：source hosting、build、鏡像站與使用者主動開啟的 Giscus。
+          </li>
+          <li>
+            <a href="https://openai.com/zh-Hant/policies/privacy-policy/">OpenAI</a>：只含文字的
+            Webmention moderation。
+          </li>
+          <li>
+            <a href="https://webmention.io/privacy/">webmention.io</a>：接收公開 Webmention。
+          </li>
+        </ul>
+
+        <p class="scope">
+          這份告知以 GDPR
+          的資料最小化與透明原則作為實務基準，不表示本站取得任何認證，也不表示各地法律都以相同方式適用。
+        </p>
+      </>
+    )
+  }
+</article>
+
+<style>
+  .privacy {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md) var(--spacing-2xl);
+    line-height: 1.9;
+  }
+
+  .kicker {
+    color: var(--color-seal);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    margin: 0 0 var(--spacing-sm);
+  }
+
+  h1 {
+    font-size: var(--font-size-4xl);
+    margin: 0;
+  }
+
+  .updated {
+    color: var(--color-text-tertiary);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    margin: var(--spacing-xs) 0 var(--spacing-lg);
+  }
+
+  .lede {
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+  }
+
+  h2 {
+    border-left: 4px solid var(--color-seal);
+    font-size: var(--font-size-xl);
+    margin: var(--spacing-xl) 0 var(--spacing-sm);
+    padding-left: var(--spacing-sm);
+  }
+
+  p,
+  li {
+    color: var(--color-text-secondary);
+  }
+
+  ul {
+    padding-left: var(--spacing-md);
+  }
+
+  a {
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-seal);
+  }
+
+  .scope {
+    border-top: 1px solid var(--color-border-subtle);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+</style>

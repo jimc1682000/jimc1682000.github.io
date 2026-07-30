@@ -19,8 +19,8 @@
 
 | ID | 項目 |
 |----|------|
-| P2-09 | **留言**（Giscus 等）— 已決議 v1 不做、之後要補 |
-| P2-10 | **Analytics** — v1 不做 |
+| P2-09 | **留言** — 已完成 Fediverse／Bluesky 預設 + Giscus click-to-load |
+| P2-10 | **Analytics** — 僅保留 Cloudflare edge／server-side aggregate |
 | P2-11 | **搜尋**（Pagefind 等）— v1 不做、要補 |
 | P2-12 | Blog 列表分頁 |
 | P2-13 | OG 圖自動化 |
@@ -52,11 +52,11 @@
 | P2-24 | content-only 規則再收緊 |
 | P2-25 | 譯文 stale 偵測 |
 
-## hidden-resume（見 `docs/hidden-resume.md`）
+## private resume（見 `docs/adr/0001-private-resume-delivery-and-site-privacy.md`）
 
 | ID | 項目 |
 |----|------|
 | HR-0 | 公開 `/resume/` 降為 L0；完整內容與 PDF 離開公開 dist／公開 git |
-| HR-1 | `cv.jimmychen.me` + Access + Worker/D1 grant MVP（申請／核准／撤銷／浮水印 HTML） |
-| HR-2 | R2 私有 PDF + 15 分鐘 signed URL + per-grant 浮水印 |
-| HR-3 | Appendix 分層、異常自動 suspended、可選 self-hosted Authentik+Pomerium |
+| HR-1 | `resume.jimmychen.me` + Email Worker + Access／Worker／D1 grant 與 invite MVP |
+| HR-2 | Private R2 + Worker 串流 + per-grant／invite 浮水印 PDF + 下載計數 |
+| HR-3 | Privacy Notice、資料保留／刪除、build-time avatar 與 Webmention moderation |

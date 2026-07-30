@@ -11,9 +11,23 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const name = lang === 'en' ? contact.nameEn : contact.nameZh;
-const requestHref = `mailto:${contact.email}?subject=${encodeURIComponent(
-  lang === 'en' ? 'Request full resume' : '申請查看完整履歷',
-)}`;
+const variants = [
+  { id: 'ai', label: 'AI' },
+  { id: 'sre', label: 'SRE' },
+  { id: 'platform', label: 'Platform' },
+  { id: 'detailed', label: lang === 'en' ? 'Detailed' : '詳細版' },
+].map((variant) => {
+  const subject =
+    lang === 'en' ? `Request ${variant.label} resume` : `申請查看 ${variant.label} 履歷`;
+  const body =
+    lang === 'en'
+      ? `Hello, I would like to view the ${variant.label} version of your full resume.`
+      : `您好，我想查看 ${variant.label} 版本的完整履歷。`;
+  return {
+    ...variant,
+    href: `mailto:resume+${variant.id}-${lang}@jimmychen.me?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+  };
+});
 ---
 
 <div class="resume-profile">
@@ -67,8 +81,16 @@ const requestHref = `mailto:${contact.email}?subject=${encodeURIComponent(
   <section class="block cta" aria-labelledby="resume-full">
     <h2 id="resume-full">{t('resume.fullTitle')}</h2>
     <p class="note">{t('resume.fullNote')}</p>
-    <p class="actions">
-      <a class="btn" href={requestHref}>{t('resume.request')}</a>
+    <div class="variants" role="group" aria-label={t('resume.variantLabel')}>
+      {
+        variants.map((variant) => (
+          <a class="btn" href={variant.href}>
+            {variant.label}
+          </a>
+        ))
+      }
+    </div>
+    <p class="actions secondary-actions">
       <a class="btn ghost" href={lang === 'en' ? '/en/contact' : '/contact'}
         >{t('resume.contact')}</a
       >
@@ -152,6 +174,17 @@ const requestHref = `mailto:${contact.email}?subject=${encodeURIComponent(
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 18px;
+  }
+
+  .variants {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+  }
+
+  .secondary-actions {
+    margin-top: var(--spacing-xs);
   }
 
   .btn {

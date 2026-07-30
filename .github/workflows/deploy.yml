@@ -16,14 +16,15 @@ on:
   repository_dispatch:
     types: [assemble-site, webmention]
   # Webmention 排程檢查(P2-11):站外迴響是 build 時抓的,不重建就不會出現。
-  # 每 6 小時「先查再決定」——由 gate job 比對 webmention.io 的最新 wm-id 與上次快取,
-  # 沒有新迴響就直接結束(約 10 秒,不 build 也不 deploy),避免每天 4 次白 build。
+  # 每 6 小時「先查再決定」——由 gate job 比對 webmention.io 的最新 wm-id 與上次快取，
+  # 每天另做一次 full build，收斂 max-id 看不到的更新與刪除。
   # 為何不用 webhook 即時:webmention.io 的 webhook 只能 POST 一個 URL、無法帶
   # Authorization header,而 GitHub 的 repository_dispatch 需要 PAT 認證,兩者接不上;
   # 要即時就得多一層 Cloudflare Worker 持有 PAT(對應上方 webmention dispatch type)。
   # 「排程 + 先查」用一個唯讀 token 就換到同樣的低浪費,不必引入可寫 repo 的 PAT。
   schedule:
     - cron: '0 */6 * * *'
+    - cron: '17 1 * * *'
 
 permissions:
   contents: read
@@ -60,6 +61,10 @@ jobs:
           set -euo pipefail
           if [ "${{ github.event_name }}" != "schedule" ]; then
             echo "非排程觸發（${{ github.event_name }}）→ 直接 build。"
+            echo "build=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          if [ "${{ github.event.schedule }}" = "17 1 * * *" ]; then
+            echo "每日 full refresh → 直接 build。"
             echo "build=true" >> "$GITHUB_OUTPUT"; exit 0
           fi
           # 排程觸發：只為刷新站外迴響而跑。查不到就跳過，下次 cron 再試。
@@ -106,15 +111,15 @@ jobs:
       - run: npm ci
       - name: Build Astro (brand + blog)
         run: npm run build
-        # PUBLIC_* 為公開值（會進 client HTML）；用 repo Variables 注入。
-        # 未設 → 空字串 → 元件 gating 自動略過（留言/analytics 不輸出）。
+        # PUBLIC_* 為公開值（會進 client HTML）；OPENAI_API_KEY 只供 build-time moderation。
+        # 未設 Giscus → 不輸出 GitHub tab；未設 OpenAI → moderation fail-open。
         env:
           PUBLIC_GISCUS_REPO: ${{ vars.PUBLIC_GISCUS_REPO }}
           PUBLIC_GISCUS_REPO_ID: ${{ vars.PUBLIC_GISCUS_REPO_ID }}
           PUBLIC_GISCUS_CATEGORY: ${{ vars.PUBLIC_GISCUS_CATEGORY }}
           PUBLIC_GISCUS_CATEGORY_ID: ${{ vars.PUBLIC_GISCUS_CATEGORY_ID }}
-          PUBLIC_CF_BEACON_TOKEN: ${{ vars.PUBLIC_CF_BEACON_TOKEN }}
           PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} # gitleaks:allow
 
       # --- /resume/ 由主站 Astro 產出 L0（不再 checkout 完整履歷 repo）---
 
@@ -153,6 +158,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+          retention-days: 1
       # 一般 artifact（供 Cloudflare 部署 job 下載，維持單一 build）
       - uses: actions/upload-artifact@v4
         with:
@@ -176,6 +182,7 @@ jobs:
     # 僅當設有 Cloudflare token 時才跑（needs-human 前自動略過，不拖垮 GH mirror）
     env:
       HAS_CF: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+      PURGE_OLD_CF_DEPLOYMENTS: ${{ vars.PURGE_OLD_CF_DEPLOYMENTS }}
     steps:
       - name: Skip notice
         if: env.HAS_CF != 'true'
@@ -191,13 +198,25 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=jimmychen
+          command: pages deploy dist --project-name=jimmychen --branch=${{ github.event.repository.default_branch }} --commit-hash=${{ github.sha }}
+      - uses: actions/checkout@v4
+        if: env.HAS_CF == 'true' && env.PURGE_OLD_CF_DEPLOYMENTS == 'true'
+        with:
+          sparse-checkout: scripts
+      - name: Delete old Cloudflare Pages deployments
+        if: env.HAS_CF == 'true' && env.PURGE_OLD_CF_DEPLOYMENTS == 'true'
+        run: node scripts/purge-cloudflare-pages-deployments.mjs
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_PAGES_PROJECT: jimmychen
+          CLOUDFLARE_KEEP_COMMIT_SHA: ${{ github.sha }}
 
   # 只有排程觸發、且真的因新迴響而重建並部署成功後，才把 wm-id 記進快取。
   # 刻意放在 deploy 之後：若 build/deploy 失敗，訊號不被消耗，下個 cron 會重試。
   record-webmention-state:
     needs: [gate, deploy-gh-pages]
-    if: github.event_name == 'schedule' && needs.gate.outputs.build == 'true'
+    if: github.event_name == 'schedule' && github.event.schedule != '17 1 * * *' && needs.gate.outputs.build == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Write last seen webmention id

@@ -5,13 +5,13 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run sync:webmentions && astro build",
     "postbuild": "pagefind --site dist && node scripts/check-fonts.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro",
     "validate:mf2": "node scripts/validate-microformats.mjs",
-    "validate": "npm run check && npm run lint && npm run lint:css && npm run lint:md && npm run format:check && npm run build && npm run validate:mf2 && npm run lint:html",
+    "validate": "npm run check && npm run lint && npm run lint:css && npm run lint:md && npm run format:check && npm run test:webmentions && npm run build && npm run validate:mf2 && npm run lint:html",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -20,7 +20,9 @@
     "lint:html": "html-validate \"dist/**/*.html\"",
     "lint:deps": "knip",
     "build:fonts": "node scripts/build-fonts.mjs",
-    "build:og": "node scripts/build-og.mjs"
+    "build:og": "node scripts/build-og.mjs",
+    "sync:webmentions": "node scripts/sync-webmentions.mjs",
+    "test:webmentions": "node --test scripts/webmention-utils.test.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

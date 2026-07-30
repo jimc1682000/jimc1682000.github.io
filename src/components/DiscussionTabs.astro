@@ -1,0 +1,230 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/ui';
+import { giscus, giscusEnabled } from '../consts';
+import Webmentions from './Webmentions.astro';
+
+interface Props {
+  target: URL;
+  lang: Lang;
+}
+
+const { target, lang } = Astro.props;
+const t = useTranslations(lang);
+const giscusLang = lang === 'en' ? 'en' : 'zh-TW';
+const idSuffix = target.pathname.replace(/[^a-z0-9]+/gi, '-') || 'home';
+const fediversePanel = `discussion-fediverse-${idSuffix}`;
+const githubPanel = `discussion-github-${idSuffix}`;
+---
+
+<section class="discussion" aria-label={t('discussion.title')}>
+  <h2>{t('discussion.title')}</h2>
+  <div class="tabs" role="tablist" aria-label={t('discussion.choose')}>
+    <button
+      type="button"
+      role="tab"
+      aria-selected="true"
+      aria-controls={fediversePanel}
+      id={`${fediversePanel}-tab`}
+      data-discussion-tab="fediverse"
+    >
+      {t('discussion.fediverse')}
+    </button>
+    {
+      giscusEnabled && (
+        <button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls={githubPanel}
+          id={`${githubPanel}-tab`}
+          tabindex="-1"
+          data-discussion-tab="github"
+        >
+          {t('discussion.github')}
+        </button>
+      )
+    }
+  </div>
+
+  <div
+    class="panel"
+    role="tabpanel"
+    id={fediversePanel}
+    aria-labelledby={`${fediversePanel}-tab`}
+    data-discussion-panel="fediverse"
+  >
+    <p class="hint">
+      {t('discussion.fediverseHint')}
+      <a href="https://fed.brid.gy/web/jimmychen.me" rel="me noopener noreferrer" target="_blank">
+        {t('discussion.fediverseProfile')}
+      </a>
+      <span aria-hidden="true"> · </span>
+      <a href="https://bsky.app/profile/jimmychen.me" rel="me noopener noreferrer" target="_blank">
+        Bluesky
+      </a>
+    </p>
+    <Webmentions target={target} lang={lang} />
+  </div>
+
+  {
+    giscusEnabled && (
+      <div
+        class="panel"
+        role="tabpanel"
+        id={githubPanel}
+        aria-labelledby={`${githubPanel}-tab`}
+        data-discussion-panel="github"
+        hidden
+      >
+        <p class="hint">{t('discussion.githubPrivacy')}</p>
+        <div class="giscus" data-giscus-container />
+      </div>
+    )
+  }
+
+  {
+    giscusEnabled && (
+      <script is:inline define:vars={{ giscus, giscusLang }}>
+        (function () {
+          var root = document.currentScript.parentElement;
+          var tabs = Array.from(root.querySelectorAll('[data-discussion-tab]'));
+          var panels = Array.from(root.querySelectorAll('[data-discussion-panel]'));
+          var loaded = false;
+
+          var pickTheme = function () {
+            return document.documentElement.getAttribute('data-theme') === 'light'
+              ? 'light'
+              : 'dark';
+          };
+
+          var loadGiscus = function () {
+            if (loaded) return;
+            loaded = true;
+            var script = document.createElement('script');
+            script.src = 'https://giscus.app/client.js';
+            script.setAttribute('data-repo', giscus.repo);
+            script.setAttribute('data-repo-id', giscus.repoId);
+            script.setAttribute('data-category', giscus.category);
+            script.setAttribute('data-category-id', giscus.categoryId);
+            script.setAttribute('data-mapping', 'pathname');
+            script.setAttribute('data-strict', '1');
+            script.setAttribute('data-reactions-enabled', '1');
+            script.setAttribute('data-emit-metadata', '0');
+            script.setAttribute('data-input-position', 'bottom');
+            script.setAttribute('data-theme', pickTheme());
+            script.setAttribute('data-lang', giscusLang);
+            script.setAttribute('data-loading', 'lazy');
+            script.crossOrigin = 'anonymous';
+            script.async = true;
+            root.querySelector('[data-giscus-container]').appendChild(script);
+          };
+
+          var select = function (name) {
+            tabs.forEach(function (tab) {
+              var selected = tab.dataset.discussionTab === name;
+              tab.setAttribute('aria-selected', String(selected));
+              tab.tabIndex = selected ? 0 : -1;
+            });
+            panels.forEach(function (panel) {
+              panel.hidden = panel.dataset.discussionPanel !== name;
+            });
+            if (name === 'github') loadGiscus();
+          };
+
+          tabs.forEach(function (tab, index) {
+            tab.addEventListener('click', function () {
+              select(tab.dataset.discussionTab);
+            });
+            tab.addEventListener('keydown', function (event) {
+              if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+              event.preventDefault();
+              var delta = event.key === 'ArrowRight' ? 1 : -1;
+              var next = tabs[(index + delta + tabs.length) % tabs.length];
+              select(next.dataset.discussionTab);
+              next.focus();
+            });
+          });
+
+          var observer = new MutationObserver(function () {
+            var iframe = root.querySelector('iframe.giscus-frame');
+            if (!iframe) return;
+            iframe.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: pickTheme() } } },
+              'https://giscus.app',
+            );
+          });
+          observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme'],
+          });
+        })();
+      </script>
+    )
+  }
+</section>
+
+<style>
+  .discussion {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .discussion > h2 {
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border: 1px solid var(--color-border);
+  }
+
+  .tabs button {
+    appearance: none;
+    border: 0;
+    border-right: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-secondary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font: inherit;
+    font-family: var(--font-sans);
+    cursor: pointer;
+  }
+
+  .tabs button:last-child {
+    border-right: 0;
+  }
+
+  .tabs button[aria-selected='true'] {
+    background: var(--color-bg-surface);
+    color: var(--color-text);
+  }
+
+  .tabs button:focus-visible {
+    outline: 2px solid var(--color-seal);
+    outline-offset: -3px;
+  }
+
+  .panel {
+    padding-top: var(--spacing-md);
+  }
+
+  .hint {
+    color: var(--color-text-secondary);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .hint a {
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-seal);
+  }
+</style>

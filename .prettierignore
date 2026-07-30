@@ -15,3 +15,4 @@ docs/
 # 伺服器端變數帶進 inline script）。為了讓 formatter 能跑而改動這段在 paint 前
 # 執行的關鍵腳本，風險大於收益，故排除本檔。eslint 仍會檢查它。
 src/layouts/BlogPost.astro
+src/components/DiscussionTabs.astro

@@ -1,11 +1,10 @@
 ---
-// Webmention 顯示（P2-11）：build 時向 webmention.io 取本頁的跨站互動並編成靜態 HTML。
-// npm 上沒有現成的 Astro webmention integration（2026-07-25 查 registry 為 Not found），故自寫。
-// 失敗（API 掛掉、超時、格式變動）一律降級為「不顯示」，不讓 CI 紅掉。
-// 新留言要出現需重新 build —— 由 deploy.yml 的排程重建負責（見該檔註解）。
+// Webmention 顯示（P2-11）：sync-webmentions.mjs 先在 build 前抓取、moderate、
+// 本地化 avatar；元件只讀 private build cache，不讓 visitor 連線到 author.photo 主機。
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import type { Lang } from '../i18n/ui';
 import { useTranslations } from '../i18n/ui';
-import { webmentionEnabled } from '../consts';
 
 interface Props {
   /** 本頁的絕對 URL（h-entry 的 u-url，同時是 webmention 的 target） */
@@ -14,45 +13,31 @@ interface Props {
 }
 
 interface Mention {
-  'wm-property': string;
-  url?: string;
+  id: string;
+  property: string;
+  source: string;
   published?: string | null;
   author?: { name?: string; photo?: string; url?: string };
-  content?: { text?: string };
+  text?: string;
 }
 
 const { target, lang } = Astro.props;
 const t = useTranslations(lang);
 
-// target 尾斜線兩種寫法都查：社群貼文可能帶或不帶，webmention.io 視為不同 key。
-const withSlash = target.href.endsWith('/') ? target.href : `${target.href}/`;
-const withoutSlash = withSlash.slice(0, -1);
-
 let mentions: Mention[] = [];
-if (webmentionEnabled) {
-  const api = new URL('https://webmention.io/api/mentions.jf2');
-  api.searchParams.append('target[]', withSlash);
-  api.searchParams.append('target[]', withoutSlash);
-  api.searchParams.set('per-page', '100');
-  try {
-    const res = await fetch(api, { signal: AbortSignal.timeout(10_000) });
-    if (res.ok) {
-      const data = await res.json();
-      if (Array.isArray(data?.children)) mentions = data.children;
-    }
-  } catch {
-    // 靜默降級：不顯示互動區，build 照常完成。
-  }
+const cacheFile = resolve(process.cwd(), '.cache/webmentions/data.json');
+if (existsSync(cacheFile)) {
+  const data = JSON.parse(readFileSync(cacheFile, 'utf8'));
+  const path = target.pathname.endsWith('/') ? target.pathname : `${target.pathname}/`;
+  if (Array.isArray(data?.mentionsByPath?.[path])) mentions = data.mentionsByPath[path];
 }
 
-const isLike = (m: Mention) => m['wm-property'] === 'like-of';
-const isRepost = (m: Mention) => m['wm-property'] === 'repost-of';
-const hasText = (m: Mention) => Boolean(m.content?.text?.trim());
+const isLike = (m: Mention) => m.property === 'like-of';
+const isRepost = (m: Mention) => m.property === 'repost-of';
 
 const likes = mentions.filter(isLike);
 const reposts = mentions.filter(isRepost);
-// 回覆與提及：只留真的有內容的，避免空殼條目。
-const replies = mentions.filter((m) => !isLike(m) && !isRepost(m) && hasText(m));
+const replies = mentions.filter((m) => m.property === 'in-reply-to' && Boolean(m.text));
 
 const show = likes.length > 0 || reposts.length > 0 || replies.length > 0;
 ---
@@ -67,7 +52,7 @@ const show = likes.length > 0 || reposts.length > 0 || replies.length > 0;
           {[...reposts, ...likes].map((m) => (
             <a
               class="face"
-              href={m.author?.url || m.url}
+              href={m.author?.url || m.source}
               target="_blank"
               rel="noopener noreferrer nofollow"
               title={`${m.author?.name ?? ''}${isRepost(m) ? ` · ${t('webmention.reposts')}` : ''}`}
@@ -99,16 +84,16 @@ const show = likes.length > 0 || reposts.length > 0 || replies.length > 0;
             <li class="reply">
               <a
                 class="who"
-                href={m.author?.url || m.url}
+                href={m.author?.url || m.source}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
               >
                 {m.author?.name ?? t('webmention.someone')}
               </a>
               {/* 只取純文字：外站內容不注入 HTML。 */}
-              <p class="what">{m.content?.text}</p>
-              {m.url && (
-                <a class="src" href={m.url} target="_blank" rel="noopener noreferrer nofollow">
+              <p class="what">{m.text}</p>
+              {m.source && (
+                <a class="src" href={m.source} target="_blank" rel="noopener noreferrer nofollow">
                   {t('webmention.source')} →
                 </a>
               )}
@@ -122,9 +107,7 @@ const show = likes.length > 0 || reposts.length > 0 || replies.length > 0;
 
 <style>
   .wm {
-    margin-top: var(--spacing-lg);
-    padding-top: var(--spacing-xl);
-    border-top: 1px solid var(--color-border-subtle);
+    margin-top: var(--spacing-md);
   }
 
   .wm-h {
