@@ -107,7 +107,7 @@ const more = [
   }
 
   .head h1 {
-    font-size: 2rem;
+    font-size: var(--text-h1);
     letter-spacing: 0.06em;
     margin: 0;
   }
@@ -115,20 +115,20 @@ const more = [
   .latin {
     margin: 2px 0 0;
     color: var(--color-text-tertiary);
-    font-size: 0.9rem;
+    font-size: var(--text-label);
     letter-spacing: 0.08em;
   }
 
   .role {
     margin: 10px 0 0;
     color: var(--color-seal);
-    font-size: 0.95rem;
+    font-size: var(--text-ui);
   }
 
   .note {
     margin: var(--spacing-md) 0 var(--spacing-lg);
     color: var(--color-text-secondary);
-    font-size: 0.95rem;
+    font-size: var(--text-ui);
     line-height: 1.9;
   }
 
@@ -137,7 +137,7 @@ const more = [
     grid-template-columns: auto 1fr;
     gap: 10px var(--spacing-md);
     margin: 0;
-    font-size: 0.92rem;
+    font-size: var(--text-label);
   }
 
   .rows dt {
@@ -183,7 +183,7 @@ const more = [
     background: var(--color-seal);
     color: var(--color-bg);
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: var(--text-ui);
     letter-spacing: 0.04em;
     border-radius: 2px;
   }
@@ -215,12 +215,12 @@ const more = [
   .qrmeta p {
     margin: 0 0 6px;
     color: var(--color-text-tertiary);
-    font-size: 0.85rem;
+    font-size: var(--text-meta);
   }
 
   .qrmeta a {
     color: var(--color-text-tertiary);
-    font-size: 0.82rem;
+    font-size: var(--text-meta);
     text-decoration: none;
   }
 
@@ -240,7 +240,7 @@ const more = [
   .more {
     display: flex;
     gap: var(--spacing-md);
-    font-size: 0.88rem;
+    font-size: var(--text-label);
   }
 
   .more a {

@@ -133,12 +133,12 @@ const recent = (await getPosts(lang)).slice(0, 3);
     user-select: none;
   }
   .scroll .nm {
-    font-size: 3.3rem;
+    font-size: var(--text-scroll);
     font-weight: 700;
     letter-spacing: 0.14em;
   }
   .scroll .slogan {
-    font-size: 1.1rem;
+    font-size: var(--text-lede);
     color: var(--color-text-secondary);
     letter-spacing: 0.28em;
     line-height: 1.4;
@@ -162,7 +162,7 @@ const recent = (await getPosts(lang)).slice(0, 3);
     padding-top: 0;
   }
   .home.en .scroll .nm {
-    font-size: 3rem;
+    font-size: var(--text-scroll-en);
     letter-spacing: 0.02em;
   }
   .home.en .scroll .slogan {
@@ -175,13 +175,13 @@ const recent = (await getPosts(lang)).slice(0, 3);
   }
   .sub {
     font-family: var(--font-ui);
-    font-size: 0.9rem;
+    font-size: var(--text-label);
     letter-spacing: 0.08em;
     color: var(--color-text-tertiary);
     margin-bottom: 26px;
   }
   .prose {
-    font-size: 1.08rem;
+    font-size: var(--text-lede);
     line-height: 2;
   }
   .prose p {
@@ -213,7 +213,7 @@ const recent = (await getPosts(lang)).slice(0, 3);
   .refs .lbl {
     font-family: var(--font-ui);
     color: var(--color-text-tertiary);
-    font-size: 0.85rem;
+    font-size: var(--text-meta);
     margin-bottom: 10px;
     letter-spacing: 0.05em;
   }
@@ -232,7 +232,7 @@ const recent = (await getPosts(lang)).slice(0, 3);
   }
   .refs time {
     color: var(--color-text-tertiary);
-    font-size: 0.82rem;
+    font-size: var(--text-meta);
     font-family: var(--font-ui);
     white-space: nowrap;
   }
@@ -243,7 +243,7 @@ const recent = (await getPosts(lang)).slice(0, 3);
   }
   .find .lbl {
     color: var(--color-text-tertiary);
-    font-size: 0.85rem;
+    font-size: var(--text-meta);
     margin-bottom: 10px;
   }
 
@@ -260,7 +260,7 @@ const recent = (await getPosts(lang)).slice(0, 3);
       order: -1;
     }
     .scroll .nm {
-      font-size: 2.6rem;
+      font-size: var(--text-page-h);
     }
   }
 </style>
