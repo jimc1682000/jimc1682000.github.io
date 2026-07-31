@@ -245,8 +245,10 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 4. 首頁走散文式，不要改成卡牆作品目錄。
 5. 直式只用於純中文短句（立軸）；含英文長內文一律橫排。
 6. 偏離本檔須使用者明確批准，並補一列 Decisions Log。
-7. 改 token 先改 global.css，再回寫本檔表格保持同步。字型只有兩個入口：global.css 的
-   Typography 區、與 scripts/build-fonts.mjs 的 FONT 物件。
+7. 改 token 先改 global.css，再回寫本檔表格保持同步。字型分兩種改法，別混：
+   換字型檔 → build-fonts.mjs 的 FONT 物件 + global.css 的 token。
+   改「哪些位置吃標題字」→ global.css 那條唯一接點規則 + site-chars.mjs 的 PATTERNS，
+   兩份清單必須一致（gate 只查反向，多接就是靜默缺字）。
 ```
 
 ---
