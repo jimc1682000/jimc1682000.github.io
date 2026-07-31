@@ -83,7 +83,8 @@ const printable = (s) => [...s].filter((c) => c.trim() !== '');
  * 漏掉任何一處的後果是那些字掉到系統黑體，同一行兩種字面，且不會報錯 —— 故有 gate。
  *
  * 反向也要顧：CSS 接上 webfont 的選擇器必須是這裡掃到的**子集**。多接（例如 h5/h6）
- * 就是靜默缺字，而 gate 只查這個方向的缺口，抓不到。
+ * 就是靜默缺字，而 gate 只查這個方向的缺口，抓不到。對帳只需看一處 ——
+ * src/styles/global.css 裡那條「標題字型的唯一接點」規則。
  */
 export function headingChars(distDir = 'dist') {
   const files = htmlFiles(distDir);

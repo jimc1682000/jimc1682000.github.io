@@ -147,13 +147,27 @@ video {
   height: auto;
 }
 
-/* 到 h4 為止 —— scripts/lib/site-chars.mjs 的 headingChars() 只掃到 h4，
-   把 h5/h6 也接上 webfont 會缺字而且 gate 不會報錯。 */
+/* 標題字型的唯一接點 —— **這份清單必須與 scripts/lib/site-chars.mjs 的 PATTERNS 一致**。
+   subset 只含這些位置用到的字，多接一個選擇器就是靜默缺字，而 check-fonts.mjs 只查
+   反向（字集缺字），抓不到。故也止於 h4：headingChars() 不掃 h5/h6。
+   刻意寫在 global.css 而不是各元件的 scoped style —— 那會讓這份清單散成四處、
+   跟 PATTERNS 對帳時得四個檔案一起看。.pt／.brand／.item .t 在本 repo 各只有一個
+   擁有者（`.t` 夠通用，故 `.item` 前綴是必要的）。 */
+h1,
+h2,
+h3,
+h4,
+.brand, /* Header 站名 */
+.pt, /* 列表頁的文章標題 */
+.item .t {
+  /* 作品集的條目標題 */
+  font-family: var(--font-heading);
+}
+
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-heading);
   line-height: 1.2;
   font-weight: 700;
   text-wrap: balance;

@@ -132,7 +132,7 @@
 | 散文 | 首頁自介、立軸、印章字仍 **宋體（serif）**，維持散文集人文質感 |
 | UI | nav、日期、tag、footer 等用 **sans**，維持介面清爽 |
 | 直式 | 立軸用 serif + `text-orientation:upright`（漢字直立） |
-| webfont 邊界 | 接上 `--font-heading` 的選擇器必須是 `headingChars()` 掃到的**子集**（故止於 `h4`）；多接就是靜默缺字，`check-fonts.mjs` 只查反向 |
+| webfont 邊界 | `--font-heading` 只有 `global.css` 裡**一條**規則接（`h1`–`h4`、`.brand`、`.pt`、`.item .t`），不寫進元件的 scoped style；那份清單必須是 `headingChars()` 掃到的**子集**（故止於 `h4`），多接就是靜默缺字，`check-fonts.mjs` 只查反向 |
 
 ---
 
