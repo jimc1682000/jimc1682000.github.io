@@ -50,7 +50,9 @@ const SOURCES = {
 // 所以 subset 要留著它們。實測這份原檔只有 halt（GPOS）、沒有 chws —— chws 是後來
 // 才加進思源系列的，一併列著讓日後換版本不必再改一次；pyftsubset 對不存在的 feature
 // 直接忽略。驗證方式：TTFont(產物).GPOS 的 FeatureTag 應含 halt（實測 +0.1 KB）。
-// 不帶 vert/vrt2：首頁直式立軸吃的是 --font-prose（系統宋體），這個 face 沒有直排位置。
+// 不帶 vert/vrt2：首頁直式立軸現在也吃這個 face，但它是 text-orientation: upright ——
+// 漢字一律直立，用的就是橫排字形，不會走 vert 的直排替代（CSS Writing Modes：upright
+// 的字不套 vert）。立軸文字裡也沒有標點，那才是 vert 真正會改的東西。
 // 刻意不加 --desubroutinize（對 CFF 反而變大，實測 449→881 KB）。
 const FLAGS = ['--layout-features=kern,chws,halt', '--no-hinting', '--flavor=woff2'];
 

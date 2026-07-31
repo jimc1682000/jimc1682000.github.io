@@ -77,6 +77,7 @@ const printable = (s) => [...s].filter((c) => c.trim() !== '');
  *   h1–h4          — 文章標題（.page-h 是 h1，一併收）
  *   .pt            — 列表頁的文章標題（div，不是 heading，容易漏）
  *   .item .t       — 作品集的條目標題（同樣是 div）
+ *   .nm / .slogan  — 首頁直式立軸的姓名與標語（3.3rem，全站最大的字）
  *   .brand         — Header 的站名
  *   strong、b      — 已不吃這個 face（正文是系統黑體），但留著多收：字集寬一點只多幾 KB，
  *                    窄了則是畫面缺字。
@@ -95,6 +96,7 @@ export function headingChars(distDir = 'dist') {
     /<(h1|h2|h3|h4|strong|b)\b[^>]*>([\s\S]*?)<\/\1>/gi,
     /<div[^>]*class="[^"]*\bpt\b[^"]*"[^>]*>([\s\S]*?)<\/div>/gi,
     /<div[^>]*class="[^"]*\bt\b[^"]*"[^>]*>([\s\S]*?)<\/div>/gi,
+    /<div[^>]*class="[^"]*\b(?:nm|slogan)\b[^"]*"[^>]*>([\s\S]*?)<\/div>/gi,
     /<[^>]*class="[^"]*\bpage-h\b[^"]*"[^>]*>([\s\S]*?)<\/[a-z0-9]+>/gi,
     /<a[^>]*class="[^"]*\bbrand\b[^"]*"[^>]*>([\s\S]*?)<\/a>/gi,
   ];

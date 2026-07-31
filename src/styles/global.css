@@ -34,13 +34,14 @@
 
   /* Typography —— **改字型只動這一區**（外加 scripts/build-fonts.mjs 的 FONT 物件）。
      token 按「角色」命名而非按字族，因為要換的永遠是某個角色的字：
-       --font-heading  標題。唯一接點是下面那條 h1–h4/.brand/.pt/.item .t 規則，
-                       且是唯一吃自 host webfont 的角色（字集有限，見那條規則的註解）。
+       --font-heading  標題與首頁立軸。唯一接點是下面那條規則，且是唯一吃自 host
+                       webfont 的角色（字集有限，見那條規則的註解）。
        --font-body     blog 正文。唯一使用者是 BlogPost.astro 的 .body。
-       --font-prose    首頁散文、立軸、印章 —— body 預設值，靠繼承散到各頁摘要小段。
+       --font-prose    首頁散文 —— body 預設值，靠繼承散到各頁摘要小段。
        --font-ui       nav／meta／日期／tag／圖說／落款／朱砂 eyebrow 小標。
+       --font-seal     落款印章的「吉」。全站唯一的宋體，理由見該 token 上方。
        --font-mono     code。
-     --font-body 與 --font-ui 目前值相同，但刻意分成兩個：上次「正文改系統黑體」時
+     body／prose／ui 目前值相同（全站黑體），但刻意分成三個：上次「正文改系統黑體」時
      它們是同一個 token，於是「改正文」與「改 nav」分不開、31 處要一處處確認。
 
      'NotoSansTC Head' 是 BaseHead.astro 那個 subset face 的專用名 —— 刻意不叫
@@ -54,10 +55,15 @@
   --font-body:
     -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang TC', 'Microsoft JhengHei',
     'Noto Sans TC', sans-serif;
-  --font-prose: Georgia, 'Times New Roman', 'Songti TC', 'PingFang TC', serif;
+  --font-prose:
+    -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang TC', 'Microsoft JhengHei',
+    'Noto Sans TC', sans-serif;
   --font-ui:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, 'PingFang TC',
     'Microsoft JhengHei', 'Noto Sans TC', sans-serif;
+  /* 印章是全站唯一留宋體的地方：它只畫一個「吉」字，是篆刻質地的 logo 而不是文字內容，
+     宋體的筆畫比黑體更有「印」的味道。不排拉丁字型 —— 這個 token 永遠只渲染漢字。 */
+  --font-seal: 'Songti TC', serif;
   --font-mono:
     ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
@@ -181,8 +187,10 @@ h3,
 h4,
 .brand, /* Header 站名 */
 .pt, /* 列表頁的文章標題 */
-.item .t {
-  /* 作品集的條目標題 */
+.item .t, /* 作品集的條目標題 */
+.scroll .nm, /* 首頁立軸：姓名 */
+.scroll .slogan {
+  /* 首頁立軸：標語 */
   font-family: var(--font-heading);
 }
 
