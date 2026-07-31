@@ -94,6 +94,9 @@ description: 一句話描述  # string，用於列表與 RSS/SEO
   會掃 `content/blog/**` 外部圖 URL、優先用本地原檔（感知雜湊比對）、轉 WebP q92、改寫 zh+en md。
 - **不要**在正文留外部圖 URL（googleusercontent 等）；一律先過上面的工具固化。
 - 圖片必有有意義 `alt`；純裝飾圖用空 `alt=""`。
+- **分享卡與頭像**：`public/og.svg`／`public/avatar.svg` 是來源，線上引用的是 PNG。
+  改完 svg 一定要跑 `npm run build:og` 重產並 commit PNG —— 只改 svg 線上不會有任何變化。
+  改 svg 的 x/y 或字級時，同步 `scripts/build-og.mjs` 的斷言區域座標。
 
 ## microformats2（改版時勿刪）
 

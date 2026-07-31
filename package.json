@@ -19,7 +19,8 @@
     "lint:md": "markdownlint-cli2",
     "lint:html": "html-validate \"dist/**/*.html\"",
     "lint:deps": "knip",
-    "build:fonts": "node scripts/build-fonts.mjs"
+    "build:fonts": "node scripts/build-fonts.mjs",
+    "build:og": "node scripts/build-og.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
