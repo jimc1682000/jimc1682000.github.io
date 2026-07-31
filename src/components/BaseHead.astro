@@ -30,20 +30,23 @@ const zhPath = isEn ? p.slice(3) || '/' : p;
 const enPath = isEn ? p : p === '/' ? '/en/' : '/en' + p;
 const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
 
-// 標題用的自 host 思源宋體（src/generated/fonts.json 由 scripts/build-fonts.mjs 產生）。
-// 只給標題與行內粗體用 —— 正文是系統黑體，見 BlogPost.astro 的 .body 註解。
+// 標題用的自 host 思源黑體 TC（src/generated/fonts.json 由 scripts/build-fonts.mjs 產生）。
+// 只給標題位置用（h1–h4、.pt、.brand）—— 正文是系統黑體，見 BlogPost.astro 的 .body 註解。
+//
+// family 名刻意是 'NotoSansTC Head' 而不是 'Noto Sans TC'：後者會蓋掉 --font-sans
+// 裡的同名字型，讓正文也吃到只有標題字的 subset。理由詳見 global.css。
 //
 // inline 在 <head> 而非放進 global.css：瀏覽器要先下載 stylesheet 才會發現外部檔裡的
 // @font-face，inline 可以早一輪開始抓（web.dev font best practices）。
 //
-// font-display: optional —— 給字型約 100ms 的窗口，沒到就這次維持系統宋體、**不換字**。
+// font-display: optional —— 給字型約 100ms 的窗口，沒到就這次維持系統黑體、**不換字**。
 // 選它而不是 swap 是為了 CLS：中文 webfont 與系統字的字寬不同，swap 換字時版面會跳
-// （實測整站 webfont 方案的首頁 CLS 從 0 變 0.155）。代價是首次造訪可能看到系統宋體，
-// 第二次起走快取就是思源宋體。配合下面的 preload 提高首訪命中率。
+// （實測整站 webfont 方案的首頁 CLS 從 0 變 0.155）。代價是首次造訪可能看到系統黑體，
+// 第二次起走快取就是思源黑體。配合下面的 preload 提高首訪命中率。
 const fontFaceCss = fontData.faces
   .map(
     (f) =>
-      `@font-face{font-family:'Noto Serif TC';font-style:normal;font-weight:${f.weight};` +
+      `@font-face{font-family:'NotoSansTC Head';font-style:normal;font-weight:${f.weight};` +
       `font-display:optional;src:url('/fonts/${f.file}') format('woff2')}`,
   )
   .join('');

@@ -43,7 +43,7 @@
 | **直式中文點綴** | 首頁右側「立軸」用 `writing-mode:vertical-rl` 直排姓名 + 標語 + 落款；**僅純中文短句用直式**，含英文的長內文一律橫排 |
 | **落款印章 logo** | 一枚朱紅方印，刻「吉」字（`Seal.astro`）；置於 Header 左與文末落款 |
 | **朱砂 accent** | 唯一品牌強調色＝印泥朱砂；只點在連結、標題記號、tag、印章、hover |
-| **宋體為主** | 標題與內文用 Noto Serif TC／Songti，拉出散文集人文質感；UI（nav/meta）用 sans |
+| **黑體標題 + 宋體散文** | 標題用自 host 思源黑體 TC（跨平台一致）；首頁散文、立軸、印章維持宋體的人文質感；blog 正文與 UI（nav/meta）用系統 sans |
 | **antfu 式透明 nav** | Header 透明、無底色 bar、融進頁面；右上文字連結 + 小 icon 叢 |
 | **深／淺雙模** | `data-theme` + localStorage；`<head>` inline no-flash |
 
@@ -110,12 +110,16 @@
 ## 4. Typography（字體）
 
 ```text
+--font-heading:
+  "NotoSansTC Head", -apple-system, "PingFang TC",
+  "Microsoft JhengHei", sans-serif;      /* 標題（自 host 思源黑體 TC subset） */
+
 --font-serif:
-  "Noto Serif TC", "Songti TC", Georgia, "PingFang TC", serif;   /* 標題 + 內文主字 */
+  "Songti TC", Georgia, "PingFang TC", serif;   /* 首頁散文、立軸、印章 */
 
 --font-sans:
   -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC",
-  "Segoe UI", sans-serif;                                        /* nav / meta / UI */
+  "Segoe UI", sans-serif;                       /* blog 正文 / nav / meta / UI */
 
 --font-mono:
   ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
@@ -123,11 +127,12 @@
 
 | 規則 | 說明 |
 |------|------|
-| 主字 | **宋體（serif）** 為散文質感主角；標題、內文、印章字皆 serif |
+| 標題 | **自 host 思源黑體 TC**（`h1`–`h4`、`.pt`、`.brand`）；跨平台一致，不看系統裝了什麼 |
+| 正文 | blog 內文用系統 **sans**（各平台都有真字重）；~1.02rem、行高 ~2.1、首行縮排 2em |
+| 散文 | 首頁自介、立軸、印章字仍 **宋體（serif）**，維持散文集人文質感 |
 | UI | nav、日期、tag、footer 等用 **sans**，維持介面清爽 |
-| 中文 | 必含 TC serif 後備（Noto Serif TC / Songti） |
-| 正文 | blog 內文 ~1.1rem、行高 ~2.0（中文長讀舒適） |
 | 直式 | 立軸用 serif + `text-orientation:upright`（漢字直立） |
+| webfont 邊界 | 接上 `--font-heading` 的選擇器必須是 `headingChars()` 掃到的**子集**（故止於 `h4`）；多接就是靜默缺字，`check-fonts.mjs` 只查反向 |
 
 ---
 
@@ -160,7 +165,7 @@
 
 ### 7.2 全域殼
 
-- **Header**：antfu 式透明（absolute、無底色 bar）；左＝印章 + 站名（serif）；右＝文字連結（Blog／履歷／作品集／語系）+ icon 叢（GitHub／RSS／theme）；當前頁 nav 標朱砂底線。
+- **Header**：antfu 式透明（absolute、無底色 bar）；左＝印章 + 站名（`--font-heading`）；右＝文字連結（Blog／履歷／作品集／語系）+ icon 叢（GitHub／RSS／theme）；當前頁 nav 標朱砂底線。
 - **Footer**：極簡（版權、RSS、語系），sans。
 - **Skip link**、可見 focus ring 保留。
 
@@ -171,12 +176,12 @@
 
 ### 7.4 作品集 `/works/`
 
-分類 editorial 清單（平台·基礎架構 / AI·Agentic / 自動化·工具 / 競賽·分享）；每項＝serif 標題 + 一句描述 + tag chip + 外連（Live／GitHub／Demo…）。資料在 `src/data/works.ts`（zh + en）。
+分類 editorial 清單（平台·基礎架構 / AI·Agentic / 自動化·工具 / 競賽·分享）；每項＝黑體標題（`.item .t`，接 `--font-heading`；`div` 不是 heading，`headingChars()` 有專門的 pattern 收它）+ 一句描述 + tag chip + 外連（Live／GitHub／Demo…）。資料在 `src/data/works.ts`（zh + en）。
 
 ### 7.5 Blog
 
-- 列表 `/blog/`：**依年份分組**（年份朱砂小標），每篇 serif 標題 + 日期 + description + tag chip；工具列「搜尋／標籤／RSS」。
-- 單篇：窄欄 serif、h2 朱砂左線、連結朱砂底線、blockquote 朱砂左線、code 區塊 surface 底 mono；文末印章落款「落款於臺灣 · <年>」；其後 Giscus 留言。
+- 列表 `/blog/`：**依年份分組**（年份朱砂小標），每篇黑體標題（`.pt`，接 `--font-heading`）+ 日期 + description + tag chip；工具列「搜尋／標籤／RSS」。
+- 單篇：窄欄、標題與 h2／h3 黑體（`--font-heading`）、正文系統黑體 + 首行縮排、h2 朱砂左線、連結朱砂底線、blockquote 朱砂左線、code 區塊 surface 底 mono；文末印章落款「落款於臺灣 · <年>」；其後 Giscus 留言。
 - Tags：`/blog/tags/[tag]`；chip 樣式一致。
 - 搜尋：`/blog/search`（Pagefind，靜態索引）。
 
@@ -215,7 +220,7 @@
 ```text
 1. 任何視覺／UI 決策前讀本 DESIGN.md。
 2. 顏色、字級、間距只用 token；禁 magic hex、禁紫漸層/霓虹/icon grid/AI slop。
-3. 主色只有朱砂一色；主字為宋體。
+3. 主色只有朱砂一色；標題黑體、blog 正文系統黑體、首頁散文與印章宋體。
 4. 首頁走散文式，不要改成卡牆作品目錄。
 5. 直式只用於純中文短句（立軸）；含英文長內文一律橫排。
 6. 偏離本檔須使用者明確批准，並補一列 Decisions Log。
@@ -265,6 +270,7 @@
 | 2026-07-25 | **Bridgy Fed 自訂 handle：`/.well-known/{host-meta*,webfinger*,atproto-did}` 302 → `fed.brid.gy`（`public/_worker.js`）** | 讓別人直接用 `@jimmychen.me` 追蹤本站。規格要求 302（對方端點可能變動）且 host-meta／webfinger 須保留 query（webfinger 靠 `?resource=`）；atproto-did 反之用固定 query 標明本站身分。與 pages.dev 轉址共用同一個 worker，不另加 dashboard 規則 |
 | 2026-07-25 | **不輸出 `rel="pingback"`** | pingback 是 XML-RPC 舊協定、垃圾訊息重災區（webmention.io 自身也警告），已在該服務停用；宣告一個停用端點只會引來嘗試。僅保留 `rel="webmention"` |
 | 2026-07-25 | **`jimmychen.pages.dev` 301 → `jimmychen.me`（`public/_worker.js`）；GitHub Pages mirror 不轉址** | pages.dev 與 canonical 同屬 Cloudflare，一起壞、無備援價值 → 收成單一入口。GH Pages 是唯一非 Cloudflare 副本，轉址會讓備援指向故障中的網域，故保留 serve 內容（SEO 已由 canonical 收斂）。用 `_worker.js` 而非 `functions/`：CI deploy job 只下載 dist、不 checkout repo |
+| 2026-07-31 | **字型重排：標題自 host 思源黑體 TC subset、blog 正文系統黑體、首頁散文與印章留宋體**（原本標題與正文都是宋體 `Noto Serif TC`／Songti） | 起因是**行內粗體看不出來**：思源宋體不是任何主流系統的內建字型，而各系統的宋體（macOS Songti、Windows 新細明體）粗體天生輕。正文改系統 sans（各平台都有真字重）；標題不能同樣交給系統 —— 版面最顯眼的地方在 PingFang 與微軟正黑之間長得不一樣，故自 host 思源黑體 TC，subset 只收標題用字（445 字、每字重約 66 KB；正文若也自 host 要 371 KB／字重，效能代價不成比例）。`font-display: optional` 而非 `swap`：中文 webfont 與系統字寬不同，換字會跳版（實測整站 webfont 方案首頁 CLS 0 → 0.155）。**兩個非顯而易見的坑**：① @font-face 的 family 名必須是 `'NotoSansTC Head'` 這種站內專用名，叫 `'Noto Sans TC'` 會蓋掉 `--font-sans` 裡的同名字型，讓正文也吃到只有標題字的 subset、段落中間出現兩種字面，而 `check-fonts.mjs` 只查「subset 缺字」這個方向，抓不到；② 因此 `body` 不再帶 webfont，`--font-heading` 只掛在 `headingChars()` 掃得到的位置（止於 `h4`）。`strong`／`b` 不再吃這個 face（正文已是系統黑體，有真粗體），字集仍收著它們，寬一點只多幾 KB |
 | 2026-07-29 | **公開 `/resume/` 降為 L0；完整履歷不再組進公開 dist** | 完整 HTML／PDF 已長期公開，與 hidden-resume（身分授權、可撤銷、短效）矛盾。主站自建 L0 摘要頁（`/resume/`、`/en/resume/`）；CI 停止 checkout `jimc1682000/resume`；deploy 硬擋 `resume-*.pdf`。完整內容改 private 源 + 後續 git 歷史清洗（見 `docs/hidden-resume.md`） |
 
 ---

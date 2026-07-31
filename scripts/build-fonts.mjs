@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-// 標題用的自 host webfont：把思源宋體 subset 成「只有標題與粗體會用到的字」。
+// 標題用的自 host webfont：把思源黑體 TC subset 成「只有標題會用到的字」。
 //
 //   npm run build && npm run build:fonts && npm run build
 //
-// 為什麼只做標題：思源宋體不是任何主流系統的內建字型，而各系統的宋體（macOS Songti、
-// Windows 新細明體）粗體都偏輕 —— 那是原本「粗體不明顯」的根因。但正文用中文 webfont
-// 要付幾百 KB（實測全站字集 371 KB／字重），效能代價太大，故正文改系統黑體。
-// 標題字少，實測只需約 420 字、每字重 90 KB 級別。
+// 為什麼標題要自 host：系統黑體長得各家不同（macOS PingFang、Windows 微軟正黑），
+// 標題是版面最顯眼的地方，交給系統字等於放棄跨平台一致性。思源黑體 TC 兩邊都不內建，
+// 只能自己送。但正文用中文 webfont 要付幾百 KB（實測全站字集 371 KB／字重），效能代價
+// 太大，故正文仍是系統黑體。標題字少，實測約 420 字、每字重 60 KB 級別。
 //
 // 為什麼產物 commit 進 repo：CI 是 Node-only 而 pyftsubset 是 Python；原檔 48 MB 不進
 // git；工具版本變動會讓輸出 hash 漂掉、訪客快取全失效。代價由 check-fonts.mjs 擋掉。
@@ -24,19 +24,20 @@ const OUT_DIR = 'public/fonts';
 const GEN_FILE = 'src/generated/fonts.json';
 
 const SOURCES = {
-  'NotoSerifCJKtc-Regular.otf':
-    'https://raw.githubusercontent.com/notofonts/noto-cjk/main/Serif/OTF/TraditionalChinese/NotoSerifCJKtc-Regular.otf',
-  'NotoSerifCJKtc-Bold.otf':
-    'https://raw.githubusercontent.com/notofonts/noto-cjk/main/Serif/OTF/TraditionalChinese/NotoSerifCJKtc-Bold.otf',
-  'LICENSE-NotoSerifCJK.txt':
-    'https://raw.githubusercontent.com/notofonts/noto-cjk/main/Serif/LICENSE',
+  'NotoSansCJKtc-Regular.otf':
+    'https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/OTF/TraditionalChinese/NotoSansCJKtc-Regular.otf',
+  'NotoSansCJKtc-Bold.otf':
+    'https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/OTF/TraditionalChinese/NotoSansCJKtc-Bold.otf',
+  'LICENSE-NotoSansCJK.txt':
+    'https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/LICENSE',
 };
 
-// vert/vrt2 給首頁的直式立軸；刻意不加 --desubroutinize（對 CFF 反而變大，實測 449→881 KB）。
-const FLAGS = ['--layout-features=kern,vert,vrt2', '--no-hinting', '--flavor=woff2'];
+// 只留 kern：首頁直式立軸吃的是 --font-serif（系統宋體），這個 face 沒有直排位置，
+// 不必帶 vert/vrt2。刻意不加 --desubroutinize（對 CFF 反而變大，實測 449→881 KB）。
+const FLAGS = ['--layout-features=kern', '--no-hinting', '--flavor=woff2'];
 const FACES = [
-  { weight: 400, src: 'NotoSerifCJKtc-Regular.otf' },
-  { weight: 700, src: 'NotoSerifCJKtc-Bold.otf' },
+  { weight: 400, src: 'NotoSansCJKtc-Regular.otf' },
+  { weight: 700, src: 'NotoSansCJKtc-Bold.otf' },
 ];
 
 const missing = Object.keys(SOURCES).filter((f) => !existsSync(join(SRC_DIR, f)));
@@ -53,7 +54,7 @@ for (const old of readdirSync(OUT_DIR)) {
 }
 
 const chars = headingChars();
-console.log(`標題與粗體用字 ${chars.size} 個`);
+console.log(`標題用字 ${chars.size} 個`);
 
 const listFile = join(OUT_DIR, '.charlist.tmp');
 writeFileSync(listFile, [...chars].join(''), 'utf8');
@@ -83,7 +84,7 @@ for (const face of FACES) {
   }
   const buf = readFileSync(tmp);
   const hash = createHash('sha256').update(buf).digest('hex').slice(0, 8);
-  const file = `noto-serif-tc-${face.weight}.${hash}.woff2`;
+  const file = `noto-sans-tc-${face.weight}.${hash}.woff2`;
   writeFileSync(join(OUT_DIR, file), buf);
   rmSync(tmp);
   faces.push({ weight: face.weight, file });
@@ -91,8 +92,8 @@ for (const face of FACES) {
 }
 rmSync(listFile);
 writeFileSync(
-  join(OUT_DIR, 'LICENSE-NotoSerifCJK.txt'),
-  readFileSync(join(SRC_DIR, 'LICENSE-NotoSerifCJK.txt')),
+  join(OUT_DIR, 'LICENSE-NotoSansCJK.txt'),
+  readFileSync(join(SRC_DIR, 'LICENSE-NotoSansCJK.txt')),
 );
 writeFileSync(
   GEN_FILE,

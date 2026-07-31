@@ -32,8 +32,12 @@
   --color-overlay: rgba(0, 0, 0, 0.8);
   --color-focus-ring: var(--color-text);
 
-  /* Typography（散文集:serif 為標題與內文主字,sans 給 nav/UI/meta） */
-  --font-serif: 'Noto Serif TC', 'Songti TC', Georgia, 'PingFang TC', serif;
+  /* Typography（標題用自 host 思源黑體,serif 給首頁散文與印章,sans 給正文/nav/UI/meta） */
+  /* 'NotoSansTC Head' 是 BaseHead.astro 那個 subset face 的專用名 —— 刻意不叫
+     'Noto Sans TC'，否則會蓋掉 --font-sans 裡同名的系統/本機字型，讓正文也吃到
+     只有標題字的 subset，段落中間就會出現兩種字面（gate 抓不到這個方向）。 */
+  --font-heading: 'NotoSansTC Head', -apple-system, 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  --font-serif: 'Songti TC', Georgia, 'PingFang TC', serif;
   --font-sans:
     -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Noto Sans TC', 'Segoe UI', 'Helvetica Neue',
     Arial, sans-serif;
@@ -143,10 +147,13 @@ video {
   height: auto;
 }
 
+/* 到 h4 為止 —— scripts/lib/site-chars.mjs 的 headingChars() 只掃到 h4，
+   把 h5/h6 也接上 webfont 會缺字而且 gate 不會報錯。 */
 h1,
 h2,
 h3,
 h4 {
+  font-family: var(--font-heading);
   line-height: 1.2;
   font-weight: 700;
   text-wrap: balance;

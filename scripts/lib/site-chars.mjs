@@ -71,14 +71,19 @@ const printable = (s) => [...s].filter((c) => c.trim() !== '');
  *   rest = 只有中文頁面才會用到的 CJK
  */
 /**
- * 標題與粗體實際會用到的字。serif webfont 只給這些位置用，所以字集比全站小得多。
+ * 標題實際會用到的字。思源黑體 webfont 只給這些位置用，所以字集比全站小得多。
  *
- * 涵蓋的位置（都是 serif 且 font-weight >= 600 → 會落到我們提供的 700）：
- *   h1–h4、strong、b — 文章標題與行內強調
+ * 涵蓋的位置：
+ *   h1–h4          — 文章標題（.page-h 是 h1，一併收）
  *   .pt            — 列表頁的文章標題（div，不是 heading，容易漏）
- *   .page-h        — 各索引頁的頁標
+ *   .item .t       — 作品集的條目標題（同樣是 div）
  *   .brand         — Header 的站名
- * 漏掉任何一處的後果是那些字掉到系統宋體，同一行兩種字面，且不會報錯 —— 故有 gate。
+ *   strong、b      — 已不吃這個 face（正文是系統黑體），但留著多收：字集寬一點只多幾 KB，
+ *                    窄了則是畫面缺字。
+ * 漏掉任何一處的後果是那些字掉到系統黑體，同一行兩種字面，且不會報錯 —— 故有 gate。
+ *
+ * 反向也要顧：CSS 接上 webfont 的選擇器必須是這裡掃到的**子集**。多接（例如 h5/h6）
+ * 就是靜默缺字，而 gate 只查這個方向的缺口，抓不到。
  */
 export function headingChars(distDir = 'dist') {
   const files = htmlFiles(distDir);
@@ -88,6 +93,7 @@ export function headingChars(distDir = 'dist') {
   const PATTERNS = [
     /<(h1|h2|h3|h4|strong|b)\b[^>]*>([\s\S]*?)<\/\1>/gi,
     /<div[^>]*class="[^"]*\bpt\b[^"]*"[^>]*>([\s\S]*?)<\/div>/gi,
+    /<div[^>]*class="[^"]*\bt\b[^"]*"[^>]*>([\s\S]*?)<\/div>/gi,
     /<[^>]*class="[^"]*\bpage-h\b[^"]*"[^>]*>([\s\S]*?)<\/[a-z0-9]+>/gi,
     /<a[^>]*class="[^"]*\bbrand\b[^"]*"[^>]*>([\s\S]*?)<\/a>/gi,
   ];
