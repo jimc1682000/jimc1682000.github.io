@@ -109,30 +109,51 @@
 
 ## 4. Typography（字體）
 
+token 按**角色**命名，不按字族 —— 要換的永遠是某個角色的字。西文字型一律排在中文字型
+**之前**（見下方「拉丁前置」）。
+
 ```text
 --font-heading:
   "NotoSansTC Head", -apple-system, "PingFang TC",
-  "Microsoft JhengHei", sans-serif;      /* 標題（自 host 思源黑體 TC subset） */
+  "Microsoft JhengHei", sans-serif;        /* 標題（自 host 思源黑體 TC subset） */
 
---font-serif:
-  "Songti TC", Georgia, "PingFang TC", serif;   /* 首頁散文、立軸、印章 */
+--font-body:
+  -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial,
+  "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;   /* blog 正文 */
 
---font-sans:
-  -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC",
-  "Segoe UI", sans-serif;                       /* blog 正文 / nav / meta / UI */
+--font-prose:
+  Georgia, "Times New Roman", "Songti TC", "PingFang TC", serif;  /* 散文、立軸、印章 */
+
+--font-ui:
+  -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial,
+  "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;  /* nav/meta/UI */
 
 --font-mono:
   ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 ```
 
-| 規則 | 說明 |
-|------|------|
-| 標題 | **自 host 思源黑體 TC**（`h1`–`h4`、`.pt`、`.brand`）；跨平台一致，不看系統裝了什麼 |
-| 正文 | blog 內文用系統 **sans**（各平台都有真字重）；~1.02rem、行高 ~2.1、首行縮排 2em |
-| 散文 | 首頁自介、立軸、印章字仍 **宋體（serif）**，維持散文集人文質感 |
-| UI | nav、日期、tag、footer 等用 **sans**，維持介面清爽 |
-| 直式 | 立軸用 serif + `text-orientation:upright`（漢字直立） |
-| webfont 邊界 | `--font-heading` 只有 `global.css` 裡**一條**規則接（`h1`–`h4`、`.brand`、`.pt`、`.item .t`），不寫進元件的 scoped style；那份清單必須是 `headingChars()` 掃到的**子集**（故止於 `h4`），多接就是靜默缺字，`check-fonts.mjs` 只查反向 |
+| 角色 | token | 用在哪 | 換字型要動 |
+|------|-------|--------|-----------|
+| 標題 | `--font-heading` | `h1`–`h4`、`.brand`、`.pt`、`.item .t` | `global.css` token + `build-fonts.mjs` 的 `FONT` |
+| blog 正文 | `--font-body` | `BlogPost.astro` 的 `.body`（唯一使用者）；~1.02rem、行高 ~2.1、首行縮排 2em | `global.css` token |
+| 散文 | `--font-prose` | `body` 預設值 → 首頁自介、立軸、印章、各頁摘要小段（靠繼承） | `global.css` token |
+| UI | `--font-ui` | nav、日期、tag、圖說、落款、朱砂 eyebrow 小標（×30） | `global.css` token |
+| code | `--font-mono` | `code`／`pre` | `global.css` token |
+
+`--font-body` 與 `--font-ui` 目前值相同但刻意分開：先前兩者共用一個 `--font-sans`，
+於是「改正文」與「改 nav」分不開，31 處得一處處確認。
+
+### 中文排版（zh-TW）依據
+
+| 做法 | 為什麼 |
+|------|--------|
+| **拉丁前置** | 中文字型自帶的拉丁字形是為全形格線設計的，混排時字寬字重都不對；西文字型放前面 → 拉丁與數字由它出、漢字自然落到後面的中文字型（[漢字標準格式](https://github.com/ethantw/Han) 與 [clreq](https://www.w3.org/TR/clreq/) 的通則）。`--font-heading` 是刻意例外：那份 subset 自帶思源黑體同源的拉丁字形，讓系統西文先出反而各平台不一致 |
+| **標點擠壓靠字型** | `text-spacing-trim` 的初始值 `normal` 就是要的行為，CSS 端不必宣告；但[字型缺 `chws`／`halt` 時瀏覽器直接停用它](https://developer.mozilla.org/en-US/docs/Web/CSS/text-spacing-trim) → subset 的 `--layout-features` 必須留 `halt`（實測原檔只有 `halt`，無 `chws`） |
+| **中西自動間距不寫 CSS** | [`text-autospace` 的 `normal`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-autospace) 等同 `ideograph-alpha ideograph-numeric`（Baseline 2025-11），宣告出來是 no-op；也因此**不需要 pangu.js** 在 runtime 插空白字元 |
+| **着重號不用斜體** | 漢字沒有斜體，瀏覽器的 CJK italic 是整體剪切傾斜。中文的強調傳統是着重號（點在字下方）→ 首頁 `.prose em` 用 `text-emphasis: filled dot`。**只收在首頁**：文章正文的斜體多是 *Tenet* 這類西文作品名，該保持 italic |
+| **行高與字距** | 中文長讀行高 ~2.0–2.1、字距 +0.015em；`text-wrap: pretty`（正文）與 `balance`（標題）避免孤字 |
+| 直式 | 立軸用 `--font-prose` + `text-orientation: upright`（漢字直立）；故標題 subset 不必帶 `vert`／`vrt2` |
+| webfont 邊界 | `--font-heading` 只有 `global.css` 裡**一條**規則接，不寫進元件的 scoped style；那份清單必須是 `headingChars()` 掃到的**子集**（故止於 `h4`），多接就是靜默缺字，`check-fonts.mjs` 只查反向 |
 
 ---
 
@@ -224,7 +245,8 @@
 4. 首頁走散文式，不要改成卡牆作品目錄。
 5. 直式只用於純中文短句（立軸）；含英文長內文一律橫排。
 6. 偏離本檔須使用者明確批准，並補一列 Decisions Log。
-7. 改 token 先改 global.css，再回寫本檔表格保持同步。
+7. 改 token 先改 global.css，再回寫本檔表格保持同步。字型只有兩個入口：global.css 的
+   Typography 區、與 scripts/build-fonts.mjs 的 FONT 物件。
 ```
 
 ---
@@ -270,6 +292,7 @@
 | 2026-07-25 | **Bridgy Fed 自訂 handle：`/.well-known/{host-meta*,webfinger*,atproto-did}` 302 → `fed.brid.gy`（`public/_worker.js`）** | 讓別人直接用 `@jimmychen.me` 追蹤本站。規格要求 302（對方端點可能變動）且 host-meta／webfinger 須保留 query（webfinger 靠 `?resource=`）；atproto-did 反之用固定 query 標明本站身分。與 pages.dev 轉址共用同一個 worker，不另加 dashboard 規則 |
 | 2026-07-25 | **不輸出 `rel="pingback"`** | pingback 是 XML-RPC 舊協定、垃圾訊息重災區（webmention.io 自身也警告），已在該服務停用；宣告一個停用端點只會引來嘗試。僅保留 `rel="webmention"` |
 | 2026-07-25 | **`jimmychen.pages.dev` 301 → `jimmychen.me`（`public/_worker.js`）；GitHub Pages mirror 不轉址** | pages.dev 與 canonical 同屬 Cloudflare，一起壞、無備援價值 → 收成單一入口。GH Pages 是唯一非 Cloudflare 副本，轉址會讓備援指向故障中的網域，故保留 serve 內容（SEO 已由 canonical 收斂）。用 `_worker.js` 而非 `functions/`：CI deploy job 只下載 dist、不 checkout repo |
+| 2026-07-31 | **字型設定收成兩個入口，token 改按角色命名，並補上 zh-TW 排版慣例** | 改字型前得翻四處 CSS 加一支 build script，是前一列那些坑的溫床。三件事：① token 由字族名改角色名（`--font-sans` → `--font-body`／`--font-ui`，`--font-serif` → `--font-prose`）—— 舊的 `--font-sans` 同時是「blog 正文」與「UI 小字」的來源，所以「改正文」動不了而不順手動到 nav，31 處要一處處確認；② `--font-heading` 收成 `global.css` 一條規則（原本散在四個檔的 scoped style），註解直接指向 `site-chars.mjs` 的 `PATTERNS`，那兩份清單必須一致；③ 字型檔的選擇收進 `build-fonts.mjs` 的 `FONT` 物件，family 名寫進 `fonts.json` 由 `BaseHead` 讀，不再兩邊手抄。排版慣例照 [漢字標準格式](https://github.com/ethantw/Han)／[clreq](https://www.w3.org/TR/clreq/)／MDN 補：**拉丁字型前置**（中文字型的拉丁字形是為全形格線設計的）、subset 保留 `halt`（[缺 `chws`／`halt` 時 `text-spacing-trim` 直接停用](https://developer.mozilla.org/en-US/docs/Web/CSS/text-spacing-trim)）、首頁 `.prose em` 改**着重號**（漢字沒有斜體，CJK italic 是整體剪切傾斜；只收首頁，文章正文的斜體多是西文作品名）。`text-autospace`／`text-spacing-trim` 刻意**不宣告** —— 兩者 initial value `normal` 就是要的行為，寫了是 no-op，也因此不需要 pangu.js |
 | 2026-07-31 | **字型重排：標題自 host 思源黑體 TC subset、blog 正文系統黑體、首頁散文與印章留宋體**（原本標題與正文都是宋體 `Noto Serif TC`／Songti） | 起因是**行內粗體看不出來**：思源宋體不是任何主流系統的內建字型，而各系統的宋體（macOS Songti、Windows 新細明體）粗體天生輕。正文改系統 sans（各平台都有真字重）；標題不能同樣交給系統 —— 版面最顯眼的地方在 PingFang 與微軟正黑之間長得不一樣，故自 host 思源黑體 TC，subset 只收標題用字（445 字、每字重約 66 KB；正文若也自 host 要 371 KB／字重，效能代價不成比例）。`font-display: optional` 而非 `swap`：中文 webfont 與系統字寬不同，換字會跳版（實測整站 webfont 方案首頁 CLS 0 → 0.155）。**兩個非顯而易見的坑**：① @font-face 的 family 名必須是 `'NotoSansTC Head'` 這種站內專用名，叫 `'Noto Sans TC'` 會蓋掉 `--font-sans` 裡的同名字型，讓正文也吃到只有標題字的 subset、段落中間出現兩種字面，而 `check-fonts.mjs` 只查「subset 缺字」這個方向，抓不到；② 因此 `body` 不再帶 webfont，`--font-heading` 只掛在 `headingChars()` 掃得到的位置（止於 `h4`）。`strong`／`b` 不再吃這個 face（正文已是系統黑體，有真粗體），字集仍收著它們，寬一點只多幾 KB |
 | 2026-07-29 | **公開 `/resume/` 降為 L0；完整履歷不再組進公開 dist** | 完整 HTML／PDF 已長期公開，與 hidden-resume（身分授權、可撤銷、短效）矛盾。主站自建 L0 摘要頁（`/resume/`、`/en/resume/`）；CI 停止 checkout `jimc1682000/resume`；deploy 硬擋 `resume-*.pdf`。完整內容改 private 源 + 後續 git 歷史清洗（見 `docs/hidden-resume.md`） |
 

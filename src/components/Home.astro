@@ -174,7 +174,7 @@ const recent = (await getPosts(lang)).slice(0, 3);
     max-width: 600px;
   }
   .sub {
-    font-family: var(--font-sans);
+    font-family: var(--font-ui);
     font-size: 0.9rem;
     letter-spacing: 0.08em;
     color: var(--color-text-tertiary);
@@ -193,9 +193,16 @@ const recent = (await getPosts(lang)).slice(0, 3);
   .prose .quiet {
     color: var(--color-text-secondary);
   }
+  /* 漢字沒有斜體：瀏覽器對中文的 italic 是把字形整體剪切傾斜（合成斜體），字面會歪，
+     故本來就寫了 font-style: normal。補上的是中文真正的強調傳統 —— **着重號**，
+     橫排時點在字下方（clreq §3.2「着重號」）。
+     只收在 .prose：本站 zh／en 首頁的 <em> 都是單一漢字（吉／米），而文章正文的斜體
+     多是 *Tenet* 這類西文作品名，那些該保持 italic，不能一律換成着重號。 */
   .prose em {
     font-style: normal;
     color: var(--color-seal);
+    text-emphasis: filled dot;
+    text-emphasis-position: under right;
   }
 
   .refs {
@@ -204,7 +211,7 @@ const recent = (await getPosts(lang)).slice(0, 3);
     border-top: 1px solid var(--color-border-subtle);
   }
   .refs .lbl {
-    font-family: var(--font-sans);
+    font-family: var(--font-ui);
     color: var(--color-text-tertiary);
     font-size: 0.85rem;
     margin-bottom: 10px;
@@ -226,13 +233,13 @@ const recent = (await getPosts(lang)).slice(0, 3);
   .refs time {
     color: var(--color-text-tertiary);
     font-size: 0.82rem;
-    font-family: var(--font-sans);
+    font-family: var(--font-ui);
     white-space: nowrap;
   }
 
   .find {
     margin-top: 30px;
-    font-family: var(--font-sans);
+    font-family: var(--font-ui);
   }
   .find .lbl {
     color: var(--color-text-tertiary);

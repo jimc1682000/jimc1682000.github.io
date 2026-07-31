@@ -32,15 +32,32 @@
   --color-overlay: rgba(0, 0, 0, 0.8);
   --color-focus-ring: var(--color-text);
 
-  /* Typography（標題用自 host 思源黑體,serif 給首頁散文與印章,sans 給正文/nav/UI/meta） */
-  /* 'NotoSansTC Head' 是 BaseHead.astro 那個 subset face 的專用名 —— 刻意不叫
-     'Noto Sans TC'，否則會蓋掉 --font-sans 裡同名的系統/本機字型，讓正文也吃到
-     只有標題字的 subset，段落中間就會出現兩種字面（gate 抓不到這個方向）。 */
+  /* Typography —— **改字型只動這一區**（外加 scripts/build-fonts.mjs 的 FONT 物件）。
+     token 按「角色」命名而非按字族，因為要換的永遠是某個角色的字：
+       --font-heading  標題。唯一接點是下面那條 h1–h4/.brand/.pt/.item .t 規則，
+                       且是唯一吃自 host webfont 的角色（字集有限，見那條規則的註解）。
+       --font-body     blog 正文。唯一使用者是 BlogPost.astro 的 .body。
+       --font-prose    首頁散文、立軸、印章 —— body 預設值，靠繼承散到各頁摘要小段。
+       --font-ui       nav／meta／日期／tag／圖說／落款／朱砂 eyebrow 小標。
+       --font-mono     code。
+     --font-body 與 --font-ui 目前值相同，但刻意分成兩個：上次「正文改系統黑體」時
+     它們是同一個 token，於是「改正文」與「改 nav」分不開、31 處要一處處確認。
+
+     'NotoSansTC Head' 是 BaseHead.astro 那個 subset face 的專用名 —— 刻意不叫
+     'Noto Sans TC'，否則會蓋掉 --font-ui／--font-body 裡同名的系統/本機字型，
+     讓正文也吃到只有標題字的 subset，段落中間就會出現兩種字面（gate 抓不到這個方向）。 */
+  /* 西文字型排在中文字型**之前**（漢字標準格式 / clreq 的通則）：中文字型自帶的拉丁
+     字形多是為全形格線設計的，混排時字寬與字重都不對。把西文字型放前面，拉丁與數字
+     由它出、漢字自然落到後面的中文字型。--font-heading 是刻意的例外：那個 subset 自帶
+     思源黑體的拉丁字形（設計上同源），若讓系統西文先出，標題的拉丁反而各平台不一致。 */
   --font-heading: 'NotoSansTC Head', -apple-system, 'PingFang TC', 'Microsoft JhengHei', sans-serif;
-  --font-serif: 'Songti TC', Georgia, 'PingFang TC', serif;
-  --font-sans:
-    -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Noto Sans TC', 'Segoe UI', 'Helvetica Neue',
-    Arial, sans-serif;
+  --font-body:
+    -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang TC', 'Microsoft JhengHei',
+    'Noto Sans TC', sans-serif;
+  --font-prose: Georgia, 'Times New Roman', 'Songti TC', 'PingFang TC', serif;
+  --font-ui:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, 'PingFang TC',
+    'Microsoft JhengHei', 'Noto Sans TC', sans-serif;
   --font-mono:
     ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
@@ -126,9 +143,14 @@ html {
 
 body {
   min-height: 100vh;
-  font-family: var(--font-serif);
+  font-family: var(--font-prose);
   font-size: var(--font-size-base);
   line-height: 1.6;
+  /* 中文排版的兩件事**刻意不宣告**：`text-autospace`（中西文之間補空白）與
+     `text-spacing-trim`（標點擠壓）的 initial value 都是 `normal`，而 `normal` 就是
+     我們要的行為 —— 寫出來是 no-op。所以不需要 pangu.js 在 runtime 插空白字元。
+     真正要顧的是字型端：`text-spacing-trim` 需要字型有 `chws`／`halt` OpenType
+     feature，否則瀏覽器直接停用 —— 見 scripts/build-fonts.mjs 的 FLAGS。 */
   color: var(--color-text);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
@@ -294,7 +316,7 @@ main {
 /* ---------- Tag chip（散文集:朱砂 pill,對齊 mockup） ---------- */
 .tag-chip {
   display: inline-block;
-  font-family: var(--font-sans);
+  font-family: var(--font-ui);
   font-size: 0.72rem;
   line-height: 1.5;
   padding: 0.1rem 0.5rem;

@@ -33,8 +33,9 @@ const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
 // 標題用的自 host 思源黑體 TC（src/generated/fonts.json 由 scripts/build-fonts.mjs 產生）。
 // 只給標題位置用（h1–h4、.pt、.brand）—— 正文是系統黑體，見 BlogPost.astro 的 .body 註解。
 //
-// family 名刻意是 'NotoSansTC Head' 而不是 'Noto Sans TC'：後者會蓋掉 --font-sans
-// 裡的同名字型，讓正文也吃到只有標題字的 subset。理由詳見 global.css。
+// family 名從 fonts.json 讀（由 build-fonts.mjs 的 FONT 物件寫入），不在這裡手抄。
+// 它刻意不叫 'Noto Sans TC'：後者會蓋掉 --font-ui／--font-body 裡的同名字型，
+// 讓正文也吃到只有標題字的 subset。理由詳見 global.css。
 //
 // inline 在 <head> 而非放進 global.css：瀏覽器要先下載 stylesheet 才會發現外部檔裡的
 // @font-face，inline 可以早一輪開始抓（web.dev font best practices）。
@@ -46,7 +47,7 @@ const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
 const fontFaceCss = fontData.faces
   .map(
     (f) =>
-      `@font-face{font-family:'NotoSansTC Head';font-style:normal;font-weight:${f.weight};` +
+      `@font-face{font-family:'${fontData.family}';font-style:normal;font-weight:${f.weight};` +
       `font-display:optional;src:url('/fonts/${f.file}') format('woff2')}`,
   )
   .join('');
