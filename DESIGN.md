@@ -71,11 +71,17 @@
 | `--color-bg-surface` | `#efeae0` | 次級表面、code 區塊底 |
 | `--color-text` | `#1a1d20` | 主文字（黛墨，非純黑） |
 | `--color-text-secondary` | `#666059` | 輔助（暖灰墨） |
-| `--color-text-tertiary` | `#9a9186` | 細標、時間戳 |
+| `--color-text-tertiary` | `#766d63` | 細標、時間戳（原 `#9a9186` 僅 2.83:1，未達 AA → 調亮度至 4.63:1） |
 | `--color-border` | `rgba(26,29,32,0.13)` | 主邊框 |
 | `--color-border-subtle` | `rgba(26,29,32,0.07)` | 分隔 |
 | `--color-seal` | `#c8392b` | 朱砂：accent／印章／連結底線／標題記號 |
 | `--color-seal-tint` | `rgba(200,57,43,0.09)` | tag chip 底、印章暈 |
+| `--color-border-hover` | `rgba(26,29,32,0.28)` | hover 邊框、連結底線預設色 |
+| `--color-header-bg` | `rgba(247,244,239,0.72)` | 保留給半透明 header（目前未使用） |
+| `--color-accent` | `#1a1d20` | 中性 accent（目前未使用） |
+| `--color-accent-hover` | `rgba(26,29,32,0.82)` | 同上（目前未使用） |
+| `--color-overlay` | `rgba(0,0,0,0.5)` | 遮罩（目前未使用） |
+| `--color-focus-ring` | `var(--color-text)` | focus ring（兩模式共用宣告） |
 
 ### 3.2 Dark（`:root` 預設，墨色）
 
@@ -85,12 +91,18 @@
 | `--color-bg-elevated` | `#202325` | 卡片 |
 | `--color-bg-surface` | `#282b2d` | 次級表面 |
 | `--color-text` | `#ece6d9` | 宣紙色主文字 |
-| `--color-text-secondary` | `rgba(236,230,217,0.60)` | 輔助 |
-| `--color-text-tertiary` | `rgba(236,230,217,0.40)` | 細標 |
+| `--color-text-secondary` | `rgba(236,230,217,0.6)` | 輔助 |
+| `--color-text-tertiary` | `rgba(236,230,217,0.55)` | 細標（原 0.4 僅 3.31:1，未達 AA → 0.55 為 5.09:1） |
 | `--color-border` | `rgba(236,230,217,0.12)` | 主邊框 |
 | `--color-border-subtle` | `rgba(236,230,217,0.06)` | 分隔 |
 | `--color-seal` | `#d6594c` | 朱砂（墨底稍亮） |
-| `--color-seal-tint` | `rgba(210,74,59,0.16)` | tag chip 底 |
+| `--color-seal-tint` | `rgba(214,89,76,0.16)` | tag chip 底（跟著 `--color-seal` 一起調） |
+| `--color-border-hover` | `rgba(236,230,217,0.24)` | hover 邊框、連結底線預設色 |
+| `--color-header-bg` | `rgba(23,25,27,0.72)` | 保留給半透明 header（目前未使用） |
+| `--color-accent` | `#ece6d9` | 中性 accent（目前未使用） |
+| `--color-accent-hover` | `rgba(236,230,217,0.85)` | 同上（目前未使用） |
+| `--color-overlay` | `rgba(0,0,0,0.8)` | 遮罩（目前未使用） |
+| `--color-focus-ring` | `var(--color-text)` | focus ring |
 
 ### 3.3 語意規則
 
@@ -138,7 +150,7 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 
 | 角色 | token | 用在哪 | 換字型要動 |
 |------|-------|--------|-----------|
-| 標題 | `--font-heading` | `h1`–`h4`、`.brand`、`.pt`、`.item .t`、`.scroll .nm`、`.scroll .slogan` | `global.css` token + `build-fonts.mjs` 的 `FONT` |
+| 標題 | `--font-heading` | `h1`–`h4`、`.brand`、`.pt`、`.item .t`、`.scroll .nm`、`.scroll .slogan`。字重只有 **400／700**（subset 就這兩個），故這些位置一律宣告 700 | `global.css` token + `build-fonts.mjs` 的 `FONT` |
 | blog 正文 | `--font-body` | `BlogPost.astro` 的 `.body`（唯一使用者）；~1.02rem、行高 ~2.1、首行縮排 2em | `global.css` token |
 | 散文 | `--font-prose` | `body` 預設值 → 首頁自介、各頁摘要小段（靠繼承） | `global.css` token |
 | 印章 | `--font-seal` | `Seal.astro` 的「吉」（全站唯一宋體） | `global.css` token |
@@ -166,8 +178,8 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 ## 5. Spacing、Layout、動效
 
 - 8pt grid spacing token（`--spacing-xs`…）；section 間距寬鬆（散文呼吸感）。
-- 版心：正文窄欄 `--max-width-narrow`（約 680–720px）；首頁/作品集約 1040–1080px。
-- 圓角克制：chip/按鈕 8px、卡片/印章 16px；不做超大圓角。
+- 版心（實際值，非 token 一律靠元件自己寫）：blog 單篇 **680px**（`BlogPost.astro` 的 `.post`）、首頁 **1080px**、履歷 **760px**／內文 40rem；`.container` 用 `--max-width`（1400px）、`.container-narrow` 用 `--max-width-narrow`（**800px**）。
+- 圓角克制：tag／chip 藥丸形 **100px**；code 區塊與抬升面 `--radius-md`（16px）；`pre`／`code`／skip-link `--radius-sm`（8px）；印章依尺寸推算 **5–7px**；focus ring 2px。不做超大圓角（`--radius-lg`／`--radius-xl` 目前未使用）。
 - 動效短、功能性（theme、hover、連結底線）；尊重 `prefers-reduced-motion`。
 
 ---
@@ -188,7 +200,7 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 
 ### 7.1 落款印章（`Seal.astro`）
 
-朱砂方塊、白字（預設「吉」）、雙層 inset box-shadow（內圈 seal 色、外圈 bg 色成邊框感）。props：`char`、`size`。用於 Header 左、首頁/單篇文末落款。
+朱砂方塊、白字（預設「吉」）、雙層 inset box-shadow（內圈 seal 色、外圈 bg 色成邊框感）。props：`char`（預設「吉」）、`size`（預設 30）、`class`。字級／圓角／雙層邊框寬度都由 `size` 等比推算（≥48px 用較粗邊框）。字型走 `--font-seal`（全站唯一宋體）。用於 Header 左、首頁/單篇文末落款。
 
 ### 7.2 全域殼
 
@@ -246,8 +258,14 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 
 ```text
 1. 任何視覺／UI 決策前讀本 DESIGN.md。
-2. 顏色、字級、間距只用 token；禁 magic hex、禁紫漸層/霓虹/icon grid/AI slop。
+2. 顏色與間距只用 token，禁 magic hex（現存例外：朱砂底上的 `#fff` 兩處）。
+   **字級是各元件直寫 rem，不走 token** —— `--font-size-*` scale 實際只用到 3 處，
+   中文字級是逐處微調出來的（1.02／1.08／1.25／2.6／3.3rem…），硬套 scale 會改外觀。
+   要收斂得整批重算並目視驗過，不要順手改一半。禁紫漸層/霓虹/icon grid/AI slop。
 3. 主色只有朱砂一色；全站黑體（標題與立軸吃 webfont，其餘系統黑體），只有落款印章留宋體。
+   吃 `--font-heading` 的位置字重一律宣告 **700**：subset 只有 400／700，寫 600 也是落到
+   700，宣告值與實際渲染不一致就是下一個 drift 的起點。真的要 600 就留在 `--font-ui`
+   （系統字有真 600，朱砂 eyebrow 小標就是這樣）。
 4. 首頁走散文式，不要改成卡牆作品目錄。
 5. 直式只用於純中文短句（立軸）；含英文長內文一律橫排。
 6. 偏離本檔須使用者明確批准，並補一列 Decisions Log。
@@ -300,6 +318,7 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 | 2026-07-25 | **Bridgy Fed 自訂 handle：`/.well-known/{host-meta*,webfinger*,atproto-did}` 302 → `fed.brid.gy`（`public/_worker.js`）** | 讓別人直接用 `@jimmychen.me` 追蹤本站。規格要求 302（對方端點可能變動）且 host-meta／webfinger 須保留 query（webfinger 靠 `?resource=`）；atproto-did 反之用固定 query 標明本站身分。與 pages.dev 轉址共用同一個 worker，不另加 dashboard 規則 |
 | 2026-07-25 | **不輸出 `rel="pingback"`** | pingback 是 XML-RPC 舊協定、垃圾訊息重災區（webmention.io 自身也警告），已在該服務停用；宣告一個停用端點只會引來嘗試。僅保留 `rel="webmention"` |
 | 2026-07-25 | **`jimmychen.pages.dev` 301 → `jimmychen.me`（`public/_worker.js`）；GitHub Pages mirror 不轉址** | pages.dev 與 canonical 同屬 Cloudflare，一起壞、無備援價值 → 收成單一入口。GH Pages 是唯一非 Cloudflare 副本，轉址會讓備援指向故障中的網域，故保留 serve 內容（SEO 已由 canonical 收斂）。用 `_worker.js` 而非 `functions/`：CI deploy job 只下載 dist、不 checkout repo |
+| 2026-07-31 | **標題字重統一宣告 700；DESIGN 對帳實際 code、修掉六處 drift** | 一致性維護，不是新設計。① `.brand`／`.pt`／`.item .t` 原本宣告 `font-weight: 600` —— 思源黑體家族**沒有 600**（7 級是 100／300／350／400／500／700／900），CSS 字重匹配在目標 > 500 時往上找，所以一直渲染 700。宣告值與實際不符就是下一個 drift 的起點，故直接寫 700；`--font-ui` 的四處朱砂 eyebrow 小標維持 600（系統字有真 600，0.9rem 配寬字距用 700 會結實突兀）。② 對帳出的 DESIGN drift：§3.1 亮色 `--color-text-tertiary` 表格仍寫舊值 `#9a9186`（實際 `#766d63`）、§3.2 暗色 tertiary 寫 `0.4`（實際 `0.55`）、`--color-seal-tint` 寫 `rgba(210,74,59,…)`（實際 `rgba(214,89,76,…)`）—— 這三個都是先前 WCAG 修正改了 CSS 但沒回寫表格；另補上六個從未列在表裡的 token（`--color-border-hover`／`header-bg`／`accent`／`accent-hover`／`overlay`／`focus-ring`）。③ §5 版心與圓角寫的是願望值：實際 blog 單篇 680px（元件自己寫死）、`--max-width-narrow` 是 800px、tag 是 100px 藥丸而非 8px、印章圓角依尺寸 5–7px。④ §10 規則 2 原本宣稱「字級只用 token」，實際 60+ 處直寫 rem、`--font-size-*` 只用到 3 處 —— 改成照實描述並說明為何不硬收斂（中文字級逐處微調，整批換算會改外觀）。⑤ §7.1 印章補上 `class` prop 與「圓角依 size 推算」 |
 | 2026-07-31 | **分享卡與頭像的字型對齊全站，並把產圖從手工變成 `npm run build:og`** | 兩個先前沒被看見的事實：① 線上引用的只有 PNG（`og:image` → `/og.png`、h-card `u-photo` 與 vCard PHOTO → `/avatar.png`），SVG 沒有任何頁面指向它 —— 所以**只改 svg 線上零變化**；② svg 裡寫的 `Noto Serif TC` 從來沒生效過，那個字型沒裝在產圖的機器上，實際一直是 Songti 的 fallback。故：og 卡的站名／標語／署名／網域改系統黑體、印章「吉」留宋體（＝站上的「全站黑體，一枚宋體印」），avatar 只把字型名寫成 `'Songti TC', serif` 照實反映（PNG 視覺不變）。產圖寫成 `scripts/build-og.mjs`（sharp，devDependency 已有），每張圖對指定區域做**像素斷言**（印章白字、站名、標語、署名各自要有墨）—— 缺字型時整支失敗且**不寫入 PNG**，而不是產出一張沒字的卡片還說成功。仍**不進 CI**：ubuntu-latest 沒有中文字型（同 `build:fonts` 的取捨）。改 svg 的 x/y 或字級時要同步斷言區域座標 |
 | 2026-07-31 | **全站統一黑體：首頁散文改系統黑體、首頁立軸接上標題 webfont，只留印章一枚宋體** | 前一版是「黑體標題 + 宋體散文」，同一頁兩種字族在使用者眼裡就是不統一。散文改黑體後 `--font-prose` 只剩角色意義（值與 `--font-body`／`--font-ui` 相同），要換回宋體仍是一行。**立軸接 webfont 的理由**：那是全站最大的字（3.3rem），若留系統黑體，同一頁會出現思源黑體與 PingFang 兩種黑體，最大的字最看得出來 —— 故 `.scroll .nm`／`.scroll .slogan` 一併加進 `global.css` 的唯一接點與 `site-chars.mjs` 的 `PATTERNS`（字集 450 → 453 字、68.0／67.8 KB）。過程中 `check-fonts.mjs` 確實擋下「立軸的微／處／皆不在字集」——那正是它存在的理由。**印章刻意留宋體**（新 token `--font-seal`）：它只畫一個「吉」，是篆刻質地的 logo 而非文字內容，宋體筆畫更有「印」的味道。`vert`／`vrt2` 仍不必收：立軸是 `text-orientation: upright`，漢字用橫排字形、不走直排替代，而立軸文字裡沒有標點 |
 | 2026-07-31 | **字型設定收成兩個入口，token 改按角色命名，並補上 zh-TW 排版慣例** | 改字型前得翻四處 CSS 加一支 build script，是前一列那些坑的溫床。三件事：① token 由字族名改角色名（`--font-sans` → `--font-body`／`--font-ui`，`--font-serif` → `--font-prose`）—— 舊的 `--font-sans` 同時是「blog 正文」與「UI 小字」的來源，所以「改正文」動不了而不順手動到 nav，31 處要一處處確認；② `--font-heading` 收成 `global.css` 一條規則（原本散在四個檔的 scoped style），註解直接指向 `site-chars.mjs` 的 `PATTERNS`，那兩份清單必須一致；③ 字型檔的選擇收進 `build-fonts.mjs` 的 `FONT` 物件，family 名寫進 `fonts.json` 由 `BaseHead` 讀，不再兩邊手抄。排版慣例照 [漢字標準格式](https://github.com/ethantw/Han)／[clreq](https://www.w3.org/TR/clreq/)／MDN 補：**拉丁字型前置**（中文字型的拉丁字形是為全形格線設計的）、subset 保留 `halt`（[缺 `chws`／`halt` 時 `text-spacing-trim` 直接停用](https://developer.mozilla.org/en-US/docs/Web/CSS/text-spacing-trim)）、首頁 `.prose em` 改**着重號**（漢字沒有斜體，CJK italic 是整體剪切傾斜；只收首頁，文章正文的斜體多是西文作品名）。`text-autospace`／`text-spacing-trim` 刻意**不宣告** —— 兩者 initial value `normal` 就是要的行為，寫了是 no-op，也因此不需要 pangu.js |
