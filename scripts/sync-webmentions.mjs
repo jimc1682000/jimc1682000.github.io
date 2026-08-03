@@ -363,11 +363,13 @@ try {
 }
 
 const { accepted, rejected } = prepareMentions(children, overrides, domain);
-// Newest first so the per-target publish cap keeps recent interactions.
+// Receipt order first so the per-target cap cannot be gamed with future-dated
+// `published` values. webmention.io `wm-id` is assigned server-side and rises.
 accepted.sort((a, b) => {
-  const ta = Date.parse(a.published ?? '') || 0;
-  const tb = Date.parse(b.published ?? '') || 0;
-  return tb - ta;
+  const na = Number(a.id);
+  const nb = Number(b.id);
+  if (Number.isFinite(na) && Number.isFinite(nb) && na !== nb) return nb - na;
+  return String(b.id).localeCompare(String(a.id));
 });
 const moderation = await moderate(accepted);
 rmSync(avatarDir, { recursive: true, force: true });
