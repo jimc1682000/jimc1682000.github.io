@@ -11,6 +11,7 @@
 // 故除了掃 dist，另外從原始碼靜態抽出「出現在標題位置的 i18n key」並收進字集。
 
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
+import { decodeHTML } from 'entities';
 import { join } from 'node:path';
 
 function filesWithExt(dir, ext, out = []) {
@@ -63,46 +64,16 @@ function i18nHeadingChars(srcDir = 'src') {
   return out;
 }
 
-const NAMED_ENTITIES = {
-  amp: '&',
-  lt: '<',
-  gt: '>',
-  quot: '"',
-  apos: "'",
-  nbsp: ' ',
-  hellip: '…',
-  mdash: '—',
-  ndash: '–',
-  lsquo: '‘',
-  rsquo: '’',
-  ldquo: '“',
-  rdquo: '”',
-  copy: '©',
-  reg: '®',
-  deg: '°',
-};
-
-// entity 必須「解碼」而不是刪掉：`&lt;` 在畫面上是 `<`，那個字形需要進 subset。
-// 早期版本直接把 entity 換成空白，導致 code 區塊的 < > & 缺字而 gate 照樣放行
-// —— 那正是這支 gate 該抓到的靜默失敗（Codex review 抓到，PR #44）。
-function decodeEntities(s) {
-  return s.replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (m, body) => {
-    if (body[0] === '#') {
-      const cp =
-        body[1] === 'x' || body[1] === 'X'
-          ? parseInt(body.slice(2), 16)
-          : parseInt(body.slice(1), 10);
-      return Number.isFinite(cp) ? String.fromCodePoint(cp) : ' ';
-    }
-    return NAMED_ENTITIES[body.toLowerCase()] ?? ' ';
-  });
-}
-
+// entity 必須「解碼」而不是刪掉：`&lt;` 在畫面上是 `<`，那個字形要進 subset。早期版本把
+// entity 換成空白，導致 code 區塊的 < > & 缺字而 gate 照樣放行（Codex review 抓到，PR #44）。
+// 用 entities 的 decodeHTML 而不是自己維護一張表：表只收了十幾個常見的，`Caf&eacute;`
+// 這種（raw HTML 標題會原樣輸出）會被當成未知、換成空白 —— 畫面渲染 é、字集卻沒有它，
+// 又變成 gate 放行的靜默缺字（Codex review 抓到，PR #53）。
 function visibleText(html) {
   const stripped = html
     .replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/gi, ' ')
     .replace(/<[^>]+>/g, ' ');
-  return decodeEntities(stripped);
+  return decodeHTML(stripped);
 }
 
 const printable = (s) => [...s].filter((c) => c.trim() !== '');
