@@ -73,7 +73,7 @@ const ui = {
     'resume.highlightsTitle': '重點（去識別）',
     'resume.fullTitle': '完整履歷',
     'resume.fullNote':
-      '完整經歷、專案細節與 PDF 不公開掛網。請選擇版本並寄出信件；系統驗證寄件信箱後，會立即回覆限時下載入口。',
+      '完整經歷、專案細節與 PDF 不公開掛網。請選擇版本並寄出信件；我會人工回覆。自動化限時下載入口會在後端就緒後接上。',
     'resume.request': '申請查看完整履歷',
     'resume.variantLabel': '選擇履歷版本',
     'resume.contact': '電子名片',
@@ -142,7 +142,7 @@ const ui = {
     'resume.highlightsTitle': 'Highlights (redacted)',
     'resume.fullTitle': 'Full resume',
     'resume.fullNote':
-      'Full history, project details, and PDFs are not public. Choose a version and send the email; after the sender address is verified, the system replies with a time-limited download entry.',
+      'Full history, project details, and PDFs are not public. Choose a version and send the email; I will reply manually. Automated time-limited download links will plug in once the backend is ready.',
     'resume.request': 'Request full resume',
     'resume.variantLabel': 'Choose a resume variant',
     'resume.contact': 'Contact card',

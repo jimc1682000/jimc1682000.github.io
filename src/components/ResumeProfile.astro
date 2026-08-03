@@ -11,6 +11,8 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const name = lang === 'en' ? contact.nameEn : contact.nameZh;
+// ADR-0001 rollout：resume+ 自動分流要等 HR-1（Email Worker）上線後才掛。
+// 目前走既有聯絡信箱，人工回覆；subject／body 先把變體標清楚，之後再切路由。
 const variants = [
   { id: 'ai', label: 'AI' },
   { id: 'sre', label: 'SRE' },
@@ -25,7 +27,7 @@ const variants = [
       : `您好，我想查看 ${variant.label} 版本的完整履歷。`;
   return {
     ...variant,
-    href: `mailto:resume+${variant.id}-${lang}@jimmychen.me?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+    href: `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
   };
 });
 ---
