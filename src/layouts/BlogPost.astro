@@ -228,7 +228,10 @@ const authorName = lang === 'en' ? 'Jimmy Chen' : '陳建豪';
   }
   /* 首行縮排是中文散文慣例，也是換掉宋體之後把「文氣」找回來的關鍵；
      段距因此收小，靠縮排而非空白分段。引文與清單不套（縮排會打亂它們的層次）。 */
-  .body :global(p) {
+  /* 只套**直接子層**的段落。用後代選擇器會連 blockquote 與 loose list 裡的 <p> 一起縮排
+     （markdown 的引文渲染成 `<blockquote><p>…`），把引文的對齊推歪 —— 與上面註解說的
+     「引文與清單不套」相反。 */
+  .body > :global(p) {
     text-indent: 2em;
     margin: 0 0 0.5rem;
   }

@@ -4,16 +4,61 @@
 //
 // 為什麼看 dist 而不是 content/：dist 才包含 i18n UI 字串、日期格式、tag 名稱、
 // 作品集與履歷資料等 runtime 產生的文字。從 content/ 掃會漏。
+//
+// 但 dist 也有它漏的東西：**條件式渲染的標題**。例如 Webmentions.astro 的
+// `<h2>{t('webmention.title')}</h2>` 只在 PUBLIC_WEBMENTION_DOMAIN 有設、且該篇真的
+// 收到迴響時才出現 —— 本機沒設就掃不到那幾個字，CI 有設就會在 postbuild 掛掉、擋住部署。
+// 故除了掃 dist，另外從原始碼靜態抽出「出現在標題位置的 i18n key」並收進字集。
 
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
-function htmlFiles(dir = 'dist', out = []) {
+function filesWithExt(dir, ext, out = []) {
   if (!existsSync(dir)) return out;
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
-    if (statSync(p).isDirectory()) htmlFiles(p, out);
-    else if (p.endsWith('.html')) out.push(p);
+    if (statSync(p).isDirectory()) filesWithExt(p, ext, out);
+    else if (p.endsWith(ext)) out.push(p);
+  }
+  return out;
+}
+
+const htmlFiles = (dir = 'dist') => filesWithExt(dir, '.html');
+
+const I18N_FILE = 'src/i18n/ui.ts';
+
+/**
+ * 出現在標題位置的 i18n 字串。掃原始碼而不是 dist，因為有些標題是條件式渲染的
+ * （見檔頭說明）。新增一個 `<h2>{t('x')}</h2>` 會自動被收進來，不必手動維護清單；
+ * key 在 ui.ts 找不到就直接爆掉（寧可 build 失敗，不要靜默缺字）。
+ */
+function i18nHeadingChars(srcDir = 'src') {
+  const ui = readFileSync(join(srcDir, 'i18n/ui.ts'), 'utf8');
+  const values = new Map();
+  for (const m of ui.matchAll(/'([\w.]+)':\s*'((?:[^'\\]|\\.)*)'/g)) {
+    if (!values.has(m[1])) values.set(m[1], []);
+    values.get(m[1]).push(m[2]);
+  }
+
+  const keys = new Set();
+  const HEADING_SOURCE = [
+    /<(h[1-4])\b[^>]*>([\s\S]*?)<\/\1>/gi,
+    /<[^>]*class="[^"]*\b(?:pt|page-h|brand|slogan|t)\b[^"]*"[^>]*>([\s\S]*?)<\//gi,
+  ];
+  for (const f of filesWithExt(srcDir, '.astro')) {
+    const src = readFileSync(f, 'utf8');
+    for (const re of HEADING_SOURCE) {
+      for (const m of src.matchAll(re)) {
+        for (const k of (m[2] ?? m[1]).matchAll(/\bt\('([\w.]+)'\)/g)) keys.add(k[1]);
+      }
+    }
+  }
+
+  const out = new Set();
+  for (const key of keys) {
+    const vals = values.get(key);
+    if (!vals) throw new Error(`${I18N_FILE} 找不到標題用的 i18n key：${key}`);
+    for (const v of vals) for (const c of printable(v)) out.add(c);
   }
   return out;
 }
@@ -106,6 +151,8 @@ export function headingChars(distDir = 'dist') {
       }
     }
   }
+  // 條件式渲染的標題（webmention 區塊等）：從原始碼補，dist 掃不到。
+  for (const c of i18nHeadingChars()) out.add(c);
   // 可見 ASCII 全收：拉丁字形極小，寧可多收也不要因抽取邏輯有漏就掉字。
   for (let cp = 0x21; cp < 0x7f; cp++) out.add(String.fromCodePoint(cp));
   for (const c of '０１２３４５６７８９年月日') out.add(c);
