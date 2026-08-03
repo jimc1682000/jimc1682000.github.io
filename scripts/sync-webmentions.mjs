@@ -32,6 +32,10 @@ const MENTIONS_PER_PAGE = 1000;
 // Keep each moderation request small; a single giant payload fails the whole
 // call and the old catch path then fail-open'd every reply.
 const MODERATION_BATCH_SIZE = 32;
+// Bound the whole moderation phase so a flood cannot burn the deploy window.
+const MAX_MODERATION_ITEMS = 200;
+const MAX_MODERATION_MS = 45_000;
+const MODERATION_REQUEST_MS = 20_000;
 
 function summary(lines) {
   if (summaryFile) appendFileSync(summaryFile, `${lines.join('\n')}\n`);
@@ -232,8 +236,21 @@ async function moderate(mentions) {
 
   const hidden = new Map();
   let unavailable = false;
-  for (let offset = 0; offset < pending.length; offset += MODERATION_BATCH_SIZE) {
-    const batch = pending.slice(offset, offset + MODERATION_BATCH_SIZE);
+  // Cap count first; remainder is fail-open (published unmoderated).
+  const queue = pending.slice(0, MAX_MODERATION_ITEMS);
+  if (pending.length > MAX_MODERATION_ITEMS) unavailable = true;
+
+  const phaseDeadline = Date.now() + MAX_MODERATION_MS;
+  for (let offset = 0; offset < queue.length; offset += MODERATION_BATCH_SIZE) {
+    if (Date.now() >= phaseDeadline) {
+      unavailable = true;
+      break;
+    }
+    const batch = queue.slice(offset, offset + MODERATION_BATCH_SIZE);
+    const requestMs = Math.max(
+      1,
+      Math.min(MODERATION_REQUEST_MS, phaseDeadline - Date.now()),
+    );
     try {
       const response = await fetch('https://api.openai.com/v1/moderations', {
         method: 'POST',
@@ -242,7 +259,7 @@ async function moderate(mentions) {
           model: 'omni-moderation-latest',
           input: batch.map((item) => item.text),
         }),
-        signal: AbortSignal.timeout(20_000),
+        signal: AbortSignal.timeout(requestMs),
       });
       if (!response.ok) throw new Error(`moderation HTTP ${response.status}`);
       const payload = await response.json();
