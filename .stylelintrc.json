@@ -4,6 +4,12 @@
     {
       "files": ["**/*.astro"],
       "customSyntax": "postcss-html"
+    },
+    {
+      "files": ["src/components/BaseHead.astro"],
+      "rules": {
+        "no-empty-source": null
+      }
     }
   ],
   "rules": {

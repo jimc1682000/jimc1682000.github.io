@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import type { Lang } from '../i18n/ui';
 import { cfBeaconToken, webmentionDomain, webmentionEnabled } from '../consts';
+import fontData from '../generated/fonts.json';
 
 interface Props {
   title: string;
@@ -28,6 +29,36 @@ const isEn = p === '/en' || p.startsWith('/en/');
 const zhPath = isEn ? p.slice(3) || '/' : p;
 const enPath = isEn ? p : p === '/' ? '/en/' : '/en' + p;
 const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
+
+// 標題用的自 host 思源黑體 TC（src/generated/fonts.json 由 scripts/build-fonts.mjs 產生）。
+// 只給標題位置用（h1–h4、.pt、.brand）—— 正文是系統黑體，見 BlogPost.astro 的 .body 註解。
+//
+// family 名從 fonts.json 讀（由 build-fonts.mjs 的 FONT 物件寫入），不在這裡手抄。
+// 它刻意不叫 'Noto Sans TC'：後者會蓋掉 --font-ui／--font-body 裡的同名字型，
+// 讓正文也吃到只有標題字的 subset。理由詳見 global.css。
+//
+// inline 在 <head> 而非放進 global.css：瀏覽器要先下載 stylesheet 才會發現外部檔裡的
+// @font-face，inline 可以早一輪開始抓（web.dev font best practices）。
+//
+// font-display: optional —— 給字型約 100ms 的窗口，沒到就這次維持系統黑體、**不換字**。
+// 選它而不是 swap 是為了 CLS：中文 webfont 與系統字的字寬不同，swap 換字時版面會跳
+// （實測整站 webfont 方案的首頁 CLS 從 0 變 0.155）。代價是首次造訪可能看到系統黑體，
+// 第二次起走快取就是思源黑體。配合下面的 preload 提高首訪命中率。
+const fontFaceCss = fontData.faces
+  .map(
+    (f) =>
+      `@font-face{font-family:'${fontData.family}';font-style:normal;font-weight:${f.weight};` +
+      `font-display:optional;src:url('/fonts/${f.file}') format('woff2')}`,
+  )
+  .join('');
+
+// preload 只挑「這條路由真的會用到」的字重，不要兩個都送。
+// 吃 --font-heading 的位置只有兩種字重：700（h1–h4、.brand、.pt、.item .t —— 幾乎每頁都有）
+// 與 400（只有首頁立軸的標語）。在 /works/、/contact、文章頁預載 400 face 等於用最高優先權
+// 搶頻寬下載一個不會被用到的 69 KB 檔。沒被 preload 的 face 仍由 @font-face 正常載入，
+// preload 只是優先權提示。
+const isHome = p === '/' || p === '/en' || p === '/en/';
+const preloadFaces = fontData.faces.filter((f) => f.weight === 700 || isHome);
 ---
 
 {/* no-flash theme：務必放 <head> 最前，於任何樣式套用前設定 data-theme（DESIGN §6） */}
@@ -47,6 +78,18 @@ const skipHreflang = p.includes('/tags/') || /\/search\/?$/.test(p);
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
+
+{
+  /* preload 只給標題字型，且只給「這條路由會用到的字重」（見上方 preloadFaces）——
+  web.dev 警告 preload 會搶頻寬，不要濫用。放在樣式表之前，讓下載早於 CSS 解析。 */
+}
+{
+  preloadFaces.map((f) => (
+    <link rel="preload" href={`/fonts/${f.file}`} as="font" type="font/woff2" crossorigin />
+  ))
+}
+{/* 自 host 標題字型：inline 宣告讓瀏覽器盡早發現（不放 global.css） */}
+<style is:inline set:html={fontFaceCss}></style>
 
 <title>{title}</title>
 <meta name="description" content={description} />

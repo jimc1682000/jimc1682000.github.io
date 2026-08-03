@@ -20,38 +20,67 @@
   --color-border: rgba(236, 230, 217, 0.12);
   --color-border-subtle: rgba(236, 230, 217, 0.06);
   --color-border-hover: rgba(236, 230, 217, 0.24);
-  --color-header-bg: rgba(23, 25, 27, 0.72);
-  --color-accent: #ece6d9;
-  --color-accent-hover: rgba(236, 230, 217, 0.85);
   /* 暗色版朱砂：原值 #d24a3b 對墨底 #17191b 只有 4.01:1，未達 WCAG AA 的 4.5
      （DESIGN §9 明訂「對比 AA」是硬規則）。本值只把 HSL 亮度 53% → 57%，
      色相 6° 與飽和 63% 不動，是達標所需的最小改動 → 4.53:1。
      亮色版的 #c8392b 為 4.70:1，本來就合格，不動。 */
   --color-seal: #d6594c;
   --color-seal-tint: rgba(214, 89, 76, 0.16);
-  --color-overlay: rgba(0, 0, 0, 0.8);
   --color-focus-ring: var(--color-text);
 
-  /* Typography（散文集:serif 為標題與內文主字,sans 給 nav/UI/meta） */
-  --font-serif: 'Noto Serif TC', 'Songti TC', Georgia, 'PingFang TC', serif;
-  --font-sans:
-    -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Noto Sans TC', 'Segoe UI', 'Helvetica Neue',
-    Arial, sans-serif;
+  /* Typography —— **改字型只動這一區**（外加 scripts/build-fonts.mjs 的 FONT 物件）。
+     token 按「角色」命名而非按字族，因為要換的永遠是某個角色的字：
+       --font-heading  標題與首頁立軸。唯一接點是下面那條規則，且是唯一吃自 host
+                       webfont 的角色（字集有限，見那條規則的註解）。
+       --font-body     blog 正文。唯一使用者是 BlogPost.astro 的 .body。
+       --font-prose    首頁散文 —— body 預設值，靠繼承散到各頁摘要小段。
+       --font-ui       nav／meta／日期／tag／圖說／落款／朱砂 eyebrow 小標。
+       --font-seal     落款印章的「吉」。全站唯一的宋體，理由見該 token 上方。
+       --font-mono     code。
+     body／prose／ui 目前值相同（全站黑體），但刻意分成三個：上次「正文改系統黑體」時
+     它們是同一個 token，於是「改正文」與「改 nav」分不開、31 處要一處處確認。
+
+     'NotoSansTC Head' 是 BaseHead.astro 那個 subset face 的專用名 —— 刻意不叫
+     'Noto Sans TC'，否則會蓋掉 --font-ui／--font-body 裡同名的系統/本機字型，
+     讓正文也吃到只有標題字的 subset，段落中間就會出現兩種字面（gate 抓不到這個方向）。 */
+  /* 西文字型排在中文字型**之前**（漢字標準格式 / clreq 的通則）：中文字型自帶的拉丁
+     字形多是為全形格線設計的，混排時字寬與字重都不對。把西文字型放前面，拉丁與數字
+     由它出、漢字自然落到後面的中文字型。--font-heading 是刻意的例外：那個 subset 自帶
+     思源黑體的拉丁字形（設計上同源），若讓系統西文先出，標題的拉丁反而各平台不一致。 */
+  --font-heading: 'NotoSansTC Head', -apple-system, 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  --font-body:
+    -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang TC', 'Microsoft JhengHei',
+    'Noto Sans TC', sans-serif;
+  --font-prose:
+    -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang TC', 'Microsoft JhengHei',
+    'Noto Sans TC', sans-serif;
+  --font-ui:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, 'PingFang TC',
+    'Microsoft JhengHei', 'Noto Sans TC', sans-serif;
+  /* 印章是全站唯一留宋體的地方：它只畫一個「吉」字，是篆刻質地的 logo 而不是文字內容，
+     宋體的筆畫比黑體更有「印」的味道。不排拉丁字型 —— 這個 token 永遠只渲染漢字。 */
+  --font-seal: 'Songti TC', serif;
   --font-mono:
     ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.3125rem;
-  --font-size-2xl: 1.5625rem;
-  --font-size-3xl: 1.875rem;
-  --font-size-4xl: 2.25rem;
-  --font-size-5xl: 2.7rem;
-  --font-size-6xl: 3.25rem;
-  --font-size-7xl: 3.875rem;
-  --font-size-display: 5rem;
+  /* 字級也按角色命名。**這串值是從各元件實際用的 rem 反推出來的**，不是憑空定的
+     modular scale —— 上一版是 --font-size-xs…display 的 12 級 t-shirt scale，跟實際
+     用值對不上，所以 60 幾處字級全在元件裡直寫 rem、scale 只有 3 處在用。
+     收斂時把相差 ≤0.8px 的鄰近值折進同一級（0.8／0.82→0.85、0.88／0.92→0.9、
+     1.08／1.1→1.05、1.2→1.25、1.9→2），中文小字在這個量級的差異肉眼分不出來。
+     新增字級前先問「有沒有現成的級可用」——會再長出 0.82 這種值就是漂移的開始。 */
+  --text-tag: 0.72rem; /* tag chip */
+  --text-meta: 0.85rem; /* 日期、時間、footer、圖說、次要小字 */
+  --text-label: 0.9rem; /* nav、朱砂 eyebrow 小標、首頁副標 */
+  --text-ui: 0.95rem; /* 按鈕、webmention 內容 */
+  --text-base: 1rem; /* body 預設、列表與作品的描述 */
+  --text-body: 1.02rem; /* blog 正文、Header 站名 */
+  --text-lede: 1.05rem; /* 各頁導語、首頁散文 */
+  --text-title: 1.25rem; /* 列表文章標題、正文 h3、作品條目標題 */
+  --text-subhead: 1.5rem; /* 正文 h2 */
+  --text-h1: 2rem; /* 名片與 404 的頁標 */
+  --text-post-h: 2.4rem; /* blog 單篇標題 */
+  --text-page-h: 2.6rem; /* 各索引頁頁標 */ /* 首頁立軸姓名（直排） */ /* 英文版立軸（橫排、字串較長） */
 
   /* Spacing（DESIGN §5，8pt grid） */
   --spacing-xs: 0.5rem;
@@ -61,24 +90,19 @@
   --spacing-xl: 3rem;
   --spacing-2xl: 4rem;
   --spacing-3xl: 6rem;
-  --spacing-4xl: 8rem;
 
   /* Layout */
   --max-width: 1400px;
   --max-width-narrow: 800px;
-  --max-width-wide: 1600px;
   --gutter: clamp(1rem, 4vw, 3rem);
 
   /* Radius */
   --radius-sm: 8px;
   --radius-md: 16px;
-  --radius-lg: 32px;
-  --radius-xl: 48px;
 
   /* Motion */
   --transition-fast: 150ms ease;
   --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 600ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ---------- Light（[data-theme="light"]，DESIGN §3.2） ---------- */
@@ -96,12 +120,8 @@
   --color-border: rgba(26, 29, 32, 0.13);
   --color-border-subtle: rgba(26, 29, 32, 0.07);
   --color-border-hover: rgba(26, 29, 32, 0.28);
-  --color-header-bg: rgba(247, 244, 239, 0.72);
-  --color-accent: #1a1d20;
-  --color-accent-hover: rgba(26, 29, 32, 0.82);
   --color-seal: #c8392b;
   --color-seal-tint: rgba(200, 57, 43, 0.09);
-  --color-overlay: rgba(0, 0, 0, 0.5);
 }
 
 /* ---------- Reset（極簡） ---------- */
@@ -122,9 +142,14 @@ html {
 
 body {
   min-height: 100vh;
-  font-family: var(--font-serif);
-  font-size: var(--font-size-base);
+  font-family: var(--font-prose);
+  font-size: var(--text-base);
   line-height: 1.6;
+  /* 中文排版的兩件事**刻意不宣告**：`text-autospace`（中西文之間補空白）與
+     `text-spacing-trim`（標點擠壓）的 initial value 都是 `normal`，而 `normal` 就是
+     我們要的行為 —— 寫出來是 no-op。所以不需要 pangu.js 在 runtime 插空白字元。
+     真正要顧的是字型端：`text-spacing-trim` 需要字型有 `chws`／`halt` OpenType
+     feature，否則瀏覽器直接停用 —— 見 scripts/build-fonts.mjs 的 FLAGS。 */
   color: var(--color-text);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
@@ -141,6 +166,24 @@ video {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+/* 標題字型的唯一接點 —— **這份清單必須與 scripts/lib/site-chars.mjs 的 PATTERNS 一致**。
+   subset 只含這些位置用到的字，多接一個選擇器就是靜默缺字，而 check-fonts.mjs 只查
+   反向（字集缺字），抓不到。故也止於 h4：headingChars() 不掃 h5/h6。
+   刻意寫在 global.css 而不是各元件的 scoped style —— 那會讓這份清單散成四處、
+   跟 PATTERNS 對帳時得四個檔案一起看。.pt／.brand／.item .t 在本 repo 各只有一個
+   擁有者（`.t` 夠通用，故 `.item` 前綴是必要的）。 */
+h1,
+h2,
+h3,
+h4,
+.brand, /* Header 站名 */
+.pt, /* 列表頁的文章標題 */
+.item .t, /* 作品集的條目標題 */
+.scroll .slogan {
+  /* 首頁立軸的標語（姓名已移除，見 Home.astro） */
+  font-family: var(--font-heading);
 }
 
 h1,
@@ -273,8 +316,8 @@ main {
 /* ---------- Tag chip（散文集:朱砂 pill,對齊 mockup） ---------- */
 .tag-chip {
   display: inline-block;
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-family: var(--font-ui);
+  font-size: var(--text-tag);
   line-height: 1.5;
   padding: 0.1rem 0.5rem;
   color: var(--color-seal);

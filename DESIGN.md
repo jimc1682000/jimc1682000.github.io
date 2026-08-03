@@ -40,10 +40,10 @@
 | 特徵 | 做法 |
 |------|------|
 | **散文式首頁** | 首頁主體是一段段自我介紹（散文），非分區塊卡牆；近作以「引用/清單」嵌在文末 |
-| **直式中文點綴** | 首頁右側「立軸」用 `writing-mode:vertical-rl` 直排姓名 + 標語 + 落款；**僅純中文短句用直式**，含英文的長內文一律橫排 |
+| **直式中文點綴** | 首頁右側「立軸」用 `writing-mode:vertical-rl` 直排標語 + 落款印章（**不放姓名** —— 散文第一句已經自我介紹，直排再寫一次是同一件事說兩遍）；**僅純中文短句用直式**，含英文的長內文一律橫排 |
 | **落款印章 logo** | 一枚朱紅方印，刻「吉」字（`Seal.astro`）；置於 Header 左與文末落款 |
 | **朱砂 accent** | 唯一品牌強調色＝印泥朱砂；只點在連結、標題記號、tag、印章、hover |
-| **宋體為主** | 標題與內文用 Noto Serif TC／Songti，拉出散文集人文質感；UI（nav/meta）用 sans |
+| **全站黑體，一枚宋體印** | 標題與首頁立軸用自 host 思源黑體 TC（跨平台一致）；散文、blog 正文與 UI（nav/meta）用系統黑體；唯一留宋體的是落款印章那個「吉」字 |
 | **antfu 式透明 nav** | Header 透明、無底色 bar、融進頁面；右上文字連結 + 小 icon 叢 |
 | **深／淺雙模** | `data-theme` + localStorage；`<head>` inline no-flash |
 
@@ -71,11 +71,13 @@
 | `--color-bg-surface` | `#efeae0` | 次級表面、code 區塊底 |
 | `--color-text` | `#1a1d20` | 主文字（黛墨，非純黑） |
 | `--color-text-secondary` | `#666059` | 輔助（暖灰墨） |
-| `--color-text-tertiary` | `#9a9186` | 細標、時間戳 |
+| `--color-text-tertiary` | `#766d63` | 細標、時間戳（原 `#9a9186` 僅 2.83:1，未達 AA → 調亮度至 4.63:1） |
 | `--color-border` | `rgba(26,29,32,0.13)` | 主邊框 |
 | `--color-border-subtle` | `rgba(26,29,32,0.07)` | 分隔 |
 | `--color-seal` | `#c8392b` | 朱砂：accent／印章／連結底線／標題記號 |
 | `--color-seal-tint` | `rgba(200,57,43,0.09)` | tag chip 底、印章暈 |
+| `--color-border-hover` | `rgba(26,29,32,0.28)` | hover 邊框、連結底線預設色 |
+| `--color-focus-ring` | `var(--color-text)` | focus ring（兩模式共用宣告） |
 
 ### 3.2 Dark（`:root` 預設，墨色）
 
@@ -85,12 +87,14 @@
 | `--color-bg-elevated` | `#202325` | 卡片 |
 | `--color-bg-surface` | `#282b2d` | 次級表面 |
 | `--color-text` | `#ece6d9` | 宣紙色主文字 |
-| `--color-text-secondary` | `rgba(236,230,217,0.60)` | 輔助 |
-| `--color-text-tertiary` | `rgba(236,230,217,0.40)` | 細標 |
+| `--color-text-secondary` | `rgba(236,230,217,0.6)` | 輔助 |
+| `--color-text-tertiary` | `rgba(236,230,217,0.55)` | 細標（原 0.4 僅 3.31:1，未達 AA → 0.55 為 5.09:1） |
 | `--color-border` | `rgba(236,230,217,0.12)` | 主邊框 |
 | `--color-border-subtle` | `rgba(236,230,217,0.06)` | 分隔 |
 | `--color-seal` | `#d6594c` | 朱砂（墨底稍亮） |
-| `--color-seal-tint` | `rgba(210,74,59,0.16)` | tag chip 底 |
+| `--color-seal-tint` | `rgba(214,89,76,0.16)` | tag chip 底（跟著 `--color-seal` 一起調） |
+| `--color-border-hover` | `rgba(236,230,217,0.24)` | hover 邊框、連結底線預設色 |
+| `--color-focus-ring` | `var(--color-text)` | focus ring |
 
 ### 3.3 語意規則
 
@@ -109,33 +113,89 @@
 
 ## 4. Typography（字體）
 
-```text
---font-serif:
-  "Noto Serif TC", "Songti TC", Georgia, "PingFang TC", serif;   /* 標題 + 內文主字 */
+token 按**角色**命名，不按字族 —— 要換的永遠是某個角色的字。西文字型一律排在中文字型
+**之前**（見下方「拉丁前置」）。
 
---font-sans:
-  -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC",
-  "Segoe UI", sans-serif;                                        /* nav / meta / UI */
+```text
+--font-heading:
+  "NotoSansTC Head", -apple-system, "PingFang TC",
+  "Microsoft JhengHei", sans-serif;        /* 標題（自 host 思源黑體 TC subset） */
+
+--font-body:
+  -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial,
+  "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;   /* blog 正文 */
+
+--font-prose:
+  -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial,
+  "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;   /* 首頁散文 */
+
+--font-ui:
+  -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial,
+  "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;  /* nav/meta/UI */
+
+--font-seal:
+  "Songti TC", serif;                    /* 落款印章的「吉」——全站唯一宋體 */
 
 --font-mono:
   ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 ```
 
-| 規則 | 說明 |
-|------|------|
-| 主字 | **宋體（serif）** 為散文質感主角；標題、內文、印章字皆 serif |
-| UI | nav、日期、tag、footer 等用 **sans**，維持介面清爽 |
-| 中文 | 必含 TC serif 後備（Noto Serif TC / Songti） |
-| 正文 | blog 內文 ~1.1rem、行高 ~2.0（中文長讀舒適） |
-| 直式 | 立軸用 serif + `text-orientation:upright`（漢字直立） |
+| 角色 | token | 用在哪 | 換字型要動 |
+|------|-------|--------|-----------|
+| 標題 | `--font-heading` | `h1`–`h4`、`.brand`、`.pt`、`.item .t`、`.scroll .slogan`。字重只有 **400／700**（subset 就這兩個），故這些位置一律宣告 700 | `global.css` token + `build-fonts.mjs` 的 `FONT` |
+| blog 正文 | `--font-body` | `BlogPost.astro` 的 `.body`（唯一使用者）；~1.02rem、行高 ~2.1、首行縮排 2em | `global.css` token |
+| 散文 | `--font-prose` | `body` 預設值 → 首頁自介、各頁摘要小段（靠繼承） | `global.css` token |
+| 印章 | `--font-seal` | `Seal.astro` 的「吉」（全站唯一宋體） | `global.css` token |
+| UI | `--font-ui` | nav、日期、tag、圖說、落款、朱砂 eyebrow 小標（×30） | `global.css` token |
+| code | `--font-mono` | `code`／`pre` | `global.css` token |
+
+`--font-body`／`--font-prose`／`--font-ui` 目前值相同（全站黑體）但刻意分成三個：先前
+`--font-body` 與 `--font-ui` 共用一個 `--font-sans`，於是「改正文」與「改 nav」分不開，
+31 處得一處處確認。散文若日後要換回宋體，也只是改 `--font-prose` 一行。
+
+### 字級 token
+
+**值是從各元件實際用的 rem 反推出來的**，不是憑空定的 modular scale —— 舊版是
+`--font-size-xs…display` 的 12 級 t-shirt scale，跟實際用值對不上，於是 60 幾處字級全在
+元件裡直寫 rem、scale 只有 3 處在用。收斂時把相差 ≤0.8px 的鄰近值折進同一級。
+
+| token | 值 | 用在哪 |
+|-------|-----|--------|
+| `--text-tag` | 0.72rem | tag chip |
+| `--text-meta` | 0.85rem | 日期、時間、footer、圖說、次要小字（最常用，×20） |
+| `--text-label` | 0.9rem | nav、朱砂 eyebrow 小標、首頁副標 |
+| `--text-ui` | 0.95rem | 按鈕、webmention 內容 |
+| `--text-base` | 1rem | `body` 預設、列表與作品的描述 |
+| `--text-body` | 1.02rem | blog 正文、Header 站名 |
+| `--text-lede` | 1.05rem | 各頁導語、首頁散文、立軸標語 |
+| `--text-title` | 1.25rem | 列表文章標題、正文 `h3`、作品條目標題 |
+| `--text-subhead` | 1.5rem | 正文 `h2` |
+| `--text-h1` | 2rem | 名片與 404 的頁標 |
+| `--text-post-h` | 2.4rem | blog 單篇標題 |
+| `--text-page-h` | 2.6rem | 各索引頁頁標 |
+
+`code`／`figcaption` 內的 `0.88em`／`0.9em` 刻意留相對值：它們要跟著父層縮放，不是絕對級。
+**新增字級前先問「有沒有現成的級可用」** —— 會再長出 `0.82rem` 這種值就是漂移的開始。
+
+### 中文排版（zh-TW）依據
+
+| 做法 | 為什麼 |
+|------|--------|
+| **拉丁前置** | 中文字型自帶的拉丁字形是為全形格線設計的，混排時字寬字重都不對；西文字型放前面 → 拉丁與數字由它出、漢字自然落到後面的中文字型（[漢字標準格式](https://github.com/ethantw/Han) 與 [clreq](https://www.w3.org/TR/clreq/) 的通則）。`--font-heading` 是刻意例外：那份 subset 自帶思源黑體同源的拉丁字形，讓系統西文先出反而各平台不一致 |
+| **標點擠壓靠字型** | `text-spacing-trim` 的初始值 `normal` 就是要的行為，CSS 端不必宣告；但[字型缺 `chws`／`halt` 時瀏覽器直接停用它](https://developer.mozilla.org/en-US/docs/Web/CSS/text-spacing-trim) → subset 的 `--layout-features` 必須留 `halt`（實測原檔只有 `halt`，無 `chws`） |
+| **中西自動間距不寫 CSS** | [`text-autospace` 的 `normal`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-autospace) 等同 `ideograph-alpha ideograph-numeric`（Baseline 2025-11），宣告出來是 no-op；也因此**不需要 pangu.js** 在 runtime 插空白字元 |
+| **着重號不用斜體** | 漢字沒有斜體，瀏覽器的 CJK italic 是整體剪切傾斜。中文的強調傳統是着重號（點在字下方）→ 首頁 `.prose em` 用 `text-emphasis: filled dot`。**只收在首頁**：文章正文的斜體多是 *Tenet* 這類西文作品名，該保持 italic |
+| **行高與字距** | 中文長讀行高 ~2.0–2.1、字距 +0.015em；`text-wrap: pretty`（正文）與 `balance`（標題）避免孤字 |
+| 直式 | 立軸用 `--font-heading` + `text-orientation: upright`（漢字直立）。**subset 仍不必帶 `vert`／`vrt2`**：`upright` 的字用橫排字形、不走直排替代，而立軸文字裡沒有標點（`vert` 真正會改的就是標點） |
+| webfont 邊界 | `--font-heading` 只有 `global.css` 裡**一條**規則接，不寫進元件的 scoped style；那份清單必須是 `headingChars()` 掃到的**子集**（故止於 `h4`），多接就是靜默缺字，`check-fonts.mjs` 只查反向 |
 
 ---
 
 ## 5. Spacing、Layout、動效
 
 - 8pt grid spacing token（`--spacing-xs`…）；section 間距寬鬆（散文呼吸感）。
-- 版心：正文窄欄 `--max-width-narrow`（約 680–720px）；首頁/作品集約 1040–1080px。
-- 圓角克制：chip/按鈕 8px、卡片/印章 16px；不做超大圓角。
+- 版心（實際值，非 token 一律靠元件自己寫）：blog 單篇 **680px**（`BlogPost.astro` 的 `.post`）、首頁 **1080px**、履歷 **760px**／內文 40rem；`.container` 用 `--max-width`（1400px）、`.container-narrow` 用 `--max-width-narrow`（**800px**）。
+- 圓角克制：tag／chip 藥丸形 **100px**；code 區塊與抬升面 `--radius-md`（16px）；`pre`／`code`／skip-link `--radius-sm`（8px）；印章依尺寸推算 **5–7px**；focus ring 2px。不做超大圓角（原本定義卻沒人用的 `--radius-lg`／`--radius-xl` 已刪）。
 - 動效短、功能性（theme、hover、連結底線）；尊重 `prefers-reduced-motion`。
 
 ---
@@ -156,27 +216,27 @@
 
 ### 7.1 落款印章（`Seal.astro`）
 
-朱砂方塊、白字（預設「吉」）、雙層 inset box-shadow（內圈 seal 色、外圈 bg 色成邊框感）。props：`char`、`size`。用於 Header 左、首頁/單篇文末落款。
+朱砂方塊、白字（預設「吉」）、雙層 inset box-shadow（內圈 seal 色、外圈 bg 色成邊框感）。props：`char`（預設「吉」）、`size`（預設 30）、`class`。字級／圓角／雙層邊框寬度都由 `size` 等比推算（≥48px 用較粗邊框）。字型走 `--font-seal`（全站唯一宋體）。用於 Header 左、首頁/單篇文末落款。
 
 ### 7.2 全域殼
 
-- **Header**：antfu 式透明（absolute、無底色 bar）；左＝印章 + 站名（serif）；右＝文字連結（Blog／履歷／作品集／語系）+ icon 叢（GitHub／RSS／theme）；當前頁 nav 標朱砂底線。
-- **Footer**：極簡（版權、RSS、語系），sans。
+- **Header**：antfu 式透明（absolute、無底色 bar）；左＝印章 + 站名（`--font-heading`）；右＝文字連結（Blog／履歷／作品集／語系）+ icon 叢（GitHub／RSS／theme）；當前頁 nav 標朱砂底線。
+- **Footer**：只有版權一行，sans。**不放 RSS／語系** —— Header 右上已經有，頁尾再放一次是同一組連結出現兩次。
 - **Skip link**、可見 focus ring 保留。
 
 ### 7.3 首頁（散文式）
 
-- 繁中 `/`：左＝散文自介（About 逐字）+「近作」最新 3 篇（引用式清單）+「Find me on」社群列；右＝直式立軸（陳建豪 + 標語 + 印章落款）。窄螢幕立軸退回橫排。
+- 繁中 `/`：左＝散文自介（About 逐字）+「近作」最新 3 篇（引用式清單）+「Find me on」社群列；右＝直式立軸（標語 + 印章落款）。窄螢幕立軸退回橫排。mf2 的 `p-name` 掛在隱藏連結上（立軸不顯示姓名，但 h-card 仍必須有 name）。
 - 英文 `/en/`：**橫排**英文版（不做直式），同結構、自然英譯。
 
 ### 7.4 作品集 `/works/`
 
-分類 editorial 清單（平台·基礎架構 / AI·Agentic / 自動化·工具 / 競賽·分享）；每項＝serif 標題 + 一句描述 + tag chip + 外連（Live／GitHub／Demo…）。資料在 `src/data/works.ts`（zh + en）。
+分類 editorial 清單（平台·基礎架構 / AI·Agentic / 自動化·工具 / 競賽·分享）；每項＝黑體標題（`.item .t`，接 `--font-heading`；`div` 不是 heading，`headingChars()` 有專門的 pattern 收它）+ 一句描述 + tag chip + 外連（Live／GitHub／Demo…）。資料在 `src/data/works.ts`（zh + en）。
 
 ### 7.5 Blog
 
-- 列表 `/blog/`：**依年份分組**（年份朱砂小標），每篇 serif 標題 + 日期 + description + tag chip；工具列「搜尋／標籤／RSS」。
-- 單篇：窄欄 serif、h2 朱砂左線、連結朱砂底線、blockquote 朱砂左線、code 區塊 surface 底 mono；文末印章落款「落款於臺灣 · <年>」；其後 Giscus 留言。
+- 列表 `/blog/`：**依年份分組**（年份朱砂小標），每篇黑體標題（`.pt`，接 `--font-heading`）+ 日期 + description + tag chip；工具列「搜尋／標籤／RSS」。
+- 單篇：窄欄、標題與 h2／h3 黑體（`--font-heading`）、正文系統黑體 + 首行縮排、h2 朱砂左線、連結朱砂底線、blockquote 朱砂左線、code 區塊 surface 底 mono；文末印章落款「落款於臺灣 · <年>」；其後 Giscus 留言。
 - Tags：`/blog/tags/[tag]`；chip 樣式一致。
 - 搜尋：`/blog/search`（Pagefind，靜態索引）。
 
@@ -214,12 +274,21 @@
 
 ```text
 1. 任何視覺／UI 決策前讀本 DESIGN.md。
-2. 顏色、字級、間距只用 token；禁 magic hex、禁紫漸層/霓虹/icon grid/AI slop。
-3. 主色只有朱砂一色；主字為宋體。
+2. 顏色、字級、間距只用 token，禁 magic hex 與 magic rem
+   （現存例外：朱砂底上的 `#fff` 兩處；`code`／`figcaption` 的 em 相對值刻意保留）。
+   字級要新增一級前先確認 §4 的表裡沒有能用的 —— 再長出 `0.82rem` 就是漂移的開始。
+   禁紫漸層/霓虹/icon grid/AI slop。
+3. 主色只有朱砂一色；全站黑體（標題與立軸吃 webfont，其餘系統黑體），只有落款印章留宋體。
+   吃 `--font-heading` 的位置字重一律宣告 **700**：subset 只有 400／700，寫 600 也是落到
+   700，宣告值與實際渲染不一致就是下一個 drift 的起點。真的要 600 就留在 `--font-ui`
+   （系統字有真 600，朱砂 eyebrow 小標就是這樣）。
 4. 首頁走散文式，不要改成卡牆作品目錄。
 5. 直式只用於純中文短句（立軸）；含英文長內文一律橫排。
 6. 偏離本檔須使用者明確批准，並補一列 Decisions Log。
-7. 改 token 先改 global.css，再回寫本檔表格保持同步。
+7. 改 token 先改 global.css，再回寫本檔表格保持同步。字型分兩種改法，別混：
+   換字型檔 → build-fonts.mjs 的 FONT 物件 + global.css 的 token。
+   改「哪些位置吃標題字」→ global.css 那條唯一接點規則 + site-chars.mjs 的 PATTERNS，
+   兩份清單必須一致（gate 只查反向，多接就是靜默缺字）。
 ```
 
 ---
@@ -245,7 +314,7 @@
 | 2026-07-25 | **加 microformats2 + webmention endpoint + 站外迴響區（P2-11）** | 讓自站成為 IndieWeb 節點：Bridgy Fed 只需 mf2 + 可發現 feed，即可讓 fediverse／Bluesky 使用者直接追蹤本站、回覆以 webmention 回流，**不需經營社群帳號**。標記無視覺副作用故不 gating；endpoint 與抓取由 `PUBLIC_WEBMENTION_DOMAIN` gating |
 | 2026-07-25 | **迴響用「排程 + 先查」（每 6 小時查，有新迴響才 build）** | webmention.io webhook 無法帶 `Authorization` header，接不上需 PAT 的 `repository_dispatch`；即時需多一層 CF Worker 持有可寫 repo 的 PAT。改為 gate job 比對全網域最大 `wm-id` 與 `actions/cache` 上次值，無變化就 ~10 秒結束不 build——用一個**唯讀** token 換到同樣的低浪費。額度不是考量（public repo 的 Actions 分鐘免費、`wrangler pages deploy` direct upload 不計入 CF 的 500 builds/月），純粹是避免無意義的重建與 deploy 雜訊。已保留 `webmention` dispatch type 供日後升級 |
 | 2026-07-25 | **自寫 `Webmentions.astro`，不用現成套件** | npm 上不存在 `astro-webmention`（當日直查 registry 為 Not found）；自寫約 80 行並包 try/catch 降級，避免 webmention.io 故障導致 CI 紅 |
-| 2026-07-25 | **加 `og:image`（站台通用卡 `public/og.png`）、`og:type=article`、`twitter:card=summary_large_image`、JSON-LD** | 原本分享出去是**沒有預覽圖的裸連結**，文章頁的 `og:type` 也錯寫成 `website`。**刻意用單一張站台通用圖，不做每篇動態生成**：`ubuntu-latest` 沒有中文字型，在 CI 產圖會**靜默**產出方框或空白（本檔 PNG 於本機產出並 commit，並以像素斷言驗過「吉」與站名真的畫出來——同 `avatar.png` 的做法）。每篇差異由 `og:title`／`og:description` 表達。JSON-LD：文章頁 `BlogPosting`、其餘 `Person`；與首頁既有的 mf2 h-card 並存不衝突（前者給搜尋引擎、後者給 IndieWeb 解析器） |
+| 2026-07-25 | **加 `og:image`（站台通用卡 `public/og.png`）、`og:type=article`、`twitter:card=summary_large_image`、JSON-LD** | 原本分享出去是**沒有預覽圖的裸連結**，文章頁的 `og:type` 也錯寫成 `website`。**刻意用單一張站台通用圖，不做每篇動態生成**：`ubuntu-latest` 沒有中文字型，在 CI 產圖會**靜默**產出方框或空白（PNG 由 `npm run build:og` 於本機產出並 commit，該腳本以像素斷言驗過「吉」與站名真的畫出來——同 `avatar.png` 的做法）。每篇差異由 `og:title`／`og:description` 表達。JSON-LD：文章頁 `BlogPosting`、其餘 `Person`；與首頁既有的 mf2 h-card 並存不衝突（前者給搜尋引擎、後者給 IndieWeb 解析器） |
 | 2026-07-25 | **修 Lighthouse 抓到的兩個 a11y 問題：`--color-text-tertiary` 對比、Header brand 缺 accessible name** | **兩者都是 pa11y 七頁全 0 issue 卻被 Lighthouse 抓到的** —— 規則集不同，所以兩個工具都要留。① tertiary 用於 meta／時間／標籤等 13–14px 小字（屬 WCAG「一般文字」需 4.5:1）：亮色 `#9a9186` 僅 **2.83:1** → `#766d63`（色相 33°／飽和 9% 不變，亮度 56%→42%）**4.63:1**；暗色 `rgba(236,230,217,0.4)` 等效 `#6c6b67` 僅 3.31:1 → α **0.55**（等效 `#8c8a84`）**5.09:1**。② Header 的 `.brand` 連結在小螢幕會被 media query 把 `.brand-text` 設為 `display:none`，而印章是 `aria-hidden` → 屆時**整個連結沒有可讀名稱**（Lighthouse 用行動裝置模擬，故四頁都報 `link-name`）。補 `aria-label`，不受 CSS 影響。結果：Accessibility **90 → 100**，兩項失敗元素皆歸零 |
 | 2026-07-25 | **加 stylelint／markdownlint／html-validate／knip，CI 另加 Lighthouse + pa11y（advisory）** | 一致套用「**linter 抓錯誤、formatter 管風格,兩者不重疊**」：stylelint 用 `config-recommended` 而非 `standard`（後者 165 個告警幾乎全是 `rule-empty-line-before` 這類排版）、markdownlint 關 `MD060`。**實際抓到的真問題**：`koding` 那篇匯入舊文有 Tomcat `server.xml` 片段**沒包 code fence**，被瀏覽器當成 `<host>`／`<valve>`／`<context>` 未知元素解析（已補 ```xml 並還原 `\_` 轉義）；`hidden="from-humans"` 不是合法的 HTML（`hidden` 是列舉屬性，Bridgy Fed 文件範例如此寫但它只認 class 與 href）；404 頁與名片頁的 `<nav>` 缺 accessible name。`valid-id` 放寬為 `relaxed`（HTML5 允許 id 以數字開頭，html-validate 預設沿用較嚴的舊規則，匯入舊文的數字標題會誤報）。Lighthouse 與 pa11y 皆 advisory：Lighthouse 的 best-practices **會扣 CSP 的分**（我們刻意含 `'unsafe-inline'`），設門檻只會逼人放寬 CSP。knip 也 advisory —— 它是清理機會而非正確性 gate |
 | 2026-07-30 | **正文連結由朱砂實線底線改為朱砂虛點底線** | 使用者不喜歡實線底線的視覺重量。實作從 `border-bottom` 換成 `text-decoration: underline dotted`：`border-bottom` 在連結斷行時會沿整行拉出框線，`text-decoration` 只跟著字走。**虛點線同時是必要的 a11y 線索**——WCAG 1.4.1 規定連結若只靠顏色區分，需對周圍正文 ≥ 3:1（實測朱砂對正文：暗色 3.13:1、亮色 3.29:1，只是剛好及格），有非色彩線索就不吃這條限制。另需明確宣告 `.body a:hover`，否則會吃到 `global.css` 的 `a:hover`（把底線轉成 `--color-text`、蓋掉朱砂）——舊版用 `border-bottom` 時那條 hover 剛好無效，換成 `text-decoration` 後就會生效 |
@@ -265,6 +334,14 @@
 | 2026-07-25 | **Bridgy Fed 自訂 handle：`/.well-known/{host-meta*,webfinger*,atproto-did}` 302 → `fed.brid.gy`（`public/_worker.js`）** | 讓別人直接用 `@jimmychen.me` 追蹤本站。規格要求 302（對方端點可能變動）且 host-meta／webfinger 須保留 query（webfinger 靠 `?resource=`）；atproto-did 反之用固定 query 標明本站身分。與 pages.dev 轉址共用同一個 worker，不另加 dashboard 規則 |
 | 2026-07-25 | **不輸出 `rel="pingback"`** | pingback 是 XML-RPC 舊協定、垃圾訊息重災區（webmention.io 自身也警告），已在該服務停用；宣告一個停用端點只會引來嘗試。僅保留 `rel="webmention"` |
 | 2026-07-25 | **`jimmychen.pages.dev` 301 → `jimmychen.me`（`public/_worker.js`）；GitHub Pages mirror 不轉址** | pages.dev 與 canonical 同屬 Cloudflare，一起壞、無備援價值 → 收成單一入口。GH Pages 是唯一非 Cloudflare 副本，轉址會讓備援指向故障中的網域，故保留 serve 內容（SEO 已由 canonical 收斂）。用 `_worker.js` 而非 `functions/`：CI deploy job 只下載 dist、不 checkout repo |
+| 2026-07-31 | **首頁立軸移除姓名、Footer 移除 RSS／語系** | 都是重複資訊：立軸的「陳建豪」與散文第一句「我是陳建豪」是同一件事說兩遍；Footer 的 RSS 與語系切換 Header 右上已經有。移姓名時 mf2 的 `p-name` 改掛在既有的隱藏 `u-url` 連結上 —— `validate-microformats.mjs` 會擋「首頁 h-card 有 name」，直接刪會壞掉。`.scroll .nm` 從 `global.css` 的唯一接點與 `site-chars.mjs` 的 `PATTERNS` 一起移除（兩份清單必須一致），`--text-scroll`／`--text-scroll-en` 兩個 token 隨之刪掉，`footer.rss` 的 i18n key 也一併清（本次改動造成的孤兒） |
+| 2026-07-31 | **字級收斂成 14 個 role token，砍掉 9 個沒人用的 token，字級零 magic rem** | 起點是一個對帳結果：60 幾處字級直寫 rem、22 個相異值，而定義好的 12 級 t-shirt scale（`--font-size-xs…display`）只有 3 處在用 —— 假 scale 留著才是放棄收斂。做法不是刪 scale，是**用實際值反推出真的 scale**：小字群原本 8 個值擠在 0.72–0.95rem（`0.82` 與 `0.85` 差 0.48px，沒人分得出來卻各自 commit 進不同元件），折成 4 級；正文群 5 個值折成 3 級；標題各自是真的角色差異，各留一級。共 14 個 `--text-*` token、替換 78 處。**逐值對帳**：產物裡 80 個帶 font-size 的選擇器全部對上，字級實際變動 15 處，最大 +1.6px（404 頁標 1.9→2rem，與名片頁標同角色，原本差 2px 本身就是漂移），其餘 ≤0.8px。`code`／`figcaption` 的 `0.88em`／`0.9em` 刻意留相對值。順手刪掉 9 個定義了卻沒人 `var()` 的 token（`--color-accent`／`accent-hover`／`header-bg`／`overlay`、`--max-width-wide`、`--radius-lg`／`xl`、`--spacing-4xl`、`--transition-slow`）—— 現在 46 個 token **零未使用**。§10 規則 2 從「字級不走 token」改回「字級也只用 token」，因為現實變了 |
+| 2026-07-31 | **標題字重統一宣告 700；DESIGN 對帳實際 code、修掉六處 drift** | 一致性維護，不是新設計。① `.brand`／`.pt`／`.item .t` 原本宣告 `font-weight: 600` —— 思源黑體家族**沒有 600**（7 級是 100／300／350／400／500／700／900），CSS 字重匹配在目標 > 500 時往上找，所以一直渲染 700。宣告值與實際不符就是下一個 drift 的起點，故直接寫 700；`--font-ui` 的四處朱砂 eyebrow 小標維持 600（系統字有真 600，0.9rem 配寬字距用 700 會結實突兀）。② 對帳出的 DESIGN drift：§3.1 亮色 `--color-text-tertiary` 表格仍寫舊值 `#9a9186`（實際 `#766d63`）、§3.2 暗色 tertiary 寫 `0.4`（實際 `0.55`）、`--color-seal-tint` 寫 `rgba(210,74,59,…)`（實際 `rgba(214,89,76,…)`）—— 這三個都是先前 WCAG 修正改了 CSS 但沒回寫表格；另補上六個從未列在表裡的 token（`--color-border-hover`／`header-bg`／`accent`／`accent-hover`／`overlay`／`focus-ring`）。③ §5 版心與圓角寫的是願望值：實際 blog 單篇 680px（元件自己寫死）、`--max-width-narrow` 是 800px、tag 是 100px 藥丸而非 8px、印章圓角依尺寸 5–7px。④ §10 規則 2 原本宣稱「字級只用 token」，實際 60+ 處直寫 rem、`--font-size-*` 只用到 3 處 —— 改成照實描述並說明為何不硬收斂（中文字級逐處微調，整批換算會改外觀）。⑤ §7.1 印章補上 `class` prop 與「圓角依 size 推算」 |
+| 2026-07-31 | **分享卡與頭像的字型對齊全站，並把產圖從手工變成 `npm run build:og`** | 兩個先前沒被看見的事實：① 線上引用的只有 PNG（`og:image` → `/og.png`、h-card `u-photo` 與 vCard PHOTO → `/avatar.png`），SVG 沒有任何頁面指向它 —— 所以**只改 svg 線上零變化**；② svg 裡寫的 `Noto Serif TC` 從來沒生效過，那個字型沒裝在產圖的機器上，實際一直是 Songti 的 fallback。故：og 卡的站名／標語／署名／網域改系統黑體、印章「吉」留宋體（＝站上的「全站黑體，一枚宋體印」），avatar 只把字型名寫成 `'Songti TC', serif` 照實反映（PNG 視覺不變）。產圖寫成 `scripts/build-og.mjs`（sharp，devDependency 已有），每張圖對指定區域做**像素斷言**（印章白字、站名、標語、署名各自要有墨）—— 缺字型時整支失敗且**不寫入 PNG**，而不是產出一張沒字的卡片還說成功。仍**不進 CI**：ubuntu-latest 沒有中文字型（同 `build:fonts` 的取捨）。改 svg 的 x/y 或字級時要同步斷言區域座標 |
+| 2026-08-03 | **字集不再掃 `strong`／`b`，`build:fonts` 改成「先產再換」，gate 加驗檔案存在** | 三件都是 Codex review 抓到的。① 掃 `strong`／`b` 看起來只是多收幾 KB，實際代價是**弄壞 content-only 發文流程**：一篇新文只要用 `**粗體**` 帶進一個新字，`check-fonts` 就在 postbuild 失敗、擋掉自動合併，而要修就得重跑 `build:fonts` 並 commit 字型產物 —— 那個 PR 就不再是 content-only、得走人工 review。它們本來就不吃 `--font-heading`（標題裡的粗體由外層 `h1`–`h4` 覆蓋），移除後字集 455 → **380 字**、每字重 68.4 → **56.5 KB**。② `build-fonts.mjs` 原本先清空 `public/fonts` 再跑 `pyftsubset`，任何一個 face 失敗就會留下「woff2 全被刪掉、`fonts.json` 還指著舊檔名」的狀態；改成全部產完才刪舊檔並落地。③ `check-fonts.mjs` 補驗 manifest 指到的檔案真的存在 —— 只比對字集的話，字型 404、畫面靜默掉回系統字，gate 照樣綠燈（實測把 400 face 移走 → exit 1） |
+| 2026-07-31 | **全站統一黑體：首頁散文改系統黑體、首頁立軸接上標題 webfont，只留印章一枚宋體** | 前一版是「黑體標題 + 宋體散文」，同一頁兩種字族在使用者眼裡就是不統一。散文改黑體後 `--font-prose` 只剩角色意義（值與 `--font-body`／`--font-ui` 相同），要換回宋體仍是一行。**立軸接 webfont 的理由**：那是全站最大的字（3.3rem），若留系統黑體，同一頁會出現思源黑體與 PingFang 兩種黑體，最大的字最看得出來 —— 故 `.scroll .nm`／`.scroll .slogan` 一併加進 `global.css` 的唯一接點與 `site-chars.mjs` 的 `PATTERNS`（字集 450 → 453 字、68.0／67.8 KB）。過程中 `check-fonts.mjs` 確實擋下「立軸的微／處／皆不在字集」——那正是它存在的理由。**印章刻意留宋體**（新 token `--font-seal`）：它只畫一個「吉」，是篆刻質地的 logo 而非文字內容，宋體筆畫更有「印」的味道。`vert`／`vrt2` 仍不必收：立軸是 `text-orientation: upright`，漢字用橫排字形、不走直排替代，而立軸文字裡沒有標點 |
+| 2026-07-31 | **字型設定收成兩個入口，token 改按角色命名，並補上 zh-TW 排版慣例** | 改字型前得翻四處 CSS 加一支 build script，是前一列那些坑的溫床。三件事：① token 由字族名改角色名（`--font-sans` → `--font-body`／`--font-ui`，`--font-serif` → `--font-prose`）—— 舊的 `--font-sans` 同時是「blog 正文」與「UI 小字」的來源，所以「改正文」動不了而不順手動到 nav，31 處要一處處確認；② `--font-heading` 收成 `global.css` 一條規則（原本散在四個檔的 scoped style），註解直接指向 `site-chars.mjs` 的 `PATTERNS`，那兩份清單必須一致；③ 字型檔的選擇收進 `build-fonts.mjs` 的 `FONT` 物件，family 名寫進 `fonts.json` 由 `BaseHead` 讀，不再兩邊手抄。排版慣例照 [漢字標準格式](https://github.com/ethantw/Han)／[clreq](https://www.w3.org/TR/clreq/)／MDN 補：**拉丁字型前置**（中文字型的拉丁字形是為全形格線設計的）、subset 保留 `halt`（[缺 `chws`／`halt` 時 `text-spacing-trim` 直接停用](https://developer.mozilla.org/en-US/docs/Web/CSS/text-spacing-trim)）、首頁 `.prose em` 改**着重號**（漢字沒有斜體，CJK italic 是整體剪切傾斜；只收首頁，文章正文的斜體多是西文作品名）。`text-autospace`／`text-spacing-trim` 刻意**不宣告** —— 兩者 initial value `normal` 就是要的行為，寫了是 no-op，也因此不需要 pangu.js |
+| 2026-07-31 | **字型重排：標題自 host 思源黑體 TC subset、blog 正文系統黑體、首頁散文與印章留宋體**（原本標題與正文都是宋體 `Noto Serif TC`／Songti） | 起因是**行內粗體看不出來**：思源宋體不是任何主流系統的內建字型，而各系統的宋體（macOS Songti、Windows 新細明體）粗體天生輕。正文改系統 sans（各平台都有真字重）；標題不能同樣交給系統 —— 版面最顯眼的地方在 PingFang 與微軟正黑之間長得不一樣，故自 host 思源黑體 TC，subset 只收標題用字（445 字、每字重約 66 KB；正文若也自 host 要 371 KB／字重，效能代價不成比例）。`font-display: optional` 而非 `swap`：中文 webfont 與系統字寬不同，換字會跳版（實測整站 webfont 方案首頁 CLS 0 → 0.155）。**兩個非顯而易見的坑**：① @font-face 的 family 名必須是 `'NotoSansTC Head'` 這種站內專用名，叫 `'Noto Sans TC'` 會蓋掉 `--font-sans` 裡的同名字型，讓正文也吃到只有標題字的 subset、段落中間出現兩種字面，而 `check-fonts.mjs` 只查「subset 缺字」這個方向，抓不到；② 因此 `body` 不再帶 webfont，`--font-heading` 只掛在 `headingChars()` 掃得到的位置（止於 `h4`）。`strong`／`b` 不再吃這個 face（正文已是系統黑體，有真粗體）；字集一度仍收著它們「以防萬一」，後來移除 —— 見下一列 |
 | 2026-07-29 | **公開 `/resume/` 降為 L0；完整履歷不再組進公開 dist** | 完整 HTML／PDF 已長期公開，與 hidden-resume（身分授權、可撤銷、短效）矛盾。主站自建 L0 摘要頁（`/resume/`、`/en/resume/`）；CI 停止 checkout `jimc1682000/resume`；deploy 硬擋 `resume-*.pdf`。完整內容改 private 源 + 後續 git 歷史清洗（見 `docs/hidden-resume.md`） |
 
 ---

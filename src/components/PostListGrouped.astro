@@ -60,8 +60,8 @@ const groups = groupByYear(posts);
 
   .year {
     margin-top: 46px;
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
+    font-family: var(--font-ui);
+    font-size: var(--text-meta);
     letter-spacing: 0.16em;
     color: var(--color-seal);
     font-weight: 600;
@@ -79,16 +79,16 @@ const groups = groupByYear(posts);
   }
 
   .pt {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: var(--text-title);
+    font-weight: 700; /* subset 只有 400／700，宣告 600 也是落到 700 */
     display: flex;
     justify-content: space-between;
     gap: 1rem;
     align-items: baseline;
   }
   .pt time {
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
+    font-family: var(--font-ui);
+    font-size: var(--text-meta);
     color: var(--color-text-tertiary);
     white-space: nowrap;
     font-weight: 400;
@@ -96,7 +96,7 @@ const groups = groupByYear(posts);
 
   .pd {
     color: var(--color-text-secondary);
-    font-size: 1rem;
+    font-size: var(--text-base);
     line-height: 1.7;
     margin-top: 6px;
   }
@@ -106,10 +106,10 @@ const groups = groupByYear(posts);
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
-    font-family: var(--font-sans);
+    font-family: var(--font-ui);
   }
   .ptag {
-    font-size: 0.72rem;
+    font-size: var(--text-tag);
     color: var(--color-seal);
     background: var(--color-seal-tint);
     padding: 0.1rem 0.5rem;

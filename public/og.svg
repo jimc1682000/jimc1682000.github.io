@@ -1,10 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="吉光聚斂，米粒成章 — 陳建豪 Jimmy Chen">
   <!-- 社群分享卡（og:image / twitter:image）的來源。1200×630 是 OG 的標準比例。
-       樣式對齊 DESIGN.md：宣紙米白底 #f7f4ef、墨 #17191b、朱砂 accent #c8392b、宋體。
+       樣式對齊 DESIGN.md：宣紙米白底 #f7f4ef、墨 #17191b、朱砂 accent #c8392b。文字用系統黑體、只有印章「吉」留宋體 —— 對齊站上的
+       「全站黑體，一枚宋體印」（DESIGN §2／§4）。
        **刻意用單一張站台通用圖，不做每篇文章動態生成**：ubuntu-latest 沒有中文字型，
-       在 CI 產圖會靜默產出方框或空白（本檔的 PNG 是在本機產生並 commit，並以像素
-       斷言驗過「吉」真的畫出來，同 public/avatar.png 的做法）。每篇的差異已由
-       og:title / og:description 表達。 -->
+       在 CI 產圖會靜默產出方框或空白。故 PNG 由 `npm run build:og` 在本機產出並
+       commit（該腳本含像素斷言，缺字型時會失敗而不是產出沒字的卡片）。每篇的差異
+       已由 og:title / og:description 表達。
+       **改動這裡的 x/y 或字級時，要同步 scripts/build-og.mjs 的斷言區域座標。** -->
   <rect width="1200" height="630" fill="#f7f4ef"/>
   <!-- 朱砂細框 -->
   <rect x="28" y="28" width="1144" height="574" fill="none" stroke="#c8392b" stroke-width="3"/>
@@ -12,16 +14,16 @@
   <!-- 落款印章「吉」 -->
   <rect x="88" y="88" width="132" height="132" rx="18" fill="#c8392b"/>
   <rect x="98" y="98" width="112" height="112" rx="12" fill="none" stroke="#f7f4ef" stroke-width="5"/>
-  <text x="154" y="154" fill="#ffffff" font-family="Noto Serif TC, Songti TC, serif" font-weight="700" font-size="86" text-anchor="middle" dominant-baseline="central">吉</text>
+  <text x="154" y="154" fill="#ffffff" font-family="Songti TC, serif" font-weight="700" font-size="86" text-anchor="middle" dominant-baseline="central">吉</text>
 
   <!-- 站名 -->
-  <text x="88" y="330" fill="#17191b" font-family="Noto Serif TC, Songti TC, serif" font-weight="700" font-size="92" letter-spacing="6">吉光聚斂，米粒成章</text>
+  <text x="88" y="330" fill="#17191b" font-family="PingFang TC, Microsoft JhengHei, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="92" letter-spacing="6">吉光聚斂，米粒成章</text>
 
   <!-- 標語 -->
-  <text x="92" y="410" fill="#666059" font-family="Noto Serif TC, Songti TC, serif" font-size="40" letter-spacing="8">微光聚斂處　粒粒皆文章</text>
+  <text x="92" y="410" fill="#666059" font-family="PingFang TC, Microsoft JhengHei, Helvetica Neue, Arial, sans-serif" font-size="40" letter-spacing="8">微光聚斂處　粒粒皆文章</text>
 
   <!-- 署名與網域 -->
   <line x1="90" y1="470" x2="1110" y2="470" stroke="#c8392b" stroke-width="2" opacity="0.5"/>
-  <text x="90" y="530" fill="#17191b" font-family="Noto Serif TC, Songti TC, serif" font-size="38" letter-spacing="4">陳建豪　Jimmy Chen</text>
-  <text x="1110" y="530" fill="#666059" font-family="Georgia, serif" font-size="34" text-anchor="end" letter-spacing="2">jimmychen.me</text>
+  <text x="90" y="530" fill="#17191b" font-family="PingFang TC, Microsoft JhengHei, Helvetica Neue, Arial, sans-serif" font-size="38" letter-spacing="4">陳建豪　Jimmy Chen</text>
+  <text x="1110" y="530" fill="#666059" font-family="Helvetica Neue, Arial, sans-serif" font-size="34" text-anchor="end" letter-spacing="2">jimmychen.me</text>
 </svg>

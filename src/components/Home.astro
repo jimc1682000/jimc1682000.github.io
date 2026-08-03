@@ -93,7 +93,11 @@ const recent = (await getPosts(lang)).slice(0, 3);
 
   {/* h-card：代表本人的 microformats2 profile（P2-11，供 webmention/Bridgy Fed 解析）。 */}
   <aside class="scroll h-card">
-    <a class="u-url" href={new URL('/', Astro.site)} hidden>{name}</a>
+    {
+      /* p-name 掛在這個隱藏連結上：立軸不再顯示姓名，但 mf2 的 h-card 仍必須有 name
+        （scripts/validate-microformats.mjs 會擋）。 */
+    }
+    <a class="u-url p-name" href={new URL('/', Astro.site)} hidden>{name}</a>
     {
       /* acct: 形式的 u-url 決定 fediverse handle 的 local part。
         沒有這行 → @jimmychen.me@jimmychen.me（網域重複）；有這行 → @jimmy@jimmychen.me。
@@ -105,7 +109,6 @@ const recent = (await getPosts(lang)).slice(0, 3);
         路徑固定，換圖只換 public/avatar.png 的內容。 */
     }
     <img class="u-photo" src="/avatar.png" alt="" width="1" height="1" hidden />
-    <div class="nm p-name">{name}</div>
     <div class="slogan">{slogan}</div>
     <div class="stamp"><Seal size={56} /></div>
   </aside>
@@ -132,13 +135,8 @@ const recent = (await getPosts(lang)).slice(0, 3);
     padding-top: 4px;
     user-select: none;
   }
-  .scroll .nm {
-    font-size: 3.3rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-  }
   .scroll .slogan {
-    font-size: 1.1rem;
+    font-size: var(--text-lede);
     color: var(--color-text-secondary);
     letter-spacing: 0.28em;
     line-height: 1.4;
@@ -161,10 +159,6 @@ const recent = (await getPosts(lang)).slice(0, 3);
     gap: 12px;
     padding-top: 0;
   }
-  .home.en .scroll .nm {
-    font-size: 3rem;
-    letter-spacing: 0.02em;
-  }
   .home.en .scroll .slogan {
     letter-spacing: 0.04em;
   }
@@ -174,14 +168,14 @@ const recent = (await getPosts(lang)).slice(0, 3);
     max-width: 600px;
   }
   .sub {
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
+    font-family: var(--font-ui);
+    font-size: var(--text-label);
     letter-spacing: 0.08em;
     color: var(--color-text-tertiary);
     margin-bottom: 26px;
   }
   .prose {
-    font-size: 1.08rem;
+    font-size: var(--text-lede);
     line-height: 2;
   }
   .prose p {
@@ -193,9 +187,16 @@ const recent = (await getPosts(lang)).slice(0, 3);
   .prose .quiet {
     color: var(--color-text-secondary);
   }
+  /* 漢字沒有斜體：瀏覽器對中文的 italic 是把字形整體剪切傾斜（合成斜體），字面會歪，
+     故本來就寫了 font-style: normal。補上的是中文真正的強調傳統 —— **着重號**，
+     橫排時點在字下方（clreq §3.2「着重號」）。
+     只收在 .prose：本站 zh／en 首頁的 <em> 都是單一漢字（吉／米），而文章正文的斜體
+     多是 *Tenet* 這類西文作品名，那些該保持 italic，不能一律換成着重號。 */
   .prose em {
     font-style: normal;
     color: var(--color-seal);
+    text-emphasis: filled dot;
+    text-emphasis-position: under right;
   }
 
   .refs {
@@ -204,9 +205,9 @@ const recent = (await getPosts(lang)).slice(0, 3);
     border-top: 1px solid var(--color-border-subtle);
   }
   .refs .lbl {
-    font-family: var(--font-sans);
+    font-family: var(--font-ui);
     color: var(--color-text-tertiary);
-    font-size: 0.85rem;
+    font-size: var(--text-meta);
     margin-bottom: 10px;
     letter-spacing: 0.05em;
   }
@@ -225,18 +226,18 @@ const recent = (await getPosts(lang)).slice(0, 3);
   }
   .refs time {
     color: var(--color-text-tertiary);
-    font-size: 0.82rem;
-    font-family: var(--font-sans);
+    font-size: var(--text-meta);
+    font-family: var(--font-ui);
     white-space: nowrap;
   }
 
   .find {
     margin-top: 30px;
-    font-family: var(--font-sans);
+    font-family: var(--font-ui);
   }
   .find .lbl {
     color: var(--color-text-tertiary);
-    font-size: 0.85rem;
+    font-size: var(--text-meta);
     margin-bottom: 10px;
   }
 
@@ -251,9 +252,6 @@ const recent = (await getPosts(lang)).slice(0, 3);
       flex-direction: column;
       gap: 10px;
       order: -1;
-    }
-    .scroll .nm {
-      font-size: 2.6rem;
     }
   }
 </style>

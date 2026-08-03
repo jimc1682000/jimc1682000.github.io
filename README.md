@@ -85,6 +85,14 @@ npm run build     # 產出 dist/
 npm run preview   # 預覽 build 結果
 ```
 
+字型與分享圖是**本機專用**產物流程（CI 沒有中文字型，在 CI 產會靜默產出方框／空白），
+產物 commit 進 repo：
+
+```bash
+npm run build:fonts  # 標題字型 subset（需先 build 出 dist/，見 scripts/build-fonts.mjs）
+npm run build:og     # og.png / avatar.png（從 public/*.svg 產出，含像素斷言）
+```
+
 ## Theme
 
 深淺雙模、手動切換，預設跟隨 `prefers-color-scheme`，選擇存於 `localStorage.theme`。`<head>` 最前的 inline script 於樣式套用前設定 `data-theme`，避免閃爍。token 以 `src/styles/global.css` 為準（dark 為 `:root`，light 為 `[data-theme="light"]`）。

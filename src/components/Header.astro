@@ -114,9 +114,8 @@ const brand = lang === 'en' ? 'Jimmy Chen' : '吉光聚斂，米粒成章';
     display: flex;
     align-items: center;
     gap: 10px;
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 1.02rem;
+    font-weight: 700; /* subset 只有 400／700，宣告 600 也是落到 700 */
+    font-size: var(--text-body);
     letter-spacing: 0.04em;
     color: var(--color-text);
     text-decoration: none;
@@ -126,13 +125,13 @@ const brand = lang === 'en' ? 'Jimmy Chen' : '吉光聚斂，米粒成章';
     display: flex;
     align-items: center;
     gap: 18px;
-    font-family: var(--font-sans);
+    font-family: var(--font-ui);
   }
 
   .nav-link {
     color: var(--color-text-secondary);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: var(--text-label);
   }
 
   .nav-link:hover {

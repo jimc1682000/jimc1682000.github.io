@@ -52,7 +52,8 @@ const BLOGGER_OVERRIDES = {
 //
 // img-src 用 https: 而非白名單：webmention 頭像來自任意第三方網域，無法預先列舉。
 //
-// 字型不必放行外部來源：本站只用系統字型（見 global.css 的 --font-serif）。
+// font-src 只放行 'self' 就夠：標題的思源黑體 subset 自 host（public/fonts/），
+// 其餘位置用系統字型，沒有任何外部字型來源。
 const CSP = [
   "default-src 'self'",
   "base-uri 'self'",
