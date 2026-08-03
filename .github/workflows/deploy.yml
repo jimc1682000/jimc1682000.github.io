@@ -166,7 +166,7 @@ jobs:
           fi
           echo "assembled OK: / /blog/ /resume/(L0) /en/resume/(L0) /film-brain/"
       # GitHub Pages 專用 artifact（供 deploy-pages 使用）
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
           retention-days: 1
