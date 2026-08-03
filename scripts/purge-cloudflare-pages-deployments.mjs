@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Delete every old deployment only after the just-deployed production commit can be identified.
-// This script is intentionally fail-closed: ambiguity means no deletion.
+// Fail-closed when that commit has no successful production deployment yet.
+// Same commit can be redeployed (daily full-refresh); keep the newest match, delete the rest.
 const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
 const apiToken = process.env.CLOUDFLARE_API_TOKEN;
 const project = process.env.CLOUDFLARE_PAGES_PROJECT;
@@ -46,6 +47,12 @@ async function listDeployments() {
   return deployments;
 }
 
+function createdAtMs(deployment) {
+  const raw = deployment.created_on ?? deployment.modified_on ?? '';
+  const ms = Date.parse(raw);
+  return Number.isFinite(ms) ? ms : 0;
+}
+
 const deployments = await listDeployments();
 const current = deployments.filter(
   (deployment) =>
@@ -54,16 +61,18 @@ const current = deployments.filter(
     deployment.deployment_trigger?.metadata?.commit_hash === keepCommit,
 );
 
-if (current.length !== 1) {
+if (current.length === 0) {
   throw new Error(
-    `Cloudflare deployment purge: expected exactly one successful production deployment for ${keepCommit}, found ${current.length}`,
+    `Cloudflare deployment purge: no successful production deployment for ${keepCommit}`,
   );
 }
 
+// Daily full-refresh redeploys the same SHA; keep only the newest successful match.
+current.sort((a, b) => createdAtMs(b) - createdAtMs(a));
 const keepId = current[0].id;
 const targets = deployments.filter((deployment) => deployment.id !== keepId);
 console.log(
-  `Cloudflare deployment purge: keeping ${keepId}; deleting ${targets.length} old deployment(s)`,
+  `Cloudflare deployment purge: keeping ${keepId} (${keepCommit}, ${current.length} match(es)); deleting ${targets.length} old deployment(s)`,
 );
 
 for (const deployment of targets) {

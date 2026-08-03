@@ -20,6 +20,11 @@ const summaryFile = process.env.GITHUB_STEP_SUMMARY;
 const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
 const MAX_IMAGE_PIXELS = 4_000_000;
 const MAX_REDIRECTS = 3;
+// Socket inactivity timeout alone is not enough: a slow-drip body can keep the
+// request alive indefinitely. Cap total wall-clock time per avatar (all hops).
+const MAX_DOWNLOAD_MS = 15_000;
+const MAX_MENTION_PAGES = 50;
+const MENTIONS_PER_PAGE = 1000;
 
 function summary(lines) {
   if (summaryFile) appendFileSync(summaryFile, `${lines.join('\n')}\n`);
@@ -44,14 +49,35 @@ async function resolvePublicAddress(hostname) {
   return addresses[0];
 }
 
-async function downloadImage(url, redirects = 0) {
+async function downloadImage(url, redirects = 0, deadline = Date.now() + MAX_DOWNLOAD_MS) {
+  if (Date.now() >= deadline) throw new Error('avatar download deadline exceeded');
   if (redirects > MAX_REDIRECTS) throw new Error('too many redirects');
   const parsed = new URL(url);
   if (parsed.protocol !== 'https:') throw new Error('avatar URL must use HTTPS');
   if (parsed.username || parsed.password || parsed.port) throw new Error('unsupported avatar URL');
   const resolved = await resolvePublicAddress(parsed.hostname);
+  if (Date.now() >= deadline) throw new Error('avatar download deadline exceeded');
+
+  const remainingMs = Math.max(1, deadline - Date.now());
+  // Inactivity timeout still helps stuck sockets; never exceed the wall-clock budget.
+  const socketTimeoutMs = Math.min(10_000, remainingMs);
 
   return new Promise((resolvePromise, reject) => {
+    let settled = false;
+    let deadlineTimer;
+    const fail = (error) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(deadlineTimer);
+      reject(error instanceof Error ? error : new Error(String(error)));
+    };
+    const succeed = (value) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(deadlineTimer);
+      resolvePromise(value);
+    };
+
     const request = https.request(
       parsed,
       {
@@ -62,18 +88,18 @@ async function downloadImage(url, redirects = 0) {
         lookup: (_hostname, _options, callback) => {
           callback(null, resolved.address, resolved.family);
         },
-        timeout: 10_000,
+        timeout: socketTimeoutMs,
       },
       (response) => {
         if ([301, 302, 303, 307, 308].includes(response.statusCode ?? 0)) {
           const location = response.headers.location;
           response.resume();
-          if (!location) return reject(new Error('redirect without location'));
-          return resolvePromise(downloadImage(new URL(location, parsed).href, redirects + 1));
+          if (!location) return fail(new Error('redirect without location'));
+          return succeed(downloadImage(new URL(location, parsed).href, redirects + 1, deadline));
         }
         if (response.statusCode !== 200) {
           response.resume();
-          return reject(new Error(`avatar HTTP ${response.statusCode}`));
+          return fail(new Error(`avatar HTTP ${response.statusCode}`));
         }
         const contentType = String(response.headers['content-type'] ?? '')
           .split(';')[0]
@@ -85,16 +111,20 @@ async function downloadImage(url, redirects = 0) {
           )
         ) {
           response.resume();
-          return reject(new Error(`unsupported avatar MIME ${contentType || 'unknown'}`));
+          return fail(new Error(`unsupported avatar MIME ${contentType || 'unknown'}`));
         }
         const length = Number(response.headers['content-length'] ?? 0);
         if (length > MAX_IMAGE_BYTES) {
           response.resume();
-          return reject(new Error('avatar exceeds byte limit'));
+          return fail(new Error('avatar exceeds byte limit'));
         }
         const chunks = [];
         let size = 0;
         response.on('data', (chunk) => {
+          if (Date.now() >= deadline) {
+            request.destroy(new Error('avatar download deadline exceeded'));
+            return;
+          }
           size += chunk.length;
           if (size > MAX_IMAGE_BYTES) {
             request.destroy(new Error('avatar exceeds byte limit'));
@@ -102,11 +132,18 @@ async function downloadImage(url, redirects = 0) {
           }
           chunks.push(chunk);
         });
-        response.on('end', () => resolvePromise(Buffer.concat(chunks)));
+        response.on('end', () => succeed(Buffer.concat(chunks)));
       },
     );
+
+    deadlineTimer = setTimeout(() => {
+      request.destroy(new Error('avatar download deadline exceeded'));
+    }, remainingMs);
+    // Don't keep the process alive solely for this timer.
+    deadlineTimer.unref?.();
+
     request.on('timeout', () => request.destroy(new Error('avatar request timed out')));
-    request.on('error', reject);
+    request.on('error', fail);
     request.end();
   });
 }
@@ -171,16 +208,29 @@ async function moderate(mentions) {
 }
 
 const overrides = JSON.parse(readFileSync(overridesFile, 'utf8'));
-const api = new URL('https://webmention.io/api/mentions.jf2');
-api.searchParams.set('domain', domain);
-api.searchParams.set('per-page', '1000');
+
+async function fetchAllMentions() {
+  const children = [];
+  // webmention.io uses 0-based pages; without `page` it returns page 0.
+  for (let page = 0; page < MAX_MENTION_PAGES; page += 1) {
+    const api = new URL('https://webmention.io/api/mentions.jf2');
+    api.searchParams.set('domain', domain);
+    api.searchParams.set('per-page', String(MENTIONS_PER_PAGE));
+    api.searchParams.set('page', String(page));
+    const response = await fetch(api, { signal: AbortSignal.timeout(15_000) });
+    if (!response.ok) throw new Error(`webmention.io HTTP ${response.status}`);
+    const payload = await response.json();
+    const batch = Array.isArray(payload.children) ? payload.children : [];
+    if (!batch.length) break;
+    children.push(...batch);
+    if (batch.length < MENTIONS_PER_PAGE) break;
+  }
+  return children;
+}
 
 let children = [];
 try {
-  const response = await fetch(api, { signal: AbortSignal.timeout(15_000) });
-  if (!response.ok) throw new Error(`webmention.io HTTP ${response.status}`);
-  const payload = await response.json();
-  children = Array.isArray(payload.children) ? payload.children : [];
+  children = await fetchAllMentions();
 } catch (error) {
   emptyCache();
   summary(['## Webmention sync', '', `- Fetch failed: ${error.message}`, '- Published replies: 0']);
