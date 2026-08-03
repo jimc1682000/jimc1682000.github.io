@@ -1,7 +1,12 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { isBlockedAddress } from './lib/network-address.mjs';
-import { normalizeTargetPath, prepareMentions, truncateUnicode } from './lib/webmention-utils.mjs';
+import {
+  normalizeTargetPath,
+  prepareMentions,
+  truncateUnicode,
+  isPublicHttpUrl,
+} from './lib/webmention-utils.mjs';
 
 const reply = {
   'wm-id': 42,
@@ -54,4 +59,29 @@ test('blocks private, reserved, and IPv4-mapped avatar destinations', () => {
   assert.equal(isBlockedAddress('198.51.100.8'), true);
   assert.equal(isBlockedAddress('::ffff:7f00:1'), true);
   assert.equal(isBlockedAddress('2606:4700:4700::1111'), false);
+});
+
+test('isPublicHttpUrl 擋掉會讓讀者打自己內網的目的地', () => {
+  // 這些 URL 會被當成可點的連結印進頁面（source / author.url），所以判斷標準不只是協定。
+  for (const url of [
+    'http://127.0.0.1:8080/x',
+    'http://localhost/',
+    'http://[::1]/',
+    'http://192.168.1.1/',
+    'http://10.0.0.5/',
+    'https://198.51.100.8/',
+    'http://router/',
+    'http://nas.local/',
+    'http://svc.internal/',
+    'ftp://example.com/',
+  ]) {
+    assert.equal(isPublicHttpUrl(url), false, url);
+  }
+  for (const url of [
+    'https://example.com/a',
+    'https://[2606:4700:4700::1111]/',
+    'https://jimmychen.me/blog/x/',
+  ]) {
+    assert.equal(isPublicHttpUrl(url), true, url);
+  }
 });

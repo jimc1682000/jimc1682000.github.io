@@ -1,3 +1,6 @@
+import { isIP } from 'node:net';
+import { isBlockedAddress } from './network-address.mjs';
+
 const ALLOWED_PROPERTIES = new Set(['in-reply-to', 'like-of', 'repost-of']);
 const MAX_RAW_TEXT = 10_000;
 export const DISPLAY_TEXT_LIMIT = 200;
@@ -8,14 +11,31 @@ export function normalizeMentionId(value) {
   return null;
 }
 
+// 內網去不得的主機名後綴。無法在渲染時做 DNS 解析（也不該做），所以這層擋的是
+// 字面 IP 與明顯的內網名稱；真正的 fetch 端另有 isBlockedAddress 對解析後的位址把關。
+const BLOCKED_HOST_SUFFIXES = ['.localhost', '.local', '.internal', '.home.arpa', '.lan'];
+
+/** 可以安全「印到頁面上」的 http(s) URL。 */
 export function isPublicHttpUrl(value) {
   if (typeof value !== 'string') return false;
+  let url;
   try {
-    const url = new URL(value);
-    return url.protocol === 'http:' || url.protocol === 'https:';
+    url = new URL(value);
   } catch {
     return false;
   }
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') return false;
+
+  // 這裡不只是「協定對不對」：source 與 author.url 來自任何人送來的 webmention，會被當成
+  // 可點的連結印在頁面上。若指向 127.0.0.1／RFC1918／單一標籤的內網名，點下去是**讀者
+  // 自己的機器或內網**在發請求，不是我們的伺服器。故連字面 IP 與內網名稱一起擋掉。
+  const host = url.hostname.replace(/^\[|\]$/g, '').toLowerCase();
+  if (!host) return false;
+  if (isIP(host)) return !isBlockedAddress(host);
+  if (host === 'localhost') return false;
+  if (BLOCKED_HOST_SUFFIXES.some((suffix) => host.endsWith(suffix))) return false;
+  // 單一標籤（router、nas…）只在內網解析得到。
+  return host.includes('.');
 }
 
 export function normalizeTargetPath(value, expectedDomain) {
