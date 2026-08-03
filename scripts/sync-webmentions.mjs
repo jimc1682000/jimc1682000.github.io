@@ -29,6 +29,9 @@ const MAX_TOTAL_AVATAR_MS = 60_000;
 const MAX_AVATAR_DOWNLOADS = 40;
 const MAX_MENTION_PAGES = 50;
 const MENTIONS_PER_PAGE = 1000;
+// Keep each moderation request small; a single giant payload fails the whole
+// call and the old catch path then fail-open'd every reply.
+const MODERATION_BATCH_SIZE = 32;
 
 function summary(lines) {
   if (summaryFile) appendFileSync(summaryFile, `${lines.join('\n')}\n`);
@@ -45,8 +48,30 @@ if (!domain) {
   process.exit(0);
 }
 
-async function resolvePublicAddress(hostname) {
-  const addresses = await lookup(hostname, { all: true, verbatim: true });
+function withDeadline(promise, deadlineMs, message) {
+  const remaining = Math.max(1, deadlineMs - Date.now());
+  return new Promise((resolvePromise, reject) => {
+    const timer = setTimeout(() => reject(new Error(message)), remaining);
+    timer.unref?.();
+    promise.then(
+      (value) => {
+        clearTimeout(timer);
+        resolvePromise(value);
+      },
+      (error) => {
+        clearTimeout(timer);
+        reject(error);
+      },
+    );
+  });
+}
+
+async function resolvePublicAddress(hostname, deadlineMs) {
+  const addresses = await withDeadline(
+    lookup(hostname, { all: true, verbatim: true }),
+    deadlineMs,
+    'DNS resolution deadline exceeded',
+  );
   if (!addresses.length || addresses.some(({ address }) => isBlockedAddress(address))) {
     throw new Error('host resolves to a private or reserved address');
   }
@@ -59,7 +84,8 @@ async function downloadImage(url, redirects = 0, deadline = Date.now() + MAX_DOW
   const parsed = new URL(url);
   if (parsed.protocol !== 'https:') throw new Error('avatar URL must use HTTPS');
   if (parsed.username || parsed.password || parsed.port) throw new Error('unsupported avatar URL');
-  const resolved = await resolvePublicAddress(parsed.hostname);
+  // DNS is part of the wall-clock budget: a stalled resolver must not hang the build.
+  const resolved = await resolvePublicAddress(parsed.hostname, deadline);
   if (Date.now() >= deadline) throw new Error('avatar download deadline exceeded');
 
   const remainingMs = Math.max(1, deadline - Date.now());
@@ -204,30 +230,35 @@ async function moderate(mentions) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) return { hidden: new Map(), unavailable: true };
 
-  try {
-    const response = await fetch('https://api.openai.com/v1/moderations', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'omni-moderation-latest',
-        input: pending.map((item) => item.text),
-      }),
-      signal: AbortSignal.timeout(20_000),
-    });
-    if (!response.ok) throw new Error(`moderation HTTP ${response.status}`);
-    const payload = await response.json();
-    if (!Array.isArray(payload.results) || payload.results.length !== pending.length) {
-      throw new Error('unexpected moderation response');
+  const hidden = new Map();
+  let unavailable = false;
+  for (let offset = 0; offset < pending.length; offset += MODERATION_BATCH_SIZE) {
+    const batch = pending.slice(offset, offset + MODERATION_BATCH_SIZE);
+    try {
+      const response = await fetch('https://api.openai.com/v1/moderations', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'omni-moderation-latest',
+          input: batch.map((item) => item.text),
+        }),
+        signal: AbortSignal.timeout(20_000),
+      });
+      if (!response.ok) throw new Error(`moderation HTTP ${response.status}`);
+      const payload = await response.json();
+      if (!Array.isArray(payload.results) || payload.results.length !== batch.length) {
+        throw new Error('unexpected moderation response');
+      }
+      batch.forEach((mention, index) => {
+        const result = payload.results[index];
+        if (result.flagged) hidden.set(mention.id, flaggedCategories(result));
+      });
+    } catch {
+      // Fail-open only this batch; keep flags from successful batches.
+      unavailable = true;
     }
-    const hidden = new Map();
-    pending.forEach((mention, index) => {
-      const result = payload.results[index];
-      if (result.flagged) hidden.set(mention.id, flaggedCategories(result));
-    });
-    return { hidden, unavailable: false };
-  } catch {
-    return { hidden: new Map(), unavailable: true };
   }
+  return { hidden, unavailable };
 }
 
 const overrides = JSON.parse(readFileSync(overridesFile, 'utf8'));
