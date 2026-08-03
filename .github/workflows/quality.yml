@@ -72,9 +72,9 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # 與 deploy.yml 一致：有設才會輸出 rel=webmention，驗證腳本才會斷言該項
+          # 只需要 domain 讓 HTML 出現 rel=webmention；不帶 token，避免
+          # webmention.io 掛掉時硬性 gate 跟著紅（sync 會寫空 mentions 後繼續）。
           PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
-          WEBMENTION_IO_TOKEN: ${{ secrets.WEBMENTION_IO_TOKEN }} # gitleaks:allow
           PUBLIC_GISCUS_REPO: ${{ vars.PUBLIC_GISCUS_REPO }}
           PUBLIC_GISCUS_REPO_ID: ${{ vars.PUBLIC_GISCUS_REPO_ID }}
           PUBLIC_GISCUS_CATEGORY: ${{ vars.PUBLIC_GISCUS_CATEGORY }}
@@ -154,8 +154,8 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
+          # 同 microformats job：domain 只為 HTML 端點；不依賴 webmention.io 可用性
           PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
-          WEBMENTION_IO_TOKEN: ${{ secrets.WEBMENTION_IO_TOKEN }} # gitleaks:allow
           PUBLIC_GISCUS_REPO: ${{ vars.PUBLIC_GISCUS_REPO }}
           PUBLIC_GISCUS_REPO_ID: ${{ vars.PUBLIC_GISCUS_REPO_ID }}
           PUBLIC_GISCUS_CATEGORY: ${{ vars.PUBLIC_GISCUS_CATEGORY }}
