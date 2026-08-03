@@ -222,7 +222,8 @@ jobs:
     steps:
       - name: Skip notice
         if: env.HAS_CF != 'true' || env.PURGE_OLD_CF_DEPLOYMENTS != 'true'
-        run: echo "Cloudflare deployment purge: skipped"
+        run: |
+          echo "Cloudflare deployment purge: skipped"
       - uses: actions/checkout@v4
         if: env.HAS_CF == 'true' && env.PURGE_OLD_CF_DEPLOYMENTS == 'true'
         with:

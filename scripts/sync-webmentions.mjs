@@ -311,7 +311,12 @@ async function fetchAllMentions() {
     const response = await fetch(api, { signal: AbortSignal.timeout(15_000) });
     if (!response.ok) throw new Error(`webmention.io HTTP ${response.status}`);
     const payload = await response.json();
-    const batch = Array.isArray(payload.children) ? payload.children : [];
+    // Missing/non-array `children` is not a legitimate empty page — fail closed so we
+    // keep the previous cache instead of wiping published mentions.
+    if (!Object.hasOwn(payload, 'children') || !Array.isArray(payload.children)) {
+      throw new Error('webmention.io response missing children array');
+    }
+    const batch = payload.children;
     if (!batch.length) break;
     children.push(...batch);
     if (batch.length < MENTIONS_PER_PAGE) break;

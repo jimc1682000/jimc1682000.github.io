@@ -37,10 +37,10 @@ const { lang } = Astro.props;
 
         <h2>Comments and responses</h2>
         <p>
-          Public replies received through Webmention may be shown with the author's name, source
-          link, reply text, and a locally cached copy of the public avatar. Avatars are downloaded
-          during the site build, converted to a static WebP file, and are not requested from the
-          author's server by your browser.
+          Public Webmentions—replies, likes, and reposts—may be shown with the author's name, source
+          link, and a locally cached copy of the public avatar; replies may also include the public
+          reply text. Avatars are downloaded during the site build, converted to a static WebP file,
+          and are not requested from the author's server by your browser.
         </p>
         <p>
           Reply text may be sent to OpenAI's moderation endpoint. Structured author fields (name,
@@ -132,7 +132,7 @@ const { lang } = Astro.props;
         <h2>留言與站外回覆</h2>
         <p>
           透過 Webmention
-          收到的公開回覆，可能連同作者名稱、來源連結、回覆文字與公開頭像顯示於文章下方。頭像只在
+          收到的公開互動（回覆、喜歡、轉發）可能連同作者名稱、來源連結與公開頭像顯示於文章下方；回覆另可能顯示公開文字。頭像只在
           build 時下載並轉成本站的靜態 WebP；訪客的 browser 不會再向原始頭像主機發出請求。
         </p>
         <p>
