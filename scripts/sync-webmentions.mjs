@@ -51,6 +51,9 @@ const MODERATION_BATCH_SIZE = 32;
 const MAX_MODERATION_ITEMS = 200;
 const MAX_MODERATION_MS = 45_000;
 const MODERATION_REQUEST_MS = 20_000;
+// Per-article publish cap (matches the old per-target API limit). Domain-wide
+// fetch can return far more; without this, a flood bloats HTML/cache.
+const MAX_PER_TARGET = 100;
 
 function summary(lines) {
   if (summaryFile) appendFileSync(summaryFile, `${lines.join('\n')}\n`);
@@ -360,6 +363,12 @@ try {
 }
 
 const { accepted, rejected } = prepareMentions(children, overrides, domain);
+// Newest first so the per-target publish cap keeps recent interactions.
+accepted.sort((a, b) => {
+  const ta = Date.parse(a.published ?? '') || 0;
+  const tb = Date.parse(b.published ?? '') || 0;
+  return tb - ta;
+});
 const moderation = await moderate(accepted);
 rmSync(avatarDir, { recursive: true, force: true });
 mkdirSync(avatarDir, { recursive: true });
@@ -373,16 +382,17 @@ for (const mention of accepted) {
     hiddenRows.push({ id: mention.id, source: mention.source, categories });
     continue;
   }
+  const bucket = (mentionsByPath[mention.targetPath] ??= []);
+  if (bucket.length >= MAX_PER_TARGET) continue;
   const avatar = await localizeAvatar(mention.author.photo);
-  const safe = {
+  bucket.push({
     id: mention.id,
     property: mention.property,
     source: mention.source,
     published: mention.published,
     author: { name: mention.author.name, url: mention.author.url, photo: avatar },
     text: mention.property === 'in-reply-to' ? truncateUnicode(mention.text) : '',
-  };
-  (mentionsByPath[mention.targetPath] ??= []).push(safe);
+  });
 }
 
 mkdirSync(cacheDir, { recursive: true });
