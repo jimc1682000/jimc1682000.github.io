@@ -221,7 +221,7 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 ### 7.2 全域殼
 
 - **Header**：antfu 式透明（absolute、無底色 bar）；左＝印章 + 站名（`--font-heading`）；右＝文字連結（Blog／履歷／作品集／語系）+ icon 叢（GitHub／RSS／theme）；當前頁 nav 標朱砂底線。
-- **Footer**：只有版權一行，sans。**不放 RSS／語系** —— Header 右上已經有，頁尾再放一次是同一組連結出現兩次。
+- **Footer**：版權一行 + **隱私告知**連結（sans）。**不放 RSS／語系** —— Header 右上已經有，頁尾再放一次是同一組連結出現兩次；隱私頁沒有其他入口，是頁尾的慣例位置。
 - **Skip link**、可見 focus ring 保留。
 
 ### 7.3 首頁（散文式）
@@ -347,6 +347,7 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 | 2026-07-30 | **Webmention avatar 改為 build-time 本地化，回覆加入結構檢查與文字 moderation** | visitor 不直接連線任意頭像主機；單則隱藏不影響其他內容或 build |
 | 2026-07-30 | **移除 client-side Cloudflare Web Analytics** | 僅保留 edge／server-side aggregate，公開頁面不需 Cookie banner |
 | 2026-07-30 | **新增 site-wide Privacy Notice** | 說明履歷交付、Webmention、Giscus、第三方服務與資料保留期限 |
+| 2026-08-03 | **Footer 加隱私連結；§7.2 從「只有版權」改為「版權 + 隱私」** | 隱私告知沒有別的全站入口，頁尾是慣例位置。仍不放 RSS／語系（Header 已有）。 |
 
 ---
 

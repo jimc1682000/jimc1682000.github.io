@@ -109,10 +109,13 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # Last-known-good webmention cache：API 失敗時 sync 腳本可沿用，避免空白部署。
+      # Last-known-good webmention cache + 本地化 avatar：
+      # API 失敗時 sync 可沿用 data.json，頭像檔也必須在，否則頁面會指到不存在的 /webmention-avatars/*。
       - uses: actions/cache@v4
         with:
-          path: .cache/webmentions
+          path: |
+            .cache/webmentions
+            public/webmention-avatars
           key: webmentions-${{ github.run_id }}
           restore-keys: |
             webmentions-
