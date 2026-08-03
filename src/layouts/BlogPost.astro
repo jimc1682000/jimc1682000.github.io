@@ -3,9 +3,8 @@ import BaseLayout from './BaseLayout.astro';
 import type { Lang } from '../i18n/ui';
 import { useTranslations } from '../i18n/ui';
 import { formatDate } from '../lib/blog';
-import { giscus, giscusEnabled } from '../consts';
 import Seal from '../components/Seal.astro';
-import Webmentions from '../components/Webmentions.astro';
+import DiscussionTabs from '../components/DiscussionTabs.astro';
 
 interface Props {
   title: string;
@@ -23,8 +22,6 @@ const blogHref = lang === 'en' ? '/en/blog/' : '/blog/';
 // AI 翻譯提示：僅英文版且標記 aiTranslated 時顯示；連回中文原文 /blog/<translationOf>。
 const showAiNotice = lang === 'en' && aiTranslated;
 const originalHref = translationOf ? `/blog/${translationOf}/` : '/blog/';
-// Giscus 留言語系(P2-09):繁中 zh-TW、英文 en。
-const giscusLang = lang === 'en' ? 'en' : 'zh-TW';
 const signoffYear = pubDate.getFullYear();
 // microformats2（P2-11）：h-entry 的 u-url 與 p-author h-card 需絕對 URL。
 const postURL = new URL(Astro.url.pathname, Astro.site);
@@ -87,57 +84,7 @@ const authorName = lang === 'en' ? 'Jimmy Chen' : '陳建豪';
       <span>{t('post.signoff')} · {signoffYear}</span>
     </div>
 
-    {/* 站外迴響（webmention）在站內留言（Giscus）之前：兩者互補，前者是跨站、後者是站內。 */}
-    <Webmentions target={postURL} lang={lang} />
-
-    {
-      giscusEnabled && (
-        <section class="comments" aria-label={lang === 'en' ? 'Comments' : '留言'}>
-          <div class="giscus" />
-          {/* giscus.app client.js 為唯一允許的外部 script(P2-09)。
-              依站台 data-theme 設初始主題,並用 MutationObserver 跟隨切換。 */}
-          <script is:inline define:vars={{ giscus, giscusLang }}>
-            (function () {
-              var pick = function () {
-                return document.documentElement.getAttribute('data-theme') === 'light'
-                  ? 'light'
-                  : 'dark';
-              };
-              var s = document.createElement('script');
-              s.src = 'https://giscus.app/client.js';
-              s.setAttribute('data-repo', giscus.repo);
-              s.setAttribute('data-repo-id', giscus.repoId);
-              s.setAttribute('data-category', giscus.category);
-              s.setAttribute('data-category-id', giscus.categoryId);
-              s.setAttribute('data-mapping', 'pathname');
-              s.setAttribute('data-strict', '1');
-              s.setAttribute('data-reactions-enabled', '1');
-              s.setAttribute('data-emit-metadata', '0');
-              s.setAttribute('data-input-position', 'bottom');
-              s.setAttribute('data-theme', pick());
-              s.setAttribute('data-lang', giscusLang);
-              s.setAttribute('data-loading', 'lazy');
-              s.crossOrigin = 'anonymous';
-              s.async = true;
-              document.currentScript.parentElement.querySelector('.giscus').appendChild(s);
-
-              var observer = new MutationObserver(function () {
-                var iframe = document.querySelector('iframe.giscus-frame');
-                if (!iframe) return;
-                iframe.contentWindow.postMessage(
-                  { giscus: { setConfig: { theme: pick() } } },
-                  'https://giscus.app',
-                );
-              });
-              observer.observe(document.documentElement, {
-                attributes: true,
-                attributeFilter: ['data-theme'],
-              });
-            })();
-          </script>
-        </section>
-      )
-    }
+    <DiscussionTabs target={postURL} lang={lang} />
   </article>
 </BaseLayout>
 
@@ -325,9 +272,4 @@ const authorName = lang === 'en' ? 'Jimmy Chen' : '陳建豪';
     font-family: var(--font-ui);
   }
 
-  .comments {
-    margin-top: var(--spacing-lg);
-    padding-top: var(--spacing-xl);
-    border-top: 1px solid var(--color-border-subtle);
-  }
 </style>

@@ -221,7 +221,7 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 ### 7.2 全域殼
 
 - **Header**：antfu 式透明（absolute、無底色 bar）；左＝印章 + 站名（`--font-heading`）；右＝文字連結（Blog／履歷／作品集／語系）+ icon 叢（GitHub／RSS／theme）；當前頁 nav 標朱砂底線。
-- **Footer**：只有版權一行，sans。**不放 RSS／語系** —— Header 右上已經有，頁尾再放一次是同一組連結出現兩次。
+- **Footer**：版權一行 + **隱私告知**連結（sans）。**不放 RSS／語系** —— Header 右上已經有，頁尾再放一次是同一組連結出現兩次；隱私頁沒有其他入口，是頁尾的慣例位置。
 - **Skip link**、可見 focus ring 保留。
 
 ### 7.3 首頁（散文式）
@@ -236,7 +236,7 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 ### 7.5 Blog
 
 - 列表 `/blog/`：**依年份分組**（年份朱砂小標），每篇黑體標題（`.pt`，接 `--font-heading`）+ 日期 + description + tag chip；工具列「搜尋／標籤／RSS」。
-- 單篇：窄欄、標題與 h2／h3 黑體（`--font-heading`）、正文系統黑體 + 首行縮排、h2 朱砂左線、連結朱砂底線、blockquote 朱砂左線、code 區塊 surface 底 mono；文末印章落款「落款於臺灣 · <年>」；其後 Giscus 留言。
+- 單篇：窄欄、標題與 h2／h3 黑體（`--font-heading`）、正文系統黑體 + 首行縮排、h2 朱砂左線、連結朱砂底線、blockquote 朱砂左線、code 區塊 surface 底 mono；文末印章落款「落款於臺灣 · <年>」；其後是 Fediverse／Bluesky 與 GitHub 留言 tab。
 - Tags：`/blog/tags/[tag]`；chip 樣式一致。
 - 搜尋：`/blog/search`（Pagefind，靜態索引）。
 
@@ -264,9 +264,9 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 
 - 可見 focus ring；對比 AA；一頁一 h1；`<html lang>` 隨語系。
 - 圖片有意義 `alt`；裝飾圖空 alt。
-- Analytics：採 **Cloudflare Web Analytics（無 cookie、隱私友善）**，token 存在才載入（見 Decisions Log）。
+- Analytics：只使用 Cloudflare edge／server-side aggregate；公開頁面不載入 client-side analytics。
 - **microformats2（P2-11）**：文章 `article.post.h-entry`（`p-name` 標題、`dt-published` 時間、`e-content` 正文、`p-category` 標籤、隱藏 `u-url` 與 `p-author h-card`）；首頁 `aside.scroll.h-card`（`p-name` + 隱藏 `u-url`）；社群連結帶 `rel="me"`。**這些是語意標記，不影響版面** —— 改版時務必保留 class，否則 webmention／Bridgy Fed 解析不到。
-- 站外迴響（webmention）與站內留言（Giscus）分區並存：前者在上、後者在下，各自 `border-top` 分隔。
+- 留言區預設顯示 Fediverse／Bluesky 與 Webmention 迴響；使用者點 GitHub tab 後才載入 Giscus。
 
 ---
 
@@ -307,7 +307,7 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 | 2026-07-25 | **站名定為「吉光聚斂，米粒成章」** | 「吉米」拆入兩句；技術（吉光）× 生活（米粒）並置 |
 | 2026-07-25 | **新增作品集 `/works/`；Film-brain 由 nav 收進作品集** | film-brain 為作品之一，集中呈現 |
 | 2026-07-25 | **加搜尋（Pagefind）、留言（Giscus）** | v1 延後項，P2 補上；皆 gating |
-| 2026-07-25 | **Analytics 由「v1 不做」改為 Cloudflare Web Analytics（無 cookie）** | 使用者要基本流量數據，選隱私友善方案不破壞原則 |
+| 2026-07-25 | **Analytics 由「v1 不做」改為 Cloudflare Web Analytics（無 cookie）** | 歷史決策；已由 2026-07-30 的隱私決策取代 |
 | 2026-07-25 | **全站文章英譯 37 篇 + AI 翻譯提示 banner** | 服務英文讀者；GEMBA-MQM 評估 0 Critical/0 Major |
 | 2026-07-25 | **舊 Blogger 外鏈圖全數固化為本地 WebP q92**（`public/blog/img/`，工具 `scripts/optimize-images.mjs`） | 來源已壓過，q92 兼顧文字銳利與 ~25% 瘦身、q95+ 幾乎不省；優先用 Takeout Albums 全畫質原檔（dHash 比對）、無死連結 |
 | 2026-07-25 | **canonical 改為自有 domain `jimmychen.me`** | 逃離主機綁定（`*.pages.dev` 與平台帳號一樣不屬於自己）；`site` 一處改，canonical／hreflang／og／RSS／sitemap 全跟著換 |
@@ -343,6 +343,11 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 | 2026-07-31 | **字型設定收成兩個入口，token 改按角色命名，並補上 zh-TW 排版慣例** | 改字型前得翻四處 CSS 加一支 build script，是前一列那些坑的溫床。三件事：① token 由字族名改角色名（`--font-sans` → `--font-body`／`--font-ui`，`--font-serif` → `--font-prose`）—— 舊的 `--font-sans` 同時是「blog 正文」與「UI 小字」的來源，所以「改正文」動不了而不順手動到 nav，31 處要一處處確認；② `--font-heading` 收成 `global.css` 一條規則（原本散在四個檔的 scoped style），註解直接指向 `site-chars.mjs` 的 `PATTERNS`，那兩份清單必須一致；③ 字型檔的選擇收進 `build-fonts.mjs` 的 `FONT` 物件，family 名寫進 `fonts.json` 由 `BaseHead` 讀，不再兩邊手抄。排版慣例照 [漢字標準格式](https://github.com/ethantw/Han)／[clreq](https://www.w3.org/TR/clreq/)／MDN 補：**拉丁字型前置**（中文字型的拉丁字形是為全形格線設計的）、subset 保留 `halt`（[缺 `chws`／`halt` 時 `text-spacing-trim` 直接停用](https://developer.mozilla.org/en-US/docs/Web/CSS/text-spacing-trim)）、首頁 `.prose em` 改**着重號**（漢字沒有斜體，CJK italic 是整體剪切傾斜；只收首頁，文章正文的斜體多是西文作品名）。`text-autospace`／`text-spacing-trim` 刻意**不宣告** —— 兩者 initial value `normal` 就是要的行為，寫了是 no-op，也因此不需要 pangu.js |
 | 2026-07-31 | **字型重排：標題自 host 思源黑體 TC subset、blog 正文系統黑體、首頁散文與印章留宋體**（原本標題與正文都是宋體 `Noto Serif TC`／Songti） | 起因是**行內粗體看不出來**：思源宋體不是任何主流系統的內建字型，而各系統的宋體（macOS Songti、Windows 新細明體）粗體天生輕。正文改系統 sans（各平台都有真字重）；標題不能同樣交給系統 —— 版面最顯眼的地方在 PingFang 與微軟正黑之間長得不一樣，故自 host 思源黑體 TC，subset 只收標題用字（445 字、每字重約 66 KB；正文若也自 host 要 371 KB／字重，效能代價不成比例）。`font-display: optional` 而非 `swap`：中文 webfont 與系統字寬不同，換字會跳版（實測整站 webfont 方案首頁 CLS 0 → 0.155）。**兩個非顯而易見的坑**：① @font-face 的 family 名必須是 `'NotoSansTC Head'` 這種站內專用名，叫 `'Noto Sans TC'` 會蓋掉 `--font-sans` 裡的同名字型，讓正文也吃到只有標題字的 subset、段落中間出現兩種字面，而 `check-fonts.mjs` 只查「subset 缺字」這個方向，抓不到；② 因此 `body` 不再帶 webfont，`--font-heading` 只掛在 `headingChars()` 掃得到的位置（止於 `h4`）。`strong`／`b` 不再吃這個 face（正文已是系統黑體，有真粗體）；字集一度仍收著它們「以防萬一」，後來移除 —— 見下一列 |
 | 2026-07-29 | **公開 `/resume/` 降為 L0；完整履歷不再組進公開 dist** | 完整 HTML／PDF 已長期公開，與 hidden-resume（身分授權、可撤銷、短效）矛盾。主站自建 L0 摘要頁（`/resume/`、`/en/resume/`）；CI 停止 checkout `jimc1682000/resume`；deploy 硬擋 `resume-*.pdf`。完整內容改 private 源 + 後續 git 歷史清洗（見 `docs/hidden-resume.md`） |
+| 2026-07-30 | **留言預設 Fediverse／Bluesky；點 GitHub tab 才載入 Giscus** | 公開頁面初始載入不連線 GitHub／Giscus；第一版不記住選擇 |
+| 2026-07-30 | **Webmention avatar 改為 build-time 本地化，回覆加入結構檢查與文字 moderation** | visitor 不直接連線任意頭像主機；單則隱藏不影響其他內容或 build |
+| 2026-07-30 | **移除 client-side Cloudflare Web Analytics** | 僅保留 edge／server-side aggregate，公開頁面不需 Cookie banner |
+| 2026-07-30 | **新增 site-wide Privacy Notice** | 說明履歷交付、Webmention、Giscus、第三方服務與資料保留期限 |
+| 2026-08-03 | **Footer 加隱私連結；§7.2 從「只有版權」改為「版權 + 隱私」** | 隱私告知沒有別的全站入口，頁尾是慣例位置。仍不放 RSS／語系（Header 已有）。 |
 
 ---
 

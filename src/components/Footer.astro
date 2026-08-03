@@ -1,20 +1,29 @@
 ---
 import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
+const t = useTranslations(lang);
 
+const privacyHref = lang === 'en' ? '/en/privacy/' : '/privacy/';
 const year = new Date().getFullYear();
 const name = lang === 'en' ? 'Jimmy Chen' : '陳建豪 Jimmy Chen';
 ---
 
 <footer class="site-footer">
-  {/* 只留版權：RSS 與語系切換 Header 右上已經有，頁尾再放一次是同一組連結出現兩次。 */}
+  {
+    /* 只放隱私聲明：RSS 與語系切換 Header 右上已經有，頁尾再放一次是同一組連結出現兩次；
+      隱私頁沒有別的入口，是頁尾的慣例位置。 */
+  }
   <div class="footer-inner">
     <span class="copyright">© {year} {name}</span>
+    <nav class="footer-links" aria-label={lang === 'en' ? 'Footer' : '頁尾'}>
+      <a href={privacyHref}>{t('footer.privacy')}</a>
+    </nav>
   </div>
 </footer>
 
@@ -23,6 +32,21 @@ const name = lang === 'en' ? 'Jimmy Chen' : '陳建豪 Jimmy Chen';
     margin-top: var(--spacing-3xl);
     border-top: 1px solid var(--color-border);
     font-family: var(--font-ui);
+  }
+
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+
+  .footer-links a {
+    color: var(--color-text-tertiary);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-seal);
   }
 
   .footer-inner {

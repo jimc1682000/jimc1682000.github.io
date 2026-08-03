@@ -18,6 +18,7 @@ const ui = {
     'lang.switch': 'EN',
     'lang.label': '語言',
     'theme.toggle': '切換深淺色主題',
+    'footer.privacy': '隱私',
     'footer.rights': '版權所有',
     'blog.title': '文章',
     'blog.subtitle': '技術、維運、AI 協作，偶爾生活。',
@@ -44,6 +45,15 @@ const ui = {
     'webmention.reposts': '次轉發',
     'webmention.someone': '某人',
     'webmention.source': '原文',
+    'discussion.title': '留言與站外回覆',
+    'discussion.choose': '選擇留言方式',
+    'discussion.fediverse': 'Fediverse／Bluesky',
+    'discussion.github': 'GitHub',
+    'discussion.fediverseHint':
+      '可以在 Fediverse 或 Bluesky 回覆這篇文章；公開回覆會透過 Webmention 顯示在這裡。',
+    'discussion.fediverseProfile': 'Fediverse 入口',
+    'discussion.githubPrivacy':
+      '開啟這個分頁後，瀏覽器才會連線至 GitHub／Giscus。留言需登入 GitHub，內容會公開顯示。',
     'contact.title': '電子名片',
     'contact.description': '陳建豪 Jimmy Chen 的電子名片：一鍵存入通訊錄。',
     'contact.email': 'Email',
@@ -63,8 +73,9 @@ const ui = {
     'resume.highlightsTitle': '重點（去識別）',
     'resume.fullTitle': '完整履歷',
     'resume.fullNote':
-      '完整經歷、專案細節與 PDF 不公開掛網。請用公司 Email 說明用途，核准後以身分驗證方式提供限時存取。',
+      '完整經歷、專案細節與 PDF 不公開掛網。請選擇版本並寄出信件；我會人工回覆。自動化限時下載入口會在後端就緒後接上。',
     'resume.request': '申請查看完整履歷',
+    'resume.variantLabel': '選擇履歷版本',
     'resume.contact': '電子名片',
   },
   en: {
@@ -75,6 +86,7 @@ const ui = {
     'lang.switch': '中',
     'lang.label': 'Language',
     'theme.toggle': 'Toggle light / dark theme',
+    'footer.privacy': 'Privacy',
     'footer.rights': 'All rights reserved',
     'blog.title': 'Posts',
     'blog.subtitle': 'Engineering, ops, AI collaboration — and the occasional slice of life.',
@@ -102,6 +114,15 @@ const ui = {
     'webmention.reposts': 'reposts',
     'webmention.someone': 'Someone',
     'webmention.source': 'Source',
+    'discussion.title': 'Discussion and responses',
+    'discussion.choose': 'Choose how to respond',
+    'discussion.fediverse': 'Fediverse / Bluesky',
+    'discussion.github': 'GitHub',
+    'discussion.fediverseHint':
+      'Reply on the Fediverse or Bluesky. Public responses received through Webmention appear here.',
+    'discussion.fediverseProfile': 'Fediverse entry',
+    'discussion.githubPrivacy':
+      'Your browser connects to GitHub and Giscus only after you open this tab. A GitHub account is required and comments are public.',
     'contact.title': 'Contact card',
     'contact.description': "Jimmy Chen's contact card — save to your phone in one tap.",
     'contact.email': 'Email',
@@ -121,8 +142,9 @@ const ui = {
     'resume.highlightsTitle': 'Highlights (redacted)',
     'resume.fullTitle': 'Full resume',
     'resume.fullNote':
-      'Full history, project detail, and PDFs are not public. Request access with a work email and purpose; after approval, access is identity-bound and time-limited.',
+      'Full history, project details, and PDFs are not public. Choose a version and send the email; I will reply manually. Automated time-limited download links will plug in once the backend is ready.',
     'resume.request': 'Request full resume',
+    'resume.variantLabel': 'Choose a resume variant',
     'resume.contact': 'Contact card',
   },
 } as const;

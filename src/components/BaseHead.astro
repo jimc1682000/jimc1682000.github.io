@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import type { Lang } from '../i18n/ui';
-import { cfBeaconToken, webmentionDomain, webmentionEnabled } from '../consts';
+import { webmentionDomain, webmentionEnabled } from '../consts';
 import fontData from '../generated/fonts.json';
 
 interface Props {
@@ -193,15 +193,3 @@ const preloadFaces = fontData.faces.filter((f) => f.weight === 700 || isHome);
         },
   )}
 />
-
-{/* Cloudflare Web Analytics(P2-10,無 cookie、隱私友善)。token 為空則不輸出(gating)。 */}
-{
-  cfBeaconToken && (
-    <script
-      is:inline
-      defer
-      src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon={`{"token": "${cfBeaconToken}"}`}
-    />
-  )
-}

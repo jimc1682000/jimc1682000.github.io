@@ -1,5 +1,7 @@
 # hidden-resume — Zero Trust–inspired 履歷分享設計
 
+**已被取代：** 本文件是歷史設計，包含人工核准、`cv.jimmychen.me`、公開 signed URL 等不再採用的決策。現行決策以 [ADR-0001：最低成本的私密履歷交付與網站隱私架構](./adr/0001-private-resume-delivery-and-site-privacy.md) 為準。
+
 > **定位**：identity-aware、least-privilege、可撤銷的履歷 portal。  
 > **不是**：完整企業級 Zero Trust Architecture（不做 device posture、browser isolation、UEBA）。  
 > **一句話**：不信任連結持有者；每次請求依「身分 × 資源 × 動作 × 期限」授權；原始履歷永不公開。

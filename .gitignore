@@ -71,3 +71,7 @@ dist/
 # 標題 webfont 的原檔（48 MB）：刻意不進 git，用 npm run build:fonts 產出 subset。
 # 缺檔時該腳本會印出下載網址。
 fonts-src/
+
+# Build-time Webmention cache / localized avatars（不進 git，只進當次 dist）
+.cache/webmentions/
+public/webmention-avatars/

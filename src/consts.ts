@@ -1,4 +1,4 @@
-// 站台設定：從環境變數讀取的第三方整合設定（P2-09 留言、P2-10 analytics）。
+// 站台設定：從環境變數讀取的第三方整合設定。
 // 值來自 PUBLIC_* 環境變數（build 時注入、可被 client 讀取）。
 // 未設定時對應 feature 不渲染（gating），站台照常運作。
 
@@ -14,10 +14,6 @@ export const giscus = {
 export const giscusEnabled = Boolean(
   giscus.repo && giscus.repoId && giscus.category && giscus.categoryId,
 );
-
-// ---- Cloudflare Web Analytics（P2-10，無 cookie、隱私友善） ----
-// token 從 Cloudflare dashboard 取得。為空 → 不輸出 beacon。
-export const cfBeaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
 
 // ---- Webmention / IndieWeb（P2-11） ----
 // 在 webmention.io 註冊的網域（如 jimmychen.me）。為空 → 不輸出 endpoint、不抓留言。
