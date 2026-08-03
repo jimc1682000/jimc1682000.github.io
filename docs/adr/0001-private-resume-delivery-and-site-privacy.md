@@ -254,7 +254,7 @@ Webmention moderation 使用兩層：
 
 `deny` precedence 高於 `allow`。被判定有問題時，只隱藏該單則留言；其他內容與 build 繼續。OpenAI Moderation API 無法使用時採 fail-open，留言仍可發布，並在 Actions summary 記錄 moderation unavailable。
 
-Actions summary 只記 `wm-id`、source URL 與 moderation category，不記完整留言文字。Owner 以 `wm-id` 管理 allow／deny override，不建立 moderation database。
+Actions summary 只記**彙總數字**（收到／發布／結構拒絕／隱藏筆數、moderation unavailable），不記個別 `wm-id`、source URL 或完整留言文字——公開 repo 的 run summary 是公開的。Owner 以 `config/webmention-moderation.json` 的 allow／deny override 管理，不建立 moderation database。
 
 同步策略：每 6 小時用新 ID gate 判斷是否需要 build，另每天無條件 full build，以收斂 `since_id` 看不到的編輯與刪除；目標是在 24 小時內反映來源刪除或更新。
 

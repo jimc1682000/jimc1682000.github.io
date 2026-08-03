@@ -19,6 +19,12 @@ import { flaggedCategories, prepareMentions, truncateUnicode } from './lib/webme
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = resolve(here, '..');
+// `npm run build` runs this as raw node before Astro; load the same `.env` contributors
+// copy from `.env.example` so PUBLIC_WEBMENTION_DOMAIN / WEBMENTION_IO_TOKEN are visible.
+const envFile = resolve(repo, '.env');
+if (existsSync(envFile) && typeof process.loadEnvFile === 'function') {
+  process.loadEnvFile(envFile);
+}
 const domain = process.env.PUBLIC_WEBMENTION_DOMAIN?.trim();
 const apiToken = process.env.WEBMENTION_IO_TOKEN?.trim();
 const cacheDir = resolve(repo, '.cache/webmentions');
@@ -317,11 +323,14 @@ async function fetchAllMentions() {
       throw new Error('webmention.io response missing children array');
     }
     const batch = payload.children;
-    if (!batch.length) break;
+    if (!batch.length) return children;
     children.push(...batch);
-    if (batch.length < MENTIONS_PER_PAGE) break;
+    if (batch.length < MENTIONS_PER_PAGE) return children;
   }
-  return children;
+  // Hit the page cap with a full final page — partial snapshot would wipe the rest.
+  throw new Error(
+    `webmention.io pagination cap reached (${MAX_MENTION_PAGES} × ${MENTIONS_PER_PAGE}); refusing partial sync`,
+  );
 }
 
 let children = [];
