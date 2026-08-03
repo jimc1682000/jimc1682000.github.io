@@ -23,6 +23,10 @@ const MAX_REDIRECTS = 3;
 // Socket inactivity timeout alone is not enough: a slow-drip body can keep the
 // request alive indefinitely. Cap total wall-clock time per avatar (all hops).
 const MAX_DOWNLOAD_MS = 15_000;
+// Even with a per-image cap, sequential downloads of many attacker-controlled
+// avatars can stall the whole deploy. Bound the whole localization phase.
+const MAX_TOTAL_AVATAR_MS = 60_000;
+const MAX_AVATAR_DOWNLOADS = 40;
 const MAX_MENTION_PAGES = 50;
 const MENTIONS_PER_PAGE = 1000;
 
@@ -148,10 +152,26 @@ async function downloadImage(url, redirects = 0, deadline = Date.now() + MAX_DOW
   });
 }
 
+const avatarCache = new Map();
+let avatarDownloads = 0;
+// Set just before the localization loop so fetch/moderation don't eat the budget.
+let avatarPhaseDeadline = 0;
+
 async function localizeAvatar(photo) {
   if (!photo) return '';
+  if (avatarCache.has(photo)) return avatarCache.get(photo);
+  if (
+    !avatarPhaseDeadline ||
+    avatarDownloads >= MAX_AVATAR_DOWNLOADS ||
+    Date.now() >= avatarPhaseDeadline
+  ) {
+    avatarCache.set(photo, '');
+    return '';
+  }
+  avatarDownloads += 1;
   try {
-    const input = await downloadImage(photo);
+    const hopDeadline = Math.min(Date.now() + MAX_DOWNLOAD_MS, avatarPhaseDeadline);
+    const input = await downloadImage(photo, 0, hopDeadline);
     const image = sharp(input, { animated: false, limitInputPixels: MAX_IMAGE_PIXELS });
     const metadata = await image.metadata();
     if (
@@ -167,8 +187,11 @@ async function localizeAvatar(photo) {
       .resize(96, 96, { fit: 'cover' })
       .webp({ quality: 88 })
       .toFile(resolve(avatarDir, name));
-    return `/webmention-avatars/${name}`;
+    const local = `/webmention-avatars/${name}`;
+    avatarCache.set(photo, local);
+    return local;
   } catch {
+    avatarCache.set(photo, '');
     return '';
   }
 }
@@ -245,6 +268,7 @@ mkdirSync(avatarDir, { recursive: true });
 
 const mentionsByPath = {};
 const hiddenRows = [];
+avatarPhaseDeadline = Date.now() + MAX_TOTAL_AVATAR_MS;
 for (const mention of accepted) {
   const categories = moderation.hidden.get(mention.id);
   if (categories) {

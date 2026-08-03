@@ -34,6 +34,11 @@ if (existsSync(cacheFile)) {
 
 const isLike = (m: Mention) => m.property === 'like-of';
 const isRepost = (m: Mention) => m.property === 'repost-of';
+// Sync stores missing names as '' (not undefined); treat empty the same as absent.
+const authorLabel = (m: Mention) => {
+  const name = m.author?.name?.trim();
+  return name || t('webmention.someone');
+};
 
 const likes = mentions.filter(isLike);
 const reposts = mentions.filter(isRepost);
@@ -55,18 +60,18 @@ const show = likes.length > 0 || reposts.length > 0 || replies.length > 0;
               href={m.author?.url || m.source}
               target="_blank"
               rel="noopener noreferrer nofollow"
-              title={`${m.author?.name ?? ''}${isRepost(m) ? ` · ${t('webmention.reposts')}` : ''}`}
+              title={`${authorLabel(m)}${isRepost(m) ? ` · ${t('webmention.reposts')}` : ''}`}
             >
               {m.author?.photo ? (
                 <img
                   src={m.author.photo}
-                  alt={m.author?.name ?? ''}
+                  alt={authorLabel(m)}
                   loading="lazy"
                   width="32"
                   height="32"
                 />
               ) : (
-                <span class="noface">{(m.author?.name ?? '?').slice(0, 1)}</span>
+                <span class="noface">{authorLabel(m).slice(0, 1)}</span>
               )}
             </a>
           ))}
@@ -88,7 +93,7 @@ const show = likes.length > 0 || reposts.length > 0 || replies.length > 0;
                 target="_blank"
                 rel="noopener noreferrer nofollow"
               >
-                {m.author?.name ?? t('webmention.someone')}
+                {authorLabel(m)}
               </a>
               {/* 只取純文字：外站內容不注入 HTML。 */}
               <p class="what">{m.text}</p>
