@@ -65,9 +65,6 @@ if (missing.length) {
 
 mkdirSync(OUT_DIR, { recursive: true });
 mkdirSync('src/generated', { recursive: true });
-for (const old of readdirSync(OUT_DIR)) {
-  if (old.endsWith('.woff2') || old.startsWith('LICENSE-')) rmSync(join(OUT_DIR, old));
-}
 
 const chars = headingChars();
 console.log(`標題用字 ${chars.size} 個`);
@@ -101,16 +98,32 @@ for (const face of FONT.faces) {
   const buf = readFileSync(tmp);
   const hash = createHash('sha256').update(buf).digest('hex').slice(0, 8);
   const file = `${FONT.filePrefix}-${face.weight}.${hash}.woff2`;
-  writeFileSync(join(OUT_DIR, file), buf);
   rmSync(tmp);
-  faces.push({ weight: face.weight, file });
+  faces.push({ weight: face.weight, file, buf });
   console.log(`  ${file}  ${(buf.length / 1024).toFixed(1)} KB`);
 }
 rmSync(listFile);
+
+// 到這裡每個 face 都產出來了，才動既有產物。**順序很重要**：舊版是先清空 OUT_DIR
+// 再跑 pyftsubset，任何一個 face 失敗就會留下「woff2 全被刪掉、fonts.json 還指著舊檔名」
+// 的狀態 —— dist 會參照到 404 的字型，而 check-fonts 只比對字集、不檢查檔案存在，
+// 下一次 build 還會綠燈放行。
+for (const old of readdirSync(OUT_DIR)) {
+  if (old.endsWith('.woff2') || old.startsWith('LICENSE-')) rmSync(join(OUT_DIR, old));
+}
+for (const face of faces) writeFileSync(join(OUT_DIR, face.file), face.buf);
 writeFileSync(join(OUT_DIR, FONT.license), readFileSync(join(SRC_DIR, FONT.license)));
 writeFileSync(
   GEN_FILE,
-  `${JSON.stringify({ family: FONT.family, faces, charset: [...chars].sort().join('') }, null, 2)}\n`,
+  `${JSON.stringify(
+    {
+      family: FONT.family,
+      faces: faces.map(({ weight, file }) => ({ weight, file })),
+      charset: [...chars].sort().join(''),
+    },
+    null,
+    2,
+  )}\n`,
   'utf8',
 );
 execFileSync('npx', ['prettier', '--write', GEN_FILE], { stdio: 'ignore' });

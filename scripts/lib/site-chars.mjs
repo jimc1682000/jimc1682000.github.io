@@ -135,7 +135,7 @@ export function headingChars(distDir = 'dist') {
 
   const out = new Set();
   const PATTERNS = [
-    /<(h1|h2|h3|h4|strong|b)\b[^>]*>([\s\S]*?)<\/\1>/gi,
+    /<(h1|h2|h3|h4)\b[^>]*>([\s\S]*?)<\/\1>/gi,
     /<div[^>]*class="[^"]*\bpt\b[^"]*"[^>]*>([\s\S]*?)<\/div>/gi,
     /<div[^>]*class="[^"]*\bt\b[^"]*"[^>]*>([\s\S]*?)<\/div>/gi,
     /<div[^>]*class="[^"]*\bslogan\b[^"]*"[^>]*>([\s\S]*?)<\/div>/gi,

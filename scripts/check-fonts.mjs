@@ -11,6 +11,18 @@ if (!existsSync(GEN)) {
   process.exit(1);
 }
 const { faces, charset } = JSON.parse(readFileSync(GEN, 'utf8'));
+
+// manifest 指到的檔案要真的在。只比對字集會漏掉「fonts.json 指著已不存在的檔名」這種狀態
+// （build:fonts 中途失敗、或 rebase 時只留下一半產物）—— 那會讓 @font-face 抓到 404，
+// 畫面靜默掉回系統字，而字集對帳照樣綠燈。
+const absent = faces.map((f) => `public/fonts/${f.file}`).filter((p) => !existsSync(p));
+if (absent.length) {
+  console.error(`\n✗ ${GEN} 指到不存在的字型檔：\n`);
+  for (const p of absent) console.error(`  ${p}`);
+  console.error('\n修法：npm run build:fonts（會重新產生產物與 manifest）\n');
+  process.exit(1);
+}
+
 const covered = new Set(charset);
 const missing = [...headingChars()].filter((c) => !covered.has(c));
 
