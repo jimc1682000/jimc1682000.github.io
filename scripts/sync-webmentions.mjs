@@ -338,6 +338,7 @@ writeFileSync(
   `${JSON.stringify({ version: 1, generatedAt: new Date().toISOString(), mentionsByPath }, null, 2)}\n`,
 );
 
+// GITHUB_STEP_SUMMARY is public on this repo — only aggregate counts, never IDs/sources.
 summary([
   '## Webmention sync',
   '',
@@ -346,9 +347,6 @@ summary([
   `- Structurally rejected: ${rejected.length}`,
   `- Moderation hidden: ${hiddenRows.length}`,
   `- Moderation unavailable (fail-open): ${moderation.unavailable ? 'yes' : 'no'}`,
-  ...hiddenRows.map(
-    (row) => `- Hidden wm-id ${row.id}: ${row.categories.join(', ') || 'flagged'} — ${row.source}`,
-  ),
 ]);
 console.log(
   `webmention sync: ${Object.values(mentionsByPath).flat().length} published, ${hiddenRows.length} hidden`,

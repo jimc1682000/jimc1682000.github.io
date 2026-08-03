@@ -226,9 +226,10 @@ jobs:
           CLOUDFLARE_KEEP_COMMIT_SHA: ${{ github.sha }}
 
   # 只有排程觸發、且真的因新迴響而重建並部署成功後，才把 wm-id 記進快取。
-  # 刻意放在 deploy 之後：若 build/deploy 失敗，訊號不被消耗，下個 cron 會重試。
+  # 必須等 canonical（CF）與 mirror（GH）都成功：只記 GH 成功會讓六小時 gate 以為已上線，
+  # CF 失敗時就不再重試直到每日 full refresh。
   record-webmention-state:
-    needs: [gate, deploy-gh-pages]
+    needs: [gate, deploy-gh-pages, deploy-cloudflare]
     if: github.event_name == 'schedule' && github.event.schedule != '17 1 * * *' && needs.gate.outputs.build == 'true'
     runs-on: ubuntu-latest
     steps:
