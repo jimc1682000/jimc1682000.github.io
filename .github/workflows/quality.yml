@@ -74,6 +74,7 @@ jobs:
         env:
           # 與 deploy.yml 一致：有設才會輸出 rel=webmention，驗證腳本才會斷言該項
           PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
+          WEBMENTION_IO_TOKEN: ${{ secrets.WEBMENTION_IO_TOKEN }} # gitleaks:allow
           PUBLIC_GISCUS_REPO: ${{ vars.PUBLIC_GISCUS_REPO }}
           PUBLIC_GISCUS_REPO_ID: ${{ vars.PUBLIC_GISCUS_REPO_ID }}
           PUBLIC_GISCUS_CATEGORY: ${{ vars.PUBLIC_GISCUS_CATEGORY }}
@@ -154,6 +155,7 @@ jobs:
       - run: npm run build
         env:
           PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
+          WEBMENTION_IO_TOKEN: ${{ secrets.WEBMENTION_IO_TOKEN }} # gitleaks:allow
           PUBLIC_GISCUS_REPO: ${{ vars.PUBLIC_GISCUS_REPO }}
           PUBLIC_GISCUS_REPO_ID: ${{ vars.PUBLIC_GISCUS_REPO_ID }}
           PUBLIC_GISCUS_CATEGORY: ${{ vars.PUBLIC_GISCUS_CATEGORY }}

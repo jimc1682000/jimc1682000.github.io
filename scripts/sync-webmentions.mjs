@@ -11,6 +11,7 @@ import { lookup } from 'node:dns/promises';
 import { createHash } from 'node:crypto';
 import https from 'node:https';
 import { dirname, resolve } from 'node:path';
+import { clearTimeout, setTimeout } from 'node:timers';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import { isBlockedAddress } from './lib/network-address.mjs';
@@ -59,15 +60,18 @@ if (!domain) {
   console.log('webmention sync: disabled (PUBLIC_WEBMENTION_DOMAIN is empty)');
   process.exit(0);
 }
-// Domain-wide mentions.jf2 requires the account token; without it the API fails and
-// wiping the cache would publish an empty site.
+// Domain-wide mentions.jf2 needs the account token. Deploy injects it; quality gates
+// that only need the domain for HTML endpoints may omit it.
 if (!apiToken) {
   if (existsSync(cacheFile)) {
     console.warn('webmention sync: WEBMENTION_IO_TOKEN missing; keeping existing cache');
     process.exit(0);
   }
-  console.error('webmention sync: WEBMENTION_IO_TOKEN missing and no cache to fall back on');
-  process.exit(1);
+  emptyCache();
+  console.warn(
+    'webmention sync: WEBMENTION_IO_TOKEN missing; publishing empty mentions (set the secret on deploy)',
+  );
+  process.exit(0);
 }
 
 function withDeadline(promise, deadlineMs, message) {
