@@ -43,11 +43,12 @@ const { lang } = Astro.props;
           author's server by your browser.
         </p>
         <p>
-          Reply text may be sent to OpenAI's moderation endpoint. No avatar, author name, email, IP
-          address, or browser data is included in that request. A flagged reply is hidden; a service
-          outage does not block the rest of the build. Public GitHub Actions run summaries only
-          report aggregate counts for this step—not individual Webmention IDs, source URLs, or reply
-          text.
+          Reply text may be sent to OpenAI's moderation endpoint. Structured author fields (name,
+          avatar, profile URL) and visitor connection data are not attached to that request; the
+          reply body itself is sent as written and may still contain personal data the author put in
+          the text. A flagged reply is hidden; a service outage does not block the rest of the
+          build. Public GitHub Actions run summaries only report aggregate counts for this step—not
+          individual Webmention IDs, source URLs, or reply text.
         </p>
         <p>
           Giscus is not loaded until you select the GitHub tab below an article. At that point your
@@ -135,10 +136,11 @@ const { lang } = Astro.props;
           build 時下載並轉成本站的靜態 WebP；訪客的 browser 不會再向原始頭像主機發出請求。
         </p>
         <p>
-          回覆文字可能送到 OpenAI moderation endpoint 檢查；請求不含頭像、作者名稱、email、IP
-          address 或 browser 資料。被標記的單則回覆會隱藏，服務中斷不會擋住其他文章或留言的
-          build。公開的 GitHub Actions run summary 只報這個步驟的彙總數字，不會寫個別 Webmention
-          ID、來源 URL 或回覆全文。
+          回覆文字可能送到 OpenAI moderation endpoint
+          檢查。請求不會附上作者的結構化欄位（名稱、頭像、 profile
+          URL）或訪客連線資料；回覆正文則照原文送出，作者若在文字裡寫了個人資料也會一併送出。
+          被標記的單則回覆會隱藏，服務中斷不會擋住其他文章或留言的 build。公開的 GitHub Actions run
+          summary 只報這個步驟的彙總數字，不會寫個別 Webmention ID、來源 URL 或回覆全文。
         </p>
         <p>
           Giscus 不會隨文章頁一起載入。只有你點選 GitHub 分頁後，browser 才會連線到

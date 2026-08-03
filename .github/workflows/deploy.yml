@@ -109,6 +109,13 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Last-known-good webmention cache：API 失敗時 sync 腳本可沿用，避免空白部署。
+      - uses: actions/cache@v4
+        with:
+          path: .cache/webmentions
+          key: webmentions-${{ github.run_id }}
+          restore-keys: |
+            webmentions-
       - name: Build Astro (brand + blog)
         run: npm run build
         # PUBLIC_* 為公開值（會進 client HTML）；OPENAI_API_KEY 只供 build-time moderation。

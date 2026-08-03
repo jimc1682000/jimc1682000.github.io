@@ -60,10 +60,14 @@ if (!domain) {
   process.exit(0);
 }
 // Domain-wide mentions.jf2 requires the account token; without it the API fails and
-// wiping the cache would publish an empty site. Leave any existing cache alone.
+// wiping the cache would publish an empty site.
 if (!apiToken) {
-  console.warn('webmention sync: WEBMENTION_IO_TOKEN missing; keeping existing cache');
-  process.exit(0);
+  if (existsSync(cacheFile)) {
+    console.warn('webmention sync: WEBMENTION_IO_TOKEN missing; keeping existing cache');
+    process.exit(0);
+  }
+  console.error('webmention sync: WEBMENTION_IO_TOKEN missing and no cache to fall back on');
+  process.exit(1);
 }
 
 function withDeadline(promise, deadlineMs, message) {
@@ -326,10 +330,15 @@ try {
     console.warn(`webmention sync: ${error.message}; keeping existing cache`);
     process.exit(0);
   }
-  emptyCache();
-  summary(['## Webmention sync', '', `- Fetch failed: ${error.message}`, '- Published replies: 0']);
-  console.warn(`webmention sync: ${error.message}`);
-  process.exit(0);
+  // Fresh checkout with no cache: failing the build keeps the previously deployed site.
+  summary([
+    '## Webmention sync',
+    '',
+    `- Fetch failed: ${error.message}`,
+    '- No cache to fall back on; failing build',
+  ]);
+  console.error(`webmention sync: ${error.message}; no cache — failing build`);
+  process.exit(1);
 }
 
 const { accepted, rejected } = prepareMentions(children, overrides, domain);
