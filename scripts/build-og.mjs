@@ -48,6 +48,7 @@ const TARGETS = [
 ];
 
 let failed = false;
+const pending = [];
 for (const t of TARGETS) {
   const buf = await sharp(readFileSync(t.svg))
     .resize(t.width, t.height)
@@ -77,14 +78,18 @@ for (const t of TARGETS) {
 
   console.log(`  ${t.png}  ${(buf.length / 1024).toFixed(1)} KB`);
   for (const l of lines) console.log(l);
-  if (!failed) writeFileSync(t.png, buf);
+  // 先收進 pending，全部通過才落地 —— 否則第一張過、第二張掛時，會留下一張新 og.png
+  // 配一張舊 avatar.png，而訊息還說「未寫入」，很容易 commit 出不成對的產物。
+  pending.push({ path: t.png, buf });
 }
 
 if (failed) {
   console.error(
-    '\n✗ 像素斷言失敗，PNG **未寫入**。常見原因：本機缺中文字型，或 svg 的座標改了' +
-      '而本腳本的區域沒跟著改。修法：先確認 svg 在瀏覽器裡看起來正常，再對齊區域座標。\n',
+    '\n✗ 像素斷言失敗，**所有 PNG 都未寫入**（避免產出不成對的圖）。常見原因：本機缺中文' +
+      '字型，或 svg 的座標改了而本腳本的區域沒跟著改。修法：先確認 svg 在瀏覽器裡看起來' +
+      '正常，再對齊區域座標。\n',
   );
   process.exit(1);
 }
+for (const { path, buf } of pending) writeFileSync(path, buf);
 console.log('✓ og.png 與 avatar.png 已更新（記得一起 commit）');

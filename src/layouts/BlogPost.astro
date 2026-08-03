@@ -219,8 +219,12 @@ const authorName = lang === 'en' ? 'Jimmy Chen' : '陳建豪';
     font-size: var(--text-body);
     line-height: 2.1;
     letter-spacing: 0.015em;
-    /* 用 token 而非寫死顏色：亮色模式的墨色不同。黑體比宋體搶眼，收一點回到「墨」。 */
-    opacity: 0.94;
+    /* 黑體比宋體搶眼，把文字收一點回到「墨」。
+       用 color-mix 而不是 opacity：`opacity` 會 composite 整個 .e-content 子樹，
+       圖片、figure、code 區塊會一起被淡掉 6% —— 那是改動媒體外觀，不是「軟化文字」。
+       兩個都是 token（亮暗模式的墨與紙不同），對純色底而言 94% 混色與 opacity .94
+       的文字結果等價。連結與引文有自己的顏色規則，不受這行影響。 */
+    color: color-mix(in srgb, var(--color-text) 94%, var(--color-bg));
   }
   /* 首行縮排是中文散文慣例，也是換掉宋體之後把「文氣」找回來的關鍵；
      段距因此收小，靠縮排而非空白分段。引文與清單不套（縮排會打亂它們的層次）。 */

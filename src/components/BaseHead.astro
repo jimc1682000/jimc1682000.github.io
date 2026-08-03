@@ -51,6 +51,14 @@ const fontFaceCss = fontData.faces
       `font-display:optional;src:url('/fonts/${f.file}') format('woff2')}`,
   )
   .join('');
+
+// preload 只挑「這條路由真的會用到」的字重，不要兩個都送。
+// 吃 --font-heading 的位置只有兩種字重：700（h1–h4、.brand、.pt、.item .t —— 幾乎每頁都有）
+// 與 400（只有首頁立軸的標語）。在 /works/、/contact、文章頁預載 400 face 等於用最高優先權
+// 搶頻寬下載一個不會被用到的 69 KB 檔。沒被 preload 的 face 仍由 @font-face 正常載入，
+// preload 只是優先權提示。
+const isHome = p === '/' || p === '/en' || p === '/en/';
+const preloadFaces = fontData.faces.filter((f) => f.weight === 700 || isHome);
 ---
 
 {/* no-flash theme：務必放 <head> 最前，於任何樣式套用前設定 data-theme（DESIGN §6） */}
@@ -72,11 +80,11 @@ const fontFaceCss = fontData.faces
 <meta name="generator" content={Astro.generator} />
 
 {
-  /* preload 只給標題字型，且只有 400／700 兩個檔 —— web.dev 警告 preload 會搶頻寬，
-  不要濫用。放在樣式表之前，讓下載早於 CSS 解析。 */
+  /* preload 只給標題字型，且只給「這條路由會用到的字重」（見上方 preloadFaces）——
+  web.dev 警告 preload 會搶頻寬，不要濫用。放在樣式表之前，讓下載早於 CSS 解析。 */
 }
 {
-  fontData.faces.map((f) => (
+  preloadFaces.map((f) => (
     <link rel="preload" href={`/fonts/${f.file}`} as="font" type="font/woff2" crossorigin />
   ))
 }
