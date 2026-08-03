@@ -80,9 +80,7 @@
   --text-subhead: 1.5rem; /* 正文 h2 */
   --text-h1: 2rem; /* 名片與 404 的頁標 */
   --text-post-h: 2.4rem; /* blog 單篇標題 */
-  --text-page-h: 2.6rem; /* 各索引頁頁標 */
-  --text-scroll: 3.3rem; /* 首頁立軸姓名（直排） */
-  --text-scroll-en: 3rem; /* 英文版立軸（橫排、字串較長） */
+  --text-page-h: 2.6rem; /* 各索引頁頁標 */ /* 首頁立軸姓名（直排） */ /* 英文版立軸（橫排、字串較長） */
 
   /* Spacing（DESIGN §5，8pt grid） */
   --spacing-xs: 0.5rem;
@@ -183,9 +181,8 @@ h4,
 .brand, /* Header 站名 */
 .pt, /* 列表頁的文章標題 */
 .item .t, /* 作品集的條目標題 */
-.scroll .nm, /* 首頁立軸：姓名 */
 .scroll .slogan {
-  /* 首頁立軸：標語 */
+  /* 首頁立軸的標語（姓名已移除，見 Home.astro） */
   font-family: var(--font-heading);
 }
 

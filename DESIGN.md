@@ -40,7 +40,7 @@
 | 特徵 | 做法 |
 |------|------|
 | **散文式首頁** | 首頁主體是一段段自我介紹（散文），非分區塊卡牆；近作以「引用/清單」嵌在文末 |
-| **直式中文點綴** | 首頁右側「立軸」用 `writing-mode:vertical-rl` 直排姓名 + 標語 + 落款；**僅純中文短句用直式**，含英文的長內文一律橫排 |
+| **直式中文點綴** | 首頁右側「立軸」用 `writing-mode:vertical-rl` 直排標語 + 落款印章（**不放姓名** —— 散文第一句已經自我介紹，直排再寫一次是同一件事說兩遍）；**僅純中文短句用直式**，含英文的長內文一律橫排 |
 | **落款印章 logo** | 一枚朱紅方印，刻「吉」字（`Seal.astro`）；置於 Header 左與文末落款 |
 | **朱砂 accent** | 唯一品牌強調色＝印泥朱砂；只點在連結、標題記號、tag、印章、hover |
 | **全站黑體，一枚宋體印** | 標題與首頁立軸用自 host 思源黑體 TC（跨平台一致）；散文、blog 正文與 UI（nav/meta）用系統黑體；唯一留宋體的是落款印章那個「吉」字 |
@@ -142,7 +142,7 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 
 | 角色 | token | 用在哪 | 換字型要動 |
 |------|-------|--------|-----------|
-| 標題 | `--font-heading` | `h1`–`h4`、`.brand`、`.pt`、`.item .t`、`.scroll .nm`、`.scroll .slogan`。字重只有 **400／700**（subset 就這兩個），故這些位置一律宣告 700 | `global.css` token + `build-fonts.mjs` 的 `FONT` |
+| 標題 | `--font-heading` | `h1`–`h4`、`.brand`、`.pt`、`.item .t`、`.scroll .slogan`。字重只有 **400／700**（subset 就這兩個），故這些位置一律宣告 700 | `global.css` token + `build-fonts.mjs` 的 `FONT` |
 | blog 正文 | `--font-body` | `BlogPost.astro` 的 `.body`（唯一使用者）；~1.02rem、行高 ~2.1、首行縮排 2em | `global.css` token |
 | 散文 | `--font-prose` | `body` 預設值 → 首頁自介、各頁摘要小段（靠繼承） | `global.css` token |
 | 印章 | `--font-seal` | `Seal.astro` 的「吉」（全站唯一宋體） | `global.css` token |
@@ -173,8 +173,6 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 | `--text-h1` | 2rem | 名片與 404 的頁標 |
 | `--text-post-h` | 2.4rem | blog 單篇標題 |
 | `--text-page-h` | 2.6rem | 各索引頁頁標 |
-| `--text-scroll` | 3.3rem | 首頁立軸姓名（直排） |
-| `--text-scroll-en` | 3rem | 英文版立軸（橫排、字串較長） |
 
 `code`／`figcaption` 內的 `0.88em`／`0.9em` 刻意留相對值：它們要跟著父層縮放，不是絕對級。
 **新增字級前先問「有沒有現成的級可用」** —— 會再長出 `0.82rem` 這種值就是漂移的開始。
@@ -223,12 +221,12 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 ### 7.2 全域殼
 
 - **Header**：antfu 式透明（absolute、無底色 bar）；左＝印章 + 站名（`--font-heading`）；右＝文字連結（Blog／履歷／作品集／語系）+ icon 叢（GitHub／RSS／theme）；當前頁 nav 標朱砂底線。
-- **Footer**：極簡（版權、RSS、語系），sans。
+- **Footer**：只有版權一行，sans。**不放 RSS／語系** —— Header 右上已經有，頁尾再放一次是同一組連結出現兩次。
 - **Skip link**、可見 focus ring 保留。
 
 ### 7.3 首頁（散文式）
 
-- 繁中 `/`：左＝散文自介（About 逐字）+「近作」最新 3 篇（引用式清單）+「Find me on」社群列；右＝直式立軸（陳建豪 + 標語 + 印章落款）。窄螢幕立軸退回橫排。
+- 繁中 `/`：左＝散文自介（About 逐字）+「近作」最新 3 篇（引用式清單）+「Find me on」社群列；右＝直式立軸（標語 + 印章落款）。窄螢幕立軸退回橫排。mf2 的 `p-name` 掛在隱藏連結上（立軸不顯示姓名，但 h-card 仍必須有 name）。
 - 英文 `/en/`：**橫排**英文版（不做直式），同結構、自然英譯。
 
 ### 7.4 作品集 `/works/`
@@ -336,6 +334,7 @@ token 按**角色**命名，不按字族 —— 要換的永遠是某個角色�
 | 2026-07-25 | **Bridgy Fed 自訂 handle：`/.well-known/{host-meta*,webfinger*,atproto-did}` 302 → `fed.brid.gy`（`public/_worker.js`）** | 讓別人直接用 `@jimmychen.me` 追蹤本站。規格要求 302（對方端點可能變動）且 host-meta／webfinger 須保留 query（webfinger 靠 `?resource=`）；atproto-did 反之用固定 query 標明本站身分。與 pages.dev 轉址共用同一個 worker，不另加 dashboard 規則 |
 | 2026-07-25 | **不輸出 `rel="pingback"`** | pingback 是 XML-RPC 舊協定、垃圾訊息重災區（webmention.io 自身也警告），已在該服務停用；宣告一個停用端點只會引來嘗試。僅保留 `rel="webmention"` |
 | 2026-07-25 | **`jimmychen.pages.dev` 301 → `jimmychen.me`（`public/_worker.js`）；GitHub Pages mirror 不轉址** | pages.dev 與 canonical 同屬 Cloudflare，一起壞、無備援價值 → 收成單一入口。GH Pages 是唯一非 Cloudflare 副本，轉址會讓備援指向故障中的網域，故保留 serve 內容（SEO 已由 canonical 收斂）。用 `_worker.js` 而非 `functions/`：CI deploy job 只下載 dist、不 checkout repo |
+| 2026-07-31 | **首頁立軸移除姓名、Footer 移除 RSS／語系** | 都是重複資訊：立軸的「陳建豪」與散文第一句「我是陳建豪」是同一件事說兩遍；Footer 的 RSS 與語系切換 Header 右上已經有。移姓名時 mf2 的 `p-name` 改掛在既有的隱藏 `u-url` 連結上 —— `validate-microformats.mjs` 會擋「首頁 h-card 有 name」，直接刪會壞掉。`.scroll .nm` 從 `global.css` 的唯一接點與 `site-chars.mjs` 的 `PATTERNS` 一起移除（兩份清單必須一致），`--text-scroll`／`--text-scroll-en` 兩個 token 隨之刪掉，`footer.rss` 的 i18n key 也一併清（本次改動造成的孤兒） |
 | 2026-07-31 | **字級收斂成 14 個 role token，砍掉 9 個沒人用的 token，字級零 magic rem** | 起點是一個對帳結果：60 幾處字級直寫 rem、22 個相異值，而定義好的 12 級 t-shirt scale（`--font-size-xs…display`）只有 3 處在用 —— 假 scale 留著才是放棄收斂。做法不是刪 scale，是**用實際值反推出真的 scale**：小字群原本 8 個值擠在 0.72–0.95rem（`0.82` 與 `0.85` 差 0.48px，沒人分得出來卻各自 commit 進不同元件），折成 4 級；正文群 5 個值折成 3 級；標題各自是真的角色差異，各留一級。共 14 個 `--text-*` token、替換 78 處。**逐值對帳**：產物裡 80 個帶 font-size 的選擇器全部對上，字級實際變動 15 處，最大 +1.6px（404 頁標 1.9→2rem，與名片頁標同角色，原本差 2px 本身就是漂移），其餘 ≤0.8px。`code`／`figcaption` 的 `0.88em`／`0.9em` 刻意留相對值。順手刪掉 9 個定義了卻沒人 `var()` 的 token（`--color-accent`／`accent-hover`／`header-bg`／`overlay`、`--max-width-wide`、`--radius-lg`／`xl`、`--spacing-4xl`、`--transition-slow`）—— 現在 46 個 token **零未使用**。§10 規則 2 從「字級不走 token」改回「字級也只用 token」，因為現實變了 |
 | 2026-07-31 | **標題字重統一宣告 700；DESIGN 對帳實際 code、修掉六處 drift** | 一致性維護，不是新設計。① `.brand`／`.pt`／`.item .t` 原本宣告 `font-weight: 600` —— 思源黑體家族**沒有 600**（7 級是 100／300／350／400／500／700／900），CSS 字重匹配在目標 > 500 時往上找，所以一直渲染 700。宣告值與實際不符就是下一個 drift 的起點，故直接寫 700；`--font-ui` 的四處朱砂 eyebrow 小標維持 600（系統字有真 600，0.9rem 配寬字距用 700 會結實突兀）。② 對帳出的 DESIGN drift：§3.1 亮色 `--color-text-tertiary` 表格仍寫舊值 `#9a9186`（實際 `#766d63`）、§3.2 暗色 tertiary 寫 `0.4`（實際 `0.55`）、`--color-seal-tint` 寫 `rgba(210,74,59,…)`（實際 `rgba(214,89,76,…)`）—— 這三個都是先前 WCAG 修正改了 CSS 但沒回寫表格；另補上六個從未列在表裡的 token（`--color-border-hover`／`header-bg`／`accent`／`accent-hover`／`overlay`／`focus-ring`）。③ §5 版心與圓角寫的是願望值：實際 blog 單篇 680px（元件自己寫死）、`--max-width-narrow` 是 800px、tag 是 100px 藥丸而非 8px、印章圓角依尺寸 5–7px。④ §10 規則 2 原本宣稱「字級只用 token」，實際 60+ 處直寫 rem、`--font-size-*` 只用到 3 處 —— 改成照實描述並說明為何不硬收斂（中文字級逐處微調，整批換算會改外觀）。⑤ §7.1 印章補上 `class` prop 與「圓角依 size 推算」 |
 | 2026-07-31 | **分享卡與頭像的字型對齊全站，並把產圖從手工變成 `npm run build:og`** | 兩個先前沒被看見的事實：① 線上引用的只有 PNG（`og:image` → `/og.png`、h-card `u-photo` 與 vCard PHOTO → `/avatar.png`），SVG 沒有任何頁面指向它 —— 所以**只改 svg 線上零變化**；② svg 裡寫的 `Noto Serif TC` 從來沒生效過，那個字型沒裝在產圖的機器上，實際一直是 Songti 的 fallback。故：og 卡的站名／標語／署名／網域改系統黑體、印章「吉」留宋體（＝站上的「全站黑體，一枚宋體印」），avatar 只把字型名寫成 `'Songti TC', serif` 照實反映（PNG 視覺不變）。產圖寫成 `scripts/build-og.mjs`（sharp，devDependency 已有），每張圖對指定區域做**像素斷言**（印章白字、站名、標語、署名各自要有墨）—— 缺字型時整支失敗且**不寫入 PNG**，而不是產出一張沒字的卡片還說成功。仍**不進 CI**：ubuntu-latest 沒有中文字型（同 `build:fonts` 的取捨）。改 svg 的 x/y 或字級時要同步斷言區域座標 |

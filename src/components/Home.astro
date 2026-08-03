@@ -93,7 +93,11 @@ const recent = (await getPosts(lang)).slice(0, 3);
 
   {/* h-card：代表本人的 microformats2 profile（P2-11，供 webmention/Bridgy Fed 解析）。 */}
   <aside class="scroll h-card">
-    <a class="u-url" href={new URL('/', Astro.site)} hidden>{name}</a>
+    {
+      /* p-name 掛在這個隱藏連結上：立軸不再顯示姓名，但 mf2 的 h-card 仍必須有 name
+        （scripts/validate-microformats.mjs 會擋）。 */
+    }
+    <a class="u-url p-name" href={new URL('/', Astro.site)} hidden>{name}</a>
     {
       /* acct: 形式的 u-url 決定 fediverse handle 的 local part。
         沒有這行 → @jimmychen.me@jimmychen.me（網域重複）；有這行 → @jimmy@jimmychen.me。
@@ -105,7 +109,6 @@ const recent = (await getPosts(lang)).slice(0, 3);
         路徑固定，換圖只換 public/avatar.png 的內容。 */
     }
     <img class="u-photo" src="/avatar.png" alt="" width="1" height="1" hidden />
-    <div class="nm p-name">{name}</div>
     <div class="slogan">{slogan}</div>
     <div class="stamp"><Seal size={56} /></div>
   </aside>
@@ -132,11 +135,6 @@ const recent = (await getPosts(lang)).slice(0, 3);
     padding-top: 4px;
     user-select: none;
   }
-  .scroll .nm {
-    font-size: var(--text-scroll);
-    font-weight: 700;
-    letter-spacing: 0.14em;
-  }
   .scroll .slogan {
     font-size: var(--text-lede);
     color: var(--color-text-secondary);
@@ -160,10 +158,6 @@ const recent = (await getPosts(lang)).slice(0, 3);
     align-items: flex-start;
     gap: 12px;
     padding-top: 0;
-  }
-  .home.en .scroll .nm {
-    font-size: var(--text-scroll-en);
-    letter-spacing: 0.02em;
   }
   .home.en .scroll .slogan {
     letter-spacing: 0.04em;
@@ -258,9 +252,6 @@ const recent = (await getPosts(lang)).slice(0, 3);
       flex-direction: column;
       gap: 10px;
       order: -1;
-    }
-    .scroll .nm {
-      font-size: var(--text-page-h);
     }
   }
 </style>
