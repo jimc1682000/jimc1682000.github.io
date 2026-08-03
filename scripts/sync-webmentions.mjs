@@ -247,10 +247,7 @@ async function moderate(mentions) {
       break;
     }
     const batch = queue.slice(offset, offset + MODERATION_BATCH_SIZE);
-    const requestMs = Math.max(
-      1,
-      Math.min(MODERATION_REQUEST_MS, phaseDeadline - Date.now()),
-    );
+    const requestMs = Math.max(1, Math.min(MODERATION_REQUEST_MS, phaseDeadline - Date.now()));
     try {
       const response = await fetch('https://api.openai.com/v1/moderations', {
         method: 'POST',
