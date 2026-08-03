@@ -180,9 +180,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     # 僅當設有 Cloudflare token 時才跑（needs-human 前自動略過，不拖垮 GH mirror）
+    # 舊 deployment 清理在 purge-cloudflare-deployments（不擋 send-webmentions）
     env:
       HAS_CF: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
-      PURGE_OLD_CF_DEPLOYMENTS: ${{ vars.PURGE_OLD_CF_DEPLOYMENTS }}
     steps:
       - name: Skip notice
         if: env.HAS_CF != 'true'
@@ -199,6 +199,19 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=jimmychen --branch=${{ github.event.repository.default_branch }} --commit-hash=${{ github.sha }}
+
+  # 清舊 deployment 與正式 deploy 拆開：purge 失敗不應擋住 send-webmentions
+  # （canonical 已上線，出站 webmention / Bridgy Fed 仍要送）。
+  purge-cloudflare-deployments:
+    needs: deploy-cloudflare
+    runs-on: ubuntu-latest
+    env:
+      HAS_CF: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+      PURGE_OLD_CF_DEPLOYMENTS: ${{ vars.PURGE_OLD_CF_DEPLOYMENTS }}
+    steps:
+      - name: Skip notice
+        if: env.HAS_CF != 'true' || env.PURGE_OLD_CF_DEPLOYMENTS != 'true'
+        run: echo "Cloudflare deployment purge: skipped"
       - uses: actions/checkout@v4
         if: env.HAS_CF == 'true' && env.PURGE_OLD_CF_DEPLOYMENTS == 'true'
         with:

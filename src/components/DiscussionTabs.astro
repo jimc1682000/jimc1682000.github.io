@@ -19,7 +19,11 @@ const githubPanel = `discussion-github-${idSuffix}`;
 
 <section class="discussion" aria-label={t('discussion.title')}>
   <h2>{t('discussion.title')}</h2>
-  <div class="tabs" role="tablist" aria-label={t('discussion.choose')}>
+  <div
+    class:list={['tabs', { 'tabs--single': !giscusEnabled }]}
+    role="tablist"
+    aria-label={t('discussion.choose')}
+  >
     <button
       type="button"
       role="tab"
@@ -182,6 +186,11 @@ const githubPanel = `discussion-github-${idSuffix}`;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     border: 1px solid var(--color-border);
+  }
+
+  /* Giscus 關閉時只剩 Fediverse 一欄，不要留半邊空白。 */
+  .tabs--single {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .tabs button {
