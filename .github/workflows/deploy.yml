@@ -119,6 +119,7 @@ jobs:
           PUBLIC_GISCUS_CATEGORY: ${{ vars.PUBLIC_GISCUS_CATEGORY }}
           PUBLIC_GISCUS_CATEGORY_ID: ${{ vars.PUBLIC_GISCUS_CATEGORY_ID }}
           PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
+          WEBMENTION_IO_TOKEN: ${{ secrets.WEBMENTION_IO_TOKEN }} # gitleaks:allow
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} # gitleaks:allow
 
       # --- /resume/ 由主站 Astro 產出 L0（不再 checkout 完整履歷 repo）---

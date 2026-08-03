@@ -1,5 +1,12 @@
 #!/usr/bin/env node
-import { appendFileSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import {
+  appendFileSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
 import { lookup } from 'node:dns/promises';
 import { createHash } from 'node:crypto';
 import https from 'node:https';
@@ -12,6 +19,7 @@ import { flaggedCategories, prepareMentions, truncateUnicode } from './lib/webme
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = resolve(here, '..');
 const domain = process.env.PUBLIC_WEBMENTION_DOMAIN?.trim();
+const apiToken = process.env.WEBMENTION_IO_TOKEN?.trim();
 const cacheDir = resolve(repo, '.cache/webmentions');
 const cacheFile = resolve(cacheDir, 'data.json');
 const avatarDir = resolve(repo, 'public/webmention-avatars');
@@ -49,6 +57,12 @@ function emptyCache() {
 if (!domain) {
   emptyCache();
   console.log('webmention sync: disabled (PUBLIC_WEBMENTION_DOMAIN is empty)');
+  process.exit(0);
+}
+// Domain-wide mentions.jf2 requires the account token; without it the API fails and
+// wiping the cache would publish an empty site. Leave any existing cache alone.
+if (!apiToken) {
+  console.warn('webmention sync: WEBMENTION_IO_TOKEN missing; keeping existing cache');
   process.exit(0);
 }
 
@@ -283,6 +297,7 @@ async function fetchAllMentions() {
   for (let page = 0; page < MAX_MENTION_PAGES; page += 1) {
     const api = new URL('https://webmention.io/api/mentions.jf2');
     api.searchParams.set('domain', domain);
+    api.searchParams.set('token', apiToken);
     api.searchParams.set('per-page', String(MENTIONS_PER_PAGE));
     api.searchParams.set('page', String(page));
     const response = await fetch(api, { signal: AbortSignal.timeout(15_000) });
@@ -300,6 +315,17 @@ let children = [];
 try {
   children = await fetchAllMentions();
 } catch (error) {
+  // Auth or network failure must not blank the live site.
+  if (existsSync(cacheFile)) {
+    summary([
+      '## Webmention sync',
+      '',
+      `- Fetch failed: ${error.message}`,
+      '- Kept existing cache (not wiped)',
+    ]);
+    console.warn(`webmention sync: ${error.message}; keeping existing cache`);
+    process.exit(0);
+  }
   emptyCache();
   summary(['## Webmention sync', '', `- Fetch failed: ${error.message}`, '- Published replies: 0']);
   console.warn(`webmention sync: ${error.message}`);

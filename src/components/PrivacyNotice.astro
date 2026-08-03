@@ -31,8 +31,8 @@ const { lang } = Astro.props;
         </p>
         <p>
           No non-essential cookie is set on the public site. The theme preference is stored in your
-          browser. The protected resume service uses authentication cookies that are necessary to
-          keep an authenticated session.
+          browser. A future protected resume service may use authentication cookies only as needed
+          for that session; the public site does not set them today.
         </p>
 
         <h2>Comments and responses</h2>
@@ -124,7 +124,8 @@ const { lang } = Astro.props;
         </p>
         <p>
           公開網站不設定非必要 cookie。深淺色偏好只存在你的
-          browser；受保護履歷服務則會使用維持登入狀態所必要的 authentication cookie。
+          browser。未來若上線受保護履歷服務，可能會為登入狀態使用必要的 authentication
+          cookie；公開站目前不會設定那些 cookie。
         </p>
 
         <h2>留言與站外回覆</h2>
@@ -243,8 +244,15 @@ const { lang } = Astro.props;
 
   a {
     color: var(--color-text);
-    text-decoration: none;
-    border-bottom: 1px solid var(--color-seal);
+    text-decoration: underline dotted;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.25em;
+    text-decoration-color: var(--color-seal);
+  }
+
+  a:hover {
+    color: var(--color-seal);
+    text-decoration-color: var(--color-seal);
   }
 
   .scope {
