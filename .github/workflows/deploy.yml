@@ -171,7 +171,7 @@ jobs:
           path: dist
           retention-days: 1
       # 一般 artifact（供 Cloudflare 部署 job 下載，維持單一 build）
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: site-dist
           path: dist
