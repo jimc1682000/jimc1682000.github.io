@@ -198,7 +198,7 @@ jobs:
       - name: Skip notice
         if: env.HAS_CF != 'true'
         run: echo "CLOUDFLARE_API_TOKEN 未設定，略過 Cloudflare 部署（needs-human）。"
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         if: env.HAS_CF == 'true'
         with:
           name: site-dist
@@ -267,7 +267,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: site-dist
           path: dist
