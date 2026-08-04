@@ -166,12 +166,12 @@ jobs:
           fi
           echo "assembled OK: / /blog/ /resume/(L0) /en/resume/(L0) /film-brain/"
       # GitHub Pages 專用 artifact（供 deploy-pages 使用）
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
           retention-days: 1
       # 一般 artifact（供 Cloudflare 部署 job 下載，維持單一 build）
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: site-dist
           path: dist
@@ -185,7 +185,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
   deploy-cloudflare:
     needs: build
@@ -205,7 +205,7 @@ jobs:
           path: dist
       - name: Deploy to Cloudflare Pages
         if: env.HAS_CF == 'true'
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
