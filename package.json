@@ -41,7 +41,7 @@
     "markdownlint-cli2": "^0.23.2",
     "microformats-parser": "^2.0.6",
     "pagefind": "^1.4.0",
-    "postcss-html": "^1.8.1",
+    "postcss-html": "^2.0.0",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
     "qrcode": "^1.5.4",
