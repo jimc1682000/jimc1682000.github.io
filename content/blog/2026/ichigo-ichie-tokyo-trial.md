@@ -8,7 +8,7 @@ tags: [影視]
 
 ![影集《東京大審判》（Tokyo Trial）宣傳圖](/blog/img/tokyo-trial.webp)
 
-圖片來源：[The Movie Database：東京裁判海報](https://image.tmdb.org/t/p/original/hCxMwXBhwS3a4zQSltP7eZZaqR3.jpg)
+圖片來源：[The Movie Database：東京裁判](https://www.themoviedb.org/tv/69090-tokyo-trial?language=zh-TW)
 
 因為一期一會的緣分，我看了這部影集《東京大審判》（Tokyo Trial），裡面有許多觀點讓我反覆思考了許久……
 
