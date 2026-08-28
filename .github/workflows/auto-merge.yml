@@ -2,9 +2,10 @@ name: Auto-merge content-only PRs
 
 # Agent 發文安全管線：
 # - 只有「非 draft」且「僅動 content/blog/** 或 public/blog/**」的 PR 會自動合併。
-# - 自動合併前先跑 astro build 當 gate；綠才 squash-merge。
-# - 合併後顯式觸發 deploy workflow（GITHUB_TOKEN 造成的 push 不會自動觸發 workflow，
-#   故用 workflow_dispatch 補觸發，否則新文不會部署）。
+# - 自動合併前先跑 astro build 當 gate；用 GitHub auto-merge 排隊等待 required checks
+#   通過後再 squash-merge，避免 build gate 與 Quality gates 平行執行造成 race condition。
+# - 確認 PR 實際合併後才顯式觸發 deploy workflow（GITHUB_TOKEN 造成的 push 不會自動觸發
+#   workflow，故用 workflow_dispatch 補觸發，否則新文不會部署）。
 # - 非 content-only 的 PR：不自動合併，留言說明需人工 review/merge。
 #
 # Draft PR 起頭 = 草稿（本站無 frontmatter draft 欄）；標成 Ready 才進入自動合併判斷。
@@ -70,12 +71,34 @@ jobs:
           npm ci
           npm run build
 
-      - name: Squash-merge
+      - name: 排入 squash auto-merge
         if: steps.scope.outputs.content_only == 'true'
         run: |
-          gh pr merge "$PR" --repo "$GITHUB_REPOSITORY" --squash --delete-branch
+          gh pr merge "$PR" --repo "$GITHUB_REPOSITORY" --squash --auto --delete-branch
 
-      - name: 觸發部署（GITHUB_TOKEN 合併不會自動觸發 deploy）
+      - name: 等待 PR 實際合併
+        if: steps.scope.outputs.content_only == 'true'
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 60); do
+            state=$(gh pr view "$PR" --repo "$GITHUB_REPOSITORY" --json state -q '.state')
+            case "$state" in
+              MERGED)
+                echo "PR #$PR 已合併。"
+                exit 0
+                ;;
+              CLOSED)
+                echo "PR #$PR 已關閉但未合併。" >&2
+                exit 1
+                ;;
+            esac
+            echo "PR #$PR 尚未合併（第 ${attempt}/60 次，state=${state:-UNKNOWN}），10 秒後重試。"
+            sleep 10
+          done
+          echo "等待 PR #$PR 合併逾時。" >&2
+          exit 1
+
+      - name: 觸發部署（確認合併後）
         if: steps.scope.outputs.content_only == 'true'
         run: |
           gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref master
