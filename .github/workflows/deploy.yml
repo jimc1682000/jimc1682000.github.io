@@ -103,7 +103,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # --- 主站 Astro brand+blog ---
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -136,7 +136,7 @@ jobs:
 
       # --- 組裝 /film-brain/（jimc1682000/film-brain，site/ 下 VitePress base /film-brain/）---
       - name: Checkout film-brain repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: jimc1682000/film-brain
           path: _src/film-brain
@@ -224,7 +224,7 @@ jobs:
         if: env.HAS_CF != 'true' || env.PURGE_OLD_CF_DEPLOYMENTS != 'true'
         run: |
           echo "Cloudflare deployment purge: skipped"
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         if: env.HAS_CF == 'true' && env.PURGE_OLD_CF_DEPLOYMENTS == 'true'
         with:
           sparse-checkout: scripts
@@ -261,7 +261,7 @@ jobs:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           sparse-checkout: scripts
       - uses: actions/setup-node@v4
