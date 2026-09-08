@@ -60,7 +60,7 @@ jobs:
 
       - name: 內容 PR → 安裝與 build gate
         if: steps.scope.outputs.content_only == 'true'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
