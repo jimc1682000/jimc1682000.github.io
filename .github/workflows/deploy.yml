@@ -46,7 +46,7 @@ jobs:
     steps:
       - name: Restore last seen webmention id
         if: github.event_name == 'schedule'
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: wm-state
           key: webmention-state-
@@ -111,7 +111,7 @@ jobs:
       - run: npm ci
       # Last-known-good webmention cache + 本地化 avatar：
       # API 失敗時 sync 可沿用 data.json，頭像檔也必須在，否則頁面會指到不存在的 /webmention-avatars/*。
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: |
             .cache/webmentions
@@ -247,7 +247,7 @@ jobs:
     steps:
       - name: Write last seen webmention id
         run: echo '${{ needs.gate.outputs.latest }}' > wm-state
-      - uses: actions/cache/save@v4
+      - uses: actions/cache/save@v6
         with:
           path: wm-state
           key: webmention-state-${{ github.run_id }}
@@ -272,7 +272,7 @@ jobs:
           name: site-dist
           path: dist
       # 已送過的 (source, target) 記在快取，避免每次部署都重送
-      - uses: actions/cache/restore@v4
+      - uses: actions/cache/restore@v6
         with:
           path: .webmention-sent.json
           key: webmention-sent-
@@ -281,7 +281,7 @@ jobs:
         # 探索不到端點／對方掛掉都不該讓部署變紅
         continue-on-error: true
         run: node scripts/send-webmentions.mjs --dist dist --site https://jimmychen.me
-      - uses: actions/cache/save@v4
+      - uses: actions/cache/save@v6
         if: always()
         with:
           path: .webmention-sent.json
