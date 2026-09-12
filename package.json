@@ -43,7 +43,7 @@
     "pagefind": "^1.4.0",
     "postcss-html": "^2.0.0",
     "prettier": "^3.9.6",
-    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-astro": "^1.0.0",
     "qrcode": "^1.5.4",
     "sharp": "^0.35.3",
     "stylelint": "^17.14.1",
