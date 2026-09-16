@@ -142,4 +142,4 @@ npm run validate   # 全部：astro check → eslint → stylelint → markdownl
 
 `content/`、`*.md`、`migrations/` 不套 formatter：匯入的內容有刻意保留的排版，重排只會產生噪音。
 
-`npm run validate:mf2` 可單獨跑 microformats 驗證。**CI 會硬性擋 microformats** （`.github/workflows/quality.yml`）——mf2 是語意 class，刪掉不會有錯誤、版面也不變，只會安靜地讓 webmention／Bridgy Fed／IndieWeb reader 解析不到。連結檢查與 `npm audit` 為 advisory（不擋），依賴更新交給 Dependabot。
+`npm run validate:mf2` 可單獨跑 microformats 驗證。**CI 會硬性擋 microformats** （`.github/workflows/quality.yml`）——mf2 是語意 class，刪掉不會有錯誤、版面也不變，只會安靜地讓 webmention／Bridgy Fed／IndieWeb reader 解析不到。連結檢查與 `npm audit` 為 advisory（不擋），依賴更新交給 Dependabot。不要對 audit 用 `--force`：`markdownlint-cli2` 0.21／0.23 會因不同 transitive CVE 互推。`smol-toml` 的 DoS 以 `package.json` `overrides` 釘 `1.8.0`，等 upstream 自己升 pin 再拿掉。
