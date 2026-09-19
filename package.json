@@ -36,7 +36,7 @@
     "entities": "^8.1.0",
     "eslint": "^10.10.0",
     "eslint-plugin-astro": "^3.1.0",
-    "html-validate": "^11.15.0",
+    "html-validate": "^11.16.0",
     "knip": "^6.35.1",
     "markdownlint-cli2": "^0.23.2",
     "microformats-parser": "^2.0.6",
