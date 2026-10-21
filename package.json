@@ -38,7 +38,7 @@
     "eslint-plugin-astro": "^3.2.1",
     "html-validate": "^11.16.2",
     "knip": "^6.41.0",
-    "markdownlint-cli2": "^0.23.3",
+    "markdownlint-cli2": "^0.24.0",
     "microformats-parser": "^2.0.6",
     "pagefind": "^1.4.0",
     "postcss-html": "^2.0.0",
