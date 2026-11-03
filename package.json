@@ -50,8 +50,5 @@
     "stylelint-config-recommended": "^18.0.0",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.1"
-  },
-  "overrides": {
-    "smol-toml": "1.8.0"
   }
 }
