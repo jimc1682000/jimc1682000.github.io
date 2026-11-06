@@ -7,7 +7,7 @@ tags: [維運]
 
 <!-- 日期暫採轉存日；正式發文前確認。來源為本人自寫教學，完整原版另存於私人備份。 -->
 
-> **歷史教學草稿。** 以下保留當時的 Airflow 術語及範例；舊版 import、`DummyOperator`、`initdb`、Trigger Rules 與 DockerOperator 參數尚未逐項移植到目前版本，請勿直接作為新環境安裝指令。實際系統的部署與 Plugin 部分暫不公開。
+> **舊版教學與範例。** 本文依撰寫當時的原稿保留，未更新技術說法、指令或程式範例。請依當時版本閱讀，勿直接作為現行環境的操作指引。
 
 ## 為什麼不用Cronjob就行？
 
@@ -21,7 +21,7 @@ Cronjob設定難以閱讀理解，而且可能因為調整錯誤讓其他排程�
 
 ### 難以相依
 
-單靠 Cron 的排程表不會表達工作之間的相依關係。若用腳本或其他工具補上，前後關連、失敗處理與監控就需要另外管理
+排程工作之間也無法有相依性、前後關連，只能夠用錯開時間的方式
 
 ### 難以監控
 
@@ -29,7 +29,7 @@ Cronjob設定難以閱讀理解，而且可能因為調整錯誤讓其他排程�
 
 ### 難以處理
 
-Cron 本身不會依工作結果自動重試；需要在腳本或其他工具中補上失敗後的處理。
+排程工作一但失敗，就失敗了，不會再次重試，或於失敗後進行相對應的處理。
 
 ## Airflow設計理念
 
@@ -37,7 +37,7 @@ Cron 本身不會依工作結果自動重試；需要在腳本或其他工具中
 
 ## 技術名詞
 
-### 生活範例（？） - 丁次的肉彈戰車
+### 生活範例(？) - 丁次的肉彈戰車
 
 [video](https://www.youtube.com/embed/7dmGdXpNzMQ?start=3&end=17)
 
@@ -47,7 +47,7 @@ Cron 本身不會依工作結果自動重試；需要在腳本或其他工具中
 
 ### DAGs
 
-Directed Acyclic Graph有向無環圖的簡稱，是所有「task」集合，並有組織的表示他們的相依性和關連性。
+Directed Acyclic Graph有向無環圖的簡稱，是所有"task"集合，並有組織的表示他們的相依性和關連性。
 
 Airflow DAG使用Python程式碼表示其結構。
 
@@ -63,20 +63,20 @@ Airflow 1.8之後，可以使用Context Manager的方式來撰寫：
 
 ```python
 with DAG('my_dag', start_date=datetime(2016, 1, 1)) as dag:
-    op = DummyOperator(task_id='op')
+    op = DummyOperator('op')
 ```
 
 ### DAG Runs
 
-DAG Run是DAG的實例，裡面有包含了特定「execution_date」的task instances。
+DAG Run是DAG的實例，裡面有包含了特定"execution_date"的task instances。
 
 #### execution_date
 
-舊版名稱 `execution_date` 對應邏輯日期，不等於實際開始執行的時間。以資料區間排程為例，它通常標示要處理的區間起點；手動觸發等情境還要看 timetable。[現行 Dag Runs 文件](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dag-run.html) 說明了兩者的差異。
+一個"邏輯"上的時間，這個時間是DAG Run及其所含的task instances將要實現的。
 
 ### Task
 
-DAG中代表「一個工作」的單位，即為Task；在DAG圖表中，會顯示為一個節點。
+DAG中代表"一個工作"的單位，即為Task；在DAG圖表中，會顯示為一個節點。
 
 每個Task會是一個Operator的實際執行方式。
 
@@ -84,8 +84,8 @@ DAG中代表「一個工作」的單位，即為Task；在DAG圖表中，會顯�
 
 ```python
 with DAG('my_dag', start_date=datetime(2016, 1, 1)) as dag:
-    task_1 = DummyOperator(task_id='task_1')
-    task_2 = DummyOperator(task_id='task_2')
+    task_1 = DummyOperator('task_1')
+    task_2 = DummyOperator('task_2')
     task_1 >> task_2 # Define dependencies
 ```
 
@@ -93,7 +93,7 @@ with DAG('my_dag', start_date=datetime(2016, 1, 1)) as dag:
 
 ### Task Instance (TI)
 
-Task Instance代表了特定時間、特定task、特定DAG下的表現狀況，所以會有「running」， 「success」， 「failed」， 「skipped」， 「up for retry」等狀況。
+Task Instance代表了特定時間、特定task、特定DAG下的表現狀況，所以會有"running", "success", "failed", "skipped", "up for retry"等狀況。
 
 ### Reminder
 
@@ -113,7 +113,7 @@ DAG_RUN = Task Instance + Task Instance + ...
 
 如果說DAG說明了怎麼完成整個workflow，那麼Operators將會是實際上如何執行該task。
 
-目前有以下幾個比較常用的Task（Operator）：
+目前有以下幾個比較常用的Task(Operator)：
 
 - BashOperator
 - PythonOperator
@@ -123,7 +123,7 @@ DAG_RUN = Task Instance + Task Instance + ...
 
 #### Bitshift Composition
 
-我們可以用 `>>` 或 `<<` 的方式來指定 Task 的相互關係
+我們可以用">>"或"<<"的方式來指定Task的相互關係
 
 ```python
 op1 >> op2
@@ -138,7 +138,7 @@ op2.set_downstream(op3)
 op3.set_upstream(op4)
 ```
 
-我們也可以用 LIST 的方式來指定關係
+我們也可以用LIST的方式來指定關係
 
 ```python
 op1 >> [op2, op3] >> op4
@@ -156,7 +156,7 @@ DAG + DAG Run + Operator + Task + Task Instance + execution_date == Workflows
 
 #### Hooks
 
-Hooks就是外部平台或資料庫（Hive， S3， MySQL， HDFS...）的一個介面，當你用Python腳本的時候可以很方便的使用他得到一些像是hostname之類的變數
+Hooks就是外部平台或資料庫(Hive, S3, MySQL, HDFS...)的一個介面，當你用Python腳本的時候可以很方便的使用他得到一些像是hostname之類的變數
 
 #### Connections
 
@@ -166,11 +166,11 @@ Hooks就是外部平台或資料庫（Hive， S3， MySQL， HDFS...）的一個
 
 XCom可以讓task之間傳送訊息，可以讓一些共用狀態和更細微的控制更加容易。
 
-XCom有推送pushed（sent）跟拉取pulled（received）兩種方式。
+XCom有推送pushed(sent)跟拉取pulled(received)兩種方式。
 
-當一個task推送XCom，其他task將可以拿到該XCom，只要使用`xcom_push()`的方式，那麼就可以隨時隨地推送訊息。
+當一個task推送XCom，其他task將可以拿到該XCom，只要使用xcom_push()的方式，那麼就可以隨時隨地推送訊息。
 
-Task使用`xcom_pull()`的方式來拿取XComs，我們可以選擇性的加上key， task_ids， dag_id來過濾我們要的資訊。
+Task使用xcom_pull()的方式來拿取XComs，我們可以選擇性的加上key, task_ids, dag_id來過濾我們要的資訊。
 
 ```python
 # inside a PythonOperator called 'pushing_task'
@@ -199,15 +199,15 @@ date = "{{ ds }}"
 
 所有的Operator都有一個trigger_rule變數，可以決定哪些task可以被啟動，all_success是預設值，其他對應的值如下：
 
-- all_success（default）： 所有父項目都成功
-- all_failed： 所有父項目都是「失敗」或是「上游失敗」的狀態
-- all_done： 所有父項目都已執行完成（不論成功或失敗）
-- one_failed： 只要任一父項目失敗，立馬執行，不等所有父項目完成
-- one_success： 只要任一父項目成功，立馬執行，不等所有父項目完成
-- none_failed： 所有父項目都沒有失敗（「失敗」或「上游失敗」），舉例來說，所有父項目成功或跳過
-- none_failed_or_skipped： 所有父項目都沒有失敗且至少一個父項目成功
-- none_skipped： 沒有父項目是「跳過」的狀態，例如：所有父項目都是在「成功」，「失敗」或「上游失敗」的狀態
-- dummy： 其相依性只是為了顯示，可隨意啟動
+- all_success(default): 所有父項目都成功
+- all_failed: 所有父項目都是"失敗"或是"上游失敗"的狀態
+- all_done: 所有父項目都已執行完成(不論成功或失敗)
+- one_failed: 只要任一父項目失敗，立馬執行，不等所有父項目完成
+- one_success: 只要任一父項目成功，立馬執行，不等所有父項目完成
+- none_failed: 所有父項目都沒有失敗("失敗"或"上游失敗")，舉例來說，所有父項目成功或跳過
+- none_failed_or_skipped: 所有父項目都沒有失敗且至少一個父項目成功
+- none_skipped: 沒有父項目是"跳過"的狀態，例如：所有父項目都是在"成功"，"失敗"或"上游失敗"的狀態
+- dummy: 其相依性只是為了顯示，可隨意啟動
 
 ## Airflow Architecture
 
@@ -274,8 +274,8 @@ from datetime import datetime, timedelta
 
 default_args = {
     'owner': 'DevOps',
-    'description': 'Print a greeting and the current date',
-    'depends_on_past': False,
+    'description': '[原稿的環境專屬描述已省略]',
+    'depend_on_past': False,
     'start_date': datetime(2019, 9, 13),
     'email_on_failure': False,
     'email_on_retry': False,
@@ -294,7 +294,7 @@ with DAG('airflow_demo', default_args=default_args, schedule_interval="5 * * * *
         bash_command='date'
     )
 
-    print_hello >> print_current_date
+		print_hello >> print_current_date
 ```
 
 ## 我知道Operator很好用，但……
@@ -320,7 +320,7 @@ send_notification = DockerOperator(
 
 ## 部署與 Plugin 延伸
 
-原教學另含實際部署流程與系統 Plugin 範例。這部分帶有特定環境的資料模型與畫面，公開草稿暫不附上；前面的 DAG、Task 與依賴關係說明仍完整保留。
+> 原稿此處的環境專屬部署流程與 Plugin 範例未收錄於公開草稿，完整內容保留於私人原稿。
 
 ## TakeOut
 
