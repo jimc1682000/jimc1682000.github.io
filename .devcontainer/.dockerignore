@@ -1,0 +1,5 @@
+# Only the files needed to build the development image enter the context.
+*
+!Dockerfile
+!post-create.sh
+!.dockerignore
