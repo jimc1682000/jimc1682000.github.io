@@ -27,9 +27,13 @@ const t = useTranslations(lang);
 >
   <div class="tag-page">
     <header class="tag-header">
-      <p class="crumb"><a href="/blog/tags/">← {t('blog.allTags')}</a></p>
+      <p class="crumb">
+        <a href="/blog/tags/">← {t('blog.allTags')}</a>
+      </p>
       <h1 class="page-h">#{tag}</h1>
-      <p class="count">{posts.length} {t('blog.postCount')}</p>
+      <p class="count">
+        {posts.length} {t('blog.postCount')}
+      </p>
     </header>
     <PostListGrouped posts={posts} lang={lang} />
   </div>

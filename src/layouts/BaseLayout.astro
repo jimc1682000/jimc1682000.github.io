@@ -24,7 +24,9 @@ const t = useTranslations(lang);
     <BaseHead title={title} description={description} lang={lang} pubDate={pubDate} tags={tags} />
   </head>
   <body>
-    <a class="skip-link" href="#main">{t('nav.skip')}</a>
+    <a class="skip-link" href="#main">
+      {t('nav.skip')}
+    </a>
     <Header lang={lang} />
     <main id="main">
       <slot />

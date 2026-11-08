@@ -47,68 +47,66 @@ const replies = mentions.filter((m) => m.property === 'in-reply-to' && Boolean(m
 const show = likes.length > 0 || reposts.length > 0 || replies.length > 0;
 ---
 
-{
-  show && (
-    <section class="wm" aria-label={t('webmention.title')}>
-      <h2 class="wm-h">{t('webmention.title')}</h2>
+{show && (
+  <section class="wm" aria-label={t('webmention.title')}>
+    <h2 class="wm-h">{t('webmention.title')}</h2>
 
-      {(likes.length > 0 || reposts.length > 0) && (
-        <div class="faces">
-          {[...reposts, ...likes].map((m) => (
+    {(likes.length > 0 || reposts.length > 0) && (
+      <div class="faces">
+        {[...reposts, ...likes].map((m) => (
+          <a
+            class="face"
+            href={m.author?.url || m.source}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            title={`${authorLabel(m)}${isRepost(m) ? ` · ${t('webmention.reposts')}` : ''}`}
+          >
+            {m.author?.photo ? (
+              <img
+                src={m.author.photo}
+                alt={authorLabel(m)}
+                loading="lazy"
+                width="32"
+                height="32"
+              />
+            ) : (
+              <span class="noface">{authorLabel(m).slice(0, 1)}</span>
+            )}
+          </a>
+        ))}
+        <span class="count">
+          {likes.length > 0 && `${likes.length} ${t('webmention.likes')}`}
+          {likes.length > 0 && reposts.length > 0 && ' · '}
+          {reposts.length > 0 && `${reposts.length} ${t('webmention.reposts')}`}
+        </span>
+      </div>
+    )}
+
+    {replies.length > 0 && (
+      <ul class="replies">
+        {replies.map((m) => (
+          <li class="reply">
             <a
-              class="face"
+              class="who"
               href={m.author?.url || m.source}
               target="_blank"
               rel="noopener noreferrer nofollow"
-              title={`${authorLabel(m)}${isRepost(m) ? ` · ${t('webmention.reposts')}` : ''}`}
             >
-              {m.author?.photo ? (
-                <img
-                  src={m.author.photo}
-                  alt={authorLabel(m)}
-                  loading="lazy"
-                  width="32"
-                  height="32"
-                />
-              ) : (
-                <span class="noface">{authorLabel(m).slice(0, 1)}</span>
-              )}
+              {authorLabel(m)}
             </a>
-          ))}
-          <span class="count">
-            {likes.length > 0 && `${likes.length} ${t('webmention.likes')}`}
-            {likes.length > 0 && reposts.length > 0 && ' · '}
-            {reposts.length > 0 && `${reposts.length} ${t('webmention.reposts')}`}
-          </span>
-        </div>
-      )}
-
-      {replies.length > 0 && (
-        <ul class="replies">
-          {replies.map((m) => (
-            <li class="reply">
-              <a
-                class="who"
-                href={m.author?.url || m.source}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-              >
-                {authorLabel(m)}
+            {/* 只取純文字：外站內容不注入 HTML。 */}
+            <p class="what">{m.text}</p>
+            {m.source && (
+              <a class="src" href={m.source} target="_blank" rel="noopener noreferrer nofollow">
+                {t('webmention.source')} →
               </a>
-              {/* 只取純文字：外站內容不注入 HTML。 */}
-              <p class="what">{m.text}</p>
-              {m.source && (
-                <a class="src" href={m.source} target="_blank" rel="noopener noreferrer nofollow">
-                  {t('webmention.source')} →
-                </a>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
-  )
-}
+            )}
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+)}
 
 <style>
   .wm {

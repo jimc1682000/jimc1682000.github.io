@@ -25,65 +25,61 @@ const recent = (await getPosts(lang)).slice(0, 3);
   <article class="essay">
     <p class="sub">{sub}</p>
 
-    {
-      lang === 'en' ? (
-        <div class="prose">
-          <p class="lead">I'm Jimmy Chen — 陳建豪.</p>
-          <p>
-            By day I'm a DevOps / SRE engineer, working with system architecture and automated
-            deployment; lately I've also been pairing with algorithms to find a graceful rhythm
-            inside AI agentic workflows. Engineering is the craft of staying steady and precise —
-            building a stable little castle out of logic measured in microns.
-          </p>
-          <p class="quiet">
-            When the terminal's chatter settles and the last note of <em>吉</em> (auspice) still
-            lingers, the scent of <em>米</em> (rice) simmering at home has already drifted in.
-          </p>
-          <p>
-            Off the clock I like watching a film, reading a few pages, and jotting down the small
-            sparks of daily life. This site is a sheet of rice-coloured paper I've spread out in the
-            digital world, stamped with a vermilion seal carved with the character 「吉」.
-          </p>
-          <p class="quiet">
-            Not just cold commands and architecture diagrams — this is where I gather my technical
-            explorations and the fragments of everyday light, grain by grain, into writing. Welcome;
-            feel free to wander.
-          </p>
-        </div>
-      ) : (
-        <div class="prose">
-          <p class="lead">我是陳建豪，朋友習慣叫我 Jimmy。</p>
-          <p>
-            日常裡，我是一位與系統架構、自動化部署打交道的 DevOps / SRE 工程師，也在 AI Agentic
-            工作流的浪潮中，試著與演算法搭檔出優雅的協作節奏。工程的本質是求穩與求精，像是在極小的微米邏輯之間，築起平穩運作的城堡。
-          </p>
-          <p class="quiet">
-            當終端機的訊號聲沉澱下來，<em>吉</em>音未落之際，屋裡炊煮的<em>米</em>香便已悄然飄至。
-          </p>
-          <p>
-            卸下架構與邏輯之後，我喜歡看一部電影、讀幾頁書、紀錄生活裡的靈光一閃。這個網站是我在數位世界裡鋪開的一方米色宣紙，蓋上一枚刻著「吉」字的朱紅落款。
-          </p>
-          <p>這裡不只有冰冷的指令與架構圖，更有我將技術探索與生活碎光細細收斂、粒粒成章的軌跡。</p>
-          <p class="quiet">微光聚斂處，粒粒皆文章。歡迎來到這裡，隨意走走。</p>
-        </div>
-      )
-    }
+    {lang === 'en' ? (
+      <div class="prose">
+        <p class="lead">I'm Jimmy Chen — 陳建豪.</p>
+        <p>
+          By day I'm a DevOps / SRE engineer, working with system architecture and automated
+          deployment; lately I've also been pairing with algorithms to find a graceful rhythm inside
+          AI agentic workflows. Engineering is the craft of staying steady and precise — building a
+          stable little castle out of logic measured in microns.
+        </p>
+        <p class="quiet">
+          When the terminal's chatter settles and the last note of <em>吉</em> (auspice) still
+          lingers, the scent of <em>米</em> (rice) simmering at home has already drifted in.
+        </p>
+        <p>
+          Off the clock I like watching a film, reading a few pages, and jotting down the small
+          sparks of daily life. This site is a sheet of rice-coloured paper I've spread out in the
+          digital world, stamped with a vermilion seal carved with the character 「吉」.
+        </p>
+        <p class="quiet">
+          Not just cold commands and architecture diagrams — this is where I gather my technical
+          explorations and the fragments of everyday light, grain by grain, into writing. Welcome;
+          feel free to wander.
+        </p>
+      </div>
+    ) : (
+      <div class="prose">
+        <p class="lead">我是陳建豪，朋友習慣叫我 Jimmy。</p>
+        <p>
+          日常裡，我是一位與系統架構、自動化部署打交道的 DevOps / SRE 工程師，也在 AI Agentic
+          工作流的浪潮中，試著與演算法搭檔出優雅的協作節奏。工程的本質是求穩與求精，像是在極小的微米邏輯之間，築起平穩運作的城堡。
+        </p>
+        <p class="quiet">
+          當終端機的訊號聲沉澱下來，<em>吉</em>音未落之際，屋裡炊煮的<em>米</em>香便已悄然飄至。
+        </p>
+        <p>
+          卸下架構與邏輯之後，我喜歡看一部電影、讀幾頁書、紀錄生活裡的靈光一閃。這個網站是我在數位世界裡鋪開的一方米色宣紙，蓋上一枚刻著「吉」字的朱紅落款。
+        </p>
+        <p>這裡不只有冰冷的指令與架構圖，更有我將技術探索與生活碎光細細收斂、粒粒成章的軌跡。</p>
+        <p class="quiet">微光聚斂處，粒粒皆文章。歡迎來到這裡，隨意走走。</p>
+      </div>
+    )}
 
-    {
-      recent.length > 0 && (
-        <div class="refs">
-          <div class="lbl">{t('home.recent')}</div>
-          {recent.map((post) => (
-            <a href={`${homeBlog}${slugOf(post)}/`}>
-              <span>{post.data.title}</span>
-              <time datetime={post.data.pubDate.toISOString()}>
-                {formatYearMonth(post.data.pubDate)}
-              </time>
-            </a>
-          ))}
-        </div>
-      )
-    }
+    {recent.length > 0 && (
+      <div class="refs">
+        <div class="lbl">{t('home.recent')}</div>
+        {recent.map((post) => (
+          <a href={`${homeBlog}${slugOf(post)}/`}>
+            <span>{post.data.title}</span>
+            <time datetime={post.data.pubDate.toISOString()}>
+              {formatYearMonth(post.data.pubDate)}
+            </time>
+          </a>
+        ))}
+      </div>
+    )}
 
     <div class="find">
       <div class="lbl">{t('home.findMe')}</div>
@@ -93,24 +89,24 @@ const recent = (await getPosts(lang)).slice(0, 3);
 
   {/* h-card：代表本人的 microformats2 profile（P2-11，供 webmention/Bridgy Fed 解析）。 */}
   <aside class="scroll h-card">
-    {
-      /* p-name 掛在這個隱藏連結上：立軸不再顯示姓名，但 mf2 的 h-card 仍必須有 name
-        （scripts/validate-microformats.mjs 會擋）。 */
-    }
-    <a class="u-url p-name" href={new URL('/', Astro.site)} hidden>{name}</a>
-    {
-      /* acct: 形式的 u-url 決定 fediverse handle 的 local part。
+    {/* p-name 掛在這個隱藏連結上：立軸不再顯示姓名，但 mf2 的 h-card 仍必須有 name
+        （scripts/validate-microformats.mjs 會擋）。 */}
+    <a class="u-url p-name" href={new URL('/', Astro.site)} hidden>
+      {name}
+    </a>
+    {/* acct: 形式的 u-url 決定 fediverse handle 的 local part。
         沒有這行 → @jimmychen.me@jimmychen.me（網域重複）；有這行 → @jimmy@jimmychen.me。
-        定了不該改：改掉等於換 handle，既有 mention 與追蹤會斷。 */
-    }
-    <a class="u-url" href="acct:jimmy@jimmychen.me" hidden>@jimmy@jimmychen.me</a>
-    {
-      /* u-photo：fediverse／Bluesky 的頭像來源。沒有它時只能退而用 favicon。
-        路徑固定，換圖只換 public/avatar.png 的內容。 */
-    }
+        定了不該改：改掉等於換 handle，既有 mention 與追蹤會斷。 */}
+    <a class="u-url" href="acct:jimmy@jimmychen.me" hidden>
+      @jimmy@jimmychen.me
+    </a>
+    {/* u-photo：fediverse／Bluesky 的頭像來源。沒有它時只能退而用 favicon。
+        路徑固定，換圖只換 public/avatar.png 的內容。 */}
     <img class="u-photo" src="/avatar.png" alt="" width="1" height="1" hidden />
     <div class="slogan">{slogan}</div>
-    <div class="stamp"><Seal size={56} /></div>
+    <div class="stamp">
+      <Seal size={56} />
+    </div>
   </aside>
 </div>
 
