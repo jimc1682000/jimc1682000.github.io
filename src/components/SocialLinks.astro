@@ -4,20 +4,18 @@ import Icon from './Icon.astro';
 ---
 
 <div class="srow">
-  {
-    activeSocials.map((s) => (
-      <a
-        class="s"
-        href={s.url}
-        target="_blank"
-        rel="me noopener noreferrer"
-        aria-label={s.label}
-        title={s.label}
-      >
-        <Icon name={s.icon} size={20} />
-      </a>
-    ))
-  }
+  {activeSocials.map((s) => (
+    <a
+      class="s"
+      href={s.url}
+      target="_blank"
+      rel="me noopener noreferrer"
+      aria-label={s.label}
+      title={s.label}
+    >
+      <Icon name={s.icon} size={20} />
+    </a>
+  ))}
 </div>
 
 <style>

@@ -41,42 +41,38 @@ const variants = [
   <section class="block" aria-labelledby="resume-focus">
     <h2 id="resume-focus">{t('resume.focusTitle')}</h2>
     <ul>
-      {
-        lang === 'en' ? (
-          <>
-            <li>AI / agentic workflows on top of production ops experience</li>
-            <li>Cloud platform, SRE, cost and reliability work</li>
-            <li>Automation, CI/CD, and developer tooling</li>
-          </>
-        ) : (
-          <>
-            <li>以生產維運底子做 AI／agentic 工作流</li>
-            <li>雲端平台、SRE、成本與可靠度</li>
-            <li>自動化、CI/CD 與開發者工具鏈</li>
-          </>
-        )
-      }
+      {lang === 'en' ? (
+        <>
+          <li>AI / agentic workflows on top of production ops experience</li>
+          <li>Cloud platform, SRE, cost and reliability work</li>
+          <li>Automation, CI/CD, and developer tooling</li>
+        </>
+      ) : (
+        <>
+          <li>以生產維運底子做 AI／agentic 工作流</li>
+          <li>雲端平台、SRE、成本與可靠度</li>
+          <li>自動化、CI/CD 與開發者工具鏈</li>
+        </>
+      )}
     </ul>
   </section>
 
   <section class="block" aria-labelledby="resume-highlights">
     <h2 id="resume-highlights">{t('resume.highlightsTitle')}</h2>
     <ul>
-      {
-        lang === 'en' ? (
-          <>
-            <li>13+ years across cloud, DevOps, and SRE roles</li>
-            <li>Hands-on with platform migrations, monitoring, and cost work</li>
-            <li>Recent focus: coding-agent tooling and knowledge workflows</li>
-          </>
-        ) : (
-          <>
-            <li>雲端／DevOps／SRE 相關經驗 13 年以上</li>
-            <li>平台遷移、監控與成本優化實務</li>
-            <li>近期聚焦 coding agent 工具鏈與知識庫工作流</li>
-          </>
-        )
-      }
+      {lang === 'en' ? (
+        <>
+          <li>13+ years across cloud, DevOps, and SRE roles</li>
+          <li>Hands-on with platform migrations, monitoring, and cost work</li>
+          <li>Recent focus: coding-agent tooling and knowledge workflows</li>
+        </>
+      ) : (
+        <>
+          <li>雲端／DevOps／SRE 相關經驗 13 年以上</li>
+          <li>平台遷移、監控與成本優化實務</li>
+          <li>近期聚焦 coding agent 工具鏈與知識庫工作流</li>
+        </>
+      )}
     </ul>
   </section>
 
@@ -84,18 +80,16 @@ const variants = [
     <h2 id="resume-full">{t('resume.fullTitle')}</h2>
     <p class="note">{t('resume.fullNote')}</p>
     <div class="variants" role="group" aria-label={t('resume.variantLabel')}>
-      {
-        variants.map((variant) => (
-          <a class="btn" href={variant.href}>
-            {variant.label}
-          </a>
-        ))
-      }
+      {variants.map((variant) => (
+        <a class="btn" href={variant.href}>
+          {variant.label}
+        </a>
+      ))}
     </div>
     <p class="actions secondary-actions">
-      <a class="btn ghost" href={lang === 'en' ? '/en/contact' : '/contact'}
-        >{t('resume.contact')}</a
-      >
+      <a class="btn ghost" href={lang === 'en' ? '/en/contact' : '/contact'}>
+        {t('resume.contact')}
+      </a>
     </p>
   </section>
 

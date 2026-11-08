@@ -16,40 +16,36 @@ const isExternal = (href: string) => /^https?:\/\//.test(href);
   <h1 class="page-h">{t('works.title')}</h1>
   <p class="page-sub">{t('works.subtitle')}</p>
 
-  {
-    workCategories.map((cat) => (
-      <section class="group">
-        <h2>{t(cat.titleKey)}</h2>
-        {works[cat.id].map((item) => (
-          <div class="item">
-            <div class="t">{item.title}</div>
-            <div class="d">{item.desc[lang]}</div>
-            <div class="meta">
-              {item.tags.length > 0 && (
-                <span class="tags">
-                  {item.tags.map((tag) => (
-                    <span class="tag">{tag}</span>
-                  ))}
-                </span>
-              )}
-              <span class="links">
-                {item.links.map((l) => (
-                  <a
-                    href={l.href}
-                    {...(isExternal(l.href)
-                      ? { target: '_blank', rel: 'noopener noreferrer' }
-                      : {})}
-                  >
-                    {l.label[lang]}
-                  </a>
+  {workCategories.map((cat) => (
+    <section class="group">
+      <h2>{t(cat.titleKey)}</h2>
+      {works[cat.id].map((item) => (
+        <div class="item">
+          <div class="t">{item.title}</div>
+          <div class="d">{item.desc[lang]}</div>
+          <div class="meta">
+            {item.tags.length > 0 && (
+              <span class="tags">
+                {item.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
                 ))}
               </span>
-            </div>
+            )}
+            <span class="links">
+              {item.links.map((l) => (
+                <a
+                  href={l.href}
+                  {...(isExternal(l.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                  {l.label[lang]}
+                </a>
+              ))}
+            </span>
           </div>
-        ))}
-      </section>
-    ))
-  }
+        </div>
+      ))}
+    </section>
+  ))}
 </div>
 
 <style>

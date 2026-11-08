@@ -41,11 +41,9 @@ const brand = lang === 'en' ? 'Jimmy Chen' : '吉光聚斂，米粒成章';
 
 <header class="site-header">
   <div class="header-inner container">
-    {
-      /* aria-label 是必要的，不是多餘：小螢幕的 media query 會把 .brand-text 設為
+    {/* aria-label 是必要的，不是多餘：小螢幕的 media query 會把 .brand-text 設為
         display:none，而印章是 aria-hidden，屆時整個連結沒有可讀名稱
-        （Lighthouse 用行動裝置模擬，因此四頁都報 link-name 失敗）。 */
-    }
+        （Lighthouse 用行動裝置模擬，因此四頁都報 link-name 失敗）。 */}
     <a class="brand" href={homeHref} aria-label={brand}>
       <Seal size={30} />
       <span class="brand-text">{brand}</span>
@@ -55,23 +53,31 @@ const brand = lang === 'en' ? 'Jimmy Chen' : '吉光聚斂，米粒成章';
       <a
         href={blogHref}
         class:list={['nav-link', { active: isBlog }]}
-        aria-current={isBlog ? 'page' : undefined}>{t('nav.blog')}</a
+        aria-current={isBlog ? 'page' : undefined}
       >
+        {t('nav.blog')}
+      </a>
       <a
         href={resumeHref}
         class:list={['nav-link', { active: isResume }]}
-        aria-current={isResume ? 'page' : undefined}>{t('nav.resume')}</a
+        aria-current={isResume ? 'page' : undefined}
       >
+        {t('nav.resume')}
+      </a>
       <a
         href={worksHref}
         class:list={['nav-link', { active: isWorks }]}
-        aria-current={isWorks ? 'page' : undefined}>{t('nav.works')}</a
+        aria-current={isWorks ? 'page' : undefined}
       >
+        {t('nav.works')}
+      </a>
       <a
         class="nav-link lang-switch"
         href={switchHref}
-        hreflang={otherLang === 'en' ? 'en' : 'zh-Hant'}>{t('lang.switch')}</a
+        hreflang={otherLang === 'en' ? 'en' : 'zh-Hant'}
       >
+        {t('lang.switch')}
+      </a>
 
       <span class="icons">
         <a
