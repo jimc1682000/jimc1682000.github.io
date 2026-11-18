@@ -38,7 +38,7 @@
     "eslint-plugin-astro": "^3.2.1",
     "html-validate": "^11.21.0",
     "knip": "^6.45.1",
-    "markdownlint-cli2": "^0.24.0",
+    "markdownlint-cli2": "^0.24.1",
     "microformats-parser": "^2.0.6",
     "pagefind": "^1.6.0",
     "postcss-html": "^2.0.0",
@@ -50,5 +50,9 @@
     "stylelint-config-recommended": "^19.0.0",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.2"
+  },
+  "overrides": {
+    "minimatch": "11.0.9",
+    "katex": "0.18.10"
   }
 }
