@@ -7,7 +7,14 @@ import astro from 'eslint-plugin-astro';
 export default [
   {
     // 產物與外部資料不 lint
-    ignores: ['dist/**', 'node_modules/**', '.astro/**', 'migrations/**', 'content/**'],
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      '.astro/**',
+      '.wrangler/**',
+      'migrations/**',
+      'content/**',
+    ],
   },
   js.configs.recommended,
   ...ts.configs.recommended,
