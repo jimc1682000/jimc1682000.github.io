@@ -12,6 +12,13 @@ name: Build & Deploy site (GH Pages mirror + Cloudflare Pages canonical)
 on:
   push:
     branches: [master, main]
+  pull_request:
+    paths:
+      - '.github/workflows/deploy.yml'
+      - 'package*.json'
+      - 'playwright.config.mjs'
+      - 'public/_worker.js'
+      - 'tests/film-brain-mobile.spec.mjs'
   workflow_dispatch:
   repository_dispatch:
     types: [assemble-site, webmention]
@@ -28,11 +35,9 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: ${{ github.event_name == 'pull_request' && format('pages-pr-{0}', github.event.pull_request.number) || 'pages' }}
   cancel-in-progress: true
 
 jobs:
@@ -56,7 +61,7 @@ jobs:
         id: decide
         env:
           WM_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
-          WM_TOKEN: ${{ secrets.WEBMENTION_IO_TOKEN }}
+          WM_TOKEN: ${{ github.event_name == 'schedule' && secrets.WEBMENTION_IO_TOKEN || '' }}
         run: |
           set -euo pipefail
           if [ "${{ github.event_name }}" != "schedule" ]; then
@@ -129,8 +134,8 @@ jobs:
           PUBLIC_GISCUS_CATEGORY: ${{ vars.PUBLIC_GISCUS_CATEGORY }}
           PUBLIC_GISCUS_CATEGORY_ID: ${{ vars.PUBLIC_GISCUS_CATEGORY_ID }}
           PUBLIC_WEBMENTION_DOMAIN: ${{ vars.PUBLIC_WEBMENTION_DOMAIN }}
-          WEBMENTION_IO_TOKEN: ${{ secrets.WEBMENTION_IO_TOKEN }} # gitleaks:allow
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} # gitleaks:allow
+          WEBMENTION_IO_TOKEN: ${{ github.event_name != 'pull_request' && secrets.WEBMENTION_IO_TOKEN || '' }} # gitleaks:allow
+          OPENAI_API_KEY: ${{ github.event_name != 'pull_request' && secrets.OPENAI_API_KEY || '' }} # gitleaks:allow
 
       # --- /resume/ 由主站 Astro 產出 L0（不再 checkout 完整履歷 repo）---
 
@@ -165,13 +170,27 @@ jobs:
             exit 1
           fi
           echo "assembled OK: / /blog/ /resume/(L0) /en/resume/(L0) /film-brain/"
+      - name: Install Chromium for Film Brain smoke test
+        run: npx playwright install --with-deps chromium
+      - name: Verify Film Brain mobile menu under the Pages Worker CSP
+        run: npm run test:film-brain
+      - name: Upload pre-deploy smoke evidence
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: film-brain-pre-deploy-smoke
+          path: test-results/
+          if-no-files-found: ignore
+          retention-days: 3
       # GitHub Pages 專用 artifact（供 deploy-pages 使用）
       - uses: actions/upload-pages-artifact@v5
+        if: github.event_name != 'pull_request'
         with:
           path: dist
           retention-days: 1
       # 一般 artifact（供 Cloudflare 部署 job 下載，維持單一 build）
       - uses: actions/upload-artifact@v7
+        if: github.event_name != 'pull_request'
         with:
           name: site-dist
           path: dist
@@ -179,7 +198,12 @@ jobs:
 
   deploy-gh-pages:
     needs: build
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -189,7 +213,10 @@ jobs:
 
   deploy-cloudflare:
     needs: build
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    outputs:
+      published: ${{ steps.deployment.outcome == 'success' }}
     # 僅當設有 Cloudflare token 時才跑（needs-human 前自動略過，不拖垮 GH mirror）
     # 舊 deployment 清理在 purge-cloudflare-deployments（不擋 send-webmentions）
     env:
@@ -204,12 +231,48 @@ jobs:
           name: site-dist
           path: dist
       - name: Deploy to Cloudflare Pages
+        id: deployment
         if: env.HAS_CF == 'true'
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=jimmychen --branch=${{ github.event.repository.default_branch }} --commit-hash=${{ github.sha }}
+
+  smoke-published:
+    needs: [deploy-gh-pages, deploy-cloudflare]
+    if: ${{ !cancelled() && (needs.deploy-gh-pages.result == 'success' || needs.deploy-cloudflare.outputs.published == 'true') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: install-browser
+        run: npx playwright install --with-deps chromium
+      - name: Smoke test Cloudflare Pages canonical
+        if: ${{ !cancelled() && steps.install-browser.outcome == 'success' && needs.deploy-cloudflare.outputs.published == 'true' }}
+        run: npm run test:film-brain -- --retries=2 --output=test-results/canonical
+        env:
+          FILM_BRAIN_SITE_URL: https://jimmychen.me
+      - name: Smoke test GitHub Pages mirror
+        if: ${{ !cancelled() && steps.install-browser.outcome == 'success' && needs.deploy-gh-pages.result == 'success' }}
+        run: npm run test:film-brain -- --retries=2 --output=test-results/mirror
+        env:
+          FILM_BRAIN_SITE_URL: https://mirror.jimmychen.me
+          FILM_BRAIN_REQUIRE_CSP: '0'
+      - name: Upload published smoke evidence
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: film-brain-published-smoke
+          path: test-results/
+          if-no-files-found: ignore
+          retention-days: 3
 
   # 清舊 deployment 與正式 deploy 拆開：purge 失敗不應擋住 send-webmentions
   # （canonical 已上線，出站 webmention / Bridgy Fed 仍要送）。

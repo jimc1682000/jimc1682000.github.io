@@ -22,7 +22,8 @@
     "build:fonts": "node scripts/build-fonts.mjs",
     "build:og": "node scripts/build-og.mjs",
     "sync:webmentions": "node scripts/sync-webmentions.mjs",
-    "test:webmentions": "node --test scripts/webmention-utils.test.mjs"
+    "test:webmentions": "node --test scripts/webmention-utils.test.mjs",
+    "test:film-brain": "playwright test"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "1.65.1",
     "@types/qrcode": "^1.5.6",
     "entities": "^9.0.0",
     "eslint": "^10.14.0",
@@ -49,7 +51,8 @@
     "stylelint": "^18.0.0",
     "stylelint-config-recommended": "^19.0.0",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.72.2"
+    "typescript-eslint": "^8.72.2",
+    "wrangler": "4.165.0"
   },
   "overrides": {
     "minimatch": "11.0.9",

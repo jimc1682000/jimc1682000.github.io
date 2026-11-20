@@ -75,3 +75,6 @@ fonts-src/
 # Build-time Webmention cache / localized avatars（不進 git，只進當次 dist）
 .cache/webmentions/
 public/webmention-avatars/
+
+# Playwright smoke test artifacts
+/test-results/
