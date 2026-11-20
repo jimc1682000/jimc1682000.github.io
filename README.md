@@ -85,6 +85,14 @@ npm run build     # 產出 dist/
 npm run preview   # 預覽 build 結果
 ```
 
+### Film Brain 發布驗證
+
+發布前用 Wrangler 啟動組裝完成的 `dist/`，由正式 Pages Worker 提供 CSP。Playwright 以 390px 寬度開啟 `/film-brain/`，展開手機選單並從「產品 → 運作原理」進到 `/film-brain/brief`。測試通過後才上傳發布產物。修改驗證相關檔案的 PR 也跑這支測試，並略過發布。
+
+每個發布成功的站點都跑同一條瀏覽器路徑。主站還會檢查 CSP；鏡像以實際回應驗證互動。失敗的 trace 和截圖可在 Actions artifacts 查看。
+
+本機重跑方式見 [Film Brain 發布驗證](.agents/skills/verify-film-brain-publish/SKILL.md)。
+
 ### Dev Container（可選）
 
 開發環境使用 `.devcontainer/Dockerfile`，固定 Node **22.23.4** 與 multi-platform image digest，對齊 CI 的 Node 22 major，並滿足目前 Astro 的最低版本。支援的 image 架構包含 Linux ARM64 與 AMD64；Mac 仍由 Podman machine／Docker 的 Linux VM 執行。這是開發工具 image，沒有打包網站或部署憑證。
